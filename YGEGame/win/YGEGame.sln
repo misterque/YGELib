@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EngineTest", "EngineTest.vcproj", "{E8E5D076-E7F7-4F38-80BA-2BCAB8F89CF3}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "YGEGame", "YGEGame.vcproj", "{C1EB6209-DDA8-404D-9983-1E1CF1C53703}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "YGELib", "YGELib.vcproj", "{B34C1000-21FF-4AF4-B36D-7C9E6175D53A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E8E5D076-E7F7-4F38-80BA-2BCAB8F89CF3}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E8E5D076-E7F7-4F38-80BA-2BCAB8F89CF3}.Debug|Win32.Build.0 = Debug|Win32
+		{E8E5D076-E7F7-4F38-80BA-2BCAB8F89CF3}.Release|Win32.ActiveCfg = Release|Win32
+		{E8E5D076-E7F7-4F38-80BA-2BCAB8F89CF3}.Release|Win32.Build.0 = Release|Win32
+		{C1EB6209-DDA8-404D-9983-1E1CF1C53703}.Debug|Win32.ActiveCfg = Debug|Win32
+		{C1EB6209-DDA8-404D-9983-1E1CF1C53703}.Debug|Win32.Build.0 = Debug|Win32
+		{C1EB6209-DDA8-404D-9983-1E1CF1C53703}.Release|Win32.ActiveCfg = Release|Win32
+		{C1EB6209-DDA8-404D-9983-1E1CF1C53703}.Release|Win32.Build.0 = Release|Win32
+		{B34C1000-21FF-4AF4-B36D-7C9E6175D53A}.Debug|Win32.ActiveCfg = Debug|Win32
+		{B34C1000-21FF-4AF4-B36D-7C9E6175D53A}.Debug|Win32.Build.0 = Debug|Win32
+		{B34C1000-21FF-4AF4-B36D-7C9E6175D53A}.Release|Win32.ActiveCfg = Release|Win32
+		{B34C1000-21FF-4AF4-B36D-7C9E6175D53A}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
