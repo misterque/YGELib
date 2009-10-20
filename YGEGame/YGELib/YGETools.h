@@ -1,5 +1,0 @@
-
-
-void testfunction(){
-	// do nothing
-}
