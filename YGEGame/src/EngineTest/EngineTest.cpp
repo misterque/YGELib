@@ -5,11 +5,12 @@
 #include "time.h"
 #include "YGEVector.h"
 #include "YGEMatrix.h"
-#include "YGECore.h"
+#include "YGEEngineCore.h"
 #include <iostream>
 
 using namespace std;
 using namespace YGEMath;
+using namespace YGECore;
 
 void test(char* test, bool passed){
 	cout<<"Test "<<test<<": ";
@@ -62,7 +63,7 @@ void speedTestMath(){
 }
 
 void testCore(){
-	YGECore core;
+	YGEEngineCore core;
 
 	core.init();
 	core.run();

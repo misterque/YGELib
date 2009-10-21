@@ -163,7 +163,7 @@
 					>
 				</File>
 				<File
-					RelativePath="..\src\YGELib\YGECore.cpp"
+					RelativePath="..\src\YGELib\YGEEngineCore.cpp"
 					>
 				</File>
 				<File
@@ -205,7 +205,7 @@
 					>
 				</File>
 				<File
-					RelativePath="..\src\YGELib\YGECore.h"
+					RelativePath="..\src\YGELib\YGEEngineCore.h"
 					>
 				</File>
 				<File
@@ -242,6 +242,14 @@
 				</File>
 				<File
 					RelativePath="..\src\YGELib\YGESDLInputManager.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="game"
+				>
+				<File
+					RelativePath="..\src\YGELib\YGEGameState.h"
 					>
 				</File>
 			</Filter>

@@ -2,11 +2,21 @@
 //
 
 #include "stdafx.h"
-#include "YGETools.h"
+#include "YGEEngineCore.h"
+#include "GameStates.h"
+#include <iostream>
+
+using namespace std;
+using namespace YGECore;
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-	testfunction();
+	YGEEngineCore core;
+
+	core.init();
+	core.run();
+	core.shutdown();
+
 	return 0;
 }
 

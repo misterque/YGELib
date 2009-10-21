@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(SolutionDir)/YGELib&quot;"
+				AdditionalIncludeDirectories="&quot;$(SolutionDir)/../lib/win32/SDL-1.2.13/include&quot;;&quot;$(SolutionDir)/../src/YGELib&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;_YGE_DEBUG"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -176,11 +176,7 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\stdafx.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\YGEGame.cpp"
+				RelativePath="..\src\YGEGame\YGEGame.cpp"
 				>
 			</File>
 		</Filter>
@@ -190,11 +186,11 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath=".\stdafx.h"
+				RelativePath="..\src\YGEGame\GameStates.h"
 				>
 			</File>
 			<File
-				RelativePath=".\targetver.h"
+				RelativePath="..\src\YGEGame\stdafx.h"
 				>
 			</File>
 		</Filter>
@@ -204,10 +200,6 @@
 			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
 			>
 		</Filter>
-		<File
-			RelativePath=".\Game_notes.txt"
-			>
-		</File>
 	</Files>
 	<Globals>
 	</Globals>

@@ -3,6 +3,7 @@
 
 
 #include <iostream>
+namespace YGECore {
 
 class YGELogger {
 private:
@@ -36,5 +37,7 @@ public:
 
 
 };
+
+}
 
 #endif

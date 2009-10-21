@@ -3,6 +3,8 @@
 
 #include <string>
 
+namespace YGECore {
+
 // needs current line
 // needs history
 // needs output
@@ -27,5 +29,5 @@ public:
 
 };
 
-
+}
 #endif

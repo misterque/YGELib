@@ -1,5 +1,8 @@
 #include "YGETimer.h"
 
+namespace YGECore {
+
+
 class YGESDLTimer : protected YGETimer {
 	/** 
 	 * time at init of the timer
@@ -24,3 +27,5 @@ public:
 	virtual long long stopTimer();
 
 };
+
+}

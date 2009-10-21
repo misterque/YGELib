@@ -1,7 +1,9 @@
-#include "YGECore.h"
+#include "YGEEngineCore.h"
 #include "YGESDLDisplay.h"
 
-void YGECore::run(){
+namespace YGECore {
+
+void YGEEngineCore::run(){
 
 #ifdef _DEBUG
 	logger->log("starting the core");
@@ -17,7 +19,7 @@ void YGECore::run(){
 #endif
 }
 
-void YGECore::update(){
+void YGEEngineCore::update(){
 
 #ifdef _DEBUG
 	logger->log("update the core");
@@ -45,7 +47,7 @@ void YGECore::update(){
 
 }
 
-void YGECore::init(){
+void YGEEngineCore::init(){
 
 #ifdef _DEBUG
 	logger->log("initialize the core");
@@ -62,8 +64,6 @@ void YGECore::init(){
 		//fprintf(stderr, "Unable to initialize SDL: %s\n", SDL_GetError());
 		return;
 	}
-	atexit(SDL_Quit); // Clean it up nicely :)
-
 
 	display = new YGESDLDisplay();
 	input = new YGESDLInputManager();
@@ -74,5 +74,23 @@ void YGECore::init(){
 
 	logger = YGELogger::getInstance();
 	display->init();
+
+}
+
+void YGEEngineCore::shutdown(){
+	
+#ifdef USE_SDL
+	SDL_Quit();
+#endif
+
+}
+
+YGEEngineCore::YGEEngineCore(){
+
+}
+
+YGEEngineCore::~YGEEngineCore(){
+
+}
 
 }

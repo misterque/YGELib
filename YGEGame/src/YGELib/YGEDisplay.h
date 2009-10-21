@@ -1,6 +1,8 @@
 #ifndef _YGE_DISPLAY_H_
 #define _YGE_DISPLAY_H_
 
+namespace YGECore {
+
 class YGEDisplay {
 public:
 	int windowClosed;
@@ -21,5 +23,7 @@ public:
 
 
 };
+
+}
 
 #endif

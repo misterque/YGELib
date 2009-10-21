@@ -1,6 +1,9 @@
 #include "YGESDLTimer.h"
 #include <SDL.h>
 
+namespace YGECore {
+
+
 YGESDLTimer::YGESDLTimer(){
 	basetime = SDL_GetTicks() * 1000;
 }
@@ -16,4 +19,6 @@ void YGESDLTimer::startTimer(){
 
 long long YGESDLTimer::stopTimer(){
 	return stoppedTime = getTime();
+}
+
 }

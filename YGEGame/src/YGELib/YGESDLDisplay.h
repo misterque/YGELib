@@ -17,6 +17,8 @@
 #define FULLSCREEN true
 #endif
 
+namespace YGECore {
+
 
 class YGESDLDisplay : public YGEDisplay {
 
@@ -112,5 +114,6 @@ public:
 	}
 };
 
+}
 
 #endif

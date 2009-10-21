@@ -1,6 +1,7 @@
 #ifndef _YGE_TIMER_H_
 #define _YGE_TIMER_H_
 
+namespace YGECore {
 
 class YGETimer {
 protected:
@@ -24,5 +25,7 @@ public:
 
 
 };
+
+}
 
 #endif
