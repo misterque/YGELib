@@ -46,6 +46,10 @@ class YGEEngineCore {
 	 */
 	YGESDLTimer* timer;
 
+	YGESDLTimer* timeSinceGameStarted;
+
+	YGEGame::YGEGameState* gamestate;
+
 public:
 	YGEEngineCore();
 
@@ -75,8 +79,18 @@ public:
 	void shutdown();
 
 
-	void addGameState(YGEGame::YGEGameState* state){
 
+	void setGameState(YGEGame::YGEGameState* state){
+		gamestate = state;
+
+	}
+
+	YGESDLInputManager* getInputManager(){
+		return input;
+	}
+
+	long long getTimeSinceGameStarted(){
+		return timeSinceGameStarted->getTime();
 	}
 };
 

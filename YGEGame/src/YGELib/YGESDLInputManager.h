@@ -3,6 +3,7 @@
 
 
 #include "YGEInputManager.h"
+#include "YGELogger.h"
 
 class YGESDLInputManager : public YGEInputManager {
 public: 
@@ -11,16 +12,22 @@ public:
 	}
 
 	virtual void update(){
-		SDL_Event event;
 
-		while(SDL_PollEvent(&event)) {
-			switch(event.type){
-			case SDL_KEYDOWN:
-			case SDL_KEYUP:
-				break;
-			}
+	}
+
+	void notifyEvent(SDL_Event *event){
+		switch(event->type){
+					case SDL_KEYDOWN:
+						for(std::vector<YGEKeyDownListener*>::iterator iter = keydownlisteners.begin();
+							iter != keydownlisteners.end();
+							iter++){
+						YGECore::YGELogger::getInstance()->log("ballalsasd-------------------------------");
+
+								(*iter)->keyDown(event->key.keysym.sym);
+
+						}
+						break;
 		}
-
 	}
 
 };

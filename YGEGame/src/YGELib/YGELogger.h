@@ -8,9 +8,10 @@ namespace YGECore {
 class YGELogger {
 private:
 	YGELogger() {
-
+		activechannel = 0;
 	}
 
+	int activechannel;
 	static YGELogger* singleton;
 
 public:
@@ -19,6 +20,11 @@ public:
 			singleton = new YGELogger();
 		}
 		return singleton;
+	}
+
+	void setChannel(int channel){
+		activechannel = channel;
+	
 	}
 
 	void log(char* message){

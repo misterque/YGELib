@@ -26,10 +26,31 @@ void YGEEngineCore::update(){
 #endif
 
 	timer->startTimer();
-	//@todo rename method to update?
+	
 	display->reset();
 	display->update();
+
+	SDL_Event event;
+
+	while(SDL_PollEvent(&event)) {
+			switch(event.type){
+			case SDL_QUIT:
+				display->notifyEvent(&event);
+				break;
+			case SDL_KEYDOWN:
+				input->notifyEvent(&event);
+				break;
+			}
+
+	}
+	
+
+
 	input->update();
+	if(gamestate != 0) {
+		gamestate->update();
+		gamestate->draw(*this);
+	}
 	long long delta = timer->stopTimer();
 
 #ifdef _DEBUG
@@ -69,6 +90,8 @@ void YGEEngineCore::init(){
 	input = new YGESDLInputManager();
 
 	timer = new YGESDLTimer();
+	timeSinceGameStarted = new YGESDLTimer();
+	timeSinceGameStarted->startTimer();
 
 #endif
 
@@ -86,7 +109,7 @@ void YGEEngineCore::shutdown(){
 }
 
 YGEEngineCore::YGEEngineCore(){
-
+	gamestate = 0;
 }
 
 YGEEngineCore::~YGEEngineCore(){

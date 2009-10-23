@@ -241,6 +241,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\YGELib\YGEKeyDownListener.h"
+					>
+				</File>
+				<File
 					RelativePath="..\src\YGELib\YGESDLInputManager.h"
 					>
 				</File>
