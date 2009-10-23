@@ -1,38 +1,40 @@
 #include "YGEEngineCore.h"
 #include "YGESDLDisplay.h"
+#include <SDL_thread.h> 
+
 
 namespace YGECore {
 
-void YGEEngineCore::run(){
+	void YGEEngineCore::run(){
 
 #ifdef _DEBUG
-	logger->log("starting the core");
+		logger->log("starting the core");
 #endif
 
-	while(display->windowClosed == false){
-		update();
+		while(display->windowClosed == false){
+			update();
 
+		}
+
+#ifdef _DEBUG
+		logger->log("stopping the core");
+#endif
 	}
 
-#ifdef _DEBUG
-	logger->log("stopping the core");
-#endif
-}
-
-void YGEEngineCore::update(){
+	void YGEEngineCore::update(){
 
 #ifdef _DEBUG
-	logger->log("update the core");
+		logger->log("update the core");
 #endif
 
-	timer->startTimer();
-	
-	display->reset();
-	display->update();
+		timer->startTimer();
 
-	SDL_Event event;
+		display->reset();
+		display->update();
 
-	while(SDL_PollEvent(&event)) {
+		SDL_Event event;
+
+		while(SDL_PollEvent(&event)) {
 			switch(event.type){
 			case SDL_QUIT:
 				display->notifyEvent(&event);
@@ -42,78 +44,127 @@ void YGEEngineCore::update(){
 				break;
 			}
 
-	}
-	
+		}
 
 
-	input->update();
-	if(gamestate != 0) {
-		gamestate->update();
-		gamestate->draw(*this);
-	}
-	long long delta = timer->stopTimer();
 
-#ifdef _DEBUG
-	logger->log("updating the core took ms");
-	logger->log(delta / 1000);
-#endif
-
-	if(delta < 10000) {
-#ifdef _DEBUG
-		logger->log("less then 10 ms, wait a little");
-#endif
-
-		SDL_Delay((10000-delta) / 1000);
-	}
-
-}
-
-void YGEEngineCore::init(){
+		input->update();
+		if(gamestate != 0) {
+			gamestate->update();
+			gamestate->draw(this);
+		}
+		long long delta = timer->stopTimer();
 
 #ifdef _DEBUG
-	logger->log("initialize the core");
-#ifdef USE_SDL
-	logger->log("using SDL");
-#endif
+		logger->log("updating the core took ms");
+		logger->log(delta / 1000);
 #endif
 
-#ifdef USE_SDL
+		if(delta < 10000) {
+#ifdef _DEBUG
+			logger->log("less then 10 ms, wait a little");
+#endif
 
-	YGELogger::getInstance()->log("Initializing SDL Video");
-	if (SDL_Init(SDL_INIT_VIDEO) != 0) {
-		YGELogger::getInstance()->log("Unable to initialize SDL");
-		//fprintf(stderr, "Unable to initialize SDL: %s\n", SDL_GetError());
-		return;
+			SDL_Delay((10000-delta) / 1000);
+		}
+
 	}
 
-	display = new YGESDLDisplay();
-	input = new YGESDLInputManager();
+	void YGEEngineCore::init(){
 
-	timer = new YGESDLTimer();
-	timeSinceGameStarted = new YGESDLTimer();
-	timeSinceGameStarted->startTimer();
-
-#endif
-
-	logger = YGELogger::getInstance();
-	display->init();
-
-}
-
-void YGEEngineCore::shutdown(){
-	
+#ifdef _DEBUG
+		logger->log("initialize the core");
 #ifdef USE_SDL
-	SDL_Quit();
+		logger->log("using SDL");
+#endif
 #endif
 
+#ifdef USE_SDL
+
+		YGELogger::getInstance()->log("Initializing SDL Video");
+		if (SDL_Init(SDL_INIT_VIDEO) != 0) {
+			YGELogger::getInstance()->log("Unable to initialize SDL");
+			//fprintf(stderr, "Unable to initialize SDL: %s\n", SDL_GetError());
+			return;
+		}
+
+		display = new YGESDLDisplay();
+		input = new YGESDLInputManager();
+
+		timer = new YGESDLTimer();
+		timeSinceGameStarted = new YGESDLTimer();
+		timeSinceGameStarted->startTimer();
+
+#endif
+
+		logger = YGELogger::getInstance();
+		display->init();
+
+	}
+
+	void YGEEngineCore::shutdown(){
+
+#ifdef USE_SDL
+		SDL_Quit();
+#endif
+
+	}
+
+	YGEEngineCore::YGEEngineCore(){
+		gamestate = 0;
+	}
+
+	YGEEngineCore::~YGEEngineCore(){
+
+	}
+
+
+
+void YGEEngineCore::threadUpdate(void *data){
+	while(true){
+		SDL_Event event;
+
+		while(SDL_PollEvent(&event)) {
+			switch(event.type){
+			case SDL_QUIT:
+				display->notifyEvent(&event);
+				break;
+			case SDL_KEYDOWN:
+				input->notifyEvent(&event);
+				break;
+			}
+
+		}
+
+		input->update();
+	}
 }
 
-YGEEngineCore::YGEEngineCore(){
-	gamestate = 0;
+void YGEEngineCore::threadRender(void *data){
+	while(true){
+		display->reset();
+		display->update();
+		if(gamestate != 0) {
+			gamestate->update();
+			gamestate->draw(this);
+		}
+	}
 }
 
-YGEEngineCore::~YGEEngineCore(){
+void YGEEngineCore::threadInput(void *data){
+	while(true){
 
+	}
+}
+
+void YGEEngineCore::runThreaded(){
+
+	SDL_CreateThread( &threadUpdate, NULL ); 
+	SDL_CreateThread( &threadRender, NULL ); 
+	while(display->windowClosed == false){
+			SDL_Delay(500);
+
+	}
 }
 
 }

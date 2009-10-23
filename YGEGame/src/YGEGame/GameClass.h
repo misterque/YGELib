@@ -8,9 +8,9 @@ using namespace YGECore;
 
 class GameClass : public YGEKeyDownListener{
 private:
-			GameStateX x;
+		GameStateX x;
 		GameStateY y;
-				YGEEngineCore core;
+		YGEEngineCore core;
 
 public:
 

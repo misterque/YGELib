@@ -11,7 +11,7 @@ public:
 		YGECore::YGELogger::getInstance()->log("Draw a quad");
 	}
 
-	virtual void draw(YGECore::YGEEngineCore& core) {
+	virtual void draw(YGECore::YGEEngineCore* core) {
 		// stolen from nehe.gamedev.net
 		glMatrixMode( GL_PROJECTION );
 		glLoadIdentity();
@@ -40,7 +40,7 @@ public:
 		YGECore::YGELogger::getInstance()->log("Draw a box");
 	}
 
-	virtual void draw(YGECore::YGEEngineCore& core) {
+	virtual void draw(YGECore::YGEEngineCore* core) {
 
 
 		glMatrixMode( GL_PROJECTION );
@@ -52,7 +52,7 @@ public:
 		glMatrixMode( GL_MODELVIEW );
 		glLoadIdentity();                           // Reset The Current Modelview Matrix
 	glTranslatef(0.0f,0.0f,-7.0f);						// Move Right 1.5 Units And Into The Screen 7.0
-	glRotatef(core.getTimeSinceGameStarted(),1.0f,1.0f,1.0f);					// Rotate The Quad On The X axis ( NEW )
+	glRotatef(core->getTimeSinceGameStarted()/100000.0f,1.0f,1.0f,1.0f);					// Rotate The Quad On The X axis ( NEW )
 	glBegin(GL_QUADS);									// Draw A Quad
 		glColor3f(0.0f,1.0f,0.0f);						// Set The Color To Blue
 		glVertex3f( 1.0f, 1.0f,-1.0f);					// Top Right Of The Quad (Top)

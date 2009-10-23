@@ -92,6 +92,14 @@ public:
 	long long getTimeSinceGameStarted(){
 		return timeSinceGameStarted->getTime();
 	}
+
+	void threadUpdate(void *data);
+
+	void threadRender(void *data);
+
+	void threadInput(void *data);
+
+	void runThreaded();
 };
 
 }
