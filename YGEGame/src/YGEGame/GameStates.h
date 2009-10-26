@@ -8,10 +8,13 @@
 class GameStateX : public YGEGame::YGEGameState {
 public:
 	virtual void update() {
-		YGECore::YGELogger::getInstance()->log("Draw a quad");
+		YGECore::YGELogger::getInstance()->log("Updating Gamestate X");
+
+
 	}
 
 	virtual void draw(YGECore::YGEEngineCore* core) {
+				YGECore::YGELogger::getInstance()->log("Draw a box (X)");
 		// stolen from nehe.gamedev.net
 		glMatrixMode( GL_PROJECTION );
 		glLoadIdentity();
@@ -37,10 +40,11 @@ public:
 class GameStateY : public YGEGame::YGEGameState {
 public:
 	virtual void update() {
-		YGECore::YGELogger::getInstance()->log("Draw a box");
+		YGECore::YGELogger::getInstance()->log("Updating Gamestate Y");
 	}
 
 	virtual void draw(YGECore::YGEEngineCore* core) {
+		YGECore::YGELogger::getInstance()->log("Draw a box (Y)");
 
 
 		glMatrixMode( GL_PROJECTION );

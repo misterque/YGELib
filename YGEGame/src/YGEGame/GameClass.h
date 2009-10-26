@@ -22,7 +22,11 @@ public:
 			case SDLK_y:
 		core.setGameState(&y);
 				break;
+			case SDLK_ESCAPE:
+				core.shutdown();
+				break;
 		}
+		
 	}
 
 	void run(){
@@ -33,7 +37,7 @@ public:
 		core.init();
 		core.setGameState(&x);
 		core.getInputManager()->addKeyDownListener(this);
-		core.run();
+		core.runThreaded();
 		core.shutdown();
 
 

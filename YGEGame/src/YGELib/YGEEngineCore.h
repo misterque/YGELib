@@ -11,6 +11,8 @@
 
 #include "YGEGameState.h"
 
+#include <SDL_mutex.h>
+
 namespace YGECore {
 
 /**
@@ -50,7 +52,10 @@ class YGEEngineCore {
 
 	YGEGame::YGEGameState* gamestate;
 
+	bool shutdownNow;
+
 public:
+
 	YGEEngineCore();
 
 	~YGEEngineCore();
@@ -99,6 +104,9 @@ public:
 
 	void threadInput(void *data);
 
+	/**
+	 * runs the engine in multithreaded mode
+	 */
 	void runThreaded();
 };
 

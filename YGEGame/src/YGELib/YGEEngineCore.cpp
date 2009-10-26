@@ -1,6 +1,9 @@
 #include "YGEEngineCore.h"
 #include "YGESDLDisplay.h"
 #include <SDL_thread.h> 
+#include <SDL_mutex.h> 
+
+SDL_mutex *render_mutex;
 
 
 namespace YGECore {
@@ -11,7 +14,7 @@ namespace YGECore {
 		logger->log("starting the core");
 #endif
 
-		while(display->windowClosed == false){
+		while(display->windowClosed == false && shutdownNow == false){
 			update();
 
 		}
@@ -107,11 +110,13 @@ namespace YGECore {
 #ifdef USE_SDL
 		SDL_Quit();
 #endif
-
+		shutdownNow = true;
 	}
 
 	YGEEngineCore::YGEEngineCore(){
 		gamestate = 0;
+		shutdownNow = false;
+		render_mutex = SDL_CreateMutex();
 	}
 
 	YGEEngineCore::~YGEEngineCore(){
@@ -120,51 +125,76 @@ namespace YGECore {
 
 
 
-void YGEEngineCore::threadUpdate(void *data){
-	while(true){
-		SDL_Event event;
+	int startThreadUpdate(void* thisOne){
+		((YGEEngineCore*)thisOne)->threadUpdate( NULL );
+		return 0;
+	}
 
-		while(SDL_PollEvent(&event)) {
-			switch(event.type){
+	void YGEEngineCore::threadUpdate(void *data){
+		while(display->windowClosed == false && shutdownNow == false){
+				SDL_mutexP(render_mutex);
+
+				YGELogger::getInstance()->log("Thread UPDATE");
+
+			SDL_Event event;
+
+			while(SDL_PollEvent(&event)) {
+				switch(event.type){
 			case SDL_QUIT:
 				display->notifyEvent(&event);
+
 				break;
 			case SDL_KEYDOWN:
 				input->notifyEvent(&event);
 				break;
+				}
+
 			}
 
-		}
+			input->update();
+			if(gamestate != 0) {
+				gamestate->update();
 
-		input->update();
-	}
-}
+			}
+				SDL_mutexV(render_mutex);
 
-void YGEEngineCore::threadRender(void *data){
-	while(true){
-		display->reset();
-		display->update();
-		if(gamestate != 0) {
-			gamestate->update();
-			gamestate->draw(this);
+			SDL_Delay(35);
 		}
 	}
-}
 
-void YGEEngineCore::threadInput(void *data){
-	while(true){
-
+	int startThreadRender(void* thisOne){
+		((YGEEngineCore*)thisOne)->threadRender( NULL );
+		return 0;
 	}
-}
+	void YGEEngineCore::threadRender(void *data){
+		while(display->windowClosed == false && shutdownNow == false){
+				SDL_mutexP(render_mutex);
 
-void YGEEngineCore::runThreaded(){
+			YGELogger::getInstance()->log("Thread RENDER");
+			display->reset();
+			display->update();
+			if(gamestate != 0) {
+				gamestate->draw(this);
+			}
 
-	SDL_CreateThread( &threadUpdate, NULL ); 
-	SDL_CreateThread( &threadRender, NULL ); 
-	while(display->windowClosed == false){
-			SDL_Delay(500);
 
+			SDL_mutexV(render_mutex);
+
+			SDL_Delay(20);
+		}
 	}
-}
+
+	void YGEEngineCore::threadInput(void *data){
+		while(display->windowClosed == false && shutdownNow == false){
+
+		}
+	}
+
+	void YGEEngineCore::runThreaded(){
+		//startThreadRender(this);
+
+		SDL_CreateThread( &startThreadRender, this ); 
+		startThreadUpdate(this);
+	}
 
 }

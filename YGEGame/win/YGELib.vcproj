@@ -82,7 +82,7 @@
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
+			OutputDirectory="$(SolutionDir)../bin"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
 			CharacterSet="1"
@@ -107,10 +107,11 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
+				AdditionalIncludeDirectories="&quot;$(SolutionDir)/../lib/win32/SDL-1.2.13/include&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
-				UsePrecompiledHeader="2"
+				UsePrecompiledHeader="0"
 				WarningLevel="3"
 				DebugInformationFormat="3"
 			/>
@@ -125,6 +126,8 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
+				AdditionalDependencies="SDL.lib opengl32.lib glu32.lib"
+				AdditionalLibraryDirectories="&quot;$(SolutionDir)/../lib/win32/SDL-1.2.13/lib&quot;"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -254,6 +257,14 @@
 				>
 				<File
 					RelativePath="..\src\YGELib\YGEGameState.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="graphics"
+				>
+				<File
+					RelativePath="..\src\YGELib\YGEGraphicsContext.h"
 					>
 				</File>
 			</Filter>

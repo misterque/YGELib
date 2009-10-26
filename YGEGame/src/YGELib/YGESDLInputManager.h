@@ -21,7 +21,7 @@ public:
 						for(std::vector<YGEKeyDownListener*>::iterator iter = keydownlisteners.begin();
 							iter != keydownlisteners.end();
 							iter++){
-						YGECore::YGELogger::getInstance()->log("ballalsasd-------------------------------");
+								YGECore::YGELogger::getInstance()->log("ballalsasd-------------------------------");
 
 								(*iter)->keyDown(event->key.keysym.sym);
 
