@@ -10,4 +10,12 @@ void YGEConsole::draw(){
 
 }
 
+
+
+void YGEConsole::init(){
+
+	TTF_Init();
+
+}
+
 }

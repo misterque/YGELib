@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="9,00"
+	Version="9.00"
 	Name="YGELib"
 	ProjectGUID="{B34C1000-21FF-4AF4-B36D-7C9E6175D53A}"
 	RootNamespace="YGELib"
@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(SolutionDir)/../lib/win32/SDL-1.2.13/include&quot;"
+				AdditionalIncludeDirectories="&quot;$(SolutionDir)/../lib/win32/SDL_ttf-2.0.9/include&quot;;&quot;$(SolutionDir)/../lib/win32/SDL-1.2.13/include&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_YGE_DEBUG"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -61,8 +61,8 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				AdditionalDependencies="SDL.lib opengl32.lib glu32.lib"
-				AdditionalLibraryDirectories="&quot;$(SolutionDir)/../lib/win32/SDL-1.2.13/lib&quot;"
+				AdditionalDependencies="SDL.lib opengl32.lib glu32.lib SDL_ttf.lib"
+				AdditionalLibraryDirectories="&quot;$(SolutionDir)/../lib/win32/SDL-1.2.13/lib&quot;;&quot;$(SolutionDir)/../lib/win32/SDL_ttf-2.0.9/lib&quot;"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -107,7 +107,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="&quot;$(SolutionDir)/../lib/win32/SDL-1.2.13/include&quot;"
+				AdditionalIncludeDirectories="&quot;$(SolutionDir)/../lib/win32/SDL_ttf-2.0.9/include&quot;;&quot;$(SolutionDir)/../lib/win32/SDL-1.2.13/include&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -126,8 +126,8 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				AdditionalDependencies="SDL.lib opengl32.lib glu32.lib"
-				AdditionalLibraryDirectories="&quot;$(SolutionDir)/../lib/win32/SDL-1.2.13/lib&quot;"
+				AdditionalDependencies="SDL.lib opengl32.lib glu32.lib SDL_ttf.lib"
+				AdditionalLibraryDirectories="&quot;$(SolutionDir)/../lib/win32/SDL-1.2.13/lib&quot;;&quot;$(SolutionDir)/../lib/win32/SDL_ttf-2.0.9/lib&quot;"
 			/>
 			<Tool
 				Name="VCALinkTool"

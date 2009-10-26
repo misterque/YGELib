@@ -5,6 +5,8 @@
 #ifndef _YGE_CONSOLE_H_
 #define _YGE_CONSOLE_H_
 
+#include <SDL_ttf.h>
+
 #include <string>
 
 namespace YGECore {
@@ -43,6 +45,8 @@ public:
 	 * evalute a string containing a command
 	 */
 	void evaluateCommand(char* command);
+
+	void init();
 
 };
 
