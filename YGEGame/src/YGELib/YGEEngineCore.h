@@ -65,6 +65,8 @@ public:
 	 * components are allocated and ressources are loaded
 	 */
 	void init();
+
+	void initThreaded();
 	
 	/**
 	 * starts a permanent engine loop, returns if core

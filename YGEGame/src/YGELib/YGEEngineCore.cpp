@@ -105,10 +105,45 @@ namespace YGECore {
 
 	}
 
+
+
+
+
+	void YGEEngineCore::initThreaded(){
+
+#ifdef _DEBUG
+		logger->log("initialize the core (threaded)");
+#ifdef USE_SDL
+		logger->log("using SDL");
+		SDL_Init(SDL_INIT_TIMER | SDL_INIT_EVENTTHREAD);
+#endif
+#endif
+
+#ifdef USE_SDL
+
+
+		input = new YGESDLInputManager();
+
+		timer = new YGESDLTimer();
+		timeSinceGameStarted = new YGESDLTimer();
+		timeSinceGameStarted->startTimer();
+
+#endif
+
+		logger = YGELogger::getInstance();
+
+	}
+
+
+
+
+
+
+
 	void YGEEngineCore::shutdown(){
 
 #ifdef USE_SDL
-		SDL_Quit();
+
 #endif
 		shutdownNow = true;
 	}
@@ -120,7 +155,7 @@ namespace YGECore {
 	}
 
 	YGEEngineCore::~YGEEngineCore(){
-
+		SDL_Quit();
 	}
 
 
@@ -131,10 +166,10 @@ namespace YGECore {
 	}
 
 	void YGEEngineCore::threadUpdate(void *data){
-		while(display->windowClosed == false && shutdownNow == false){
-				SDL_mutexP(render_mutex);
+		while(shutdownNow == false){
+			SDL_mutexP(render_mutex);
 
-				YGELogger::getInstance()->log("Thread UPDATE");
+			YGELogger::getInstance()->log("Thread UPDATE");
 
 			SDL_Event event;
 
@@ -156,7 +191,7 @@ namespace YGECore {
 				gamestate->update();
 
 			}
-				SDL_mutexV(render_mutex);
+			SDL_mutexV(render_mutex);
 
 			SDL_Delay(35);
 		}
@@ -167,8 +202,19 @@ namespace YGECore {
 		return 0;
 	}
 	void YGEEngineCore::threadRender(void *data){
+			SDL_mutexP(render_mutex);
+			YGELogger::getInstance()->log("init Thread RENDER");
+
+			if(SDL_InitSubSystem(SDL_INIT_VIDEO) == -1) {
+								YGELogger::getInstance()->log("initialising subsystem VIDEO failed");
+			}
+
+		display = new YGESDLDisplay();
+		display->init();
+			SDL_mutexV(render_mutex);
+
 		while(display->windowClosed == false && shutdownNow == false){
-				SDL_mutexP(render_mutex);
+			SDL_mutexP(render_mutex);
 
 			YGELogger::getInstance()->log("Thread RENDER");
 			display->reset();
@@ -193,8 +239,10 @@ namespace YGECore {
 	void YGEEngineCore::runThreaded(){
 		//startThreadRender(this);
 
-		SDL_CreateThread( &startThreadRender, this ); 
-		startThreadUpdate(this);
+		// create new thread for rendering
+		SDL_CreateThread( &startThreadUpdate, this ); 
+		// use current thread for updating
+		startThreadRender(this);
 	}
 
 }

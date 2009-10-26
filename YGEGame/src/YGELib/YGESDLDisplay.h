@@ -55,8 +55,6 @@ namespace YGECore {
 
 			YGELogger::getInstance()->log("Initializing Display");
 
-			// fullscreen can be toggled at run time :) any you might want to change the flags with params?
-			//set the main screen to SCREEN_WIDTHxSCREEN_HEIGHT with a colour depth of 16:
 			Uint32 flags;
 			if(fullscreen) {
 				flags = SDL_OPENGL | SDL_FULLSCREEN;
@@ -66,11 +64,10 @@ namespace YGECore {
 
 			SDL_GL_SetAttribute( SDL_GL_DOUBLEBUFFER, 1 );
 
-
 			screen = SDL_SetVideoMode(screenw, screenh, 16, flags);
 			if (screen == NULL) {
 				YGELogger::getInstance()->log("Setting Video Mode Failed");
-				//fprintf(stderr, "Unable to set video mode: %s\n", SDL_GetError());
+				fprintf(stderr, "Unable to set video mode: %s\n", SDL_GetError());
 				return;
 			}
 			windowClosed = 0;
