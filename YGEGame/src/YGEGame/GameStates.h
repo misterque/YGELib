@@ -23,6 +23,9 @@ public:
 
 		glMatrixMode( GL_MODELVIEW );
 		glLoadIdentity();
+
+		glDisable(GL_TEXTURE_2D);
+		glDisable(GL_BLEND);
 		//glTranslatef(0.0f,0.0f,-6.0f);						// Move Left 1.5 Units And Into The Screen 6.0
 		// Finished Drawing The Triangle
 		glColor3f(0.5f,0.5f,1.0f);							// Set The Color To Blue One Time Only
@@ -54,7 +57,9 @@ public:
 
 
 		glMatrixMode( GL_MODELVIEW );
-		glLoadIdentity();                           // Reset The Current Modelview Matrix
+		glLoadIdentity();       
+				glDisable(GL_TEXTURE_2D);
+		glDisable(GL_BLEND);
 	glTranslatef(0.0f,0.0f,-7.0f);						// Move Right 1.5 Units And Into The Screen 7.0
 	glRotatef(core->getTimeSinceGameStarted()/100000.0f,1.0f,1.0f,1.0f);					// Rotate The Quad On The X axis ( NEW )
 	glBegin(GL_QUADS);									// Draw A Quad

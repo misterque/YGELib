@@ -2,6 +2,7 @@
 #include "YGESDLDisplay.h"
 #include <SDL_thread.h> 
 #include <SDL_mutex.h> 
+#include <SDL_ttf.h>
 
 SDL_mutex *render_mutex;
 
@@ -35,6 +36,8 @@ namespace YGECore {
 		display->reset();
 		display->update();
 
+
+
 		SDL_Event event;
 
 		while(SDL_PollEvent(&event)) {
@@ -43,7 +46,11 @@ namespace YGECore {
 				display->notifyEvent(&event);
 				break;
 			case SDL_KEYDOWN:
-				input->notifyEvent(&event);
+				if(consoleEnabled){
+					console->insertKey(event.key.keysym);
+				} else {
+					input->notifyEvent(&event);
+				}
 				break;
 			}
 
@@ -56,6 +63,11 @@ namespace YGECore {
 			gamestate->update();
 			gamestate->draw(this);
 		}
+
+		if(consoleEnabled) {
+			console->draw();
+		}
+
 		long long delta = timer->stopTimer();
 
 #ifdef _DEBUG
@@ -91,6 +103,9 @@ namespace YGECore {
 			return;
 		}
 
+		TTF_Init();
+
+		console = new YGEConsole();
 		display = new YGESDLDisplay();
 		input = new YGESDLInputManager();
 
@@ -102,6 +117,7 @@ namespace YGECore {
 
 		logger = YGELogger::getInstance();
 		display->init();
+		console->init(this);
 
 	}
 
@@ -152,6 +168,7 @@ namespace YGECore {
 		gamestate = 0;
 		shutdownNow = false;
 		render_mutex = SDL_CreateMutex();
+		consoleEnabled = false;
 	}
 
 	YGEEngineCore::~YGEEngineCore(){
@@ -180,6 +197,7 @@ namespace YGECore {
 
 				break;
 			case SDL_KEYDOWN:
+	//			if
 				input->notifyEvent(&event);
 				break;
 				}

@@ -5,36 +5,46 @@
 #ifndef _YGE_CONSOLE_H_
 #define _YGE_CONSOLE_H_
 
-#include <SDL_ttf.h>
-
+#include <SDL.h>
+#include <SDL_opengl.h>
 #include <string>
+
+
 
 namespace YGECore {
 
+
+	class YGEEngineCore;
 // needs current line
 // needs history
 // needs output
 // is a singleton?
 
+
+	struct consoleLine {
+		std::string text;
+		GLuint texture;
+		int width;
+		int height;
+	};
 	/**
 	 * command line console class for interaction with the game engine
 	 */
 class YGEConsole {
 
-	std::string currentLine;
-	//std::string history;
+	consoleLine output[10];
 
-	std::string output;
+	consoleLine currentLine;
+
+	YGEEngineCore *core;
 
 public:
 
-	YGEConsole(){
-		output = "Blablabla \n hohohoho \n hihihihih \n";
-	}
+	YGEConsole();
 	/**
 	 * adds a character to the current input line
 	 */
-	void insertKey(char key);
+	void insertKey(SDL_keysym key);
 
 	/**
 	 * draw the console on top of the rendering window
@@ -44,9 +54,13 @@ public:
 	/**
 	 * evalute a string containing a command
 	 */
-	void evaluateCommand(char* command);
+	void evaluateCommand(const char* command);
 
-	void init();
+	void println(const char* line);
+
+	void init(YGEEngineCore *core);
+
+	void update();
 
 };
 

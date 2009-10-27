@@ -7,6 +7,8 @@
 #include "YGESDLInputManager.h"
 #include "YGESDLTimer.h"
 
+#include "YGEConsole.h"
+
 #include "YGELogger.h"
 
 #include "YGEGameState.h"
@@ -52,7 +54,11 @@ class YGEEngineCore {
 
 	YGEGame::YGEGameState* gamestate;
 
+	YGEConsole* console;
+
 	bool shutdownNow;
+
+	bool consoleEnabled;
 
 public:
 
@@ -110,6 +116,11 @@ public:
 	 * runs the engine in multithreaded mode
 	 */
 	void runThreaded();
+
+	void toggleConsole(){
+		consoleEnabled = !consoleEnabled;
+		SDL_EnableUNICODE(consoleEnabled);
+	}
 };
 
 }
