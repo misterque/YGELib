@@ -13,6 +13,8 @@
 
 #include "YGEGameState.h"
 
+#include "YGEScene.h"
+
 #include <SDL_mutex.h>
 
 namespace YGECore {
@@ -59,6 +61,8 @@ class YGEEngineCore {
 	bool shutdownNow;
 
 	bool consoleEnabled;
+
+	YGEScene* scene;
 
 public:
 

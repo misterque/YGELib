@@ -178,6 +178,18 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="scene"
+				>
+				<File
+					RelativePath="..\src\YGELib\YGEEntity.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\src\YGELib\YGEEntityAsset.cpp"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -265,6 +277,22 @@
 				>
 				<File
 					RelativePath="..\src\YGELib\YGEGraphicsContext.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="scene"
+				>
+				<File
+					RelativePath="..\src\YGELib\YGEEntity.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\YGELib\YGEEntityAsset.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\YGELib\YGEScene.h"
 					>
 				</File>
 			</Filter>
