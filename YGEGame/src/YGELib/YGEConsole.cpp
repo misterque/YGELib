@@ -5,6 +5,51 @@
 
 #include <sstream>
 
+using namespace std;
+
+
+//Your constant ColorKey colors
+const int COLORKEY_RED = 0xFF;
+const int COLORKEY_GREEN = 0x00;
+const int COLORKEY_BLUE = 0xFF;
+
+
+/**
+ * stolen from http://www.gamedev.net/community/forums/topic.asp?topic_id=422993
+ */
+SDL_Surface *CreateText(std::string text, TTF_Font *font, SDL_Color textColor)
+{
+    //Make text as normal...
+    SDL_Surface* TextSurface = TTF_RenderText_Solid(font, text.c_str(), textColor);
+
+    SDL_Surface *NewSurface = SDL_CreateRGBSurface(SDL_SWSURFACE, 1024, 32, 32, 
+                                  0xFF000000, 0x00FF0000, 0x0000FF00, 0);
+    
+    //Create a rectangle for coloring the empty image
+    SDL_Rect rect;
+    rect.x = 0;
+    rect.y = 0;
+    rect.w = NewSurface->w;
+    rect.h = NewSurface->h;
+    
+    //Fill the new image with your colorkey color
+  //  SDL_FillRect(NewSurface, &rect, SDL_MapRGB(NewSurface->format, COLORKEY_RED, COLORKEY_GREEN, COLORKEY_BLUE));
+    
+    //Place your text onto the new surface
+    SDL_BlitSurface(TextSurface, NULL, NewSurface, &rect);
+    
+    //Free the old surface
+    SDL_FreeSurface(TextSurface);
+    
+    //Set the colorkey on the empty surface to make the COLORKEY_ color clear
+  //  Uint32 colorkey = SDL_MapRGB(NewSurface->format, COLORKEY_RED, COLORKEY_GREEN, COLORKEY_BLUE);
+//    SDL_SetColorKey(NewSurface, SDL_RLEACCEL|SDL_SRCCOLORKEY, colorkey);
+
+    //Return your new surface, with dimensions of a power of two.
+    return NewSurface;
+}
+
+
 
 TTF_Font* VeraMono;
 
@@ -66,6 +111,8 @@ GLuint surfaceToTexture(SDL_Surface *surface){
 	// Have OpenGL generate a texture object handle for us
 	glGenTextures( 1, &texture );
 
+	printf("init tex %u", texture);
+
 	// Bind the texture object
 	glBindTexture( GL_TEXTURE_2D, texture );
 
@@ -121,27 +168,28 @@ namespace YGECore {
 
 	void YGEConsole::insertKey(SDL_keysym key){
 
-		println((char*)&key.unicode);
 
 		if (key.unicode > 33 && key.unicode < 300 ){
 			std::ostringstream stream;
 			stream << currentLine.text << (char)key.unicode;
-			printf("%i",key.unicode);
 			currentLine.text = stream.str();
 			update();
 		} else {
 
 			switch(key.sym) {
 			case SDLK_BACKSPACE:
-				println("erase");
 				if(currentLine.text.length() > 0) {
 				currentLine.text.erase(currentLine.text.length()-1);
 				update();
 				}
 				break;
+
+			case SDLK_SPACE:
+				currentLine.text.append(" ");
+				update();
+				break;
 			
 			case SDLK_RETURN:
-				println("return");
 				if(currentLine.text.length() > 0) {
 					println(currentLine.text.c_str());
 					evaluateCommand(currentLine.text.c_str());
@@ -167,8 +215,12 @@ namespace YGECore {
 		glLoadIdentity();
 		//glTranslatef(0.0f,0.0f,-6.0f);						// Move Left 1.5 Units And Into The Screen 6.0
 		// Finished Drawing The Triangle
-		glColor3f(0.2f,0.2f,0.2f);	
+	
 		glDisable(GL_TEXTURE_2D);
+				glEnable(GL_BLEND);
+
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		glColor4f(0.2f,0.2f,0.2f,0.8f);
 		// Set The Color To Blue One Time Only
 		glBegin(GL_QUADS);			
 		// Draw A Quad
@@ -189,9 +241,6 @@ namespace YGECore {
 		glEnable(GL_TEXTURE_2D);
 
 
-		glEnable(GL_BLEND);
-
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 
 		for(int i=0; i<11; i++){
@@ -243,6 +292,14 @@ namespace YGECore {
 		update();
 	}
 
+	SDL_Surface* redImage(int w,int h,SDL_Surface* src) 
+{ 
+SDL_Surface* surface = SDL_CreateRGBSurface(SDL_SWSURFACE,w,h,32,0,0,0,0); 
+SDL_SetColorKey(surface,SDL_SRCCOLORKEY,SDL_MapRGB(surface->format,0,0,0)); 
+SDL_BlitSurface(src,NULL,surface,NULL); 
+SDL_FreeSurface(src); 
+return surface; 
+} 
 
 	void textToConsoleLine(consoleLine* line){
 
@@ -250,13 +307,37 @@ namespace YGECore {
 
 		stream << "> " << line->text;
 		SDL_Surface* surface;
-		surface = drawtext(VeraMono, 0, 255, 0, 255, 0, 0, 255, 255, stream.str().c_str(), blended);
-		glDeleteTextures( 1, &line->texture	);
+		// 
+		//surface = SDL_LoadBMP("../media/images/testalpha256x256.bmp");
+		//surface = drawtext(VeraMono, 0, 255, 0, 255, 0, 0, 255, 255, stream.str().c_str(), blended);
+		// surface = drawtext(VeraMono, 0, 255, 0, 255, 0, 0, 255, 255, stream.str().c_str(), blended);
+
+		//surface = redImage(1024,32,surface);
+		SDL_Color c;
+		c.r=255;
+		c.g=0;
+		c.b=255;
+		surface = CreateText(stream.str(), VeraMono, c);
+		/*	SDL_Surface* big = SDL_CreateRGBSurface(SDL_SWSURFACE | SDL_SRCALPHA, 1024, 64, surface->format->BitsPerPixel,surface->format->Rmask, surface->format->Gmask, surface->format->Bmask, surface->format->Amask);
+		SDL_Rect r;
+		r.h= surface->h;
+		r.w= surface->w;
+		r.x= 0;
+		r.y= 0;
+		int blitresult = SDL_BlitSurface(surface, NULL, big, NULL);
+		printf("blit %i", blitresult);*/
+		printf("to delete Texute ID: %i \n", line->texture);
+
+		if(line->texture > -1) {
+			glDeleteTextures( 1, &line->texture	);
+		}
 		line->width = surface->w;
 		line->height = surface->h;
 		line->texture = surfaceToTexture(surface);
 
+		printf("Texute ID: %i \n", line->texture);
 		SDL_FreeSurface( surface );
+//		SDL_FreeSurface( big );
 	}
 
 	void YGEConsole::update(){

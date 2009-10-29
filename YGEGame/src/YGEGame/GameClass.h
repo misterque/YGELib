@@ -25,8 +25,6 @@ public:
 			case SDLK_ESCAPE:
 				core.shutdown();
 				break;
-			case SDLK_a:
-				core.toggleConsole();
 				break;
 		}
 		

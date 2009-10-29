@@ -26,6 +26,10 @@ namespace YGECore {
 		GLuint texture;
 		int width;
 		int height;
+
+		consoleLine(){
+			texture = -1;
+		}
 	};
 	/**
 	 * command line console class for interaction with the game engine

@@ -46,10 +46,18 @@ namespace YGECore {
 				display->notifyEvent(&event);
 				break;
 			case SDL_KEYDOWN:
+
+				switch(event.key.keysym.sym){
+			case SDLK_BACKQUOTE:
+				toggleConsole();
+				break;
+			default:
 				if(consoleEnabled){
 					console->insertKey(event.key.keysym);
 				} else {
 					input->notifyEvent(&event);
+				}
+				break;
 				}
 				break;
 			}
@@ -197,7 +205,7 @@ namespace YGECore {
 
 				break;
 			case SDL_KEYDOWN:
-	//			if
+				//			if
 				input->notifyEvent(&event);
 				break;
 				}
@@ -220,16 +228,16 @@ namespace YGECore {
 		return 0;
 	}
 	void YGEEngineCore::threadRender(void *data){
-			SDL_mutexP(render_mutex);
-			YGELogger::getInstance()->log("init Thread RENDER");
+		SDL_mutexP(render_mutex);
+		YGELogger::getInstance()->log("init Thread RENDER");
 
-			if(SDL_InitSubSystem(SDL_INIT_VIDEO) == -1) {
-								YGELogger::getInstance()->log("initialising subsystem VIDEO failed");
-			}
+		if(SDL_InitSubSystem(SDL_INIT_VIDEO) == -1) {
+			YGELogger::getInstance()->log("initialising subsystem VIDEO failed");
+		}
 
 		display = new YGESDLDisplay();
 		display->init();
-			SDL_mutexV(render_mutex);
+		SDL_mutexV(render_mutex);
 
 		while(display->windowClosed == false && shutdownNow == false){
 			SDL_mutexP(render_mutex);
