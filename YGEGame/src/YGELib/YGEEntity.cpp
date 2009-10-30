@@ -12,6 +12,6 @@ void YGEEntity::addAsset( YGEEntityAsset* asset ){
 
 	//@todo check for double insertion
 
-	assets.push_back(entity);
+	assets.push_back(asset);
 
 }

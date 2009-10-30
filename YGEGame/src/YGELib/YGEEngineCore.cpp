@@ -70,6 +70,10 @@ namespace YGECore {
 		if(gamestate != 0) {
 			gamestate->update();
 			gamestate->draw(this);
+			YGESceneList list = gamestate->getScenesToRender();
+			for(YGESceneList::iterator iter = list.begin(); iter != list.end(); iter++){
+				(*iter)->render();
+			}
 		}
 
 		if(consoleEnabled) {

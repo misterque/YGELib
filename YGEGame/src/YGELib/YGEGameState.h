@@ -17,8 +17,8 @@ public:
 	virtual void update() = 0;
 	virtual void draw(YGECore::YGEEngineCore* core) = 0;
 
-	virtual std::list<YGEScene*> getScenesToRender() {
-		std::list<YGEScene*> list;
+	virtual YGESceneList getScenesToRender() {
+		YGESceneList list;
 		return list;
 	};
 	

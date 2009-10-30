@@ -1,17 +1,20 @@
 /** @file
  * @author Dirk Fortmeier
+ * @todo wrapping in namespace
  */
 
 #ifndef _YGE_SCENE_H_
 #define _YGE_SCENE_H_
 
 #include "YGEEntity.h"
-
 class YGEScene {
 
 
 private:
 	YGEEntity rootNode;
+
+	void renderEntity(YGEEntity* entity);
+
 public:
 	void render();
 
@@ -19,5 +22,9 @@ public:
 		return &rootNode;
 	}
 };
+
+
+typedef std::list<YGEScene*> YGESceneList;
+
 
 #endif

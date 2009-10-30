@@ -53,6 +53,9 @@ public:
 	 */
 	void removeChild( YGEEntity* entity );
 
+	std::list<YGEEntity*> getChildren(){
+		return children;
+	}
 	/**
 	 * add an asset to the entity
 	 */
@@ -62,6 +65,12 @@ public:
 	 * remove an assed
 	 */
 	void removeAsset( YGEEntityAsset* asset );
+
+	std::list<YGEEntityAsset*> getAssets(){
+		return assets;
+	}
+
+
 
 };
 
