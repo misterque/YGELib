@@ -8,19 +8,26 @@ void YGEScene::render(){
 
 void YGEScene::renderEntity(YGEEntity* entity){
 
-	for(std::list<YGEEntityAsset*>::iterator iter = entity->getAssets().begin();
-		iter != entity->getAssets().end();
+	// get every graphical asset and render it
+	std::list<YGEGraphicsAsset*> assets = entity->getGraphicsAssets();
+	for(std::list<YGEGraphicsAsset*>::iterator iter = assets.begin();
+		iter != assets.end();
 		iter++){
-		//	if(	dynamic_cast<YGEGraphicsAsset*> (*iter) != NULL ) {
-		//		printf("found a ga \n");
-		//		(*iter)->draw();
-		//	}
+
+			(*iter)->draw();
+
 	}
 
-	for(std::list<YGEEntity*>::iterator iter = entity->getChildren().begin();
-		iter != entity->getChildren().end();
+	// recursive call on all children
+	std::list<YGEEntity*> children = entity->getChildren();
+	for(std::list<YGEEntity*>::iterator iter = children.begin();
+		iter != children.end();
 		iter++){
 			renderEntity(*iter);
 
 	}
 };
+
+YGEScene::YGEScene(){
+	//rootNode.p
+}

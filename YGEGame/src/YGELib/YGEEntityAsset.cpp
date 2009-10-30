@@ -1,9 +1,11 @@
 #include <SDL_opengl.h>
+#include <stdio.h>
 
 
 #include "YGEEntityAsset.h"
 
 void YGESimpleBox::draw(){
+	printf("BOX\n");
 			// NEHEs code?
 	glBegin(GL_QUADS);									// Draw A Quad
 		glColor3f(0.0f,1.0f,0.0f);						// Set The Color To Blue

@@ -35,6 +35,7 @@ public:
 
 	virtual void draw(YGECore::YGEEngineCore* core) {
 
+										// Finished Drawing The Triangle
 	}
 
 };

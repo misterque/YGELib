@@ -22,6 +22,8 @@
  * phenomenon.
  */
 
+
+
 class YGEEntity {
 private:
 	/**
@@ -34,6 +36,8 @@ private:
 	 */
 	std::list<YGEEntityAsset*> assets;
 
+	std::list<YGEGraphicsAsset*> graphicAssets;
+
 
 	/**
 	 * parent of this entity. every entity can have just one
@@ -43,6 +47,11 @@ private:
 	YGEEntity* parent;
 
 public:
+
+
+	YGEEntity();
+
+
 	/**
 	 * add a child to the entity
 	 */
@@ -68,6 +77,10 @@ public:
 
 	std::list<YGEEntityAsset*> getAssets(){
 		return assets;
+	}
+
+	std::list<YGEGraphicsAsset*> getGraphicsAssets(){
+		return graphicAssets;
 	}
 
 

@@ -21,6 +21,8 @@ public:
 	YGEEntity* getRootNode(){
 		return &rootNode;
 	}
+
+	YGEScene();
 };
 
 

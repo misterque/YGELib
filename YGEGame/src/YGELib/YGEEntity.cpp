@@ -14,4 +14,17 @@ void YGEEntity::addAsset( YGEEntityAsset* asset ){
 
 	assets.push_back(asset);
 
+	// if it is a graphical asset put it in the list of graphicals
+	if(asset->getAssetType() == Graphical) {
+		graphicAssets.push_back((YGEGraphicsAsset*)asset);
+	}
+
+}
+
+
+YGEEntity::YGEEntity(){
+	assets.clear();
+	children.clear();
+	parent = NULL;
+
 }
