@@ -4,7 +4,7 @@
 
 #include "YGEEntityAsset.h"
 namespace YGETimeSpace{
-void YGESimpleBox::draw(){
+void YGESimpleBox::draw(YGEGraphicsContext* context){
 	printf("BOX\n");
 			// NEHEs code?
 	glBegin(GL_QUADS);									// Draw A Quad

@@ -23,7 +23,7 @@ void YGEScene::renderEntity(YGEEntity* entity){
 
 			
 
-			(*iter)->draw();
+			(*iter)->draw(NULL);
 
 	}
 

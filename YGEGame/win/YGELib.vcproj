@@ -283,6 +283,10 @@
 					RelativePath="..\src\YGELib\YGEGraphicsContext.h"
 					>
 				</File>
+				<File
+					RelativePath="..\src\YGELib\YGEVbo.h"
+					>
+				</File>
 			</Filter>
 			<Filter
 				Name="scene"
