@@ -6,6 +6,8 @@
 #include "YGEEntity.h"
 #include "YGEEntityAsset.h"
 
+using namespace YGETimeSpace;
+
 class GameStateX : public YGEGame::YGEGameState {
 public:
 	YGEScene* scene;
@@ -15,6 +17,31 @@ public:
 		scene = new YGEScene();
 		YGEEntity* boxPos = new YGEEntity();
 		YGESimpleBox* box = new YGESimpleBox();
+
+		YGEEntity* smallBoxPos = new YGEEntity();
+		YGESimpleBox* smallBox = new YGESimpleBox();
+
+		YGEMath::Vector3 pos;
+		pos.x = 0;
+		pos.y = 0;
+		pos.z = -10;
+		boxPos->setPosition(pos);
+
+		YGEMath::Vector3 pos2;
+		pos2.x = 4;
+		pos2.y = 0;
+		pos2.z = 0;
+
+		YGEMath::Vector3 scale;
+		scale.x = 0.5;
+		scale.y = 0.5;
+		scale.z = 0.5;
+
+		smallBoxPos->setPosition(pos2);
+		smallBoxPos->setScale(scale);
+
+		smallBoxPos->addAsset(smallBox);
+		boxPos->addChild(smallBoxPos);
 
 		boxPos->addAsset(box);
 		scene->getRootNode()->addChild(boxPos);

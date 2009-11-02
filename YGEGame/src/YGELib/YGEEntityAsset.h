@@ -6,7 +6,8 @@
 #ifndef _YGE_ENTITY_ASSET_H_
 #define _YGE_ENTITY_ASSET_H_
 
-	enum AssetType { 
+namespace YGETimeSpace{
+enum AssetType { 
 		Standard,
 		Graphical,
 		Sound,
@@ -39,5 +40,5 @@ public:
 
 
 };
-
+}
 #endif

@@ -1,12 +1,14 @@
 /** @file
  * @author Dirk Fortmeier
- * @todo wrapping in namespace
  */
 
 #ifndef _YGE_SCENE_H_
 #define _YGE_SCENE_H_
 
 #include "YGEEntity.h"
+
+namespace YGETimeSpace{
+
 class YGEScene {
 
 
@@ -28,5 +30,5 @@ public:
 
 typedef std::list<YGEScene*> YGESceneList;
 
-
+}
 #endif

@@ -6,8 +6,14 @@
 #define _YGE_ENTITY_H_
 
 #include "YGEEntityAsset.h"
+#include "YGEVector.h"
+#include "YGEMatrix.h"
+#include "YGEQuaternion.h"
+
+
 #include <list>
 
+namespace YGETimeSpace{
 
 /**
  * Entity Class
@@ -19,7 +25,10 @@
  * 
  * YGEEntities are abstract objects composed of other YGEEntities,
  * augmented by YGEEntityAssets which represents a perceptible
- * phenomenon.
+ * phenomenon. 
+ *
+ * Each YGEEntitiy has a pose (position and orientation) in space.
+ *
  */
 
 
@@ -36,6 +45,9 @@ private:
 	 */
 	std::list<YGEEntityAsset*> assets;
 
+	/**
+	 * renderable graphics assets of this entity
+	 */
 	std::list<YGEGraphicsAsset*> graphicAssets;
 
 
@@ -46,11 +58,14 @@ private:
 	 */
 	YGEEntity* parent;
 
+	YGEMath::Vector3 position;
+	YGEMath::Vector3 scale;
+	YGEMath::Quaternion orientation;
+
 public:
 
 
 	YGEEntity();
-
 
 	/**
 	 * add a child to the entity
@@ -62,6 +77,9 @@ public:
 	 */
 	void removeChild( YGEEntity* entity );
 
+	/**
+	 * get all the entities attached to this children
+	 */
 	std::list<YGEEntity*> getChildren(){
 		return children;
 	}
@@ -75,16 +93,41 @@ public:
 	 */
 	void removeAsset( YGEEntityAsset* asset );
 
+	/**
+	 * returns all assets assigned to this entity
+	 */
 	std::list<YGEEntityAsset*> getAssets(){
 		return assets;
 	}
 
+	/**
+	 * returns all assets that are graphical assets,
+	 * meaning they are derived from YGEGraphicsAsset.
+	 * will be called by the scene graphical renderer to
+	 * just get the assests which are renderable
+	 */
 	std::list<YGEGraphicsAsset*> getGraphicsAssets(){
 		return graphicAssets;
 	}
 
+	YGEMath::Vector3 getPosition(){
+		return position;
+	}
 
+	YGEMath::Vector3 getScale(){
+		return scale;
+	}
+
+	void setPosition(const YGEMath::Vector3 &pos){
+		position = pos;
+	}
+
+	void setScale(const YGEMath::Vector3 &sca){
+		scale = sca;
+	}
 
 };
+
+}
 
 #endif

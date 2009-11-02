@@ -115,8 +115,8 @@ namespace YGEMath{
 
 		}
 
-		math::Vec3d operator * (const math::Vec3d &v) {
-			math::Vec3d result;
+		YGEMath::Vector3 operator * (const YGEMath::Vector3 &v) {
+			YGEMath::Vector3 result;
 			// TODO result = 
 
 		}
@@ -132,8 +132,8 @@ namespace YGEMath{
 		}
 
 
-		math::Mat3x3d getRotationMatrix() const{
-			math::Mat3x3d result( 
+		YGEMath::Mat3x3 getRotationMatrix() const{
+			YGEMath::Mat3x3 result( 
 				1-2*(y*y + z*z),	2*x*y - 2*w*z,		2*w*y + 2*x*z,
 				2*w*z+2*x*y,		1-2*(x*x + z*z),	-2*w*x+2*y*z,
 				-2*w*y+2*x*z,		2*w*x+2*y*z,		1-2*(x*x + y*y));
@@ -178,7 +178,7 @@ namespace YGEMath{
 			}
 		}
 
-		Quaternion(math::Mat3x3d a){
+		Quaternion(YGEMath::Mat3x3 a){
 
 			// stolen from http://www.euclideanspace.com/maths/geometry/rotations/conversions/matrixToQuaternion/index.htm
 
@@ -192,19 +192,19 @@ namespace YGEMath{
 			} else {
 				//std::cout<<"adfdgdf"<<std::endl;
 				if ( a[0][0] > a[1][1] && a[0][0] > a[2][2] ) {
-					float s = 2.0f * sqrtf( 1.0f + a[0][0] - a[1][1] - a[2][2]);
+					double s = 2.0 * (double)sqrtf( 1.0 + a[0][0] - a[1][1] - a[2][2]);
 					w = (a[2][1] - a[1][2] ) / s;
 					x = 0.25f * s;
 					y = (a[0][1] + a[1][0] ) / s;
 					z = (a[0][2] + a[2][0] ) / s;
 				} else if (a[1][1] > a[2][2]) {
-					float s = 2.0f * sqrtf( 1.0f + a[1][1] - a[0][0] - a[2][2]);
+					double s = 2.0f * (double)sqrtf( 1.0f + a[1][1] - a[0][0] - a[2][2]);
 					w = (a[0][2] - a[2][0] ) / s;
 					x = (a[0][1] + a[1][0] ) / s;
 					y = 0.25f * s;
 					z = (a[1][2] + a[2][1] ) / s;
 				} else {
-					float s = 2.0f * sqrtf( 1.0f + a[2][2] - a[0][0] - a[1][1] );
+					double s = 2.0f * (double)sqrtf( 1.0f + a[2][2] - a[0][0] - a[1][1] );
 					w = (a[1][0] - a[0][1] ) / s;
 					x = (a[0][2] + a[2][0] ) / s;
 					y = (a[1][2] + a[2][1] ) / s;
@@ -232,5 +232,3 @@ namespace YGEMath{
 #endif // _QUATERNIONS_H_
 
 
-
-#endif

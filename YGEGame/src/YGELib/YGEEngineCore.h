@@ -62,7 +62,7 @@ class YGEEngineCore {
 
 	bool consoleEnabled;
 
-	YGEScene* scene;
+	YGETimeSpace::YGEScene* scene;
 
 public:
 

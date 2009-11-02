@@ -224,16 +224,16 @@ namespace YGECore {
 		// Set The Color To Blue One Time Only
 		glBegin(GL_QUADS);			
 		// Draw A Quad
-		glTexCoord2i( 0.0f, 0.0f );
+		glTexCoord2f( 0.0f, 0.0f );
 		glVertex3f(0.0f, 480.0f, 0.0f);					// Top Left
 
-		glTexCoord2i( 0.0f, 1.0f );
+		glTexCoord2f( 0.0f, 1.0f );
 		glVertex3f( 0.0f, 240.0f, 0.0f);					// Top Right
 
-		glTexCoord2i( 1.0f, 1.0f );
+		glTexCoord2f( 1.0f, 1.0f );
 		glVertex3f( 640.0f,240.0f, 0.0f);					// Bottom Right
 
-		glTexCoord2i( 1.0f, 0.0f );
+		glTexCoord2f( 1.0f, 0.0f );
 		glVertex3f(640.0f,480.0f, 0.0f);					// Bottom Left
 		glEnd();	
 

@@ -18,38 +18,42 @@ struct Mat2x2 {
 };
 	
 struct Mat3x3 {
-	double values[3][3];
+	Vector3 columns[3];
 
 	Mat3x3(){
-		values[0][0] = 0.0;
-		values[0][1] = 0.0;
-		values[0][2] = 0.0;
-		values[0][3] = 0.0;
 
-		values[1][0] = 0.0;
-		values[1][1] = 0.0;
-		values[1][2] = 0.0;
-		values[1][3] = 0.0;
-
-		values[2][0] = 0.0;
-		values[2][1] = 0.0;
-		values[2][2] = 0.0;
-		values[2][3] = 0.0;
-
-		values[3][0] = 0.0;
-		values[3][1] = 0.0;
-		values[3][2] = 0.0;
-		values[3][3] = 0.0;
 
 
 	}
 
+	Mat3x3( double aa, double ab, double ac,
+		    double ba, double bb, double bc,
+			double ca, double cb, double cc){
+
+		columns[0][0] = aa;
+		columns[0][1] = ab;
+		columns[0][2] = ac;
+		columns[1][0] = ba;
+		columns[1][1] = bb;
+		columns[1][2] = bc;
+		columns[2][0] = ca;
+		columns[2][1] = cb;
+		columns[2][2] = cc;
+
+
+
+	}
+
+		Vector3& operator [] (const int index){
+			return columns[index];
+		}
+
 	Vector3 operator*(const Vector3& V){
 		Vector3 newVector;
 
-		newVector.x = values[0][0] * V.x + values[1][0] * V.y + values[2][0] * V.z;
-		newVector.y = values[0][1] * V.x + values[1][1] * V.y + values[2][1] * V.z;
-		newVector.z = values[0][2] * V.x + values[1][2] * V.y + values[2][3] * V.z;
+		newVector.x = columns[0][0] * V.x + columns[1][0] * V.y + columns[2][0] * V.z;
+		newVector.y = columns[0][1] * V.x + columns[1][1] * V.y + columns[2][1] * V.z;
+		newVector.z = columns[0][2] * V.x + columns[1][2] * V.y + columns[2][2] * V.z;
 
 		return newVector;
 	}
@@ -59,6 +63,10 @@ struct Mat3x3 {
 
 		return newMatrix;
 
+	}
+
+	double at(int i, int j){
+		return columns[i][j];
 	}
 
 };

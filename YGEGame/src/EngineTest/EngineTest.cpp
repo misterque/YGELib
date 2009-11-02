@@ -76,7 +76,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	cout<<"1) Math Library"<<endl;
 	testMath();
 	cout<<"2) Core Functions"<<endl;
-	testCore();
+	//testCore();
 	return 0;
 }
 

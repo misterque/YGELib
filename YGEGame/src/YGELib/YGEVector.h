@@ -45,6 +45,20 @@ struct Vector3 {
 		z = Z;
 	}
 
+	double& operator [] (const int index){
+		switch(index){
+			case 0:
+				return x;
+				break;
+			case 1:
+				return y;
+				break;
+			case 2:
+				return z;
+				break;
+		}
+	}
+
 	/**
 	 * add a vector to an other
 	 */

@@ -70,8 +70,8 @@ namespace YGECore {
 		if(gamestate != 0) {
 			gamestate->update();
 			gamestate->draw(this);
-			YGESceneList list = gamestate->getScenesToRender();
-			for(YGESceneList::iterator iter = list.begin(); iter != list.end(); iter++){
+			YGETimeSpace::YGESceneList list = gamestate->getScenesToRender();
+			for(YGETimeSpace::YGESceneList::iterator iter = list.begin(); iter != list.end(); iter++){
 
 		YGECore::YGELogger::getInstance()->log("Draw a box (Y)");
 
@@ -86,8 +86,8 @@ namespace YGECore {
 		glLoadIdentity();       
 				glDisable(GL_TEXTURE_2D);
 		glDisable(GL_BLEND);
-	glTranslatef(0.0f,0.0f,-7.0f);						// Move Right 1.5 Units And Into The Screen 7.0
-	glRotatef(45,1.0f,1.0f,1.0f);					// Rotate The Quad On The X axis ( NEW )
+//	glTranslatef(0.0f,0.0f,-7.0f);						// Move Right 1.5 Units And Into The Screen 7.0
+//	glRotatef(45,1.0f,1.0f,1.0f);					// Rotate The Quad On The X axis ( NEW )
 
 
 				(*iter)->render();

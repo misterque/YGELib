@@ -3,7 +3,7 @@
 
 
 #include "YGEEntityAsset.h"
-
+namespace YGETimeSpace{
 void YGESimpleBox::draw(){
 	printf("BOX\n");
 			// NEHEs code?
@@ -39,5 +39,7 @@ void YGESimpleBox::draw(){
 		glVertex3f( 1.0f,-1.0f, 1.0f);					// Bottom Left Of The Quad (Right)
 		glVertex3f( 1.0f,-1.0f,-1.0f);					// Bottom Right Of The Quad (Right)
 	glEnd();											// Done Drawing The Quad
+
+}
 
 }
