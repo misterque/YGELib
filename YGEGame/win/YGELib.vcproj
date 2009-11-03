@@ -194,6 +194,14 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="graphics"
+				>
+				<File
+					RelativePath="..\src\YGELib\YGEVbo.cpp"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Header Files"
