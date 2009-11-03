@@ -8,15 +8,56 @@
 
 #include "YGEEntityAsset.h"
 
-class YGEVbo : YGEGraphicsAsset {
+namespace YGEGraphics {
+
+
+	struct Vertex {
+		YGEMath::Vector3 position;
+		YGEMath::Vector2 texCoords;
+		double r,g,b,a;
+	};
+
+	class Mesh {
+		/**
+		 * array of vertices, size must be number of
+		 * vertices * 3
+		 */
+		Glfloat* vertices;
+
+		/**
+		 *
+		 *
+		 */
+		Glfloat* uv;
+
+		Gluint textureID;
+
+	}
+
+class YGEVbo {
+
+private:
+	GLuint vboId;
+
+	Mesh *mesh;
+
+	bool uptodate;
 
 public:
 	YGEVbo();
 
 	virtual void draw(YGEGraphicsContext* context);
 
+	void fillBuffers();
+
+	void setMesh(Mesh *m){
+		mesh = m;
+		uptodate = false;
+	}
+
 
 
 };
 
+}
 #endif
