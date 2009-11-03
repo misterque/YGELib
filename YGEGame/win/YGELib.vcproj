@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(SolutionDir)/../lib/win32/SDL_ttf-2.0.9/include&quot;;&quot;$(SolutionDir)/../lib/win32/SDL-1.2.13/include&quot;"
+				AdditionalIncludeDirectories="&quot;$(SolutionDir)/../lib/win32/SDL_ttf-2.0.9/include&quot;;&quot;$(SolutionDir)/../lib/win32/GLee&quot;;&quot;$(SolutionDir)/../lib/win32/SDL-1.2.13/include&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_YGE_DEBUG"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -62,7 +62,7 @@
 			<Tool
 				Name="VCLibrarianTool"
 				AdditionalDependencies="SDL.lib opengl32.lib glu32.lib SDL_ttf.lib"
-				AdditionalLibraryDirectories="&quot;$(SolutionDir)/../lib/win32/SDL-1.2.13/lib&quot;;&quot;$(SolutionDir)/../lib/win32/SDL_ttf-2.0.9/lib&quot;"
+				AdditionalLibraryDirectories="&quot;$(SolutionDir)/../lib/win32/SDL-1.2.13/lib&quot;;&quot;$(SolutionDir)/../lib/win32/SDL_ttf-2.0.9/lib&quot;;&quot;$(SolutionDir)/../lib/win32/GLee&quot;"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -210,6 +210,14 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="extern"
+				>
+				<File
+					RelativePath="..\src\GLee\GLee.c"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -333,6 +341,14 @@
 				</File>
 				<File
 					RelativePath="..\src\YGELib\YGEScene.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="extern"
+				>
+				<File
+					RelativePath="..\src\GLee\GLee.h"
 					>
 				</File>
 			</Filter>

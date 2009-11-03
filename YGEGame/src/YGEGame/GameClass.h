@@ -8,8 +8,8 @@ using namespace YGECore;
 
 class GameClass : public YGEKeyDownListener{
 private:
-		GameStateX x;
-		GameStateY y;
+		GameStateX* x;
+		GameStateY* y;
 		YGEEngineCore core;
 
 public:
@@ -17,10 +17,10 @@ public:
 	virtual void keyDown(SDLKey key){
 		switch(key){
 			case SDLK_x:
-		core.setGameState(&x);
+		core.setGameState(x);
 				break;
 			case SDLK_y:
-		core.setGameState(&y);
+		core.setGameState(y);
 				break;
 			case SDLK_ESCAPE:
 				core.shutdown();
@@ -32,11 +32,15 @@ public:
 
 	void run(){
 
-
+		
 
 
 		core.init();
-		core.setGameState(&x);
+
+		x = new GameStateX();
+		y = new GameStateY();
+
+		core.setGameState(x);
 		core.getInputManager()->addKeyDownListener(this);
 		core.run();
 		core.shutdown();

@@ -136,6 +136,7 @@ namespace YGECore {
 		TTF_Init();
 
 		console = new YGEConsole();
+		YGELogger::getInstance()->setConsole(console);
 		display = new YGESDLDisplay();
 		input = new YGESDLInputManager();
 

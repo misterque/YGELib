@@ -54,7 +54,7 @@ namespace YGECore {
 		virtual void init(){
 
 			YGELogger::getInstance()->log("Initializing Display");
-
+			
 			Uint32 flags;
 			if(fullscreen) {
 				flags = SDL_OPENGL | SDL_FULLSCREEN;

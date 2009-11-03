@@ -7,6 +7,8 @@
 #define _YGE_VBO_H_
 
 #include "YGEEntityAsset.h"
+
+
 #include <SDL_opengl.h>
 
 namespace YGEGraphics {
@@ -30,11 +32,18 @@ namespace YGEGraphics {
 
 		GLfloat* uv;
 
+
+		GLuint* indices;
 		/**
 		 * texture ID
 		 * @todo add multitexturing
 		 */
 		GLuint textureID;
+
+
+
+		int numVertices;
+		int numTriangles;
 
 	};
 
@@ -42,6 +51,7 @@ namespace YGEGraphics {
 
 	private:
 		GLuint vboId;
+		GLuint iboId;
 
 		Mesh *mesh;
 
