@@ -16,8 +16,8 @@ void YGEScene::renderEntity(YGEEntity* entity){
 	glScalef(scale.x, scale.y, scale.z);
 
 	// get every graphical asset and render it
-	std::list<YGEGraphicsAsset*> assets = entity->getGraphicsAssets();
-	for(std::list<YGEGraphicsAsset*>::iterator iter = assets.begin();
+	std::list<YGEGraphics::YGEGraphicsAsset*> assets = entity->getGraphicsAssets();
+	for(std::list<YGEGraphics::YGEGraphicsAsset*>::iterator iter = assets.begin();
 		iter != assets.end();
 		iter++){
 

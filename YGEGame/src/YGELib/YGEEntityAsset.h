@@ -27,20 +27,6 @@ public:
 };
 
 
-class YGEGraphicsAsset : public YGEEntityAsset {
-public:
-	virtual void draw(YGEGraphicsContext* context) = 0;
-	
-	virtual AssetType getAssetType(){
-		return Graphical;
-	}
-};
 
-class YGESimpleBox : public YGEGraphicsAsset {
-public:
-	virtual void draw(YGEGraphicsContext* context);
-
-
-};
 }
 #endif

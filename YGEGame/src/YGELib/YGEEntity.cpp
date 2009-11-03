@@ -19,7 +19,7 @@ namespace YGETimeSpace{
 
 		// if it is a graphical asset put it in the list of graphicals
 		if(asset->getAssetType() == Graphical) {
-			graphicAssets.push_back((YGEGraphicsAsset*)asset);
+			graphicAssets.push_back((YGEGraphics::YGEGraphicsAsset*)asset);
 		}
 
 	}

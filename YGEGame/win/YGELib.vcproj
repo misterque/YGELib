@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="9,00"
+	Version="9.00"
 	Name="YGELib"
 	ProjectGUID="{B34C1000-21FF-4AF4-B36D-7C9E6175D53A}"
 	RootNamespace="YGELib"
@@ -198,6 +198,14 @@
 				Name="graphics"
 				>
 				<File
+					RelativePath="..\src\YGELib\YGEHeightmap.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\src\YGELib\YGESimpleBox.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\YGELib\YGEVbo.cpp"
 					>
 				</File>
@@ -237,6 +245,10 @@
 				</File>
 				<File
 					RelativePath="..\src\YGELib\YGELogger.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\YGELib\YGERessourceManager.h"
 					>
 				</File>
 				<File
@@ -288,7 +300,19 @@
 				Name="graphics"
 				>
 				<File
+					RelativePath="..\src\YGELib\YGEGraphicsAsset.h"
+					>
+				</File>
+				<File
 					RelativePath="..\src\YGELib\YGEGraphicsContext.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\YGELib\YGEHeightmap.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\YGELib\YGEStaticMesh.h"
 					>
 				</File>
 				<File

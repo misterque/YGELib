@@ -6,6 +6,7 @@
 #define _YGE_ENTITY_H_
 
 #include "YGEEntityAsset.h"
+#include "YGEGraphicsAsset.h"
 #include "YGEVector.h"
 #include "YGEMatrix.h"
 #include "YGEQuaternion.h"
@@ -48,7 +49,7 @@ private:
 	/**
 	 * renderable graphics assets of this entity
 	 */
-	std::list<YGEGraphicsAsset*> graphicAssets;
+	std::list<YGEGraphics::YGEGraphicsAsset*> graphicAssets;
 
 
 	/**
@@ -106,7 +107,7 @@ public:
 	 * will be called by the scene graphical renderer to
 	 * just get the assests which are renderable
 	 */
-	std::list<YGEGraphicsAsset*> getGraphicsAssets(){
+	std::list<YGEGraphics::YGEGraphicsAsset*> getGraphicsAssets(){
 		return graphicAssets;
 	}
 
