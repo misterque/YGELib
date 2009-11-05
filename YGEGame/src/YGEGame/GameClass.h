@@ -42,6 +42,7 @@ public:
 
 		core.setGameState(x);
 		core.getInputManager()->addKeyDownListener(this);
+		core.getInputManager()->addKeyDownListener(y);
 		core.run();
 		core.shutdown();
 

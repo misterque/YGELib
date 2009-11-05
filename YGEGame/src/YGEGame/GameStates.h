@@ -74,7 +74,7 @@ public:
 };
 
 
-class GameStateY : public YGEGame::YGEGameState {
+class GameStateY : public YGEGame::YGEGameState, public YGEKeyDownListener {
 public:
 	YGEEntity* scene;
 	YGEObserver* camera;
@@ -89,15 +89,17 @@ public:
 		pos.x = 20;
 		pos.y = 20;
 		pos.z = 140;
-		hmapPos->setPosition(pos);
+
+		camera = new YGEObserver();
+
+		camera->setPosition(pos);
 
 		YGEHeightmap* heightmap = new YGEHeightmap();
 		heightmap->create("heightmaps/simple.bmp");
 		scene->addChild(hmapPos);
 		scene->addAsset(heightmap);
 
-		camera = new YGEObserver();
-		hmapPos->addChild(camera);
+		scene->addChild(camera);
 
 	}
 
@@ -117,6 +119,17 @@ public:
 	}
 
 	virtual void draw(YGECore::YGEEngineCore* core) {
+	}
+
+	virtual void keyDown(SDLKey key){
+		switch(key){
+			case SDLK_UP:
+				YGEMath::Vector3 pos = camera->getPosition();
+				pos.z+=1;
+				camera->setPosition(pos);
+				break;
+		}
+		
 	}
 
 };
