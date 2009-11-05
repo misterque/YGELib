@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="9.00"
+	Version="9,00"
 	Name="YGELib"
 	ProjectGUID="{B34C1000-21FF-4AF4-B36D-7C9E6175D53A}"
 	RootNamespace="YGELib"
@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(SolutionDir)/../lib/win32/SDL_ttf-2.0.9/include&quot;;&quot;$(SolutionDir)/../lib/win32/GLee&quot;;&quot;$(SolutionDir)/../lib/win32/SDL-1.2.13/include&quot;"
+				AdditionalIncludeDirectories="&quot;$(SolutionDir)/../lib/win32/SDL_ttf-2.0.9/include&quot;;&quot;$(SolutionDir)/../src/GLee&quot;;&quot;$(SolutionDir)/../lib/win32/SDL-1.2.13/include&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_YGE_DEBUG"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -171,6 +171,10 @@
 				</File>
 				<File
 					RelativePath="..\src\YGELib\YGELogger.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\src\YGELib\YGERessourceManager.cpp"
 					>
 				</File>
 				<File

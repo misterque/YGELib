@@ -79,9 +79,18 @@ public:
 
 		scene = new YGEScene();
 
+		YGEEntity* hmapPos = new YGEEntity();
+
+		YGEMath::Vector3 pos;
+		pos.x = -20;
+		pos.y = -20;
+		pos.z = -140;
+		hmapPos->setPosition(pos);
+
 		YGEHeightmap* heightmap = new YGEHeightmap();
 		heightmap->create("heightmaps/simple.bmp");
-		scene->getRootNode()->addAsset(heightmap);
+		scene->getRootNode()->addChild(hmapPos);
+		hmapPos->addAsset(heightmap);
 
 	}
 

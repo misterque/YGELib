@@ -12,6 +12,8 @@ void YGEScene::renderEntity(YGEEntity* entity){
 
 	YGEMath::Vector3 pos = entity->getPosition();
 	YGEMath::Vector3 scale = entity->getScale();
+
+	glPushMatrix();
 	glTranslatef(pos.x, pos.y, pos.z);
 	glScalef(scale.x, scale.y, scale.z);
 
@@ -35,6 +37,7 @@ void YGEScene::renderEntity(YGEEntity* entity){
 			renderEntity(*iter);
 
 	}
+	glPopMatrix();
 };
 
 YGEScene::YGEScene(){
