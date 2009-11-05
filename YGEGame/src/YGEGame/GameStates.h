@@ -52,8 +52,11 @@ public:
 	}
 
 	virtual YGESceneList getScenesToRender(){
+		YGEScene s;
+		s.first = scene;
+		s.second = NULL;
 		YGESceneList list;
-		list.push_back(scene);
+		list.push_back(s);
 		return list;
 	}
 
@@ -74,6 +77,7 @@ public:
 class GameStateY : public YGEGame::YGEGameState {
 public:
 	YGEEntity* scene;
+	YGEObserver* camera;
 
 	GameStateY(){
 
@@ -82,21 +86,27 @@ public:
 		YGEEntity* hmapPos = new YGEEntity();
 
 		YGEMath::Vector3 pos;
-		pos.x = -20;
-		pos.y = -20;
-		pos.z = -140;
+		pos.x = 20;
+		pos.y = 20;
+		pos.z = 140;
 		hmapPos->setPosition(pos);
 
 		YGEHeightmap* heightmap = new YGEHeightmap();
 		heightmap->create("heightmaps/simple.bmp");
 		scene->addChild(hmapPos);
-		hmapPos->addAsset(heightmap);
+		scene->addAsset(heightmap);
+
+		camera = new YGEObserver();
+		hmapPos->addChild(camera);
 
 	}
 
 	virtual YGESceneList getScenesToRender(){
+		YGEScene s;
+		s.first = scene;
+		s.second = camera;
 		YGESceneList list;
-		list.push_back(scene);
+		list.push_back(s);
 		return list;
 	}
 

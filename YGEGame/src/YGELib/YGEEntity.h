@@ -84,6 +84,10 @@ public:
 	std::list<YGEEntity*> getChildren(){
 		return children;
 	}
+
+	YGEEntity* getParent(){
+		return parent;
+	}
 	/**
 	 * add an asset to the entity
 	 */

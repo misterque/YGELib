@@ -6,6 +6,7 @@
 #define _YGE_SCENE_H_
 
 #include "YGEEntity.h"
+#include "YGEObserver.h"
 
 namespace YGETimeSpace{
 
@@ -44,7 +45,8 @@ public:
 };
 
 */
-typedef std::list<YGEEntity*> YGESceneList;
+	typedef std::pair<YGEEntity*, YGEObserver*> YGEScene;
+	typedef std::list<YGEScene> YGESceneList;
 
 }
 
