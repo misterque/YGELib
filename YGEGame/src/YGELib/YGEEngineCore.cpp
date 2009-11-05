@@ -73,8 +73,6 @@ namespace YGECore {
 			YGETimeSpace::YGESceneList list = gamestate->getScenesToRender();
 			for(YGETimeSpace::YGESceneList::iterator iter = list.begin(); iter != list.end(); iter++){
 
-		YGECore::YGELogger::getInstance()->log("Draw a box (Y)");
-
 
 		glMatrixMode( GL_PROJECTION );
 		glLoadIdentity();

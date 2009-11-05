@@ -13,7 +13,8 @@
 
 #include "YGEGameState.h"
 
-#include "YGEScene.h"
+//#include "YGEScene.h"
+#include "YGEEntity.h"
 
 #include <SDL_mutex.h>
 
@@ -62,7 +63,7 @@ class YGEEngineCore {
 
 	bool consoleEnabled;
 
-	YGETimeSpace::YGEScene* scene;
+	YGETimeSpace::YGEEntity* scene;
 
 public:
 

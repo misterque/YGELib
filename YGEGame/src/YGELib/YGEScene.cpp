@@ -1,4 +1,4 @@
-#include <SDL_opengl.h>
+/*#include <SDL_opengl.h>
 #include "YGEScene.h"
 
 namespace YGETimeSpace{
@@ -44,4 +44,4 @@ YGEScene::YGEScene(){
 	//rootNode.p
 }
 
-}
+}*/

@@ -127,6 +127,8 @@ public:
 		scale = sca;
 	}
 
+	void render();
+
 };
 
 }

@@ -13,11 +13,11 @@ using namespace YGEGraphics;
 
 class GameStateX : public YGEGame::YGEGameState {
 public:
-	YGEScene* scene;
+	YGEEntity* scene;
 
 	GameStateX(){
 
-		scene = new YGEScene();
+		scene = new YGEEntity();
 		YGEEntity* boxPos = new YGEEntity();
 		YGESimpleBox* box = new YGESimpleBox();
 
@@ -47,12 +47,12 @@ public:
 		boxPos->addChild(smallBoxPos);
 
 		boxPos->addAsset(box);
-		scene->getRootNode()->addChild(boxPos);
+		scene->addChild(boxPos);
 
 	}
 
-	virtual std::list<YGEScene*> getScenesToRender(){
-		std::list<YGEScene*> list;
+	virtual YGESceneList getScenesToRender(){
+		YGESceneList list;
 		list.push_back(scene);
 		return list;
 	}
@@ -73,11 +73,11 @@ public:
 
 class GameStateY : public YGEGame::YGEGameState {
 public:
-	YGEScene* scene;
+	YGEEntity* scene;
 
 	GameStateY(){
 
-		scene = new YGEScene();
+		scene = new YGEEntity();
 
 		YGEEntity* hmapPos = new YGEEntity();
 
@@ -89,13 +89,13 @@ public:
 
 		YGEHeightmap* heightmap = new YGEHeightmap();
 		heightmap->create("heightmaps/simple.bmp");
-		scene->getRootNode()->addChild(hmapPos);
+		scene->addChild(hmapPos);
 		hmapPos->addAsset(heightmap);
 
 	}
 
-	virtual std::list<YGEScene*> getScenesToRender(){
-		std::list<YGEScene*> list;
+	virtual YGESceneList getScenesToRender(){
+		YGESceneList list;
 		list.push_back(scene);
 		return list;
 	}

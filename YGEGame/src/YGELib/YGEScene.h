@@ -23,6 +23,8 @@ namespace YGETimeSpace{
  * 
  * i am getting stupid here...
  */
+
+/*
 class YGEScene {
 
 
@@ -41,8 +43,9 @@ public:
 	YGEScene();
 };
 
-
-typedef std::list<YGEScene*> YGESceneList;
+*/
+typedef std::list<YGEEntity*> YGESceneList;
 
 }
+
 #endif
