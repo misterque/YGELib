@@ -344,6 +344,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\YGELib\YGEObserver.h"
+					>
+				</File>
+				<File
 					RelativePath="..\src\YGELib\YGEScene.h"
 					>
 				</File>
