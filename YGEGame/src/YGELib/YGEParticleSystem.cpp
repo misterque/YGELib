@@ -3,6 +3,8 @@
 #include "YGEParticleSystem.h"
 #include "YGELogger.h"
 
+#include <cassert>
+
 namespace YGEGraphics {
 	void YGEParticleList::setAlive(YGEGraphics::YGEParticle *p){
 
@@ -21,6 +23,7 @@ namespace YGEGraphics {
 
 			// add to head of alive list
 			p->nextParticle = this->firstAlive;
+			p->nextParticle->previousParticle = p;
 			p->previousParticle = NULL;
 			this->firstAlive = p;
 
@@ -29,6 +32,8 @@ namespace YGEGraphics {
 			//increase alive counter
 			numberOfAliveParticles++;
 			numberOfDeadParticles--;
+		} else {
+			assert(false);
 		}
 
 	}
@@ -56,6 +61,8 @@ namespace YGEGraphics {
 			// increase dead counter
 			numberOfDeadParticles++;
 			numberOfAliveParticles--;
+		} else {
+			assert(false);
 		}
 	}
 
@@ -75,8 +82,8 @@ namespace YGEGraphics {
 			p->alive = true;
 			p->previousParticle = NULL;
 			p->nextParticle = this->firstAlive;
-			if(p->nextParticle != NULL) {
-				p->nextParticle->previousParticle = p;
+			if(this->firstAlive != NULL) {
+				this->firstAlive->previousParticle = p;
 			}
 			this->firstAlive = p;
 			numberOfAliveParticles++;
@@ -86,6 +93,7 @@ namespace YGEGraphics {
 	}
 
 	void YGEParticleSystem::update(){
+
 		YGEParticle* p = particleList.getFirstAliveParticle();
 		YGEParticle* p2;
 
@@ -109,7 +117,7 @@ namespace YGEGraphics {
 
 		// calc the amount of particles to spawn
 		// should be dependand on framerate and respawn rate
-		int spawnnew = 2;
+		int spawnnew = 1;
 		for(int i = 0; i<spawnnew; i++){
 			YGEParticle* newParticle = particleList.getParticle();
 			newParticle->timeToLive = 5.0f;

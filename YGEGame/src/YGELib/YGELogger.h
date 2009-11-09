@@ -3,6 +3,7 @@
 
 
 #include <iostream>
+#include <sstream>
 #include "YGEConsole.h"
 
 
@@ -46,6 +47,14 @@ public:
 	void logToConsole(char* message){
 		console->println(message);
 	}
+
+	void logToConsole(int message){
+		std::stringstream s;
+		s<<message;
+		console->println(s.str().c_str());
+	}
+
+
 
 	void log(long long number){
 #ifdef _DEBUG

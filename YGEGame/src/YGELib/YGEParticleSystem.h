@@ -89,6 +89,11 @@ private:
 	YGEParticleList particleList;
 public:
 
+	YGEParticleSystem(){
+		bla = 0;
+	}
+	int bla;
+
 	virtual void draw(YGEGraphicsContext* context);
 
 	void update();
