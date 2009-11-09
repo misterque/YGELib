@@ -13,6 +13,21 @@
 
 namespace YGEGraphics {
 
+/*
+
+	struct Vertex {
+		GLfloat x, y, z;
+
+		GLfloat u,v;
+
+		GLubyte8 r,g,b,a;
+	};
+
+	struct Triangle {
+		int a,b,c;
+	
+	};
+*/
 
 	/**
 	 * holds mesh information
@@ -20,19 +35,21 @@ namespace YGEGraphics {
 	class Mesh {
 	public:
 		/**
-		* array of vertices, size must be number of
-		* vertices * 3
-		*/
+		 * array of vertices, size must be number of
+		 * vertices * 3
+		 */
 		GLfloat* vertices;
 
 		/**
-		*
-		*
-		*/
-
+		 * 
+		 *
+		 */
 		GLfloat* uv;
 
 
+		/**
+		 * array
+		 */
 		GLuint* indices;
 		/**
 		 * texture ID

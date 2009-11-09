@@ -206,6 +206,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\YGELib\YGEParticleSystem.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\YGELib\YGESimpleBox.cpp"
 					>
 				</File>
@@ -324,6 +328,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\YGELib\YGEParticleSystem.h"
+					>
+				</File>
+				<File
 					RelativePath="..\src\YGELib\YGEStaticMesh.h"
 					>
 				</File>
@@ -368,7 +376,7 @@
 			>
 		</Filter>
 		<File
-			RelativePath=".\Engine_notes.txt"
+			RelativePath="..\src\YGELib\Engine_notes.txt"
 			>
 		</File>
 	</Files>

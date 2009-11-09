@@ -184,6 +184,10 @@
 				RelativePath="..\src\EngineTest\stdafx.cpp"
 				>
 			</File>
+			<File
+				RelativePath="..\src\EngineTest\testParticleSystem.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -196,6 +200,10 @@
 			</File>
 			<File
 				RelativePath="..\src\EngineTest\targetver.h"
+				>
+			</File>
+			<File
+				RelativePath="..\src\EngineTest\tests.h"
 				>
 			</File>
 			<File

@@ -43,41 +43,45 @@ namespace YGEGraphics {
 		SDL_Surface* surface = 
 			YGECore::YGERessourceManager::getInstance()->getSurface("hmap.bmp");
 
+		int w = surface->w;
+		int h = surface->h;
 		mesh = new YGEVbo();
 
 		Mesh* map = new Mesh();
 
-		map->vertices = new GLfloat[3 * 256 * 256];
-		map->uv = new GLfloat[ 2 * 256 * 256 ];
-		map->indices = new GLuint [ 2 * 3 * 255 * 255 ];
+		map->vertices = new GLfloat[3 * w * h];
+		map->uv = new GLfloat[ 2 * w * h ];
+		map->indices = new GLuint [ 2 * 3 * (w-1) * (h-1) ];
 		map->textureID = 0;
 
-		map->numTriangles = 255 * 255 * 2;
-		map->numVertices = 256 * 256;
+		map->numTriangles = (w-1) * (h-1) * 2;
+		map->numVertices = w * h;
+
+//		map->textureID = (YGECore::YGERessourceManager::getInstance()->getTexture("mud.bmp"))->textureID;
 
 		SDL_LockSurface(surface);
-		for(int x = 0; x < 256; x++){
-			for(int y = 0; y < 256; y++){
-				map->vertices[(x + y*256)*3 + 0] = x;
+		for(int x = 0; x < w; x++){
+			for(int y = 0; y < h; y++){
+				map->vertices[(x + y*w)*3 + 0] = x;
 				
-				Uint8 h;
-				SDL_GetRGB(getpixel(surface, x, y), surface->format, &h, &h, &h);
+				Uint8 height;
+				SDL_GetRGB(getpixel(surface, x, y), surface->format, &height, &height, &height);
 				//YGECore::YGELogger::getInstance()->log(h);
 				
-				map->vertices[(x + y*256)*3 + 1] =  (float)h;
-				map->vertices[(x + y*256)*3 + 2] = y;
+				map->vertices[(x + y*w)*3 + 1] =  (float)height;
+				map->vertices[(x + y*w)*3 + 2] = y;
 			}
 		}
 		SDL_UnlockSurface(surface);
 
-		for(int x = 0; x < 255; x++){
-			for(int y = 0; y < 255; y++){
-				map->indices[(x + y*255)*6 + 0] = x +     y*256;
-				map->indices[(x + y*255)*6 + 1] = x + 1 + y*256;
-				map->indices[(x + y*255)*6 + 2] = x +     (y+1)*256;
-				map->indices[(x + y*255)*6 + 3] = x + 1 + y*256;
-				map->indices[(x + y*255)*6 + 4] = x + 1 + (y+1)*256;
-				map->indices[(x + y*255)*6 + 5] = x +     (y+1)*256;
+		for(int x = 0; x < (w-1); x++){
+			for(int y = 0; y < (h-1); y++){
+				map->indices[(x + y*(w-1))*6 + 0] = x +     y*w;
+				map->indices[(x + y*(w-1))*6 + 1] = x + 1 + y*w;
+				map->indices[(x + y*(w-1))*6 + 2] = x +     (y+1)*w;
+				map->indices[(x + y*(w-1))*6 + 3] = x + 1 + y*w;
+				map->indices[(x + y*(w-1))*6 + 4] = x + 1 + (y+1)*w;
+				map->indices[(x + y*(w-1))*6 + 5] = x +     (y+1)*w;
 			}
 		}
 

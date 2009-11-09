@@ -1,33 +1,112 @@
-========================================================================
-    CONSOLE APPLICATION : YGEGame Project Overview
-========================================================================
-
-AppWizard has created this YGEGame application for you.
-
-This file contains a summary of what you will find in each of the files that
-make up your YGEGame application.
 
 
-YGEGame.vcproj
-    This is the main project file for VC++ projects generated using an Application Wizard.
-    It contains information about the version of Visual C++ that generated the file, and
-    information about the platforms, configurations, and project features selected with the
-    Application Wizard.
 
-YGEGame.cpp
-    This is the main application source file.
+1. Requirements
+a) Brief overview of features wanted
+	GF01: loading and display of an island
+		(a)- terrain via heightmap
+		(b)- houses via static models
+		(c)- ocean via ???
+		
+	GF02: player
+		(a)- gyrocopter model via static model, particle system
+		(b)- interaction via keyboard or joystick
+		
+		
+	GF03: megahawk
+		(a)- robot model via animated model
+		(b)- AI via state machine
+		
+	GF04: missles
+		(a) rocket model via static model, particle system
+		(b) rock model via static model
+		
+	GF05: game logic
+		(a) spash screen
+		(b) main menu
+		(c) ingame logic
+			- goal: killing megahawk
+			- goal: landing
+			- goal: time
+			- fail
+		(d) score count
+		(e) highscore
+		
+	GF06: options window
+		(a) change resolution
+		(b) change fullscreen state
+		(c) change sound volume
+		
+		
+2. Milestones
+	GMS00: orientation and waiting for basic engine functionality
+	
+	
+	GMS01: due to
+		(a) creation of heightmap
+		(b) loading of heightmap with texture
+		(c) creation of basic gyrocopter model with texture
+			submodels:
+				body
+				main rotor
+				main rotor fast
+				back rotor
+				back rotor fast
+				tail v
+				tail t
+				
+		(d) creation of gyrocopter class
+		(e) display of gyrocopter
+		(f) mapping of controls to gyrocopter visualisation
+		
+	GMS02: due to
+		(a) creation of basic airport model
+		(b) design of level format
+			- levelname
+			- description
+			- heightmap
+			- skymap
+			- sun position
+			- ambient light
+			- list of music files
+			- static objects
+			- player start
+			- player landing zone
+			- megahawk starting position
+			- number of hits
+			- time to complete
+			- time point decay rate
+		(c) creation of basic level 
+		(d) physics model for gyrocopter
+		(e) collsion detection
+		
+	
+	GMS03: due to
+		(a) creation of basic megahawk model
+		(b) creation or megahawk class
+		(c) creation of missle model
+		(d) creation of missle class
+		(e) creation of game-logic
+			- landing
+			- shooting
+			- hitting
+			- failing
+			- scoring	
+	
+	GMS04: due to
+		(a) creation of megahawk AI
 
-/////////////////////////////////////////////////////////////////////////////
-Other standard files:
-
-StdAfx.h, StdAfx.cpp
-    These files are used to build a precompiled header (PCH) file
-    named YGEGame.pch and a precompiled types file named StdAfx.obj.
-
-/////////////////////////////////////////////////////////////////////////////
-Other notes:
-
-AppWizard uses "TODO:" comments to indicate parts of the source code you
-should add to or customize.
-
-/////////////////////////////////////////////////////////////////////////////
+	GMS05: due to
+		(a) creation of spashscreen
+		(b) creation of main menu
+		(c) creation of game
+		(d) creation of score count and highscore
+		(e) creation of options menu
+		(f) creation of credits screen (together with splashscreen)
+		
+	GMS06: due to
+		(a) beautifying of code
+		(b) beautifying of models and textures
+		(c) creation of 3 levels
+		(d) testing
+	

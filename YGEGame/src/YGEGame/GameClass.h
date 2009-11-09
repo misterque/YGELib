@@ -10,17 +10,21 @@ class GameClass : public YGEKeyDownListener{
 private:
 		GameStateX* x;
 		GameStateY* y;
+		GameStateZ* z;
 		YGEEngineCore core;
 
 public:
 
 	virtual void keyDown(SDLKey key){
 		switch(key){
-			case SDLK_x:
+			case SDLK_1:
 		core.setGameState(x);
 				break;
-			case SDLK_y:
+			case SDLK_2:
 		core.setGameState(y);
+				break;
+			case SDLK_3:
+		core.setGameState(z);
 				break;
 			case SDLK_ESCAPE:
 				core.shutdown();
@@ -39,6 +43,7 @@ public:
 
 		x = new GameStateX();
 		y = new GameStateY();
+		z = new GameStateZ();
 
 		core.setGameState(x);
 		core.getInputManager()->addKeyDownListener(this);

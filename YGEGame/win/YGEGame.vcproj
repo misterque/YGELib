@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="9.00"
+	Version="9,00"
 	Name="YGEGame"
 	ProjectGUID="{C1EB6209-DDA8-404D-9983-1E1CF1C53703}"
 	RootNamespace="YGEGame"
@@ -205,6 +205,10 @@
 			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
 			>
 		</Filter>
+		<File
+			RelativePath="..\src\YGEGame\Game_notes.txt"
+			>
+		</File>
 	</Files>
 	<Globals>
 	</Globals>

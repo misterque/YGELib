@@ -7,6 +7,7 @@
 #include "YGEEntityAsset.h"
 #include "YGEHeightmap.h"
 #include "YGEGraphicsAsset.h"
+#include "YGEParticleSystem.h"
 
 using namespace YGETimeSpace;
 using namespace YGEGraphics;
@@ -83,8 +84,6 @@ public:
 
 		scene = new YGEEntity();
 
-		YGEEntity* hmapPos = new YGEEntity();
-
 		YGEMath::Vector3 pos;
 		pos.x = 20;
 		pos.y = 20;
@@ -96,7 +95,7 @@ public:
 
 		YGEHeightmap* heightmap = new YGEHeightmap();
 		heightmap->create("heightmaps/simple.bmp");
-		scene->addChild(hmapPos);
+
 		scene->addAsset(heightmap);
 
 		scene->addChild(camera);
@@ -114,6 +113,65 @@ public:
 
 	virtual void update() {
 		YGECore::YGELogger::getInstance()->log("Updating Gamestate Y");
+
+
+	}
+
+	virtual void draw(YGECore::YGEEngineCore* core) {
+	}
+
+	virtual void keyDown(SDLKey key){
+		switch(key){
+			case SDLK_UP:
+				YGEMath::Vector3 pos = camera->getPosition();
+				pos.z+=1;
+				camera->setPosition(pos);
+				break;
+		}
+		
+	}
+
+};
+
+
+class GameStateZ : public YGEGame::YGEGameState, public YGEKeyDownListener {
+public:
+	YGEEntity* scene;
+	YGEObserver* camera;
+	YGEParticleSystem* ps;
+
+	GameStateZ(){
+
+		scene = new YGEEntity();
+
+		YGEMath::Vector3 pos;
+		pos.x = 0;
+		pos.y = 0;
+		pos.z = 10;
+
+		camera = new YGEObserver();
+
+		camera->setPosition(pos);
+
+		ps = new YGEParticleSystem();
+		scene->addAsset(ps);
+
+		scene->addChild(camera);
+
+	}
+
+	virtual YGESceneList getScenesToRender(){
+		YGEScene s;
+		s.first = scene;
+		s.second = camera;
+		YGESceneList list;
+		list.push_back(s);
+		return list;
+	}
+
+	virtual void update() {
+		ps->update();
+		YGECore::YGELogger::getInstance()->log("Updating Gamestate Z");
 
 
 	}

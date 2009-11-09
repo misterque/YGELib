@@ -13,6 +13,7 @@ namespace YGECore {
 
 
 	class Texture {
+	public:
 		int w, h;
 		GLuint textureID;
 	};

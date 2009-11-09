@@ -27,9 +27,6 @@ namespace YGEGraphics {
 	void YGEVbo::draw(YGEGraphicsContext *context){
 
 
-		//YGECore::YGELogger::getInstance()->log(mesh->vertices[ 1]);
-
-		//glTranslatef(-20.0f, -20.0f, -140.0f);
 		glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
 		// fallback
 		if(false){

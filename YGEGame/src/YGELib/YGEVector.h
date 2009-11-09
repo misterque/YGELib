@@ -3,6 +3,7 @@
 
 #include <math.h>
 #include <iostream>
+#include <stdlib.h>
 
 namespace YGEMath{
 
@@ -44,6 +45,25 @@ struct Vector3 {
 		y = Y;
 		z = Z;
 	}
+
+	// @todo: move this somewhere else
+	static double randDouble(){
+		int i = rand() % 20000;
+		i -= 10000;
+		return (double)i / 10000.0f;
+	}
+
+
+	
+	static Vector3 random(double v){
+		Vector3 r;
+		r.x = randDouble() * v;
+		r.y = randDouble() * v;
+		r.z = randDouble() * v;
+		return r;
+
+	}
+
 
 	double& operator [] (const int index){
 		switch(index){

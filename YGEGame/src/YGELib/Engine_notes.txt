@@ -1,30 +1,66 @@
-========================================================================
-    STATIC LIBRARY : YGELib Project Overview
-========================================================================
-
-AppWizard has created this YGELib library project for you.
-
-This file contains a summary of what you will find in each of the files that
-make up your YGELib application.
 
 
-YGELib.vcproj
-    This is the main project file for VC++ projects generated using an Application Wizard.
-    It contains information about the version of Visual C++ that generated the file, and
-    information about the platforms, configurations, and project features selected with the
-    Application Wizard.
 
 
-/////////////////////////////////////////////////////////////////////////////
 
-StdAfx.h, StdAfx.cpp
-    These files are used to build a precompiled header (PCH) file
-    named YGELib.pch and a precompiled types file named StdAfx.obj.
+1. Requirements
+	a) Brief overview of features wanted
+		EF01: Entity-Based Scenegraph
+		EF02: static models: OBJ loading and display
+		EF03: animated models: md2 loading and display
+		EF04: heightmap loading and display
+		EF05: texture loading (bmp, png)
+		EF06: Particle System (not affected by physics)
+		EF07: loading and use of soundfiles (wav, ogg) via OPENAL
+		EF08: Collision detection and physics with ODE
+		EF09: Console for interaction with the engine
+		EF10: Input Management
+		EF11: Skybox rendering
+		EF12: multi-threading
+		EF13: shadows
+		EF14: anti-aliasing
 
-/////////////////////////////////////////////////////////////////////////////
-Other notes:
 
-AppWizard uses "TODO:" comments to indicate parts of the source code you
-should add to or customize.
+2. Milestones:
+	EMS00: orientation phase: completed
 
-/////////////////////////////////////////////////////////////////////////////
+	EMS01: due to 6.11.2009: completed
+		(a) entity-graph with translation (no rotations): completed
+		(b) camera like object:	completed
+		(c) basic heightmap loading and storing as VBO: completed
+		(d) keyboard input management: completed
+		
+	EMS02: due to 11.11.2009
+		(a) entity-graph with translation and rotations
+		(b) basic particle system with point sprites
+		(c) improved heightmap loading with texture
+		(d) OBJ loading with multiple meshes
+		(e) ressource management for textures
+		
+	EMS03: due to
+		(a) skybox rendering
+		(c) collsion detection and physics (via ODE/EntityAssets)
+			- BoxHullAsset
+			- MeshHullAsset
+			- Heightmap as Physics Asset
+			- MotorAsset
+			- MassAsset
+		(d) interpolation
+		(e) light asset
+		
+	
+	EMS04:
+		(a) animated md2 loading and rendering
+		(b) particle system from file
+		(c) ressource management for models
+		(d) basic shadows
+		
+		
+	EMS05:
+		(a) loading and playing of wav files via OPENAL
+		(b) adding of sound sources to the entitygraph
+		(c) adding of playable music
+		
+	EMS06:
+		(a) adding of gamepad/joystick input
+		(b) adding of multitexturing for the heightmap
