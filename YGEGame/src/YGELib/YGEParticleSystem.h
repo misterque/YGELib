@@ -8,6 +8,7 @@
 
 #include "YGEGraphicsAsset.h"
 #include "YGEVector.h"
+#include "YGERessourceManager.h"
 
 namespace YGEGraphics {
 
@@ -87,12 +88,10 @@ public:
 class YGEParticleSystem : public YGEGraphicsAsset {
 private:
 	YGEParticleList particleList;
+	YGECore::Texture* texture;
 public:
 
-	YGEParticleSystem(){
-		bla = 0;
-	}
-	int bla;
+	YGEParticleSystem();
 
 	virtual void draw(YGEGraphicsContext* context);
 

@@ -12,7 +12,17 @@ namespace YGETimeSpace{
 
 	glPushMatrix();
 	glTranslatef(pos.x, pos.y, pos.z);
-	glScalef(scale.x, scale.y, scale.z);
+
+	YGEMath::Mat3x3 mat = orientation.getRotationMatrix();
+
+	float m[16] = { mat[0][0], mat[0][1], mat[0][2], 0.0f,
+					mat[1][0], mat[1][1], mat[1][2], 0.0f,
+					mat[2][0], mat[2][1], mat[2][2], 0.0f,
+					0,         0,         0,         1.0f };
+
+	glMultMatrixf(m);
+
+	//glScalef(scale.x, scale.y, scale.z);
 
 	// get every graphical asset and render it
 	std::list<YGEGraphics::YGEGraphicsAsset*> assets = this->getGraphicsAssets();

@@ -41,10 +41,13 @@ namespace YGEGraphics {
 
 		// get texture
 		SDL_Surface* surface = 
-			YGECore::YGERessourceManager::getInstance()->getSurface("hmap.bmp");
+			YGECore::YGERessourceManager::getInstance()->getSurface("images/hmap.bmp");
 
 		int w = surface->w;
 		int h = surface->h;
+
+		texture = YGECore::YGERessourceManager::getInstance()->getTexture("textures/mud.tex");
+
 		mesh = new YGEVbo();
 
 		Mesh* map = new Mesh();
@@ -52,7 +55,7 @@ namespace YGEGraphics {
 		map->vertices = new GLfloat[3 * w * h];
 		map->uv = new GLfloat[ 2 * w * h ];
 		map->indices = new GLuint [ 2 * 3 * (w-1) * (h-1) ];
-		map->textureID = 0;
+		map->textureID = texture->textureID;
 
 		map->numTriangles = (w-1) * (h-1) * 2;
 		map->numVertices = w * h;
@@ -68,8 +71,11 @@ namespace YGEGraphics {
 				SDL_GetRGB(getpixel(surface, x, y), surface->format, &height, &height, &height);
 				//YGECore::YGELogger::getInstance()->log(h);
 				
-				map->vertices[(x + y*w)*3 + 1] =  (float)height;
+				map->vertices[(x + y*w)*3 + 1] =  (float)height / 5.0f;
 				map->vertices[(x + y*w)*3 + 2] = y;
+
+				map->uv[(x + y*w)*2 + 0] = x  / 20.0f;
+				map->uv[(x + y*w)*2 + 1] = y  / 20.0f;
 			}
 		}
 		SDL_UnlockSurface(surface);

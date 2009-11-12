@@ -21,10 +21,16 @@ public:
 						for(std::vector<YGEKeyDownListener*>::iterator iter = keydownlisteners.begin();
 							iter != keydownlisteners.end();
 							iter++){
-								YGECore::YGELogger::getInstance()->log("ballalsasd-------------------------------");
-
 								(*iter)->keyDown(event->key.keysym.sym);
 
+						}
+						break;
+					case SDL_MOUSEMOTION:
+						for(std::vector<YGEMouseMoveListener*>::iterator iter = mousemovelisteners.begin();
+							iter != mousemovelisteners.end();
+							iter++){
+								(*iter)->mouseMoved(event->motion.xrel, event->motion.yrel);
+								
 						}
 						break;
 		}

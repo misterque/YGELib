@@ -123,6 +123,10 @@ public:
 		return scale;
 	}
 
+	YGEMath::Quaternion getOrientation(){
+		return orientation;
+	}
+
 	void setPosition(const YGEMath::Vector3 &pos){
 		position = pos;
 	}
@@ -131,6 +135,9 @@ public:
 		scale = sca;
 	}
 
+	void setOrientation(const YGEMath::Quaternion &q){
+		orientation = q;
+	}
 	void render();
 
 };

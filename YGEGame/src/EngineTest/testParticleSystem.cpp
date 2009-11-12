@@ -60,8 +60,6 @@ void testParticleSystem(){
 	test("ParticleList getFirstAlive 3", plist.getNumberOfDeadParticles() == 5);
 
 
-	}
-
-
-
 }
+
+

@@ -27,59 +27,69 @@ namespace YGEGraphics {
 	void YGEVbo::draw(YGEGraphicsContext *context){
 
 
-		glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
+		//glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
+		glEnable(GL_TEXTURE_2D);
+		glBindTexture(GL_TEXTURE_2D, mesh->textureID);
+
+		glColor3f(1,1,1);
 		// fallback
-		if(false){
-		for(int i = 0; i < mesh->numTriangles; i++){
-			glBegin(GL_TRIANGLES);
+		if(true){
+			for(int i = 0; i < mesh->numTriangles; i++){
+				glBegin(GL_TRIANGLES);
 
-			int iV1 = mesh->indices[i*3 + 0] * 3;
-			int iV2 = mesh->indices[i*3 + 1] * 3;
-			int iV3 = mesh->indices[i*3 + 2] * 3;
+				int iV1 = mesh->indices[i*3 + 0] * 3;
+				int iV2 = mesh->indices[i*3 + 1] * 3;
+				int iV3 = mesh->indices[i*3 + 2] * 3;
 
-			
-			glVertex3f(	mesh->vertices[iV1 + 0],
-						mesh->vertices[iV1 + 1],
-						mesh->vertices[iV1 + 2] );
-
-
-			glVertex3f(	mesh->vertices[iV2 + 0],
-						mesh->vertices[iV2 + 1],
-						mesh->vertices[iV2 + 2] );
-
-			glVertex3f(	mesh->vertices[iV3 + 0],
-						mesh->vertices[iV3 + 1],
-						mesh->vertices[iV3 + 2] );
-			
-			glEnd();
+				int iT1 = mesh->indices[i*3 + 0] * 2;
+				int iT2 = mesh->indices[i*3 + 1] * 2;
+				int iT3 = mesh->indices[i*3 + 2] * 2;
 
 
+				glTexCoord2d(mesh->uv[iT1 + 0], mesh->uv[iT1 + 1]); 
+				glVertex3f(	mesh->vertices[iV1 + 0],
+					mesh->vertices[iV1 + 1],
+					mesh->vertices[iV1 + 2] );
 
+				glTexCoord2d(mesh->uv[iT2 + 0], mesh->uv[iT2 + 1]); 
+				glVertex3f(	mesh->vertices[iV2 + 0],
+					mesh->vertices[iV2 + 1],
+					mesh->vertices[iV2 + 2] );
+
+				glTexCoord2d(mesh->uv[iT3 + 0], mesh->uv[iT3 + 1]); 
+				glVertex3f(	mesh->vertices[iV3 + 0],
+					mesh->vertices[iV3 + 1],
+					mesh->vertices[iV3 + 2] );
+
+				glEnd();
+
+
+
+			}
+		} else {
+
+			if(!uptodate){
+				fillBuffers();
+				uptodate = true;
+			} 
+
+			glBindBufferARB(GL_ARRAY_BUFFER_ARB, vboId);
+			glBindBufferARB(GL_ELEMENT_ARRAY_BUFFER_ARB, iboId);
+
+			glEnableClientState(GL_VERTEX_ARRAY);
+			glVertexPointer(3, GL_FLOAT, 0, 0);
+
+			//glDrawArrays( GL_TRIANGLES, 0, mesh->numVertices );
+			glDrawElements(GL_TRIANGLES, mesh->numTriangles*3, GL_UNSIGNED_INT, 0);
+
+			// reset
+			glDisableClientState(GL_VERTEX_ARRAY);
+			glBindBufferARB(GL_ARRAY_BUFFER_ARB, 0);
+			glBindBufferARB(GL_ELEMENT_ARRAY_BUFFER_ARB, 0);
+
+
+			//glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
 		}
-		}
-
-		if(!uptodate){
-			fillBuffers();
-			uptodate = true;
-		} 
-
-		glBindBufferARB(GL_ARRAY_BUFFER_ARB, vboId);
-		glBindBufferARB(GL_ELEMENT_ARRAY_BUFFER_ARB, iboId);
-
-		glEnableClientState(GL_VERTEX_ARRAY);
-		glVertexPointer(3, GL_FLOAT, 0, 0);
-
-		//glDrawArrays( GL_TRIANGLES, 0, mesh->numVertices );
-		glDrawElements(GL_TRIANGLES, mesh->numTriangles*3, GL_UNSIGNED_INT, 0);
-
-		// reset
-		glDisableClientState(GL_VERTEX_ARRAY);
-		glBindBufferARB(GL_ARRAY_BUFFER_ARB, 0);
-		glBindBufferARB(GL_ELEMENT_ARRAY_BUFFER_ARB, 0);
-		
-
-		glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
-
 	}
 
 	void YGEVbo::fillBuffers(){

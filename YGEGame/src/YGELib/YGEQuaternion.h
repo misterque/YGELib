@@ -6,6 +6,7 @@
 * Quaternion class. Usable for Rotations and Orientations.
 */
 #include "YGEMatrix.h"
+#include "YGEExceptions.h"
 
 namespace YGEMath{
 
@@ -62,6 +63,7 @@ namespace YGEMath{
 			result.y = this->w*q2.y + q2.w*this->y - this->x*q2.z + this->z*q2.x;
 			result.z = this->w*q2.z + q2.w*this->z + this->x*q2.y - this->y*q2.x;
 
+			return result;
 		}
 
 
@@ -118,6 +120,7 @@ namespace YGEMath{
 		YGEMath::Vector3 operator * (const YGEMath::Vector3 &v) {
 			YGEMath::Vector3 result;
 			// TODO result = 
+			throw YGEExceptionMethodNotImplementedYet();
 
 		}
 
@@ -219,6 +222,16 @@ namespace YGEMath{
 			x = 0;
 			y = 0;
 			z = 0;
+		}
+
+		Quaternion getConjugate(){
+			Quaternion q;
+			q.w = w;
+			q.x = -x;
+			q.y = -y;
+			q.z = -z;
+
+			return q;
 		}
 
 

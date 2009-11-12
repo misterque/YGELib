@@ -8,12 +8,15 @@
 
 #include <SDL.h> 
 #include <SDL_opengl.h>
+#include <string>
+#include <map>
 
 namespace YGECore {
 
 
 	class Texture {
 	public:
+		std::string filename;
 		int w, h;
 		GLuint textureID;
 	};
@@ -22,6 +25,8 @@ class YGERessourceManager {
 
 private: 
 		static YGERessourceManager* singleton;
+
+		std::map<std::string, Texture> textures;
 public:
 	static YGERessourceManager* getInstance(){
 		if(singleton == 0){
@@ -30,9 +35,21 @@ public:
 		return singleton;
 	}
 
-	Texture* getTexture(char *filename);
 
-	SDL_Surface* getSurface(char *filename);
+
+	SDL_Surface* getSurface(const char *filename);
+
+	/**
+	 * crawls the ressource directory/directories
+	 * for ressources and stores the location of ressources
+	 */
+	void crawlRessources();
+
+
+	void loadTexture(std::string filename);
+	//void unloadTexture(std::string name);
+
+	Texture* getTexture(std::string filename);
 
 };
 

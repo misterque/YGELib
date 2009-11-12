@@ -1,4 +1,6 @@
 #include <cstdlib>
+#include "GLee.h"
+
 #include <SDL_opengl.h>
 #include "YGEParticleSystem.h"
 #include "YGELogger.h"
@@ -16,7 +18,7 @@ namespace YGEGraphics {
 			} else {
 				firstDead = p->nextParticle;
 			}
-			
+
 			if(p->nextParticle != NULL) {
 				p->nextParticle->previousParticle = p->previousParticle;
 			} 
@@ -92,6 +94,10 @@ namespace YGEGraphics {
 		return p;
 	}
 
+	YGEParticleSystem::YGEParticleSystem(){
+		texture = YGECore::YGERessourceManager::getInstance()->getTexture("textures/particle.tex");
+	}
+
 	void YGEParticleSystem::update(){
 
 		YGEParticle* p = particleList.getFirstAliveParticle();
@@ -124,23 +130,50 @@ namespace YGEGraphics {
 			newParticle->position.x = 0.0f;
 			newParticle->position.y = 0.0f;
 			newParticle->position.z = 0.0f;
-			
+
 		}
 
-	
+
 
 	}
 
 	void YGEParticleSystem::draw(YGEGraphicsContext *context){
-		
 		YGEParticle* p = particleList.getFirstAliveParticle();
 
+		glDisable(GL_TEXTURE_2D);
+		glBindTexture(GL_TEXTURE_2D, texture->textureID);
+
+		glColor3f(1,1,1);
+
+		glEnable( GL_POINT_SPRITE );
+
+		glTexEnvi( GL_POINT_SPRITE, GL_COORD_REPLACE, GL_TRUE );
+
+
+		GLfloat fSizes[2];
+glGetFloatv(GL_ALIASED_POINT_SIZE_RANGE, fSizes);
+//glGetFloatv
+		float quadratic[] =  { 1.0f, 0.0f, 0.01f };
+
+		glPointParameterfv( GL_POINT_DISTANCE_ATTENUATION, quadratic );
+
+		glPointParameterf( GL_POINT_FADE_THRESHOLD_SIZE, 60.0f );
+
+		glPointParameterf( GL_POINT_SIZE_MIN, 50.0f );
+
+		glPointParameterf( GL_POINT_SIZE_MAX, 60.0f );
+
+		glPointSize(32.0f);
+
+		glBegin(GL_POINTS);
 		while(p != NULL){
-			glBegin(GL_POINTS);
 			glVertex3f(p->position.x, p->position.y, p->position.z); 
-			glEnd();
 			p = p->nextParticle;
 		}
+		glEnd();
+
+
 	}
+
 
 };

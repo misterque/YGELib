@@ -8,12 +8,15 @@
 
 #include "YGEGraphicsAsset.h"
 #include "YGEVbo.h"
+#include "YGERessourceManager.h"
 
 namespace YGEGraphics {
 
 class YGEHeightmap : public YGEGraphicsAsset { // , YGEPhysicsAsset
 private:
 	YGEVbo* mesh;
+
+	YGECore::Texture* texture;
 
 public:
 

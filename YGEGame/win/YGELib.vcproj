@@ -260,6 +260,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\YGELib\YGEExceptions.h"
+					>
+				</File>
+				<File
 					RelativePath="..\src\YGELib\YGELogger.h"
 					>
 				</File>
@@ -300,6 +304,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\YGELib\YGEKeyUpListener.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\YGELib\YGEMouseMoveListener.h"
+					>
+				</File>
+				<File
 					RelativePath="..\src\YGELib\YGESDLInputManager.h"
 					>
 				</File>
@@ -333,6 +345,10 @@
 				</File>
 				<File
 					RelativePath="..\src\YGELib\YGEStaticMesh.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\YGELib\YGETextureFunctions.h"
 					>
 				</File>
 				<File

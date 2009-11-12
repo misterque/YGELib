@@ -46,6 +46,10 @@ namespace YGECore {
 				display->notifyEvent(&event);
 				break;
 			case SDL_KEYDOWN:
+			case SDL_KEYUP:
+			case SDL_MOUSEMOTION:
+			case SDL_MOUSEBUTTONDOWN:
+			case SDL_MOUSEBUTTONUP:
 
 				switch(event.key.keysym.sym){
 			case SDLK_BACKQUOTE:

@@ -1,3 +1,7 @@
+#ifndef _GAMESTATES_H_
+#define _GAMESTATES_H_
+
+
 #include <SDL_opengl.h>
 
 #include "YGEGameState.h"
@@ -8,6 +12,9 @@
 #include "YGEHeightmap.h"
 #include "YGEGraphicsAsset.h"
 #include "YGEParticleSystem.h"
+#include "YGEQuaternion.h"
+#include "YGEKeyDownListener.h"
+#include "YGEMouseMoveListener.h"
 
 using namespace YGETimeSpace;
 using namespace YGEGraphics;
@@ -16,120 +23,42 @@ class GameStateX : public YGEGame::YGEGameState {
 public:
 	YGEEntity* scene;
 
-	GameStateX(){
+	YGEEntity* smallBoxPos;
 
-		scene = new YGEEntity();
-		YGEEntity* boxPos = new YGEEntity();
-		YGESimpleBox* box = new YGESimpleBox();
+	GameStateX();
 
-		YGEEntity* smallBoxPos = new YGEEntity();
-		YGESimpleBox* smallBox = new YGESimpleBox();
+	virtual YGESceneList getScenesToRender();
 
-		YGEMath::Vector3 pos;
-		pos.x = 0;
-		pos.y = 0;
-		pos.z = -10;
-		boxPos->setPosition(pos);
+	virtual void update();
 
-		YGEMath::Vector3 pos2;
-		pos2.x = 4;
-		pos2.y = 0;
-		pos2.z = 0;
-
-		YGEMath::Vector3 scale;
-		scale.x = 0.5;
-		scale.y = 0.5;
-		scale.z = 0.5;
-
-		smallBoxPos->setPosition(pos2);
-		smallBoxPos->setScale(scale);
-
-		smallBoxPos->addAsset(smallBox);
-		boxPos->addChild(smallBoxPos);
-
-		boxPos->addAsset(box);
-		scene->addChild(boxPos);
-
-	}
-
-	virtual YGESceneList getScenesToRender(){
-		YGEScene s;
-		s.first = scene;
-		s.second = NULL;
-		YGESceneList list;
-		list.push_back(s);
-		return list;
-	}
-
-	virtual void update() {
-		YGECore::YGELogger::getInstance()->log("Updating Gamestate X");
-
-
-	}
-
-	virtual void draw(YGECore::YGEEngineCore* core) {
-
-										// Finished Drawing The Triangle
-	}
+	virtual void draw(YGECore::YGEEngineCore* core);
 
 };
 
 
-class GameStateY : public YGEGame::YGEGameState, public YGEKeyDownListener {
+class GameStateY : 
+	public YGEGame::YGEGameState,
+	public YGEKeyDownListener,
+	public YGEMouseMoveListener 
+{
 public:
 	YGEEntity* scene;
 	YGEObserver* camera;
 
-	GameStateY(){
+	float pitch;
+	float yaw;
 
-		scene = new YGEEntity();
+	GameStateY();
 
-		YGEMath::Vector3 pos;
-		pos.x = 20;
-		pos.y = 20;
-		pos.z = 140;
+	virtual YGESceneList getScenesToRender();
 
-		camera = new YGEObserver();
+	virtual void update();
 
-		camera->setPosition(pos);
+	virtual void draw(YGECore::YGEEngineCore* core);
 
-		YGEHeightmap* heightmap = new YGEHeightmap();
-		heightmap->create("heightmaps/simple.bmp");
+	virtual void keyDown(SDLKey key);
 
-		scene->addAsset(heightmap);
-
-		scene->addChild(camera);
-
-	}
-
-	virtual YGESceneList getScenesToRender(){
-		YGEScene s;
-		s.first = scene;
-		s.second = camera;
-		YGESceneList list;
-		list.push_back(s);
-		return list;
-	}
-
-	virtual void update() {
-		YGECore::YGELogger::getInstance()->log("Updating Gamestate Y");
-
-
-	}
-
-	virtual void draw(YGECore::YGEEngineCore* core) {
-	}
-
-	virtual void keyDown(SDLKey key){
-		switch(key){
-			case SDLK_UP:
-				YGEMath::Vector3 pos = camera->getPosition();
-				pos.z+=1;
-				camera->setPosition(pos);
-				break;
-		}
-		
-	}
+	virtual void mouseMoved(int x, int y);
 
 };
 
@@ -140,55 +69,16 @@ public:
 	YGEObserver* camera;
 	YGEParticleSystem* ps;
 
-	GameStateZ(){
+	GameStateZ();
 
-		scene = new YGEEntity();
+	virtual YGESceneList getScenesToRender();
 
-		YGEMath::Vector3 pos;
-		pos.x = 0;
-		pos.y = 0;
-		pos.z = 10;
+	virtual void update();
 
-		camera = new YGEObserver();
+	virtual void draw(YGECore::YGEEngineCore* core);
 
-		camera->setPosition(pos);
-
-		ps = new YGEParticleSystem();
-		scene->addAsset(ps);
-
-		scene->addChild(camera);
-
-	}
-
-	virtual YGESceneList getScenesToRender(){
-		YGEScene s;
-		s.first = scene;
-		s.second = camera;
-		YGESceneList list;
-		list.push_back(s);
-		return list;
-	}
-
-	virtual void update() {
-		ps->update();
-		YGECore::YGELogger::getInstance()->log("Updating Gamestate Z");
-
-
-	}
-
-	virtual void draw(YGECore::YGEEngineCore* core) {
-	}
-
-	virtual void keyDown(SDLKey key){
-		switch(key){
-			case SDLK_UP:
-				YGEMath::Vector3 pos = camera->getPosition();
-				pos.z+=1;
-				camera->setPosition(pos);
-				break;
-		}
-		
-	}
+	virtual void keyDown(SDLKey key);
 
 };
 
+#endif

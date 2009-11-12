@@ -48,6 +48,8 @@ public:
 		core.setGameState(x);
 		core.getInputManager()->addKeyDownListener(this);
 		core.getInputManager()->addKeyDownListener(y);
+		core.getInputManager()->addMouseMoveListener(y);
+
 		core.run();
 		core.shutdown();
 
