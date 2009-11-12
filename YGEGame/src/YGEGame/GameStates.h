@@ -16,6 +16,8 @@
 #include "YGEKeyDownListener.h"
 #include "YGEMouseMoveListener.h"
 
+#include "Camera.h"
+
 using namespace YGETimeSpace;
 using namespace YGEGraphics;
 
@@ -43,7 +45,7 @@ class GameStateY :
 {
 public:
 	YGEEntity* scene;
-	YGEObserver* camera;
+	Camera* camera;
 
 	float pitch;
 	float yaw;

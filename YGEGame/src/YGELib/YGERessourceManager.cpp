@@ -50,6 +50,7 @@ namespace YGECore {
 		//is.getline(imagefilename, 200);
 
 		std::string imagefilename;
+		bool mipmap = false;
 
 		while(!is.eof()){
 			std::string in;
@@ -57,24 +58,21 @@ namespace YGECore {
 			if(in == "file:") {
 				is>>imagefilename;
 			}
+			if(in == "genmipmaps") {
+				mipmap = true;
+			}
 
 
 		}
 		
-
-		
-
-		std::cout<<imagefilename<<std::endl;
-
-
-
 		// then create a new texture
 		Texture newTexture;
 		newTexture.filename = filename;
 		SDL_Surface* surface =  getSurface(imagefilename.c_str());
-		newTexture.textureID = surfaceToTexture2(surface);
+		newTexture.textureID = surfaceToTexture2(surface, mipmap);
 		newTexture.h = surface->h;
 		newTexture.w = surface->w;
+
 
 		// and add it to the map of textures
 		textures[filename] = newTexture;
