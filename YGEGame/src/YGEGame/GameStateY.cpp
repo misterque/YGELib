@@ -2,8 +2,6 @@
 
 GameStateY::GameStateY(){
 
-	pitch = 0;
-	yaw = 0;
 	
 	scene = new YGEEntity();
 
@@ -13,7 +11,7 @@ GameStateY::GameStateY(){
 	pos.z = 140;
 
 
-	camera = new YGEObserver();
+	camera = new Camera();
 
 	camera->setPosition(pos);
 
@@ -29,7 +27,7 @@ GameStateY::GameStateY(){
 YGESceneList GameStateY::getScenesToRender(){
 	YGEScene s;
 	s.first = scene;
-	s.second = camera;
+	s.second = camera->getObserver();
 	YGESceneList list;
 	list.push_back(s);
 	return list;
@@ -37,17 +35,6 @@ YGESceneList GameStateY::getScenesToRender(){
 
 void GameStateY::update() {
 	YGECore::YGELogger::getInstance()->log("Updating Gamestate Y");
-
-	YGEMath::Quaternion q;
-	q.w = cos(yaw);
-	q.x = 0;
-	q.y = sin(yaw);
-	q.z = 0;
-
-	//YGEMath::Quaternion p = smallBoxPos->getOrientation();
-
-	camera->setOrientation(q);
-
 }
 
 void GameStateY::draw(YGECore::YGEEngineCore* core) {
@@ -55,12 +42,6 @@ void GameStateY::draw(YGECore::YGEEngineCore* core) {
 
 void GameStateY::keyDown(SDLKey key){
 	switch(key){
-			case SDLK_LEFT:
-				yaw += 0.1;
-				break;
-			case SDLK_RIGHT:
-				yaw -= 0.1;
-				break;
 
 			case SDLK_UP:
 				YGEMath::Vector3 pos = camera->getPosition();
@@ -72,5 +53,5 @@ void GameStateY::keyDown(SDLKey key){
 }
 
 void GameStateY::mouseMoved(int x, int y){
-	yaw += x / 100.0f;
+	camera->rotate(x / 100.0f, y / 100.0f);
 }

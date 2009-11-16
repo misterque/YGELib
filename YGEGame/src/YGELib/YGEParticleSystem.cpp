@@ -140,7 +140,11 @@ namespace YGEGraphics {
 	void YGEParticleSystem::draw(YGEGraphicsContext *context){
 		YGEParticle* p = particleList.getFirstAliveParticle();
 
-		glDisable(GL_TEXTURE_2D);
+		glEnable(GL_TEXTURE_2D);
+		glEnable(GL_BLEND);
+		glDisable(GL_DEPTH_TEST);
+		glBlendFunc(GL_SRC_COLOR, GL_ONE_MINUS_SRC_COLOR);
+
 		glBindTexture(GL_TEXTURE_2D, texture->textureID);
 
 		glColor3f(1,1,1);
@@ -151,8 +155,8 @@ namespace YGEGraphics {
 
 
 		GLfloat fSizes[2];
-glGetFloatv(GL_ALIASED_POINT_SIZE_RANGE, fSizes);
-//glGetFloatv
+		glGetFloatv(GL_ALIASED_POINT_SIZE_RANGE, fSizes);
+		//glGetFloatv
 		float quadratic[] =  { 1.0f, 0.0f, 0.01f };
 
 		glPointParameterfv( GL_POINT_DISTANCE_ATTENUATION, quadratic );
