@@ -16,7 +16,7 @@ GameStateY::GameStateY(){
 	camera->setPosition(pos);
 
 	YGEHeightmap* heightmap = new YGEHeightmap();
-	heightmap->create("heightmaps/simple.bmp");
+	heightmap->create("images/hmap2.bmp");
 
 	scene->addAsset(heightmap);
 

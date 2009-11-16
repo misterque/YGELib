@@ -45,18 +45,18 @@ a) Brief overview of features wanted
 	GMS01: due to
 		(a) creation of heightmap
 		(b) loading of heightmap with texture
-		(c) creation of basic gyrocopter model with texture
+		(c) creation of basic gyrocopter model with texture (30%)
 			submodels:
-				body
-				main rotor
+				body: done
+				main rotor: done
 				main rotor fast
 				back rotor
 				back rotor fast
 				tail v
 				tail t
 				
-		(d) creation of gyrocopter class
-		(e) display of gyrocopter
+		(d) creation of gyrocopter class: 30%, green
+		(e) display of gyrocopter 40%, green, needs proper model loading 
 		(f) mapping of controls to gyrocopter visualisation
 		
 	GMS02: due to

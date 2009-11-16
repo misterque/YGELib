@@ -41,7 +41,7 @@ namespace YGEGraphics {
 
 		// get texture
 		SDL_Surface* surface = 
-			YGECore::YGERessourceManager::getInstance()->getSurface("images/hmap.bmp");
+			YGECore::YGERessourceManager::getInstance()->getSurface(filename);
 
 		int w = surface->w;
 		int h = surface->h;
@@ -65,14 +65,14 @@ namespace YGEGraphics {
 		SDL_LockSurface(surface);
 		for(int x = 0; x < w; x++){
 			for(int y = 0; y < h; y++){
-				map->vertices[(x + y*w)*3 + 0] = x;
-				
+				map->vertices[(x + y*w)*3 + 0] = x - w/2;
+				map->vertices[(x + y*w)*3 + 2] = y - h/2;
+
 				Uint8 height;
 				SDL_GetRGB(getpixel(surface, x, y), surface->format, &height, &height, &height);
-				//YGECore::YGELogger::getInstance()->log(h);
 				
 				map->vertices[(x + y*w)*3 + 1] =  (float)height / 5.0f;
-				map->vertices[(x + y*w)*3 + 2] = y;
+
 
 				map->uv[(x + y*w)*2 + 0] = x  / 20.0f;
 				map->uv[(x + y*w)*2 + 1] = y  / 20.0f;
