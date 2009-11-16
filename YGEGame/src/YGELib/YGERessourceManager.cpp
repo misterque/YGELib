@@ -34,10 +34,19 @@ namespace YGECore {
 			return;
 		}
 
+		
+		std::string filetype = filename.substr(filename.find_first_of(".")+1);
+
+
 		// then extract the filename of the image
 		std::ostringstream s;
 		s<<"../media/"<<filename;
 
+
+
+		std::string imagefilename;
+
+		if(filetype == "tex") {
 		std::ifstream is;
 		is.open(s.str().c_str());
 		if(!is.is_open()) {
@@ -49,7 +58,7 @@ namespace YGECore {
 		//char imagefilename[200];
 		//is.getline(imagefilename, 200);
 
-		std::string imagefilename;
+		
 
 		while(!is.eof()){
 			std::string in;
@@ -65,7 +74,9 @@ namespace YGECore {
 		
 
 		std::cout<<imagefilename<<std::endl;
-
+		} else {
+			imagefilename = filename;
+		}
 
 
 		// then create a new texture

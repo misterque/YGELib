@@ -16,6 +16,8 @@
 #include "YGEKeyDownListener.h"
 #include "YGEMouseMoveListener.h"
 
+#include "GameGyrocopter.h"
+
 using namespace YGETimeSpace;
 using namespace YGEGraphics;
 
@@ -32,6 +34,8 @@ public:
 	virtual void update();
 
 	virtual void draw(YGECore::YGEEngineCore* core);
+
+	GameGyrocopter* gyro;
 
 };
 

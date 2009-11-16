@@ -1,10 +1,15 @@
 #include "GameStates.h"
+#include "YGEStaticMesh.h"
+
 
 GameStateX::GameStateX(){
 
 	scene = new YGEEntity();
 	YGEEntity* boxPos = new YGEEntity();
-	YGESimpleBox* box = new YGESimpleBox();
+
+	gyro = new GameGyrocopter();
+
+	boxPos->addChild(gyro);
 
 	smallBoxPos = new YGEEntity();
 	YGESimpleBox* smallBox = new YGESimpleBox();
@@ -38,8 +43,10 @@ GameStateX::GameStateX(){
 	smallBoxPos->addAsset(smallBox);
 	boxPos->addChild(smallBoxPos);
 
-	boxPos->addAsset(box);
+	//boxPos->addAsset(box);
 	scene->addChild(boxPos);
+
+	boxPos->translate3d(0,-10,-15);
 
 }
 
@@ -64,6 +71,8 @@ void GameStateX::update() {
 	YGEMath::Quaternion p = smallBoxPos->getOrientation();
 
 	smallBoxPos->setOrientation(p * q);
+
+	gyro->update();
 
 
 }

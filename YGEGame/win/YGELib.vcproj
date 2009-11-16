@@ -214,6 +214,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\YGELib\YGEStaticMesh.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\YGELib\YGEVbo.cpp"
 					>
 				</File>

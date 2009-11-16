@@ -7,6 +7,7 @@
 #define _YGE_STATIC_MESH_H_
 
 #include "YGEGraphicsAsset.h"
+#include "YGEVbo.h"
 
 namespace YGEGraphics {
 
@@ -28,13 +29,15 @@ private:
 	 */
 	YGEVbo *meshes;
 
+	Mesh model;
+
 public:
 		virtual void draw(YGEGraphicsContext* context);
 
 		/**
 		 * loads mesh data from an OBJ file.
 		 */
-		void loadFromOBJ(char *filename);
+		void loadFromOBJ(const char *filename);
 
 };
 

@@ -140,6 +140,16 @@ public:
 	}
 	void render();
 
+	void translate3d(double x, double y, double z){
+		position.x += x;
+		position.y += y;
+		position.z += z;
+	}
+
+	void rotateDGR(const YGEMath::Vector3 axis, double degree);
+
+	void rotateRAD(const YGEMath::Vector3 axis, double radiant);
+
 };
 
 }

@@ -1,56 +1,58 @@
 #include <SDL_opengl.h>
 
 #include "YGEEntity.h"
+#include <cmath>
 
+#define PI 3.1415926
 
 namespace YGETimeSpace{
 
 	void YGEEntity::render(){
 
-	YGEMath::Vector3 pos = this->getPosition();
-	YGEMath::Vector3 scale = this->getScale();
+		YGEMath::Vector3 pos = this->getPosition();
+		YGEMath::Vector3 scale = this->getScale();
 
-	glPushMatrix();
-	glTranslatef(pos.x, pos.y, pos.z);
+		glPushMatrix();
+		glTranslatef(pos.x, pos.y, pos.z);
 
-	YGEMath::Mat3x3 mat = orientation.getRotationMatrix();
+		YGEMath::Mat3x3 mat = orientation.getRotationMatrix();
 
-	float m[16] = { mat[0][0], mat[0][1], mat[0][2], 0.0f,
-					mat[1][0], mat[1][1], mat[1][2], 0.0f,
-					mat[2][0], mat[2][1], mat[2][2], 0.0f,
-					0,         0,         0,         1.0f };
+		float m[16] = { mat[0][0], mat[0][1], mat[0][2], 0.0f,
+			mat[1][0], mat[1][1], mat[1][2], 0.0f,
+			mat[2][0], mat[2][1], mat[2][2], 0.0f,
+			0,         0,         0,         1.0f };
 
-	glMultMatrixf(m);
+		glMultMatrixf(m);
 
-	//glScalef(scale.x, scale.y, scale.z);
+		//glScalef(scale.x, scale.y, scale.z);
 
-	// get every graphical asset and render it
-	std::list<YGEGraphics::YGEGraphicsAsset*> assets = this->getGraphicsAssets();
-	for(std::list<YGEGraphics::YGEGraphicsAsset*>::iterator iter = assets.begin();
-		iter != assets.end();
-		iter++){
+		// get every graphical asset and render it
+		std::list<YGEGraphics::YGEGraphicsAsset*> assets = this->getGraphicsAssets();
+		for(std::list<YGEGraphics::YGEGraphicsAsset*>::iterator iter = assets.begin();
+			iter != assets.end();
+			iter++){
 
-			
 
-			(*iter)->draw(NULL);
 
-	}
+				(*iter)->draw(NULL);
 
-	// recursive call on all children
-	std::list<YGEEntity*> children = this->getChildren();
-	for(std::list<YGEEntity*>::iterator iter = children.begin();
-		iter != children.end();
-		iter++){
-			(*iter)->render();
+		}
 
-	}
-	glPopMatrix();
-};
+		// recursive call on all children
+		std::list<YGEEntity*> children = this->getChildren();
+		for(std::list<YGEEntity*>::iterator iter = children.begin();
+			iter != children.end();
+			iter++){
+				(*iter)->render();
+
+		}
+		glPopMatrix();
+	};
 
 	void YGEEntity::addChild( YGEEntity* entity ){
 
 		//@todo check for double insertion
-		
+
 		entity->parent = this;
 		children.push_back(entity);
 
@@ -80,5 +82,26 @@ namespace YGETimeSpace{
 		parent = NULL;
 
 	}
+
+	void YGEEntity::rotateDGR(const YGEMath::Vector3 axis, double degree){
+
+		rotateRAD(axis, degree * PI / 180.0f);
+	}
+
+	void YGEEntity::rotateRAD(const YGEMath::Vector3 axis, double radiant){
+
+		YGEMath::Quaternion q;
+		q.w = cos(radiant);
+		q.x = axis.x * sin(radiant);
+		q.y = axis.y * sin(radiant);
+		q.z = axis.z * sin(radiant);
+
+		setOrientation(q * getOrientation());
+
+
+	}
+
+
+
 
 }

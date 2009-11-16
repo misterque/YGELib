@@ -201,7 +201,7 @@ namespace YGEMath{
 					y = (a[0][1] + a[1][0] ) / s;
 					z = (a[0][2] + a[2][0] ) / s;
 				} else if (a[1][1] > a[2][2]) {
-					double s = 2.0f * (double)sqrtf( 1.0f + a[1][1] - a[0][0] - a[2][2]);
+					double s = 2.0 * (double)sqrtf( 1.0f + a[1][1] - a[0][0] - a[2][2]);
 					w = (a[0][2] - a[2][0] ) / s;
 					x = (a[0][1] + a[1][0] ) / s;
 					y = 0.25f * s;
