@@ -205,12 +205,4 @@ namespace YGEGraphics {
 		meshes->draw(context);
 	}
 
-}}text *context){
-		meshes->draw(context);
-	}
-
-}sContext *context){
-		meshes->draw(context);
-	}
-
 }

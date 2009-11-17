@@ -185,14 +185,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\src\YGEGame\GameStateY.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\src\YGEGame\GameStateZ.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\src\YGEGame\YGEGame.cpp"
 				>
 			</File>
