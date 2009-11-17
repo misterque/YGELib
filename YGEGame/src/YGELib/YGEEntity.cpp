@@ -13,13 +13,13 @@ namespace YGETimeSpace{
 		YGEMath::Vector3 scale = this->getScale();
 
 		glPushMatrix();
-		glTranslatef(pos.x, pos.y, pos.z);
+		glTranslatef((GLfloat)pos.x, (GLfloat)pos.y, (GLfloat)pos.z);
 
 		YGEMath::Mat3x3 mat = orientation.getRotationMatrix();
 
-		float m[16] = { mat[0][0], mat[0][1], mat[0][2], 0.0f,
-			mat[1][0], mat[1][1], mat[1][2], 0.0f,
-			mat[2][0], mat[2][1], mat[2][2], 0.0f,
+		GLfloat m[16] = { (GLfloat)mat[0][0], (GLfloat)mat[0][1], (GLfloat)mat[0][2], 0.0f,
+			(GLfloat)mat[1][0], (GLfloat)mat[1][1], (GLfloat)mat[1][2], 0.0f,
+			(GLfloat)mat[2][0], (GLfloat)mat[2][1], (GLfloat)mat[2][2], 0.0f,
 			0,         0,         0,         1.0f };
 
 		glMultMatrixf(m);

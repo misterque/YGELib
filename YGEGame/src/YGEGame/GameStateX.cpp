@@ -3,8 +3,8 @@
 
 
 GameStateX::GameStateX(){
+	space = new YGESpace();
 
-	scene = new YGEEntity();
 	YGEEntity* boxPos = new YGEEntity();
 
 	gyro = new GameGyrocopter();
@@ -44,7 +44,7 @@ GameStateX::GameStateX(){
 	boxPos->addChild(smallBoxPos);
 
 	//boxPos->addAsset(box);
-	scene->addChild(boxPos);
+	space->getRootEntity()->addChild(boxPos);
 
 	boxPos->translate3d(0,-10,-15);
 
@@ -52,7 +52,7 @@ GameStateX::GameStateX(){
 
 YGESceneList GameStateX::getScenesToRender(){
 	YGEScene s;
-	s.first = scene;
+	s.first = space;
 	s.second = NULL;
 	YGESceneList list;
 	list.push_back(s);

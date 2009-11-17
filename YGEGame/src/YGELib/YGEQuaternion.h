@@ -195,19 +195,19 @@ namespace YGEMath{
 			} else {
 				//std::cout<<"adfdgdf"<<std::endl;
 				if ( a[0][0] > a[1][1] && a[0][0] > a[2][2] ) {
-					double s = 2.0 * (double)sqrtf( 1.0 + a[0][0] - a[1][1] - a[2][2]);
+					double s = 2.0 * (double)sqrt( 1.0 + a[0][0] - a[1][1] - a[2][2]);
 					w = (a[2][1] - a[1][2] ) / s;
 					x = 0.25f * s;
 					y = (a[0][1] + a[1][0] ) / s;
 					z = (a[0][2] + a[2][0] ) / s;
 				} else if (a[1][1] > a[2][2]) {
-					double s = 2.0 * (double)sqrtf( 1.0f + a[1][1] - a[0][0] - a[2][2]);
+					double s = 2.0 * (double)sqrt( 1.0f + a[1][1] - a[0][0] - a[2][2]);
 					w = (a[0][2] - a[2][0] ) / s;
 					x = (a[0][1] + a[1][0] ) / s;
 					y = 0.25f * s;
 					z = (a[1][2] + a[2][1] ) / s;
 				} else {
-					double s = 2.0f * (double)sqrtf( 1.0f + a[2][2] - a[0][0] - a[1][1] );
+					double s = 2.0f * (double)sqrt( 1.0f + a[2][2] - a[0][0] - a[1][1] );
 					w = (a[1][0] - a[0][1] ) / s;
 					x = (a[0][2] + a[2][0] ) / s;
 					y = (a[1][2] + a[2][1] ) / s;

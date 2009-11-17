@@ -171,7 +171,7 @@ namespace YGEGraphics {
 
 		glBegin(GL_POINTS);
 		while(p != NULL){
-			glVertex3f(p->position.x, p->position.y, p->position.z); 
+			glVertex3f((GLfloat)p->position.x, (GLfloat)p->position.y, (GLfloat)p->position.z); 
 			p = p->nextParticle;
 		}
 		glEnd();

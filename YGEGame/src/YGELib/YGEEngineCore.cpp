@@ -73,7 +73,7 @@ namespace YGECore {
 		input->update();
 		if(gamestate != 0) {
 			gamestate->update();
-			gamestate->draw(this);
+//			gamestate->draw(this);
 			YGETimeSpace::YGESceneList list = gamestate->getScenesToRender();
 			for(YGETimeSpace::YGESceneList::iterator iter = list.begin(); iter != list.end(); iter++){
 
@@ -89,8 +89,8 @@ namespace YGECore {
 				glDisable(GL_TEXTURE_2D);
 				glDisable(GL_BLEND);
 
-				(*iter).second->setCameraMatrix((*iter).first);
-				(*iter).first->render();
+				(*iter).second->setCameraMatrix((*iter).first->getRootEntity());
+				(*iter).first->getRootEntity()->render();
 			}
 		}
 
@@ -110,7 +110,7 @@ namespace YGECore {
 			logger->log("less then 10 ms, wait a little");
 #endif
 
-			SDL_Delay((10000-delta) / 1000);
+			SDL_Delay(Uint32((10000-delta) / 1000));
 		}
 
 	}
@@ -268,9 +268,6 @@ namespace YGECore {
 			YGELogger::getInstance()->log("Thread RENDER");
 			display->reset();
 			display->update();
-			if(gamestate != 0) {
-				gamestate->draw(this);
-			}
 
 
 			SDL_mutexV(render_mutex);

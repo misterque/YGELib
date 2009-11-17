@@ -24,7 +24,8 @@ using namespace YGEGraphics;
 
 class GameStateX : public YGEGame::YGEGameState {
 public:
-	YGEEntity* scene;
+	YGESpace *space;
+
 
 	YGEEntity* smallBoxPos;
 
@@ -47,7 +48,8 @@ class GameStateY :
 	public YGEMouseMoveListener 
 {
 public:
-	YGEEntity* scene;
+	YGESpace *space;
+
 	Camera* camera;
 
 	float pitch;
@@ -70,7 +72,7 @@ public:
 
 class GameStateZ : public YGEGame::YGEGameState, public YGEKeyDownListener {
 public:
-	YGEEntity* scene;
+	YGESpace *space;
 	YGEObserver* camera;
 	YGEParticleSystem* ps;
 

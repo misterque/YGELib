@@ -9,8 +9,8 @@ using namespace YGECore;
 class GameClass : public YGEKeyDownListener{
 private:
 		GameStateX* x;
-		GameStateY* y;
-		GameStateZ* z;
+	//	GameStateY* y;
+	//	GameStateZ* z;
 		YGEEngineCore core;
 
 public:
@@ -21,10 +21,10 @@ public:
 		core.setGameState(x);
 				break;
 			case SDLK_2:
-		core.setGameState(y);
+	//	core.setGameState(y);
 				break;
 			case SDLK_3:
-		core.setGameState(z);
+	//	core.setGameState(z);
 				break;
 			case SDLK_ESCAPE:
 				core.shutdown();
@@ -42,13 +42,13 @@ public:
 		core.init();
 
 		x = new GameStateX();
-		y = new GameStateY();
-		z = new GameStateZ();
+	//	y = new GameStateY();
+	//	z = new GameStateZ();
 
 		core.setGameState(x);
 		core.getInputManager()->addKeyDownListener(this);
-		core.getInputManager()->addKeyDownListener(y);
-		core.getInputManager()->addMouseMoveListener(y);
+	//	core.getInputManager()->addKeyDownListener(y);
+	//	core.getInputManager()->addMouseMoveListener(y);
 
 		core.run();
 		core.shutdown();

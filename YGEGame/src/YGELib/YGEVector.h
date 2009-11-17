@@ -76,6 +76,9 @@ struct Vector3 {
 			case 2:
 				return z;
 				break;
+			default:
+				return x;
+				break;
 		}
 	}
 

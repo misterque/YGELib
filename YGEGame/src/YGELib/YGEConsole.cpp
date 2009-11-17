@@ -261,10 +261,10 @@ namespace YGECore {
 			glVertex3f( 0.0f, 480.0f - output[i].height, 0.0f);					// Top Right
 
 			glTexCoord2f( 1.0f,1.0f );
-			glVertex3f( output[i].width , 480.0f - output[i].height, 0.0f);					// Bottom Right
+			glVertex3f( (GLfloat)output[i].width , (GLfloat)(480.0f - output[i].height), 0.0f);					// Bottom Right
 
 			glTexCoord2f( 1.0f , 0.0f );
-			glVertex3f(output[i].width , 480.0f, 0.0f);					// Bottom Left
+			glVertex3f((GLfloat)output[i].width , 480.0f, 0.0f);					// Bottom Left
 			glEnd();
 			glTranslatef(0.0f, -15.0f, 0.0f);
 		}

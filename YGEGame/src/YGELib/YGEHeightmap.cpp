@@ -65,8 +65,8 @@ namespace YGEGraphics {
 		SDL_LockSurface(surface);
 		for(int x = 0; x < w; x++){
 			for(int y = 0; y < h; y++){
-				map->vertices[(x + y*w)*3 + 0] = x - w/2;
-				map->vertices[(x + y*w)*3 + 2] = y - h/2;
+				map->vertices[(x + y*w)*3 + 0] = GLfloat(x - w/2);
+				map->vertices[(x + y*w)*3 + 2] = GLfloat(y - h/2);
 
 				Uint8 height;
 				SDL_GetRGB(getpixel(surface, x, y), surface->format, &height, &height, &height);

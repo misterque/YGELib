@@ -7,6 +7,7 @@
 
 #include "YGEEntity.h"
 #include "YGESpace.h"
+#include "YGEObserver.h"
 
 namespace YGETimeSpace{
 
