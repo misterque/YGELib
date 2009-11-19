@@ -71,7 +71,7 @@ namespace YGEGraphics {
 
 		void fillArrays(){
 			vertices = new GLfloat[vertexList.size() * 3];
-			uv = new GLfloat[triangleList.size() * 2];
+			uv = new GLfloat[vertexList.size() * 2];
 
 			indices = new GLuint[triangleList.size() * 3];
 			int i = 0;

@@ -157,13 +157,13 @@ namespace YGEGraphics {
 
 					switch(j){
 					case 0:
-						v.a = model.vertexList.size();
+						v.a = model.vertexList.size() - 1;
 						break;
 					case 1:
-						v.b = model.vertexList.size();
+						v.b = model.vertexList.size() - 1;
 						break;
 					case 2:
-						v.c = model.vertexList.size();
+						v.c = model.vertexList.size() - 1;
 						break;
 					}
 
@@ -202,14 +202,6 @@ namespace YGEGraphics {
 	}
 
 	void YGEStaticMesh::draw(YGEGraphicsContext *context){
-		meshes->draw(context);
-	}
-
-}}text *context){
-		meshes->draw(context);
-	}
-
-}sContext *context){
 		meshes->draw(context);
 	}
 
