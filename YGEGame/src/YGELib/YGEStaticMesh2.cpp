@@ -153,23 +153,23 @@ namespace YGEGraphics {
 					vv.y = vertexCoords.at(vindex).y;
 					vv.z = vertexCoords.at(vindex).z;
 
+
 					model.vertexList.push_back(vv);
 
 					switch(j){
 					case 0:
-						v.a = model.vertexList.size();
+						v.a = model.vertexList.length();
 						break;
 					case 1:
-						v.b = model.vertexList.size();
+						v.b = model.vertexList.length();
 						break;
 					case 2:
-						v.c = model.vertexList.size();
+						v.c = model.vertexList.length();
 						break;
 					}
+					model.addTriangle(v);
 
 				}
-				model.addTriangle(v);
-
 			}
 			if(type=="mtllib"){
 				string s;
@@ -202,14 +202,6 @@ namespace YGEGraphics {
 	}
 
 	void YGEStaticMesh::draw(YGEGraphicsContext *context){
-		meshes->draw(context);
-	}
-
-}}text *context){
-		meshes->draw(context);
-	}
-
-}sContext *context){
 		meshes->draw(context);
 	}
 
