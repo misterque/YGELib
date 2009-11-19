@@ -5,6 +5,8 @@
 GameStateX::GameStateX(){
 	space = new YGESpace();
 
+	space->initTime();
+
 	YGEEntity* boxPos = new YGEEntity();
 
 	gyro = new GameGyrocopter();

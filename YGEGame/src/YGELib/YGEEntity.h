@@ -7,9 +7,11 @@
 
 #include "YGEEntityAsset.h"
 #include "YGEGraphicsAsset.h"
+#include "YGEPhysicsAsset.h"
 #include "YGEVector.h"
 #include "YGEMatrix.h"
 #include "YGEQuaternion.h"
+
 
 
 #include <list>
@@ -50,6 +52,12 @@ private:
 	 * renderable graphics assets of this entity
 	 */
 	std::list<YGEGraphics::YGEGraphicsAsset*> graphicAssets;
+
+
+	/**
+	 * physical assets of this entity
+	 */
+	std::list<YGEPhysics::YGEPhysicsAsset*> physicsAssets;
 
 
 	/**
@@ -115,6 +123,11 @@ public:
 		return graphicAssets;
 	}
 
+	std::list<YGEPhysics::YGEPhysicsAsset*> getPhysicsAssets(){
+		return physicsAssets;
+	}
+
+
 
 	/**
 	 * get the position of this entity
@@ -163,6 +176,7 @@ public:
 	void setOrientation(const YGEMath::Quaternion &q){
 		orientation = q;
 	}
+
 	void render();
 
 	void translate3d(double x, double y, double z){

@@ -7,6 +7,7 @@
 #define _YGE_SPACE_H_
 
 #include "YGEEntity.h"
+#include <ode/ode.h>
 
 namespace YGETimeSpace {
 
@@ -22,6 +23,9 @@ namespace YGETimeSpace {
 	class YGESpace {
 	private:
 		YGEEntity rootEntity;
+
+		dWorldID worldId;
+
 	public:
 		/**
 		 * Creates a physics environment for this YGESpace.

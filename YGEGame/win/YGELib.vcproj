@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="9.00"
+	Version="9,00"
 	Name="YGELib"
 	ProjectGUID="{B34C1000-21FF-4AF4-B36D-7C9E6175D53A}"
 	RootNamespace="YGELib"
@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(SolutionDir)/../lib/win32/SDL_ttf-2.0.9/include&quot;;&quot;$(SolutionDir)/../src/GLee&quot;;&quot;$(SolutionDir)/../lib/win32/SDL-1.2.13/include&quot;"
+				AdditionalIncludeDirectories="&quot;$(SolutionDir)/../lib/win32/SDL_ttf-2.0.9/include&quot;;&quot;$(SolutionDir)/../src/GLee&quot;;&quot;$(SolutionDir)/../lib/win32/SDL-1.2.13/include&quot;;&quot;$(SolutionDir)/../lib/ode-0.11.1/include&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_YGE_DEBUG"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -107,7 +107,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="&quot;$(SolutionDir)/../lib/win32/SDL_ttf-2.0.9/include&quot;;&quot;$(SolutionDir)/../lib/win32/SDL-1.2.13/include&quot;"
+				AdditionalIncludeDirectories="&quot;$(SolutionDir)/../lib/win32/SDL_ttf-2.0.9/include&quot;;&quot;$(SolutionDir)/../src/GLee&quot;;&quot;$(SolutionDir)/../lib/win32/SDL-1.2.13/include&quot;;&quot;$(SolutionDir)/../lib/ode-0.11.1/include&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -197,6 +197,10 @@
 					RelativePath="..\src\YGELib\YGEScene.cpp"
 					>
 				</File>
+				<File
+					RelativePath="..\src\YGELib\YGESpace.cpp"
+					>
+				</File>
 			</Filter>
 			<Filter
 				Name="graphics"
@@ -229,6 +233,10 @@
 					RelativePath="..\src\GLee\GLee.c"
 					>
 				</File>
+			</Filter>
+			<Filter
+				Name="physics"
+				>
 			</Filter>
 		</Filter>
 		<Filter
@@ -383,12 +391,28 @@
 					RelativePath="..\src\YGELib\YGEScene.h"
 					>
 				</File>
+				<File
+					RelativePath="..\src\YGELib\YGESpace.h"
+					>
+				</File>
 			</Filter>
 			<Filter
 				Name="extern"
 				>
 				<File
 					RelativePath="..\src\GLee\GLee.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="physics"
+				>
+				<File
+					RelativePath="..\src\YGELib\YGEBoxHullAsset.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\YGELib\YGEPhysicsAsset.h"
 					>
 				</File>
 			</Filter>

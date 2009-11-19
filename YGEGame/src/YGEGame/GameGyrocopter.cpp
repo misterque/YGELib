@@ -25,6 +25,6 @@ GameGyrocopter::GameGyrocopter(){
 
 void GameGyrocopter::update(){
 
-	posRotorTop.rotateDGR(YGEMath::Vector3(0,1,0), 10);
+	posRotorTop.rotateDGR(YGEMath::Vector3(0,1,0), 1.0f);
 
 }
