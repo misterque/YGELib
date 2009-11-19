@@ -115,18 +115,43 @@ public:
 		return graphicAssets;
 	}
 
+
+	/**
+	 * get the position of this entity
+	 * If this entity has a mass (is affected by the physical world)
+	 * this position will be an absolute position in the space the
+	 * entity exists in. In all other cases, the position will be
+	 * relative to the parent of the entity.
+	 */
 	YGEMath::Vector3 getPosition(){
 		return position;
 	}
 
+	/**
+	 * returns the scaling factor of an entity
+	 * in this version, this only applies to the visual representation
+	 */
 	YGEMath::Vector3 getScale(){
 		return scale;
 	}
 
+	/**
+	 * get the rotation of this entity
+	 * @see getPosition();
+	 */
 	YGEMath::Quaternion getOrientation(){
 		return orientation;
 	}
 
+	/**
+	 * Sets the position of an object.
+	 *
+	 * If this entity has a mass (is affected by the physical world)
+	 * this position will be an absolute position in the space the
+	 * entity exists in. In all other cases, the position will be
+	 * relative to the parent of the entity.
+	 * @see getPosition();
+	 */
 	void setPosition(const YGEMath::Vector3 &pos){
 		position = pos;
 	}

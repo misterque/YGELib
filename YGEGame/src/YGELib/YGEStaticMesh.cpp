@@ -51,7 +51,7 @@ namespace YGEGraphics {
 	typedef string ObjTextureName;
 	typedef string ObjTextureFilename;
 
-	
+
 	typedef std::map<ObjTextureName, ObjTextureFilename> OBJTextures;
 
 	OBJTextures objTextures;
@@ -106,6 +106,7 @@ namespace YGEGraphics {
 		}
 
 		std::vector<Vertex> textureCoords;
+		std::vector<Vertex> vertexCoords;
 
 		OBJTextures textures;
 
@@ -123,7 +124,7 @@ namespace YGEGraphics {
 				istr >> v.y;
 				istr >> v.z;
 
-				model.addVertex(v);
+				vertexCoords.push_back(v);
 			}
 			if(type == "vt") {
 				Vertex v;
@@ -135,30 +136,41 @@ namespace YGEGraphics {
 			}
 
 			if(type == "f"){
-				int vtindex;
+				int vindex, vtindex;
 				Triangle v;
+				Vertex vv;
 				string s;
-				
-				istr >> s;
-				v.a = vertexIndexFromString(s) - 1;
-				vtindex = texCoordIndexFromString(s) - 1;
-				model.vertexList.at(v.a).u = textureCoords.at(vtindex).u;
-				model.vertexList.at(v.a).v = textureCoords.at(vtindex).v;
 
-				istr >> s;
-				v.b = vertexIndexFromString(s) - 1;
-				vtindex = texCoordIndexFromString(s) - 1;
-				model.vertexList.at(v.b).u = textureCoords.at(vtindex).u;
-				model.vertexList.at(v.b).v = textureCoords.at(vtindex).v;
+				for(int j = 0; j<3; j++){
+					istr >> s;
+					vindex = vertexIndexFromString(s) - 1;
+					vtindex = texCoordIndexFromString(s) - 1;
 
 
-				istr >> s;
-				v.c = vertexIndexFromString(s) - 1;
-				vtindex = texCoordIndexFromString(s) - 1;
-				model.vertexList.at(v.c).u = textureCoords.at(vtindex).u;
-				model.vertexList.at(v.c).v = textureCoords.at(vtindex).v;
+					vv.u = textureCoords.at(vtindex).u;
+					vv.v = textureCoords.at(vtindex).v;
+					vv.x = vertexCoords.at(vindex).x;
+					vv.y = vertexCoords.at(vindex).y;
+					vv.z = vertexCoords.at(vindex).z;
 
+
+					model.vertexList.push_back(vv);
+
+					switch(j){
+					case 0:
+						v.a = model.vertexList.size();
+						break;
+					case 1:
+						v.b = model.vertexList.size();
+						break;
+					case 2:
+						v.c = model.vertexList.size();
+						break;
+					}
+
+				}
 				model.addTriangle(v);
+
 			}
 			if(type=="mtllib"){
 				string s;
@@ -174,7 +186,7 @@ namespace YGEGraphics {
 
 				std::stringstream ss;
 				ss <<"images/"<< textures[s];
-				
+
 				model.textureID =
 					YGECore::YGERessourceManager::getInstance()->getTexture(ss.str())->textureID;
 
