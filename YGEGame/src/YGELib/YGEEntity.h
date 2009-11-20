@@ -12,11 +12,12 @@
 #include "YGEMatrix.h"
 #include "YGEQuaternion.h"
 
-
-
 #include <list>
 
 namespace YGETimeSpace{
+
+// forward declaration	
+class YGESpace;
 
 /**
  * Entity Class
@@ -66,6 +67,8 @@ private:
 	 * a root entity.
 	 */
 	YGEEntity* parent;
+
+	YGESpace* space;
 
 	YGEMath::Vector3 position;
 	YGEMath::Vector3 scale;
@@ -127,6 +130,14 @@ public:
 		return physicsAssets;
 	}
 
+	/**
+	 * @return the YGESpace the entity lies in, NULL if the entity is not
+	 * associated to a YGESpace
+	 */
+	YGESpace* getSpace();
+
+	void setSpace(YGESpace* s);
+
 
 
 	/**
@@ -178,6 +189,8 @@ public:
 	}
 
 	void render();
+
+	void update();
 
 	void translate3d(double x, double y, double z){
 		position.x += x;

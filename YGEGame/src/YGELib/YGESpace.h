@@ -27,6 +27,10 @@ namespace YGETimeSpace {
 		dWorldID worldId;
 
 	public:
+
+		YGESpace() {
+			rootEntity.setSpace(this);
+		}
 		/**
 		 * Creates a physics environment for this YGESpace.
 		 * Time only affects physical assets as YGEMass.
@@ -46,13 +50,19 @@ namespace YGETimeSpace {
 		 */
 		void stopTime();
 
-
+		void timeStep();
 
 		/**
 		 * */
 		YGEEntity* getRootEntity(){
 			return &rootEntity;
 		}
+
+		/**
+		 * @return the ODE dWorldID of the world
+		 * associated to this space
+		 */
+		dWorldID getWorldId();
 
 	};
 

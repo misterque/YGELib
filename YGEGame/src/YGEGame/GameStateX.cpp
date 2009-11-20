@@ -1,6 +1,6 @@
 #include "GameStates.h"
 #include "YGEStaticMesh.h"
-
+#include "YGEMassAsset.h"
 
 GameStateX::GameStateX(){
 	space = new YGESpace();
@@ -43,6 +43,11 @@ GameStateX::GameStateX(){
 	smallBoxPos->setOrientation(q );
 
 	smallBoxPos->addAsset(smallBox);
+
+	YGEPhysics::YGEMassAsset* mass = new YGEPhysics::YGEMassAsset();
+
+	smallBoxPos->addAsset(mass);
+
 	boxPos->addChild(smallBoxPos);
 
 	//boxPos->addAsset(box);
@@ -64,17 +69,9 @@ YGESceneList GameStateX::getScenesToRender(){
 void GameStateX::update() {
 	YGECore::YGELogger::getInstance()->log("Updating Gamestate X");
 
-	YGEMath::Quaternion q;
-	q.w = cos(0.01);
-	q.x = 0;
-	q.y = 0;
-	q.z = sin(0.01);
-
-	YGEMath::Quaternion p = smallBoxPos->getOrientation();
-
-	smallBoxPos->setOrientation(p * q);
-
 	gyro->update();
+
+	space->timeStep();
 
 
 }

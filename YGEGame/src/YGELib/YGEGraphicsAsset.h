@@ -9,19 +9,6 @@
 
 #include "YGEEntityAsset.h"
 
-namespace YGEPhysics {
-class YGEPhysicsAsset : public YGETimeSpace::YGEEntityAsset {
-public:
-	virtual void draw(YGEGraphicsContext* context) = 0;
-	
-	virtual YGETimeSpace::AssetType getAssetType(){
-		return YGETimeSpace::Physics;
-	}
-};
-
-}
-
-
 
 namespace YGEGraphics {
 	class YGEGraphicsAsset : public YGETimeSpace::YGEEntityAsset {

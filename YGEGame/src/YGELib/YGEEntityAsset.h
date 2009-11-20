@@ -17,11 +17,19 @@ enum AssetType {
 		ETC
 	};
 
+class YGEEntity;
+
 class YGEEntityAsset {
+protected:
+	YGEEntity *parent;
 
 public:
 	virtual AssetType getAssetType(){
 		return Standard;
+	}
+
+	virtual void setParent(YGEEntity* entity){
+		parent = entity;
 	}
 
 };

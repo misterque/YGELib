@@ -91,6 +91,7 @@ namespace YGECore {
 
 				(*iter).second->setCameraMatrix((*iter).first->getRootEntity());
 				(*iter).first->getRootEntity()->render();
+				(*iter).first->getRootEntity()->update();
 			}
 		}
 

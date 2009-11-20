@@ -1,5 +1,6 @@
 #include <SDL_opengl.h>
 
+#include "YGESpace.h"
 #include "YGEEntity.h"
 #include <cmath>
 
@@ -48,6 +49,31 @@ namespace YGETimeSpace{
 		}
 		glPopMatrix();
 	};
+	
+	void YGEEntity::update(){
+
+		// get every graphical asset and render it
+		std::list<YGEPhysics::YGEPhysicsAsset*> assets = this->getPhysicsAssets();
+		for(std::list<YGEPhysics::YGEPhysicsAsset*>::iterator iter = assets.begin();
+			iter != assets.end();
+			iter++){
+
+
+
+				(*iter)->update();
+
+		}
+
+		// recursive call on all children
+		std::list<YGEEntity*> children = this->getChildren();
+		for(std::list<YGEEntity*>::iterator iter = children.begin();
+			iter != children.end();
+			iter++){
+				(*iter)->update();
+
+		}
+
+	};
 
 	void YGEEntity::addChild( YGEEntity* entity ){
 
@@ -62,11 +88,16 @@ namespace YGETimeSpace{
 
 		//@todo check for double insertion
 
+		asset->setParent(this);
+
 		assets.push_back(asset);
 
 		// if it is a graphical asset put it in the list of graphicals
 		if(asset->getAssetType() == Graphical) {
 			graphicAssets.push_back((YGEGraphics::YGEGraphicsAsset*)asset);
+		}
+		if(asset->getAssetType() == Physics) {
+			physicsAssets.push_back((YGEPhysics::YGEPhysicsAsset*)asset);
 		}
 
 	}
@@ -81,6 +112,7 @@ namespace YGETimeSpace{
 		children.clear();
 		parent = NULL;
 
+		space = NULL;
 	}
 
 	void YGEEntity::rotateDGR(const YGEMath::Vector3 axis, double degree){
@@ -101,7 +133,17 @@ namespace YGETimeSpace{
 
 	}
 
+	YGESpace* YGEEntity::getSpace(){
+		if(space == NULL) {
+			return parent->getSpace();
+		}
+		return space;
 
+	}
+
+	void YGEEntity::setSpace(YGESpace* s){
+		space = s;
+	}
 
 
 }
