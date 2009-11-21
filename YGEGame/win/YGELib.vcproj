@@ -170,6 +170,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\YGELib\YGEEngineCoreMultiThreaded.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\src\YGELib\YGEEngineCoreSingleThreaded.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\YGELib\YGELogger.cpp"
 					>
 				</File>
@@ -178,7 +186,7 @@
 					>
 				</File>
 				<File
-					RelativePath="..\src\YGELib\YGESDLTimer.cpp"
+					RelativePath="..\src\YGELib\YGETimer.cpp"
 					>
 				</File>
 			</Filter>
@@ -242,6 +250,14 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="audio"
+				>
+				<File
+					RelativePath="..\src\YGELib\YGEAudioCore.cpp"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -276,6 +292,14 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\YGELib\YGEEngineCoreMultiThreaded.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\YGELib\YGEEngineCoreSingleThreaded.h"
+					>
+				</File>
+				<File
 					RelativePath="..\src\YGELib\YGEExceptions.h"
 					>
 				</File>
@@ -285,10 +309,6 @@
 				</File>
 				<File
 					RelativePath="..\src\YGELib\YGERessourceManager.h"
-					>
-				</File>
-				<File
-					RelativePath="..\src\YGELib\YGESDLTimer.h"
 					>
 				</File>
 				<File

@@ -1,11 +1,9 @@
 #ifndef _YGE_ENGINE_CORE_H_
 #define _YGE_ENGINE_CORE_H_
 
-#define USE_SDL
-
 #include "YGESDLDisplay.h"
 #include "YGESDLInputManager.h"
-#include "YGESDLTimer.h"
+#include "YGETimer.h"
 
 #include "YGEConsole.h"
 
@@ -26,15 +24,16 @@ namespace YGECore {
  * true object orientation
  */
 class YGEEngineCore {
+protected:
 
 	/**
-	 * pointer to a YGEDisplay. Responsible for graphics rendering stuff
+	 * pointer to a YGEDisplay. Responsible for graphics rendering stuff.
 	 */
 	YGESDLDisplay* display;
 
 	/**
 	 * pointer to a YGEInputManager. Responsible for input
-	 * as from keyboard, joystick, gamepad or mouse
+	 * as from keyboard, joystick, gamepad or mouse.
 	 */
 	YGESDLInputManager* input;
 
@@ -49,11 +48,11 @@ class YGEEngineCore {
 
 	/**
 	 * pointer to a YGETimer.
-	 * This timer is used atm to measure the framerate
+	 * This timer is used atm to measure the framerate.
 	 */
-	YGESDLTimer* timer;
+	YGETimer* timer;
 
-	YGESDLTimer* timeSinceGameStarted;
+	YGETimer* timeSinceGameStarted;
 
 	YGEGame::YGEGameState* gamestate;
 
@@ -75,57 +74,29 @@ public:
 	 * initialises the core
 	 * components are allocated and ressources are loaded
 	 */
-	void init();
+	virtual void init() = 0;
 
-	void initThreaded();
-	
 	/**
 	 * starts a permanent engine loop, returns if core
 	 * decides to shut down (window closed etc...);
 	 * init() should be called before starting the render loop
 	 */
-	void run();
-
-	/**
-	 * update the core. should only be called by the core itself
-	 */
-	void update();
+	virtual void run() = 0;
 
 	/**
 	 * free resources etc.
 	 */
-	void shutdown();
+	virtual void shutdown() = 0;
 
 
 
-	void setGameState(YGEGame::YGEGameState* state){
-		gamestate = state;
+	void setGameState(YGEGame::YGEGameState* state);
 
-	}
+	YGESDLInputManager* getInputManager();
 
-	YGESDLInputManager* getInputManager(){
-		return input;
-	}
+	long long getTimeSinceGameStarted();
 
-	long long getTimeSinceGameStarted(){
-		return timeSinceGameStarted->getTime();
-	}
-
-	void threadUpdate(void *data);
-
-	void threadRender(void *data);
-
-	void threadInput(void *data);
-
-	/**
-	 * runs the engine in multithreaded mode
-	 */
-	void runThreaded();
-
-	void toggleConsole(){
-		consoleEnabled = !consoleEnabled;
-		SDL_EnableUNICODE(consoleEnabled);
-	}
+	void toggleConsole();
 };
 
 }

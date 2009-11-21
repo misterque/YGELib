@@ -1,4 +1,4 @@
-#include "YGEEngineCore.h"
+#include "YGEEngineCoreSingleThreaded.h"
 #include "GameStates.h"
 #include <iostream>
 
@@ -11,7 +11,7 @@ private:
 		GameStateX* x;
 	//	GameStateY* y;
 	//	GameStateZ* z;
-		YGEEngineCore core;
+		YGEEngineCoreSingleThreaded core;
 
 public:
 
