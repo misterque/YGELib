@@ -3,39 +3,56 @@
 #include <SDL_thread.h> 
 #include <SDL_ttf.h>
 
+#ifdef _DEBUG
+#define debugout(s); logger->log(s);
+#else
+#define debugout(s);
+#endif
 
 namespace YGECore {
 
 	void YGEEngineCoreSingleThreaded::run(){
 
-#ifdef _DEBUG
-		logger->log("starting the core");
-#endif
+		debugout("starting the core");
 
 		while(display->windowClosed == false && shutdownNow == false){
-			update();
+
+			debugout("update the core");
+
+			timer->startTimer();
+
+			display->reset();
+			display->update();
+
+
+
+			processEvents();
+
+
+			if(gamestate != NULL) {
+				gamestate->update();
+
+				updateSpaceList(&gamestate->getSpacesToUpdate());
+
+				renderSceneList(&gamestate->getScenesToRender());
+
+			}
+
+			if(consoleEnabled) {
+				console->draw();
+			}
+
+			calculateFPSRate();
+
+			limitFPS();
+
 
 		}
 
-#ifdef _DEBUG
-		logger->log("stopping the core");
-#endif
+		debugout("stopping the core");
 	}
 
-
-
-	void YGEEngineCoreSingleThreaded::update(){
-
-#ifdef _DEBUG
-		logger->log("update the core");
-#endif
-
-		timer->startTimer();
-
-		display->reset();
-		display->update();
-
-
+	void YGEEngineCoreSingleThreaded::processEvents(){
 
 		SDL_Event event;
 
@@ -45,11 +62,6 @@ namespace YGECore {
 				display->notifyEvent(&event);
 				break;
 			case SDL_KEYDOWN:
-			case SDL_KEYUP:
-			case SDL_MOUSEMOTION:
-			case SDL_MOUSEBUTTONDOWN:
-			case SDL_MOUSEBUTTONUP:
-
 				switch(event.key.keysym.sym){
 			case SDLK_BACKQUOTE:
 				toggleConsole();
@@ -63,64 +75,73 @@ namespace YGECore {
 				break;
 				}
 				break;
+			case SDL_KEYUP:
+				break;
+			case SDL_MOUSEMOTION:
+				break;
+			case SDL_MOUSEBUTTONDOWN:
+				break;
+			case SDL_MOUSEBUTTONUP:
+
+
+				break;
 			}
 
 		}
 
+	}
 
+	void YGEEngineCoreSingleThreaded::renderSceneList(YGETimeSpace::YGESceneList *list){
+		for(YGETimeSpace::YGESceneList::iterator iter = list->begin(); iter != list->end(); iter++){
 
-		input->update();
-		if(gamestate != 0) {
-			gamestate->update();
-			//			gamestate->draw(this);
-			YGETimeSpace::YGESceneList list = gamestate->getScenesToRender();
-			for(YGETimeSpace::YGESceneList::iterator iter = list.begin(); iter != list.end(); iter++){
+			(*iter).second->setCameraMatrix((*iter).first->getRootEntity());
 
-
-				glMatrixMode( GL_PROJECTION );
-				glLoadIdentity();
-
-				gluPerspective(45.0f,640.0f/480.0f,0.1f,100.0f);
-
-
-				glMatrixMode( GL_MODELVIEW );
-				glLoadIdentity();       
-				glDisable(GL_TEXTURE_2D);
-				glDisable(GL_BLEND);
-
-				(*iter).second->setCameraMatrix((*iter).first->getRootEntity());
-				(*iter).first->getRootEntity()->render();
-				(*iter).first->getRootEntity()->update();
-			}
+			// @todo this doesnt belong here
+			glDisable(GL_TEXTURE_2D);
+			glDisable(GL_BLEND);
+			(*iter).first->getRootEntity()->render();
 		}
+	}
+	void YGEEngineCoreSingleThreaded::updateSpaceList(YGETimeSpace::YGESpaceList *list){
+		for(YGETimeSpace::YGESpaceList::iterator iter = list->begin(); iter != list->end(); iter++){
 
-		if(consoleEnabled) {
-			console->draw();
+			(*iter)->timeStep(delta);
+			(*iter)->getRootEntity()->update();
 		}
+	}
 
-		long long delta = timer->stopTimer();
+
+	void YGEEngineCoreSingleThreaded::calculateFPSRate(){
+
+		delta = timer->stopTimer();
 
 #ifdef _DEBUG
-		logger->log("updating the core took ms");
-		logger->log(delta / 1000);
+		debugout("updating the core took ms");
+		debugout(delta / 1000);
 #endif
+	}
 
+	void YGEEngineCoreSingleThreaded::limitFPS(){
 		if(delta < 10000) {
-#ifdef _DEBUG
-			logger->log("less then 10 ms, wait a little");
-#endif
+			debugout("less then 10 ms, wait a little");
 
 			SDL_Delay(Uint32((10000-delta) / 1000));
 		}
+	}
+
+
+	void YGEEngineCoreSingleThreaded::update(){
+
 
 	}
 
 	void YGEEngineCoreSingleThreaded::init(){
 
-#ifdef _DEBUG
-		logger->log("initialize the core");
-		logger->log("using SDL");
-#endif
+		delta = 1000;
+
+
+		debugout("initialize the core");
+		debugout("using SDL");
 
 
 		YGELogger::getInstance()->log("Initializing SDL Video");
@@ -156,7 +177,7 @@ namespace YGECore {
 
 
 	void YGEEngineCoreSingleThreaded::shutdown(){
-
+		debugout("prepare to shut down!");
 		shutdownNow = true;
 	}
 

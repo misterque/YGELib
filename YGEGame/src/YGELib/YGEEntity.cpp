@@ -52,7 +52,7 @@ namespace YGETimeSpace{
 	
 	void YGEEntity::update(){
 
-		// get every graphical asset and render it
+		// get every physical asset and ...
 		std::list<YGEPhysics::YGEPhysicsAsset*> assets = this->getPhysicsAssets();
 		for(std::list<YGEPhysics::YGEPhysicsAsset*>::iterator iter = assets.begin();
 			iter != assets.end();

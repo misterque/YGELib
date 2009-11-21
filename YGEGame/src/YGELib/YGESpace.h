@@ -50,7 +50,7 @@ namespace YGETimeSpace {
 		 */
 		void stopTime();
 
-		void timeStep();
+		void timeStep(long long delta);
 
 		/**
 		 * */
@@ -66,6 +66,7 @@ namespace YGETimeSpace {
 
 	};
 
+	typedef std::list<YGESpace*> YGESpaceList;
 }
 
 #endif

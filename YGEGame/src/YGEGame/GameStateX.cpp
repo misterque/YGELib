@@ -66,12 +66,18 @@ YGESceneList GameStateX::getScenesToRender(){
 	return list;
 }
 
+YGESpaceList  GameStateX::getSpacesToUpdate() {
+		YGESpaceList list;
+		list.push_back(space);
+		return list;
+}
+
 void GameStateX::update() {
 	YGECore::YGELogger::getInstance()->log("Updating Gamestate X");
 
 	gyro->update();
 
-	space->timeStep();
+
 
 
 }

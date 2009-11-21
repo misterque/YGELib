@@ -30,8 +30,7 @@ namespace YGEPhysics {
 	public:
 
 		YGEMassAsset() : hasBody(false){
-
-			//mass = new dMass();
+			
 		}
 
 		void createBody();

@@ -9,13 +9,14 @@ namespace YGEPhysics {
 		if(parentSpace != NULL){
 			bodyId = dBodyCreate(parentSpace->getWorldId());
 
-//			mass = new dMass;
-//			dMassSetBox(mass,1,1,1,1);
+			mass = new dMass();
+			dMassSetBox(mass,1,1,1,1);
 
-//			dMassAdjust(mass,0.2f);
+			dMassAdjust(mass,0.2f);
 
-			//dBodySetMass(bodyId, &mass);
-			//dBodyAddForce(bodyId, 0.5, 0, 0);
+			dBodySetMass(bodyId, mass);
+			dBodySetPosition(bodyId,0,0,0);
+			dBodyAddForce(bodyId, 0.5, 0, 0);
 			hasBody = true;
 		}
 	}

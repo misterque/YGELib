@@ -11,10 +11,10 @@ public:
 
 	}
 
-	virtual void update(){
+/*+	virtual void update(){
 
 	}
-
++*/
 	void notifyEvent(SDL_Event *event){
 		switch(event->type){
 					case SDL_KEYDOWN:

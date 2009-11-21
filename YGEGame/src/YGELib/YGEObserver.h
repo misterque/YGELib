@@ -27,6 +27,18 @@ namespace YGETimeSpace {
 	public:
 		void setCameraMatrix(YGEEntity* rootEntity){
 
+			// set default projection matrix
+			// @todo make this configurable
+			glMatrixMode( GL_PROJECTION );
+			glLoadIdentity();
+
+			gluPerspective(45.0f,640.0f/480.0f,0.1f,100.0f);
+
+
+			glMatrixMode( GL_MODELVIEW );
+			glLoadIdentity();  
+
+
 			YGEEntity *transformEntity = this;
 			while(transformEntity != rootEntity && transformEntity != NULL ){
 				YGEMath::Vector3 pos = transformEntity->getPosition();

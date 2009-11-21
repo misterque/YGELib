@@ -21,7 +21,13 @@ public:
 		YGETimeSpace::YGESceneList list;
 		return list;
 	};
-	
+
+	virtual YGETimeSpace::YGESpaceList getSpacesToUpdate() {
+		YGETimeSpace::YGESpaceList list;
+		return list;
+	};
+
+
 };
 }
 

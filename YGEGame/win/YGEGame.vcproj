@@ -42,7 +42,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="&quot;$(SolutionDir)/../lib/win32/SDL-1.2.13/include&quot;;&quot;$(SolutionDir)/../src/YGELib&quot;;&quot;$(SolutionDir)/../lib/win32/GLee&quot;;&quot;$(SolutionDir)/../lib/ode-0.11.1/include&quot;"
-				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;_YGE_DEBUG"
+				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;_YGE_DEBUG;dDOUBLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"

@@ -14,7 +14,7 @@ protected:
 	std::vector<YGEMouseMoveListener*> mousemovelisteners;
 
 public:
-	virtual void update() = 0;
+	/*+ virtual void update() = 0; +*/
 	virtual void init() = 0;
 
 	void addKeyDownListener(YGEKeyDownListener* listener){

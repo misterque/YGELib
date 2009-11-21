@@ -34,6 +34,26 @@ namespace YGEAudio {
 		 * play a song from a file
 		 */
 		void playMusic(const char* filename);
+
+		/**
+		 * sets the sound fx volume in percent
+		 */
+		void setSoundVolume(int volume);
+
+		/**
+		 * gets the sound fx volume in percent
+		 */
+		int getSoundVolume();
+
+		/**
+		 * sets the music volume in percent
+		 */
+		void setMusicVolume(int volume);
+
+		/**
+		 * gets the music volume in percent
+		 */
+		int getMusicVolume();
 	};
 
 }

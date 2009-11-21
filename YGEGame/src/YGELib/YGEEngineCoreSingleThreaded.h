@@ -12,7 +12,23 @@ namespace YGECore {
 	*/
 	class YGEEngineCoreSingleThreaded : public YGEEngineCore {
 	private:
+
+		/**
+		 * time elapsed between two frames
+		 */
+		long long delta;
+
 		void update();
+
+		void processEvents();
+
+		void renderSceneList(YGETimeSpace::YGESceneList *list);
+
+		void updateSpaceList(YGETimeSpace::YGESpaceList *list);
+
+		void calculateFPSRate();
+
+		void limitFPS();
 
 	public:
 

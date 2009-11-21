@@ -32,6 +32,7 @@ public:
 	GameStateX();
 
 	virtual YGESceneList getScenesToRender();
+	virtual YGESpaceList getSpacesToUpdate();
 
 	virtual void update();
 
