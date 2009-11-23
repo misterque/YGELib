@@ -24,9 +24,11 @@ namespace YGECore {
 		YGETimer();
 
 		/**
-		* @return time in microseconds since game has started
+		* @return time in microseconds since timer has been started
 		*/
 		virtual long long getTime();
+
+		long getTimeMilliseconds();
 
 
 		/**
@@ -40,6 +42,8 @@ namespace YGECore {
 		* function
 		*/
 		virtual long long stopTimer();
+
+
 
 	};
 

@@ -222,6 +222,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\YGELib\YGEPrimitives.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\YGELib\YGESimpleBox.cpp"
 					>
 				</File>

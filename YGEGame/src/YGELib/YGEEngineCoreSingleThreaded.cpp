@@ -3,11 +3,7 @@
 #include <SDL_thread.h> 
 #include <SDL_ttf.h>
 
-#ifdef _DEBUG
-#define debugout(s); logger->log(s);
-#else
-#define debugout(s);
-#endif
+
 
 namespace YGECore {
 
@@ -17,7 +13,7 @@ namespace YGECore {
 
 		while(display->windowClosed == false && shutdownNow == false){
 
-			debugout("update the core");
+			//debugout("update the core");
 
 			timer->startTimer();
 
@@ -32,9 +28,9 @@ namespace YGECore {
 			if(gamestate != NULL) {
 				gamestate->update();
 
-				updateSpaceList(&gamestate->getSpacesToUpdate());
+				updateSpaceList(gamestate->getSpacesToUpdate());
 
-				renderSceneList(&gamestate->getScenesToRender());
+				renderSceneList(gamestate->getScenesToRender());
 
 			}
 
@@ -115,15 +111,14 @@ namespace YGECore {
 
 		delta = timer->stopTimer();
 
-#ifdef _DEBUG
-		debugout("updating the core took ms");
-		debugout(delta / 1000);
-#endif
+		//debugout("updating the core took ms");
+		//debugout(delta / 1000);
+
 	}
 
 	void YGEEngineCoreSingleThreaded::limitFPS(){
 		if(delta < 10000) {
-			debugout("less then 10 ms, wait a little");
+			//debugout("less then 10 ms, wait a little");
 
 			SDL_Delay(Uint32((10000-delta) / 1000));
 		}

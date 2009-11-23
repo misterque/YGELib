@@ -224,6 +224,9 @@ namespace YGEMath{
 			z = 0;
 		}
 
+		Quaternion(double W, double X, double Y, double Z) : w(W), x(X), y(Y), z(Z) {
+		}
+
 		Quaternion getConjugate(){
 			Quaternion q;
 			q.w = w;

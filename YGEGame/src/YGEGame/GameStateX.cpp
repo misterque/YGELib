@@ -1,6 +1,7 @@
 #include "GameStates.h"
 #include "YGEStaticMesh.h"
 #include "YGEMassAsset.h"
+#include "Camera.h"
 
 GameStateX::GameStateX(){
 	space = new YGESpace();
@@ -54,6 +55,13 @@ GameStateX::GameStateX(){
 	space->getRootEntity()->addChild(boxPos);
 
 	boxPos->translate3d(0,-10,-15);
+
+
+	YGEHeightmap* heightmap = new YGEHeightmap();
+	heightmap->create("images/hmap.bmp");
+
+	space->getRootEntity()->addAsset(heightmap);
+	heightmap->makeSolid();
 
 }
 

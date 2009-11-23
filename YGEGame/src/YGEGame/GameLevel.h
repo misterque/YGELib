@@ -7,8 +7,24 @@
 #ifndef _GAME_LEVEL_H_
 #define _GAME_LEVEL_H_
 
+#include "YGEVector.h"
+#include "YGEHeightmap.h"
+#include "YGESpace.h"
 class GameLevel {
+private:
+	YGETimeSpace::YGESpace *space;
+	YGEGraphics::YGEHeightmap *heightmap;
 
+public:
+	void loadFromFile(const char* filename);
+
+	YGEMath::Vector3 getPlayerStartPosition();
+
+	void addEntity(YGETimeSpace::YGEEntity* entity);
+
+	YGETimeSpace::YGESpace* getSpace(){
+		return space;
+	}
 
 };
 

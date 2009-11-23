@@ -177,17 +177,29 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath="..\src\YGEGame\GameGyrocopter.cpp"
+				RelativePath="..\src\YGEGame\GameManager.cpp"
 				>
 			</File>
-			<File
-				RelativePath="..\src\YGEGame\GameStateX.cpp"
+			<Filter
+				Name="gamestates"
 				>
-			</File>
-			<File
-				RelativePath="..\src\YGEGame\YGEGame.cpp"
+				<File
+					RelativePath="..\src\YGEGame\GameStateIngame.cpp"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="objects"
 				>
-			</File>
+				<File
+					RelativePath="..\src\YGEGame\GameGyrocopter.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\src\YGEGame\GameLevel.cpp"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -195,25 +207,49 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath="..\src\YGEGame\Camera.h"
+				RelativePath="..\src\YGEGame\GameManager.h"
 				>
 			</File>
-			<File
-				RelativePath="..\src\YGEGame\GameClass.h"
+			<Filter
+				Name="gamestates"
 				>
-			</File>
-			<File
-				RelativePath="..\src\YGEGame\GameGyrocopter.h"
+				<File
+					RelativePath="..\src\YGEGame\GameStateIngame.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\YGEGame\GameStateMainmenu.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\YGEGame\GameStateOptionsmenu.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\YGEGame\GameStatesCredits.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\YGEGame\GameStateSplashscreen.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="objects"
 				>
-			</File>
-			<File
-				RelativePath="..\src\YGEGame\GameStates.h"
-				>
-			</File>
-			<File
-				RelativePath="..\src\YGEGame\stdafx.h"
-				>
-			</File>
+				<File
+					RelativePath="..\src\YGEGame\Camera.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\YGEGame\GameGyrocopter.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\YGEGame\GameLevel.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Resource Files"

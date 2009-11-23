@@ -10,10 +10,32 @@
 #include "YGEGameState.h"
 #include "GameManager.h"
 
-class GameStateSplashscreen : public YGEGamestate {
+#include "YGETimer.h"
+#include "YGELogger.h"
+class GameStateSplashscreen : public YGEGame::YGEGameState {
 private:
-
+	YGECore::YGETimer timer;
+	bool started;
 public:
+	GameStateSplashscreen(){
+		started = false;
+	}
+
+	virtual void update(){
+		if (started == false) {
+			started = true;
+			timer.startTimer();
+			debugout("show splashscreen");
+		} else {
+
+			if(timer.getTimeMilliseconds() > 1000) {
+
+				GameManager::getInstance()->popGameState();
+				debugout("hide splashscreen");
+			}
+		}
+		
+	}
 
 };
 

@@ -15,8 +15,22 @@ namespace YGEPhysics {
 			dMassAdjust(mass,0.2f);
 
 			dBodySetMass(bodyId, mass);
-			dBodySetPosition(bodyId,0,0,0);
-			dBodyAddForce(bodyId, 0.5, 0, 0);
+
+			YGEMath::Vector3 pos = parent->getPosition();
+			YGEMath::Quaternion rot = parent->getOrientation();
+
+			dBodySetPosition(bodyId,pos.x,pos.y,pos.z);
+			dQuaternion q;
+			q[0]=rot.w;
+			q[1]=rot.x;
+			q[2]=rot.y;
+			q[3]=rot.z;
+			dBodySetQuaternion(bodyId, q);
+			//dBodyAddForce(bodyId, 0.5, 0, 0);
+
+			// a hull, remove this
+			dGeomID geom = dCreateBox(parentSpace->getDSpaceId(), 1, 1, 1);
+			dGeomSetBody(geom, bodyId);
 			hasBody = true;
 		}
 	}
@@ -35,7 +49,9 @@ namespace YGEPhysics {
 			createBody();
 		}
 		const dReal* pos = dBodyGetPosition (bodyId);
+		const dReal* rot = dBodyGetQuaternion(bodyId);
 		parent->setPosition(YGEMath::Vector3(pos[0], pos[1], pos[2]));
+		parent->setOrientation(YGEMath::Quaternion(rot[0], rot[1], rot[2], rot[3]));
 	}
 
 

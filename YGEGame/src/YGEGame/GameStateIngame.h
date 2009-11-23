@@ -15,8 +15,13 @@
 #include "GameGyrocopter.h"
 #include "GameLevel.h"
 
-class GameStateIngame  : public YGEGamestate, public YGEKeyDownListener{
+#include "Camera.h"
+
+class GameStateIngame  : public YGEGame::YGEGameState, public YGEKeyDownListener{
 private:
+
+	Camera* cam;
+
 	/**
 	 * the player
 	 */
@@ -28,9 +33,9 @@ private:
 
 	GameLevel* level;
 
-	GameHUD* hud;
+	//GameHUD* hud;
 
-	boolean initialized;
+	bool initialized;
 
 public:
 
@@ -53,7 +58,7 @@ public:
 
 		// check if ESC was pressed and if so tell the gamemangager to switch the gamestate to GameStateIngameOptionsMenu
 	void keyDown(SDLKey key);
-	
+
 
 };
 

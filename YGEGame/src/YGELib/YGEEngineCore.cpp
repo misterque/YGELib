@@ -1,6 +1,8 @@
 #include "YGEEngineCore.h"
 #include "YGESDLDisplay.h"
 
+#include <ode/ode.h>
+
 
 namespace YGECore {
 
@@ -9,6 +11,8 @@ namespace YGECore {
 		gamestate = 0;
 		shutdownNow = false;
 		consoleEnabled = false;
+
+		dInitODE();
 	}
 
 	YGEEngineCore::~YGEEngineCore(){

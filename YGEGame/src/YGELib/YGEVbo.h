@@ -40,6 +40,10 @@ namespace YGEGraphics {
 			uptodate = false;
 		}
 
+		Mesh* getMesh() {
+			return mesh;
+		}
+
 
 
 	};

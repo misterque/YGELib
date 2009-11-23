@@ -20,6 +20,9 @@ GameGyrocopter::GameGyrocopter(){
 	meshRotorBack.loadFromOBJ("models/gyro_rotor_back.obj");
 
 
+	addAsset(&mass);
+
+
 
 }
 

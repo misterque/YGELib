@@ -2,6 +2,8 @@
 #include "YGERessourceManager.h"
 #include "YGELogger.h"
 
+#include "YGESpace.h"
+
 /* 
  * Return the pixel value at (x, y) 
  * NOTE: The surface must be locked before calling this! 
@@ -43,8 +45,8 @@ namespace YGEGraphics {
 		SDL_Surface* surface = 
 			YGECore::YGERessourceManager::getInstance()->getSurface(filename);
 
-		int w = surface->w;
-		int h = surface->h;
+		w = surface->w;
+		h = surface->h;
 
 		texture = YGECore::YGERessourceManager::getInstance()->getTexture("textures/mud.tex");
 
@@ -52,45 +54,48 @@ namespace YGEGraphics {
 
 		Mesh* map = new Mesh();
 
-		map->vertices = new GLfloat[3 * w * h];
-		map->uv = new GLfloat[ 2 * w * h ];
-		map->indices = new GLuint [ 2 * 3 * (w-1) * (h-1) ];
 		map->textureID = texture->textureID;
 
-		map->numTriangles = (w-1) * (h-1) * 2;
-		map->numVertices = w * h;
 
 //		map->textureID = (YGECore::YGERessourceManager::getInstance()->getTexture("mud.bmp"))->textureID;
+		pHeightData = new double[w*h];
 
 		SDL_LockSurface(surface);
 		for(int x = 0; x < w; x++){
 			for(int y = 0; y < h; y++){
-				map->vertices[(x + y*w)*3 + 0] = GLfloat(x - w/2);
-				map->vertices[(x + y*w)*3 + 2] = GLfloat(y - h/2);
 
 				Uint8 height;
 				SDL_GetRGB(getpixel(surface, x, y), surface->format, &height, &height, &height);
-				
-				map->vertices[(x + y*w)*3 + 1] =  (float)height / 5.0f;
+				pHeightData[x + (y * w)] = height;
+				Vertex v;
+				v.x = GLfloat(x);
+				v.z = GLfloat(y);
+				v.y = (float)height / 5.0f;
+				v.u = x  / 20.0f;
+				v.v = y  / 20.0f;
 
-
-				map->uv[(x + y*w)*2 + 0] = x  / 20.0f;
-				map->uv[(x + y*w)*2 + 1] = y  / 20.0f;
+				map->addVertex(v);
 			}
 		}
 		SDL_UnlockSurface(surface);
 
 		for(int x = 0; x < (w-1); x++){
 			for(int y = 0; y < (h-1); y++){
-				map->indices[(x + y*(w-1))*6 + 0] = x +     y*w;
-				map->indices[(x + y*(w-1))*6 + 1] = x + 1 + y*w;
-				map->indices[(x + y*(w-1))*6 + 2] = x +     (y+1)*w;
-				map->indices[(x + y*(w-1))*6 + 3] = x + 1 + y*w;
-				map->indices[(x + y*(w-1))*6 + 4] = x + 1 + (y+1)*w;
-				map->indices[(x + y*(w-1))*6 + 5] = x +     (y+1)*w;
+
+				Triangle t;
+				t.a = x +     y*w;
+				t.b = x + 1 + y*w;
+				t.c = x +     (y+1)*w;
+				map->addTriangle(t);
+				t.a = x + 1 + y*w;
+				t.b = x + 1 + (y+1)*w;
+				t.c = x +     (y+1)*w;
+				map->addTriangle(t);
+
 			}
 		}
 
+		map->fillArrays();
 		mesh->setMesh(map);
 		
 	}
@@ -98,5 +103,25 @@ namespace YGEGraphics {
 	void YGEHeightmap::draw(YGEGraphicsContext *context){
 		mesh->draw(context);
 
+	}
+
+	void YGEHeightmap::makeSolid(){
+		YGETimeSpace::YGESpace* parentSpace = parent->getSpace();
+		if(parentSpace != NULL){
+
+
+
+//@todo check if space has time not enabled
+heightfieldId = dGeomHeightfieldDataCreate ();
+dGeomHeightfieldDataBuildDouble (heightfieldId,
+                                      pHeightData,
+                                      true,
+                                      w, h,
+                                      w, h,
+                                      1, 0, 5, 0);
+
+dGeomID geom = dCreateHeightfield( parentSpace->getDSpaceId(), heightfieldId, false);
+			//dGeomSetBody(geom, bodyId);
+		}
 	}
 }

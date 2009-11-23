@@ -26,6 +26,10 @@ namespace YGETimeSpace {
 
 		dWorldID worldId;
 
+		dSpaceID spaceId;
+
+		dJointGroupID contactGroup;
+
 	public:
 
 		YGESpace() {
@@ -41,12 +45,14 @@ namespace YGETimeSpace {
 
 		/**
 		 * starts the simulation of time
+		 * @todo implement this
 		 *
 		 */
 		void startTime();
 
 		/**
 		 * stops the simualtion of time
+		 * @todo implement this
 		 */
 		void stopTime();
 
@@ -63,6 +69,10 @@ namespace YGETimeSpace {
 		 * associated to this space
 		 */
 		dWorldID getWorldId();
+
+		dSpaceID getDSpaceId();
+
+		void handleCollisionBetween(dGeomID o0, dGeomID o1);
 
 	};
 

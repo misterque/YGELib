@@ -10,6 +10,7 @@
 #include <SDL_opengl.h>
 #include <list>
 #include <vector>
+#include <ode/ode.h>
 
 namespace YGEGraphics {
 
@@ -25,13 +26,15 @@ namespace YGEGraphics {
 		};
 
 
-		int index;
 
 		GLfloat x, y, z;
 
 		GLfloat u, v;
 
 		GLubyte r,g,b,a;
+
+		int index;
+
 	};
 
 	struct Triangle {
@@ -57,52 +60,17 @@ namespace YGEGraphics {
 		std::vector<Vertex> vertexList;
 		std::list<Triangle> triangleList;
 
-		void addVertex(const Vertex &v){
-			vertexList.push_back(v);
-			vertexList.back().index = vertexCounter;
-			vertexCounter++;
+		void addVertex(const Vertex &v);
 
-		}
+		void addTriangle(const Triangle &t);
 
-		void addTriangle(const Triangle &t){
-			triangleList.push_back(t);
+		void fillArrays();
 
-		}
 
-		void fillArrays(){
-			vertices = new GLfloat[vertexList.size() * 3];
-			uv = new GLfloat[vertexList.size() * 2];
+		dTriMeshDataID getODEMesh();
 
-			indices = new GLuint[triangleList.size() * 3];
-			int i = 0;
-			for(std::vector<Vertex>::iterator iter = vertexList.begin();
-				iter != vertexList.end();
-				iter++) {
-					vertices[i * 3 + 0] = iter->x;
-					vertices[i * 3 + 1] = iter->y;
-					vertices[i * 3 + 2] = iter->z;
 
-					uv[i * 2 + 0] = iter->u;
-					uv[i * 2 + 1] = iter->v;
-
-					i++;
-			}
-
-			i = 0;
-			for(std::list<Triangle>::iterator iter = triangleList.begin();
-				iter != triangleList.end();
-				iter++) {
-
-					indices[i * 3 + 0] = iter->a;
-					indices[i * 3 + 1] = iter->b;
-					indices[i * 3 + 2] = iter->c;
-					i++;
-
-			}
-			numVertices = vertexList.size();
-			numTriangles = triangleList.size();
-
-		}
+		Vertex* vertexBufferArray;
 		/**
 		* array of vertices, size must be number of
 		* vertices * 3

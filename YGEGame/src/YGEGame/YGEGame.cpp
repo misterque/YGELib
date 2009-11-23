@@ -2,14 +2,8 @@
 //
 
 #include "stdafx.h"
-#include "GameClass.h"
+#include "GameMananger.h"
 
 
-int _tmain(int argc, _TCHAR* argv[])
-{
 
-	GameClass gc;
-	gc.run();
-	return 0;
-}
 

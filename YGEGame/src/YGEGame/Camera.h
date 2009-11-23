@@ -8,20 +8,28 @@
 class Camera :	public YGETimeSpace::YGEEntity {
 private:
 	YGETimeSpace::YGEEntity* pitcher;
+	YGETimeSpace::YGEEntity* distancer;
 	YGETimeSpace::YGEObserver* cam;
 	float pitch;
 	float yaw;
+	float distance;
 public:
 
 	Camera(){
 		pitcher = new YGETimeSpace::YGEEntity();
+		distancer = new YGETimeSpace::YGEEntity();
 		cam = new YGETimeSpace::YGEObserver();
 
 		this->addChild(pitcher);
-		pitcher->addChild(cam);
+		pitcher->addChild(distancer);
+		distancer->addChild(cam);
 		
-		pitch = 0;
+		pitch = 0.6f;
 		yaw = 0;
+		distance = 20;
+		distancer->translate3d(0,0, distance);
+
+		 rotate(0,0);
 	}
 
 	YGETimeSpace::YGEObserver* getObserver(){

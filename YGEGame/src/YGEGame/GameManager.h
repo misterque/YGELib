@@ -8,19 +8,32 @@
 #ifndef _GAME_MANAGER_H_
 #define _GAME_MANAGER_H_
 
-#include "GameStateIngame.h"
 
+
+#include "YGEGameState.h"
+#include "YGEEngineCore.h"
+
+#include <stack>
 /**
  * holds all GameState independant information
  * and all the GameStates as well. 
  * @todo make singleton
  */
-class GameManager {
+class GameManager : public YGEGame::YGEGameState{
 private:
 
-	GameStateIngame* ingame;
+	GameManager();
+
+	static GameManager* instance;
+
+
+	YGECore::YGEEngineCore* engineCore;
+
+	YGEGameState* ingame;
+	YGEGameState* splashscreen;
 	
 
+	std::stack<YGEGameState*> gameStateStack;
 	/**
 	 * init the game engine
 	 */
@@ -28,16 +41,20 @@ private:
 
 
 public:
-	//
-	void initAndStartGame(){
-
-
-		//init the gamestates
-		// @todo add GameStateIngame keydownlistenable
-
+	static GameManager* getInstance(){
+		if(instance == NULL) {
+			instance = new GameManager();
+		}
+		return instance;
 	}
+	//
+	void initAndStartGame();
 	
+	void pushGameState(YGEGame::YGEGameState* gamestate);
 
+	void popGameState();
+
+	void update();
 
 };
 

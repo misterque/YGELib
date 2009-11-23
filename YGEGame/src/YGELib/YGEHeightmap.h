@@ -18,6 +18,11 @@ private:
 
 	YGECore::Texture* texture;
 
+	int w;
+	int h;
+
+	dHeightfieldDataID heightfieldId;
+	double* pHeightData;
 public:
 
 	/**
@@ -30,6 +35,8 @@ public:
 	 * creates a heightmap using a monocromatic texture.
 	 */
 	void create(char *filename);
+
+	void makeSolid();
 };
 
 }

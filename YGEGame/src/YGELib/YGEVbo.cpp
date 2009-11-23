@@ -33,7 +33,7 @@ namespace YGEGraphics {
 
 		glColor3f(1,1,1);
 		// fallback
-		if(true){
+		if(false){
 			for(int i = 0; i < mesh->numTriangles; i++){
 				glBegin(GL_TRIANGLES);
 
@@ -77,7 +77,13 @@ namespace YGEGraphics {
 			glBindBufferARB(GL_ELEMENT_ARRAY_BUFFER_ARB, iboId);
 
 			glEnableClientState(GL_VERTEX_ARRAY);
-			glVertexPointer(3, GL_FLOAT, 0, 0);
+			glVertexPointer(3, GL_FLOAT, sizeof(Vertex), 0);
+
+		glClientActiveTexture(GL_TEXTURE0);
+		glTexCoordPointer(2, GL_FLOAT, sizeof(Vertex), (void*) (sizeof(GLfloat) * 3));
+		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+		
+
 
 			//glDrawArrays( GL_TRIANGLES, 0, mesh->numVertices );
 			glDrawElements(GL_TRIANGLES, mesh->numTriangles*3, GL_UNSIGNED_INT, 0);
@@ -99,12 +105,14 @@ namespace YGEGraphics {
 
 		// fill the buffer with vertex data
 		glBindBufferARB(GL_ARRAY_BUFFER_ARB, vboId);
-		glBufferDataARB(GL_ARRAY_BUFFER_ARB, mesh->numVertices*3*sizeof(float), mesh->vertices, GL_STATIC_DRAW_ARB);
+		
+		
+		glBufferDataARB(GL_ARRAY_BUFFER_ARB, mesh->numVertices*sizeof(Vertex), mesh->vertexBufferArray, GL_STATIC_DRAW_ARB);
 
 		glGenBuffersARB(1, &iboId);
 		// fill the buffer with index data
 		glBindBufferARB(GL_ELEMENT_ARRAY_BUFFER_ARB, iboId);
-		glBufferDataARB(GL_ELEMENT_ARRAY_BUFFER_ARB, mesh->numTriangles*3*sizeof(float), mesh->indices, GL_STATIC_DRAW_ARB);
+		glBufferDataARB(GL_ELEMENT_ARRAY_BUFFER_ARB, mesh->numTriangles*3*sizeof(GLuint), mesh->indices, GL_STATIC_DRAW_ARB);
 
 	}
 

@@ -6,6 +6,12 @@
 #include <sstream>
 #include "YGEConsole.h"
 
+#ifdef _DEBUG
+#define debugout(s); YGECore::YGELogger::getInstance()->log(s);
+#else
+#define debugout(s);
+#endif
+
 
 namespace YGECore {
 

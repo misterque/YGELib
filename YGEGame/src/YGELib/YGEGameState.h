@@ -13,18 +13,20 @@ namespace YGECore {
 
 namespace YGEGame {
 class YGEGameState {
+protected:
+	YGETimeSpace::YGESceneList sceneList;
+	YGETimeSpace::YGESpaceList spaceList;
+
 public:
 	virtual void update() = 0;
 	//virtual void draw(YGECore::YGEEngineCore* core) = 0;
 
-	virtual YGETimeSpace::YGESceneList getScenesToRender() {
-		YGETimeSpace::YGESceneList list;
-		return list;
+	virtual YGETimeSpace::YGESceneList* getScenesToRender() {
+		return &sceneList;
 	};
 
-	virtual YGETimeSpace::YGESpaceList getSpacesToUpdate() {
-		YGETimeSpace::YGESpaceList list;
-		return list;
+	virtual YGETimeSpace::YGESpaceList* getSpacesToUpdate() {
+		return &spaceList;
 	};
 
 

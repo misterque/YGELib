@@ -3,6 +3,7 @@
 
 #include "YGEStaticMesh.h"
 #include "YGEEntity.h"
+#include "YGEMassAsset.h"
 
 class GameGyrocopter : public YGETimeSpace::YGEEntity{
 private:
@@ -17,6 +18,8 @@ private:
 	YGETimeSpace::YGEEntity posRotorBack;
 	YGETimeSpace::YGEEntity posTailV;
 	YGETimeSpace::YGEEntity posTailH;
+
+	YGEPhysics::YGEMassAsset mass;
 
 
 	float fuel;
