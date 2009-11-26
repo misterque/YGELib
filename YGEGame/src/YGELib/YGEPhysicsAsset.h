@@ -15,7 +15,7 @@ public:
 	 * gets the position from the physics engine, interpolates
 	 * and updates the parent entity
 	 */
-	virtual void update() = 0;
+	virtual void update(long delta) = 0;
 	
 	virtual YGETimeSpace::AssetType getAssetType(){
 		return YGETimeSpace::Physics;

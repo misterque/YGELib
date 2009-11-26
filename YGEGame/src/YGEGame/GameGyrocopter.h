@@ -3,7 +3,7 @@
 
 #include "YGEStaticMesh.h"
 #include "YGEEntity.h"
-#include "YGEMassAsset.h"
+#include "YGEBodyAsset.h"
 
 class GameGyrocopter : public YGETimeSpace::YGEEntity{
 private:
@@ -19,17 +19,36 @@ private:
 	YGETimeSpace::YGEEntity posTailV;
 	YGETimeSpace::YGEEntity posTailH;
 
-	YGEPhysics::YGEMassAsset mass;
+	YGEPhysics::YGEBodyAsset mass;
 
 
 	float fuel;
 
+	double throttle;
+	double tailH;
+	double tailV;
 
+	double up;
 
 public:
 	GameGyrocopter();
 
-	void update();
+	/**
+	 * sets the throttle in percent
+	 */
+	void setThrottle(double t){
+		throttle = t;
+}
+
+	void setTailV( double v ){
+		tailV = v;
+	}
+
+	void setTailH( double h ){
+		tailH = h;
+	}
+
+	virtual void tick(long delta);
 
 
 

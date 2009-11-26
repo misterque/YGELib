@@ -15,6 +15,8 @@ protected:
 
 public:
 	/*+ virtual void update() = 0; +*/
+
+	/** @todo remove SDLInputManager **/
 	virtual void init() = 0;
 
 	void addKeyDownListener(YGEKeyDownListener* listener){

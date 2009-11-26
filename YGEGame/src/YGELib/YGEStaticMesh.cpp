@@ -43,6 +43,13 @@ int texCoordIndexFromString(string str){
 	return atoi((++strings.begin())->c_str());
 }
 
+int vertexNormalIndexFromString(string str){
+	std::vector<string> strings;
+	Tokenize(str, strings, "/");
+	if(strings.size() < 3) return -1;
+	return atoi((++(++strings.begin()))->c_str());
+}
+
 
 
 namespace YGEGraphics {
@@ -107,6 +114,7 @@ namespace YGEGraphics {
 
 		std::vector<Vertex> textureCoords;
 		std::vector<Vertex> vertexCoords;
+		std::vector<Vertex> vertexNormals;
 
 		OBJTextures textures;
 
@@ -134,9 +142,18 @@ namespace YGEGraphics {
 				textureCoords.push_back(v);
 
 			}
+			if(type == "vn") {
+				Vertex v;
+				istr >> v.nx;
+				istr >> v.ny;
+				istr >> v.nz;
+
+				vertexNormals.push_back(v);
+
+			}
 
 			if(type == "f"){
-				int vindex, vtindex;
+				int vindex, vtindex, vnindex;
 				Triangle v;
 				Vertex vv;
 				string s;
@@ -145,13 +162,23 @@ namespace YGEGraphics {
 					istr >> s;
 					vindex = vertexIndexFromString(s) - 1;
 					vtindex = texCoordIndexFromString(s) - 1;
-
+					vnindex = vertexNormalIndexFromString(s) - 1;
 
 					vv.u = textureCoords.at(vtindex).u;
 					vv.v = textureCoords.at(vtindex).v;
 					vv.x = vertexCoords.at(vindex).x;
 					vv.y = vertexCoords.at(vindex).y;
 					vv.z = vertexCoords.at(vindex).z;
+					if(vnindex >= 0) {
+					vv.nx = vertexNormals.at(vnindex).nx;
+					vv.ny = vertexNormals.at(vnindex).ny;
+					vv.nz = vertexNormals.at(vnindex).nz;
+					} else {
+						vv.nx = 0;
+						vv.ny = 1;
+						vv.nz = 0;
+					}
+
 
 					model.vertexList.push_back(vv);
 

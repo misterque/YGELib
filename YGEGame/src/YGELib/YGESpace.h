@@ -7,6 +7,8 @@
 #define _YGE_SPACE_H_
 
 #include "YGEEntity.h"
+#include "YGESkybox.h"
+#include "YGESunlight.h"
 #include <ode/ode.h>
 
 namespace YGETimeSpace {
@@ -30,9 +32,20 @@ namespace YGETimeSpace {
 
 		dJointGroupID contactGroup;
 
+		YGEGraphics::YGESkybox* skybox;
+
+		YGEGraphics::YGESunlight* sunlight;
+
+		YGEMath::Vector3 sunlightPosition;
+
 	public:
 
 		YGESpace() {
+
+			sunlight = new YGEGraphics::YGESunlight();
+
+			skybox = new YGEGraphics::YGESkybox();
+			skybox->loadTextures();
 			rootEntity.setSpace(this);
 		}
 		/**
@@ -73,6 +86,16 @@ namespace YGETimeSpace {
 		dSpaceID getDSpaceId();
 
 		void handleCollisionBetween(dGeomID o0, dGeomID o1);
+
+		YGEGraphics::YGESkybox* getSkybox(){
+			return skybox;
+		}
+
+		YGEGraphics::YGESunlight* getSunlight(){
+			return sunlight;
+		}
+
+		void setSunLightPosition(YGEMath::Vector3 pos);
 
 	};
 

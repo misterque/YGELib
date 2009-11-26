@@ -202,6 +202,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\YGELib\YGEObserver.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\YGELib\YGEScene.cpp"
 					>
 				</File>
@@ -230,11 +234,23 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\YGELib\YGESkybox.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\YGELib\YGEStaticMesh.cpp"
 					>
 				</File>
 				<File
+					RelativePath="..\src\YGELib\YGESunlight.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\YGELib\YGEVbo.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\src\YGELib\YGEWater.cpp"
 					>
 				</File>
 			</Filter>
@@ -250,7 +266,7 @@
 				Name="physics"
 				>
 				<File
-					RelativePath="..\src\YGELib\YGEMassAsset.cpp"
+					RelativePath="..\src\YGELib\YGEBodyAsset.cpp"
 					>
 				</File>
 			</Filter>
@@ -388,7 +404,15 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\YGELib\YGESkybox.h"
+					>
+				</File>
+				<File
 					RelativePath="..\src\YGELib\YGEStaticMesh.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\YGELib\YGESunlight.h"
 					>
 				</File>
 				<File
@@ -397,6 +421,10 @@
 				</File>
 				<File
 					RelativePath="..\src\YGELib\YGEVbo.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\YGELib\YGEWater.h"
 					>
 				</File>
 			</Filter>
@@ -436,11 +464,15 @@
 				Name="physics"
 				>
 				<File
+					RelativePath="..\src\YGELib\YGEBodyAsset.h"
+					>
+				</File>
+				<File
 					RelativePath="..\src\YGELib\YGEBoxHullAsset.h"
 					>
 				</File>
 				<File
-					RelativePath="..\src\YGELib\YGEMassAsset.h"
+					RelativePath="..\src\YGELib\YGEPhysics.h"
 					>
 				</File>
 				<File

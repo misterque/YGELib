@@ -19,6 +19,10 @@ namespace YGECore {
 		std::string filename;
 		int w, h;
 		GLuint textureID;
+
+		void bind(){
+			glBindTexture(GL_TEXTURE_2D, textureID);
+		}
 	};
 
 class YGERessourceManager {

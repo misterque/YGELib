@@ -82,7 +82,9 @@ namespace YGEGraphics {
 		glClientActiveTexture(GL_TEXTURE0);
 		glTexCoordPointer(2, GL_FLOAT, sizeof(Vertex), (void*) (sizeof(GLfloat) * 3));
 		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-		
+
+		glNormalPointer(GL_FLOAT, sizeof(Vertex), (void*) (sizeof(GLfloat) * 5 + sizeof(GLubyte) * 4));
+		glEnableClientState(GL_NORMAL_ARRAY);
 
 
 			//glDrawArrays( GL_TRIANGLES, 0, mesh->numVertices );

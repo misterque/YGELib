@@ -33,6 +33,8 @@ namespace YGEGraphics {
 
 		GLubyte r,g,b,a;
 
+		GLfloat nx, ny, nz;
+
 		int index;
 
 	};

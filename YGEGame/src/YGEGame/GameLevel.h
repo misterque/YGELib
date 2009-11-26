@@ -9,11 +9,15 @@
 
 #include "YGEVector.h"
 #include "YGEHeightmap.h"
+#include "YGEWater.h"
 #include "YGESpace.h"
+
+
 class GameLevel {
 private:
 	YGETimeSpace::YGESpace *space;
 	YGEGraphics::YGEHeightmap *heightmap;
+	YGEGraphics::YGEWater *water;
 
 public:
 	void loadFromFile(const char* filename);

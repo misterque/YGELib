@@ -10,6 +10,8 @@ namespace YGETimeSpace{
 
 	void YGEEntity::render(){
 
+		glEnable(GL_LIGHTING);
+
 		YGEMath::Vector3 pos = this->getPosition();
 		YGEMath::Vector3 scale = this->getScale();
 
@@ -50,7 +52,7 @@ namespace YGETimeSpace{
 		glPopMatrix();
 	};
 	
-	void YGEEntity::update(){
+	void YGEEntity::update(long delta){
 
 		// get every physical asset and ...
 		std::list<YGEPhysics::YGEPhysicsAsset*> assets = this->getPhysicsAssets();
@@ -60,7 +62,7 @@ namespace YGETimeSpace{
 
 
 
-				(*iter)->update();
+				(*iter)->update(delta);
 
 		}
 
@@ -69,9 +71,13 @@ namespace YGETimeSpace{
 		for(std::list<YGEEntity*>::iterator iter = children.begin();
 			iter != children.end();
 			iter++){
-				(*iter)->update();
+				(*iter)->update(delta);
 
 		}
+
+		
+		tick(delta);
+
 
 	};
 

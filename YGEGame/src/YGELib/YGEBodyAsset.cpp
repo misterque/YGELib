@@ -1,20 +1,25 @@
-#include "YGEMassAsset.h"
+#include "YGEBodyAsset.h"
 #include "YGELogger.h"
 #include "YGESpace.h"
 
+#include "YGEPhysics.h"
+
 namespace YGEPhysics {
 
-	void YGEMassAsset::createBody(){
+	void YGEBodyAsset::createBody(){
 		YGETimeSpace::YGESpace* parentSpace = parent->getSpace();
 		if(parentSpace != NULL){
 			bodyId = dBodyCreate(parentSpace->getWorldId());
 
+			
 			mass = new dMass();
 			dMassSetBox(mass,1,1,1,1);
 
-			dMassAdjust(mass,0.2f);
+			dMassAdjust(mass,1.0f);
 
 			dBodySetMass(bodyId, mass);
+
+			dBodySetAutoDisableFlag(bodyId, 0);
 
 			YGEMath::Vector3 pos = parent->getPosition();
 			YGEMath::Quaternion rot = parent->getOrientation();
@@ -30,12 +35,39 @@ namespace YGEPhysics {
 
 			// a hull, remove this
 			dGeomID geom = dCreateBox(parentSpace->getDSpaceId(), 1, 1, 1);
+
+			dGeomSetCategoryBits(geom, YGEPhysics::ENTITIES );
+			dGeomSetCollideBits(geom, YGEPhysics::ENTITIES | YGEPhysics::STATIC_OBJECTS );
 			dGeomSetBody(geom, bodyId);
+//			dBodySetAuto
 			hasBody = true;
 		}
 	}
 
-	void YGEMassAsset::setParent(YGETimeSpace::YGEEntity* entity){
+	void YGEBodyAsset::addRelativeForce(double x, double y, double z){
+		if(hasBody){
+			dBodyAddRelForce(bodyId, x, y, z);
+		}
+
+	}
+
+		void YGEBodyAsset::addRelativeTorque(double x, double y, double z){
+		if(hasBody){
+			dBodyAddRelTorque(bodyId, x, y, z);
+		}
+
+	}
+
+		dBodyID YGEBodyAsset::getBodyId(){
+			if(hasBody) {
+				return bodyId;
+			} else {
+				// @todo add exception or similar
+				return 0;
+			}
+		}
+
+	void YGEBodyAsset::setParent(YGETimeSpace::YGEEntity* entity){
 		parent = entity;
 		if(hasBody){
 			dBodyDestroy(bodyId);
@@ -43,15 +75,16 @@ namespace YGEPhysics {
 		}
 	}
 
-	void YGEMassAsset::update(){
+	void YGEBodyAsset::update(long delta){
 		if(!hasBody){
 
 			createBody();
 		}
+
 		const dReal* pos = dBodyGetPosition (bodyId);
 		const dReal* rot = dBodyGetQuaternion(bodyId);
 		parent->setPosition(YGEMath::Vector3(pos[0], pos[1], pos[2]));
-		parent->setOrientation(YGEMath::Quaternion(rot[0], rot[1], rot[2], rot[3]));
+		parent->setOrientation(YGEMath::Quaternion(rot[0], rot[1], rot[3], rot[2]));
 	}
 
 

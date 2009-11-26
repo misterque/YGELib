@@ -69,6 +69,13 @@ public:
 #endif
 	}
 
+		void log(double number){
+#ifdef _DEBUG
+		std::cout<<number<<std::endl;
+
+#endif
+	}
+
 
 };
 

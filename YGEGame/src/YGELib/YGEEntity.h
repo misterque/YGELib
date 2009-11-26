@@ -188,9 +188,11 @@ public:
 		orientation = q;
 	}
 
-	void render();
+	virtual void render();
 
-	void update();
+	void update(long delta);
+
+	virtual void tick(long delta) { };
 
 	void translate3d(double x, double y, double z){
 		position.x += x;

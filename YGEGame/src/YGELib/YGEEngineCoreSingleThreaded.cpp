@@ -72,6 +72,7 @@ namespace YGECore {
 				}
 				break;
 			case SDL_KEYUP:
+				input->notifyEvent(&event);
 				break;
 			case SDL_MOUSEMOTION:
 				break;
@@ -90,8 +91,14 @@ namespace YGECore {
 	void YGEEngineCoreSingleThreaded::renderSceneList(YGETimeSpace::YGESceneList *list){
 		for(YGETimeSpace::YGESceneList::iterator iter = list->begin(); iter != list->end(); iter++){
 
-			(*iter).second->setCameraMatrix((*iter).first->getRootEntity());
 
+
+			(*iter).second->setCameraMatrixRotation((*iter).first->getRootEntity());
+			(*iter).first->getSkybox()->draw();
+			(*iter).second->setCameraMatrix((*iter).first->getRootEntity());
+			(*iter).first->getSunlight()->draw();
+
+			
 			// @todo this doesnt belong here
 			glDisable(GL_TEXTURE_2D);
 			glDisable(GL_BLEND);
@@ -102,7 +109,7 @@ namespace YGECore {
 		for(YGETimeSpace::YGESpaceList::iterator iter = list->begin(); iter != list->end(); iter++){
 
 			(*iter)->timeStep(delta);
-			(*iter)->getRootEntity()->update();
+			(*iter)->getRootEntity()->update(delta);
 		}
 	}
 

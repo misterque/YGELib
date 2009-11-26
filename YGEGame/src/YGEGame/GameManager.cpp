@@ -27,6 +27,10 @@ void GameManager::initAndStartGame(){
 	splashscreen = new GameStateSplashscreen();
 	
 	this->pushGameState(ingame);
+	engineCore->getInputManager()->addKeyDownListener((GameStateIngame*)ingame);
+	engineCore->getInputManager()->addKeyUpListener((GameStateIngame*)ingame);
+
+
 	this->pushGameState(splashscreen);
 	
 	startEngine();

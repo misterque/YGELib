@@ -98,7 +98,7 @@ namespace YGEGraphics {
 		texture = YGECore::YGERessourceManager::getInstance()->getTexture("textures/particle.tex");
 	}
 
-	void YGEParticleSystem::update(){
+	void YGEParticleSystem::update(long delta){
 
 		YGEParticle* p = particleList.getFirstAliveParticle();
 		YGEParticle* p2;

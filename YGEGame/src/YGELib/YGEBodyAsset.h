@@ -12,7 +12,7 @@
 #include "ode/ode.h"
 
 namespace YGEPhysics {
-	class YGEMassAsset : public YGEPhysicsAsset {
+	class YGEBodyAsset : public YGEPhysicsAsset {
 
 	private: 
 		/**
@@ -29,15 +29,25 @@ namespace YGEPhysics {
 
 	public:
 
-		YGEMassAsset() : hasBody(false){
+		YGEBodyAsset() : hasBody(false){
 			
 		}
 
 		void createBody();
 
+		void addRelativeForce(double x, double y, double z);
+
+		void addRelativeTorque(double x, double y, double z);
+
+		void addAbsoluteForce(double x, double y, double z);
+
+		void addAbsoluteTorque(double x, double y, double z);
+
+		dBodyID getBodyId();
+
 		virtual void setParent(YGETimeSpace::YGEEntity* entity);
 
-		virtual void update();
+		virtual void update(long delta);
 
 	};
 

@@ -4,47 +4,47 @@
 1. Requirements
 a) Brief overview of features wanted
 	GF01: loading and display of an island
-		(a)- terrain via heightmap
+		(a)- terrain via heightmap: 70%
 		(b)- houses via static models
-		(c)- ocean via ???
+		(c)- ocean via ??? 20%
 		
 	GF02: player
-		(a)- gyrocopter model via static model, particle system
-		(b)- interaction via keyboard or joystick
+		(a)- gyrocopter model via static model, particle system 50%
+		(b)- interaction via keyboard or joystick 20%
 		
 		
 	GF03: megahawk
-		(a)- robot model via animated model
-		(b)- AI via state machine
+		(a)- robot model via animated model 0%
+		(b)- AI via state machine 0%
 		
 	GF04: missles
-		(a) rocket model via static model, particle system
-		(b) rock model via static model
+		(a) rocket model via static model, particle system 0%
+		(b) rock model via static model 0%
 		
 	GF05: game logic
-		(a) spash screen
-		(b) main menu
+		(a) spash screen 30%
+		(b) main menu 0%
 		(c) ingame logic
-			- goal: killing megahawk
-			- goal: landing
-			- goal: time
-			- fail
-		(d) score count
-		(e) highscore
+			- goal: killing megahawk 0%
+			- goal: landing 0%
+			- goal: time 0%
+			- fail: 0%
+		(d) score count 0%
+		(e) highscore 0%
 		
-	GF06: options window
-		(a) change resolution
-		(b) change fullscreen state
-		(c) change sound volume
+	GF06: options window 0%
+		(a) change resolution 0%
+		(b) change fullscreen state 0%
+		(c) change sound volume 0%
 		
 		
 2. Milestones
 	GMS00: orientation and waiting for basic engine functionality
-	
+	done!
 	
 	GMS01: due to
-		(a) creation of heightmap
-		(b) loading of heightmap with texture
+		(a) creation of heightmap 50%
+		(b) loading of heightmap with texture 80%
 		(c) creation of basic gyrocopter model with texture (30%)
 			submodels:
 				body: done
@@ -55,13 +55,13 @@ a) Brief overview of features wanted
 				tail v
 				tail t
 				
-		(d) creation of gyrocopter class: 30%, green
-		(e) display of gyrocopter 40%, green, needs proper model loading 
-		(f) mapping of controls to gyrocopter visualisation
+		(d) creation of gyrocopter class: 50%
+		(e) display of gyrocopter 80% 
+		(f) mapping of controls to gyrocopter visualisation 0%
 		
 	GMS02: due to
-		(a) creation of basic airport model
-		(b) design of level format
+		(a) creation of basic airport model 0%
+		(b) design of level format 0%
 			- levelname
 			- description
 			- heightmap
@@ -76,37 +76,37 @@ a) Brief overview of features wanted
 			- number of hits
 			- time to complete
 			- time point decay rate
-		(c) creation of basic level 
-		(d) physics model for gyrocopter
-		(e) collsion detection
+		(c) creation of basic level 0%
+		(d) physics model for gyrocopter 5%
+		(e) collsion detection 50%
 		
 	
 	GMS03: due to
-		(a) creation of basic megahawk model
-		(b) creation or megahawk class
-		(c) creation of missle model
-		(d) creation of missle class
-		(e) creation of game-logic
-			- landing
+		(a) creation of basic megahawk model 0%
+		(b) creation or megahawk class 0%
+		(c) creation of missle model 0%
+		(d) creation of missle class 0%
+		(e) creation of game-logic 0%
+			- landing 
 			- shooting
 			- hitting
 			- failing
 			- scoring	
 	
 	GMS04: due to
-		(a) creation of megahawk AI
+		(a) creation of megahawk AI 0%
 
 	GMS05: due to
-		(a) creation of spashscreen
-		(b) creation of main menu
-		(c) creation of game
-		(d) creation of score count and highscore
-		(e) creation of options menu
-		(f) creation of credits screen (together with splashscreen)
+		(a) creation of spashscreen 30%
+		(b) creation of main menu 0%
+		(c) creation of game 0%
+		(d) creation of score count and highscore 0%
+		(e) creation of options menu 0%
+		(f) creation of credits screen (together with splashscreen) 0%
 		
 	GMS06: due to
-		(a) beautifying of code
-		(b) beautifying of models and textures
-		(c) creation of 3 levels
-		(d) testing
+		(a) beautifying of code 0%
+		(b) beautifying of models and textures 0%
+		(c) creation of 3 levels 0%
+		(d) testing 0%
 	

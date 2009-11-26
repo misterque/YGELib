@@ -15,38 +15,38 @@ const int COLORKEY_BLUE = 0xFF;
 
 
 /**
- * stolen from http://www.gamedev.net/community/forums/topic.asp?topic_id=422993
- */
+* stolen from http://www.gamedev.net/community/forums/topic.asp?topic_id=422993
+*/
 SDL_Surface *CreateText(std::string text, TTF_Font *font, SDL_Color textColor)
 {
-    //Make text as normal...
-    SDL_Surface* TextSurface = TTF_RenderText_Solid(font, text.c_str(), textColor);
+	//Make text as normal...
+	SDL_Surface* TextSurface = TTF_RenderText_Solid(font, text.c_str(), textColor);
 
-    SDL_Surface *NewSurface = SDL_CreateRGBSurface(SDL_SWSURFACE, 1024, 32, 32, 
-                                  0xFF000000, 0x00FF0000, 0x0000FF00, 0);
-    
-    //Create a rectangle for coloring the empty image
-    SDL_Rect rect;
-    rect.x = 0;
-    rect.y = 0;
-    rect.w = NewSurface->w;
-    rect.h = NewSurface->h;
-    
-    //Fill the new image with your colorkey color
-  //  SDL_FillRect(NewSurface, &rect, SDL_MapRGB(NewSurface->format, COLORKEY_RED, COLORKEY_GREEN, COLORKEY_BLUE));
-    
-    //Place your text onto the new surface
-    SDL_BlitSurface(TextSurface, NULL, NewSurface, &rect);
-    
-    //Free the old surface
-    SDL_FreeSurface(TextSurface);
-    
-    //Set the colorkey on the empty surface to make the COLORKEY_ color clear
-  //  Uint32 colorkey = SDL_MapRGB(NewSurface->format, COLORKEY_RED, COLORKEY_GREEN, COLORKEY_BLUE);
-//    SDL_SetColorKey(NewSurface, SDL_RLEACCEL|SDL_SRCCOLORKEY, colorkey);
+	SDL_Surface *NewSurface = SDL_CreateRGBSurface(SDL_SWSURFACE, 1024, 32, 32, 
+		0xFF000000, 0x00FF0000, 0x0000FF00, 0);
 
-    //Return your new surface, with dimensions of a power of two.
-    return NewSurface;
+	//Create a rectangle for coloring the empty image
+	SDL_Rect rect;
+	rect.x = 0;
+	rect.y = 0;
+	rect.w = NewSurface->w;
+	rect.h = NewSurface->h;
+
+	//Fill the new image with your colorkey color
+	//  SDL_FillRect(NewSurface, &rect, SDL_MapRGB(NewSurface->format, COLORKEY_RED, COLORKEY_GREEN, COLORKEY_BLUE));
+
+	//Place your text onto the new surface
+	SDL_BlitSurface(TextSurface, NULL, NewSurface, &rect);
+
+	//Free the old surface
+	SDL_FreeSurface(TextSurface);
+
+	//Set the colorkey on the empty surface to make the COLORKEY_ color clear
+	//  Uint32 colorkey = SDL_MapRGB(NewSurface->format, COLORKEY_RED, COLORKEY_GREEN, COLORKEY_BLUE);
+	//    SDL_SetColorKey(NewSurface, SDL_RLEACCEL|SDL_SRCCOLORKEY, colorkey);
+
+	//Return your new surface, with dimensions of a power of two.
+	return NewSurface;
 }
 
 
@@ -179,8 +179,8 @@ namespace YGECore {
 			switch(key.sym) {
 			case SDLK_BACKSPACE:
 				if(currentLine.text.length() > 0) {
-				currentLine.text.erase(currentLine.text.length()-1);
-				update();
+					currentLine.text.erase(currentLine.text.length()-1);
+					update();
 				}
 				break;
 
@@ -188,13 +188,13 @@ namespace YGECore {
 				currentLine.text.append(" ");
 				update();
 				break;
-			
+
 			case SDLK_RETURN:
 				if(currentLine.text.length() > 0) {
 					println(currentLine.text.c_str());
 					evaluateCommand(currentLine.text.c_str());
 					currentLine.text = "";
-				update();
+					update();
 				}
 				break;
 			}
@@ -206,6 +206,7 @@ namespace YGECore {
 
 	void YGEConsole::draw(){
 
+		glDisable(GL_LIGHTING);
 		glMatrixMode( GL_PROJECTION );
 		glLoadIdentity();
 
@@ -215,9 +216,9 @@ namespace YGECore {
 		glLoadIdentity();
 		//glTranslatef(0.0f,0.0f,-6.0f);						// Move Left 1.5 Units And Into The Screen 6.0
 		// Finished Drawing The Triangle
-	
+
 		glDisable(GL_TEXTURE_2D);
-				glEnable(GL_BLEND);
+		glEnable(GL_BLEND);
 
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		glColor4f(0.2f,0.2f,0.2f,0.8f);
@@ -293,13 +294,13 @@ namespace YGECore {
 	}
 
 	SDL_Surface* redImage(int w,int h,SDL_Surface* src) 
-{ 
-SDL_Surface* surface = SDL_CreateRGBSurface(SDL_SWSURFACE,w,h,32,0,0,0,0); 
-SDL_SetColorKey(surface,SDL_SRCCOLORKEY,SDL_MapRGB(surface->format,0,0,0)); 
-SDL_BlitSurface(src,NULL,surface,NULL); 
-SDL_FreeSurface(src); 
-return surface; 
-} 
+	{ 
+		SDL_Surface* surface = SDL_CreateRGBSurface(SDL_SWSURFACE,w,h,32,0,0,0,0); 
+		SDL_SetColorKey(surface,SDL_SRCCOLORKEY,SDL_MapRGB(surface->format,0,0,0)); 
+		SDL_BlitSurface(src,NULL,surface,NULL); 
+		SDL_FreeSurface(src); 
+		return surface; 
+	} 
 
 	void textToConsoleLine(consoleLine* line){
 
@@ -337,7 +338,7 @@ return surface;
 
 		printf("Texute ID: %i \n", line->texture);
 		SDL_FreeSurface( surface );
-//		SDL_FreeSurface( big );
+		//		SDL_FreeSurface( big );
 	}
 
 	void YGEConsole::update(){

@@ -25,6 +25,14 @@ public:
 
 						}
 						break;
+					case SDL_KEYUP:
+						for(std::vector<YGEKeyUpListener*>::iterator iter = keyuplisteners.begin();
+							iter != keyuplisteners.end();
+							iter++){
+								(*iter)->keyUp(event->key.keysym.sym);
+
+						}
+						break;
 					case SDL_MOUSEMOTION:
 						for(std::vector<YGEMouseMoveListener*>::iterator iter = mousemovelisteners.begin();
 							iter != mousemovelisteners.end();

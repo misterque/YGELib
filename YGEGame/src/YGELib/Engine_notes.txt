@@ -5,20 +5,21 @@
 
 1. Requirements
 	a) Brief overview of features wanted
-		EF01: Entity-Based Scenegraph
-		EF02: static models: OBJ loading and display
-		EF03: animated models: md2 loading and display
-		EF04: heightmap loading and display
-		EF05: texture loading (bmp, png)
-		EF06: Particle System (not affected by physics)
-		EF07: loading and use of soundfiles (wav, ogg) via OPENAL
-		EF08: Collision detection and physics with ODE
-		EF09: Console for interaction with the engine
-		EF10: Input Management
-		EF11: Skybox rendering
-		EF12: multi-threading
-		EF13: shadows
-		EF14: anti-aliasing
+		EF01: Entity-Based Scenegraph 80%
+		EF02: static models: OBJ loading and display 70%
+		EF03: animated models: md2 loading and display 0%
+		EF04: heightmap loading and display 70%
+		EF05: texture loading (bmp, png) 50%
+		EF06: Particle System (not affected by physics) 40%
+		EF07: loading and use of soundfiles (wav, ogg) via OPENAL 0%
+		EF08: Collision detection and physics with ODE 70%
+		EF09: Console for interaction with the engine 80%
+		EF10: Input Management 70%
+		EF11: Skybox rendering 80%
+		EF12: multi-threading 10%
+		EF13: shadows 0%
+		EF14: anti-aliasing 0%
+		EF15: shaders for terrain + water
 
 
 2. Milestones:
@@ -34,7 +35,7 @@
 		(a) entity-graph with translation and rotations: completed
 		(b) basic particle system with point sprites: completed
 		(c) improved heightmap loading with texture: completed
-		(d) OBJ loading with multiple meshes: 30 %
+		(d) OBJ loading with multiple meshes: 70 %
 		(e) ressource management for textures: completed
 		
 	EMS03: due to
@@ -42,13 +43,13 @@
 		(c) collsion detection and physics (via ODE/EntityAssets)
 			- BoxHullAsset
 			- MeshHullAsset
-			- Heightmap as Physics Asset
+			- Heightmap as Physics Asset completed
 			- MotorAsset
-			- MassAsset
+			- MassAsset completed
 		(d) interpolation
 		(e) light asset
 		(f) sunlight asset
-		(g) readding of a scene/space object WHICH IS AN ENTITY????
+		(g) readding of a scene/space object completed
 		
 	
 	EMS04:
@@ -56,7 +57,7 @@
 		(b) particle system from file
 		(c) ressource management for models
 		(d) basic shadows
-		(e) redoing the vertex buffer objects
+		(e) redoing the vertex buffer objects completed
 		
 		
 	EMS05:
@@ -67,3 +68,4 @@
 	EMS06:
 		(a) adding of gamepad/joystick input
 		(b) adding of multitexturing for the heightmap
+		(c) shaders for terrain and water
