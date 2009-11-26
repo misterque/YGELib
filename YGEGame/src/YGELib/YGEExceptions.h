@@ -1,3 +1,7 @@
+#ifndef _YGE_EXCEPTIONS_H_
+#define _YGE_EXCEPTIONS_H_
+
+
 #include <exception>
 #include <string>
 
@@ -25,3 +29,5 @@ public:
 		return "Method not implemented yet!";
 	}
 };
+
+#endif

@@ -4,8 +4,13 @@
 #include <math.h>
 #include <iostream>
 #include <stdlib.h>
+#include "YGEExceptions.h"
+
 
 namespace YGEMath{
+
+	struct Quaternion;
+
 
 /**
  * 2d Vector struct
@@ -224,6 +229,9 @@ struct Vector3 {
 
 	}
 
+	void rotateBy(const Quaternion& q){
+		throw YGEExceptionMethodNotImplementedYet();
+	}
 
 	/**
 	 * function for debugging purposes.

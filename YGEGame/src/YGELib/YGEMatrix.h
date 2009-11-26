@@ -5,6 +5,7 @@
 
 namespace YGEMath{
 
+
 struct Mat2x2 {	
 	double values[2][2];
 

@@ -117,9 +117,18 @@ namespace YGECore {
 	void YGEEngineCoreSingleThreaded::calculateFPSRate(){
 
 		delta = timer->stopTimer();
+		accumDelta += delta;
+		frames++;
+		if(accumDelta > 1000000){
+			accumDelta = 0;
+			frames = 0;
+			debugout("FPS:");
+			debugout((long long)frames);
 
+		}
 		//debugout("updating the core took ms");
 		//debugout(delta / 1000);
+
 
 	}
 

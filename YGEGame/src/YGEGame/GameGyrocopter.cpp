@@ -45,7 +45,7 @@ void GameGyrocopter::tick(long delta){
 
 	const double* v = dBodyGetLinearVel(bodyId);
 
-	dBodySetLinearDamping(bodyId, 0.1);
+	dBodySetLinearDamping(bodyId, 0.01);
     
 	//double up = v[2] / 10.0f;
 
@@ -64,25 +64,30 @@ void GameGyrocopter::tick(long delta){
 
 	//dBodyAddRelForce(bodyId, 0, throttle*0.1, -throttle);
 
-	dReal d[4];
+	YGEMath::Quaternion q(dBodyGetQuaternion(bodyId));
 
-	dBodyGetRelPointPos(bodyId, -1, 0, 0, d);
+	YGEMath::Vector3 z(0,0,-1);
 
-	const double* pos = dBodyGetPosition(bodyId);
+	z.rotateBy(q);
 
-	d[0] -= pos[0];
-	d[1] -= pos[1];
-	d[2] -= pos[2];
 
-	dBodyAddForce(bodyId, d[0] * throttle, d[1] * throttle, d[2] * throttle);
+
+	//const double* pos = dBodyGetPosition(bodyId);
+
+//	d[0] -= pos[0];
+//	d[1] -= pos[1];
+//	d[2] -= pos[2];
+
+	//dBodyAddForce(bodyId, d[0] * throttle, d[1] * throttle, d[2] * throttle);
 
 	//mass.addRelativeForce(0,0,-throttle * 1.0f);
 //	mass.addRelativeForce(0,tailH / 200.0f, 0);
-	debugout(d[0]);
+	/*debugout(d[0]);
 	debugout(d[1]);
 	debugout(d[2]);
+	debugout(d[3]);
 	debugout("---");
-
+*/
 	mass.addRelativeTorque(0, 0, tailV / 1000.0f);
 	mass.addRelativeTorque(tailH / 1000.0f, 0, 0);
 

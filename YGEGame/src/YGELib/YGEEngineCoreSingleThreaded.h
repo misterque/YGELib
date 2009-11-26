@@ -18,6 +18,17 @@ namespace YGECore {
 		 */
 		long long delta;
 
+		/**
+		 * stores time since last output of FPS rate
+		 * if > 1 sec debugout frames
+		 */
+		long long accumDelta;
+
+		/**
+		 * frame counter for FPS rate
+		 */
+		int frames;
+
 		void update();
 
 		void processEvents();

@@ -32,6 +32,8 @@ namespace YGETimeSpace{
 	}
 
 	void YGESpace::timeStep(long long delta){
+		if(delta <= 0) return;
+
 		double seconds = delta / 1000000.0f;
 		dSpaceCollide(spaceId, this, &nearCallback);
 		dWorldStep(worldId, seconds );
@@ -51,7 +53,7 @@ namespace YGETimeSpace{
 			contact[i].surface.mode = dContactBounce | dContactSoftCFM;
 			contact[i].surface.mu = dInfinity;
 			contact[i].surface.mu2 = 0;
-			contact[i].surface.bounce = 0.2;
+			contact[i].surface.bounce = 0.7;
 			contact[i].surface.bounce_vel = 0.1;
 			contact[i].surface.soft_cfm = 0.01;
 		}
