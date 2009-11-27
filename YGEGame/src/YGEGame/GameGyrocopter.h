@@ -27,8 +27,13 @@ private:
 	double throttle;
 	double tailH;
 	double tailV;
+	double tailX;
 
 	double up;
+
+	long long reload;
+	int fireFromRight;
+
 
 public:
 	GameGyrocopter();
@@ -47,6 +52,14 @@ public:
 	void setTailH( double h ){
 		tailH = h;
 	}
+	
+	void setTailX( double x){
+		tailX = x;
+	}
+
+
+
+	void fireRocket();
 
 	virtual void tick(long delta);
 

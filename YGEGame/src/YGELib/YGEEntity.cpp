@@ -20,10 +20,16 @@ namespace YGETimeSpace{
 
 		YGEMath::Mat3x3 mat = orientation.getRotationMatrix();
 
-		GLfloat m[16] = { (GLfloat)mat[0][0], (GLfloat)mat[0][1], (GLfloat)mat[0][2], 0.0f,
+/*		GLfloat m[16] = { (GLfloat)mat[0][0], (GLfloat)mat[0][1], (GLfloat)mat[0][2], 0.0f,
 			(GLfloat)mat[1][0], (GLfloat)mat[1][1], (GLfloat)mat[1][2], 0.0f,
 			(GLfloat)mat[2][0], (GLfloat)mat[2][1], (GLfloat)mat[2][2], 0.0f,
 			0,         0,         0,         1.0f };
+*/
+		GLfloat m[16] = { (GLfloat)mat[0][0], (GLfloat)mat[1][0], (GLfloat)mat[2][0], 0.0f,
+			(GLfloat)mat[0][1], (GLfloat)mat[1][1], (GLfloat)mat[2][1], 0.0f,
+			(GLfloat)mat[0][2], (GLfloat)mat[1][2], (GLfloat)mat[2][2], 0.0f,
+			0,         0,         0,         1.0f };
+
 
 		glMultMatrixf(m);
 
@@ -87,6 +93,11 @@ namespace YGETimeSpace{
 
 		entity->parent = this;
 		children.push_back(entity);
+
+	}
+
+	void YGEEntity::removeChild(YGETimeSpace::YGEEntity *entity){
+		children.remove(entity);
 
 	}
 

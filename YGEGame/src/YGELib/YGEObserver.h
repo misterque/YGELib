@@ -10,6 +10,9 @@
 #include "YGEEntity.h"
 #include <SDL_opengl.h>
 
+#define CAMERA_ORTHOGONAL 1
+#define CAMERA_PERSPECTIVE 2
+
 namespace YGETimeSpace {
 
 
@@ -23,8 +26,16 @@ namespace YGETimeSpace {
 	* An observer itself is an entity.
 	*/
 	class YGEObserver : public YGEEntity {
+	private:
+		int cameraMode;
+
+		void setProjectionMatrix();
 
 	public:
+		YGEObserver();
+
+
+		void setCameraMode(int mode);
 		void setCameraMatrix(YGEEntity* rootEntity);
 
 		void setCameraMatrixRotation(YGEEntity* rootEntity);

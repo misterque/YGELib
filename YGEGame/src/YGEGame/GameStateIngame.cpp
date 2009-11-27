@@ -9,6 +9,8 @@ GameStateIngame::GameStateIngame(){
 
 
 void GameStateIngame::init(){
+	// setting up the HUD
+	hud = new GameHUD();
 
 	// setting up the level
 	level = new GameLevel();
@@ -36,6 +38,11 @@ void GameStateIngame::init(){
 
 	spaceList.push_back(level->getSpace());
 
+	s.first = hud->getSpace();
+	s.second = hud->getObserver();
+
+	sceneList.push_back(s);
+	spaceList.push_back(hud->getSpace());
 
 
 
@@ -59,11 +66,17 @@ void GameStateIngame::update(){
 void GameStateIngame::keyDown(SDLKey key){
 
 	switch(key){
-			case SDLK_a:
+			case SDLK_s:
 				gyro->setThrottle(0.0f);
 				break;
-			case SDLK_q:
+			case SDLK_w:
 				gyro->setThrottle(100.0f);
+				break;
+			case SDLK_a:
+				gyro->setTailX(-100.0f);
+				break;
+			case SDLK_d:
+				gyro->setTailX(100.0f);
 				break;
 			case SDLK_LEFT:
 				gyro->setTailV(-100.0f);
@@ -77,6 +90,9 @@ void GameStateIngame::keyDown(SDLKey key){
 			case SDLK_DOWN:
 				gyro->setTailH(-100.0f);
 				break;
+			case SDLK_SPACE:
+				gyro->fireRocket();
+				break;
 
 
 	}
@@ -86,15 +102,21 @@ void GameStateIngame::keyDown(SDLKey key){
 void GameStateIngame::keyUp(SDLKey key){
 
 		switch(key){
-			case SDLK_a:
+			case SDLK_w:
 				gyro->setThrottle(50.0f);
 				break;
-			case SDLK_q:
+			case SDLK_s:
 				gyro->setThrottle(50.0f);
 				break;
-			case SDLK_LEFT:
+				case SDLK_a:
+				gyro->setTailX(0.0f);
+				break;
+							case SDLK_d:
+				gyro->setTailX(0.0f);
+				break;			case SDLK_LEFT:
 				gyro->setTailV(0.0f);
 				break;
+
 			case SDLK_RIGHT:
 				gyro->setTailV(0.0f);
 				break;

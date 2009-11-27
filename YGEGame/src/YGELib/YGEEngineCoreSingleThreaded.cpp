@@ -3,6 +3,8 @@
 #include <SDL_thread.h> 
 #include <SDL_ttf.h>
 
+#include "YGEText.h"
+
 
 
 namespace YGECore {
@@ -93,8 +95,8 @@ namespace YGECore {
 
 
 
-			(*iter).second->setCameraMatrixRotation((*iter).first->getRootEntity());
-			(*iter).first->getSkybox()->draw();
+			//(*iter).second->setCameraMatrixRotation((*iter).first->getRootEntity());
+			//(*iter).first->getSkybox()->draw();
 			(*iter).second->setCameraMatrix((*iter).first->getRootEntity());
 			(*iter).first->getSunlight()->draw();
 
@@ -120,10 +122,11 @@ namespace YGECore {
 		accumDelta += delta;
 		frames++;
 		if(accumDelta > 1000000){
-			accumDelta = 0;
-			frames = 0;
 			debugout("FPS:");
 			debugout((long long)frames);
+			accumDelta = 0;
+			frames = 0;
+
 
 		}
 		//debugout("updating the core took ms");
@@ -149,6 +152,7 @@ namespace YGECore {
 	void YGEEngineCoreSingleThreaded::init(){
 
 		delta = 1000;
+		accumDelta = 0;
 
 
 		debugout("initialize the core");

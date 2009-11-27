@@ -28,7 +28,7 @@ namespace YGEMath{
 		Quaternion operator * (const Quaternion &q2) const;
 
 
-
+		Quaternion operator * (const Vector3 &q2) const;
 
 
 
@@ -63,6 +63,8 @@ namespace YGEMath{
 		Quaternion(const double* q);
 
 		Quaternion getConjugate();
+
+		Vector3 rotateVector(const Vector3& v);
 
 
 

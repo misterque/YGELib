@@ -10,7 +10,7 @@ a) Brief overview of features wanted
 		
 	GF02: player
 		(a)- gyrocopter model via static model, particle system 50%
-		(b)- interaction via keyboard or joystick 20%
+		(b)- interaction via keyboard or joystick 60%
 		
 		
 	GF03: megahawk
@@ -77,7 +77,7 @@ a) Brief overview of features wanted
 			- time to complete
 			- time point decay rate
 		(c) creation of basic level 0%
-		(d) physics model for gyrocopter 5%
+		(d) physics model for gyrocopter 40%
 		(e) collsion detection 50%
 		
 	
@@ -85,7 +85,7 @@ a) Brief overview of features wanted
 		(a) creation of basic megahawk model 0%
 		(b) creation or megahawk class 0%
 		(c) creation of missle model 0%
-		(d) creation of missle class 0%
+		(d) creation of missle class 80%
 		(e) creation of game-logic 0%
 			- landing 
 			- shooting

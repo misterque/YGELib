@@ -38,6 +38,8 @@ namespace YGETimeSpace {
 
 		YGEMath::Vector3 sunlightPosition;
 
+		bool timeIsRunning;
+
 	public:
 
 		YGESpace() {
@@ -47,6 +49,8 @@ namespace YGETimeSpace {
 			skybox = new YGEGraphics::YGESkybox();
 			skybox->loadTextures();
 			rootEntity.setSpace(this);
+
+			timeIsRunning = false;
 		}
 		/**
 		 * Creates a physics environment for this YGESpace.

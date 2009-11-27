@@ -200,6 +200,11 @@ public:
 		position.z += z;
 	}
 
+
+	void translate(const YGEMath::Vector3& v){
+		position += v;
+	}
+
 	void rotateDGR(const YGEMath::Vector3 axis, double degree);
 
 	void rotateRAD(const YGEMath::Vector3 axis, double radiant);

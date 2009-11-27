@@ -43,6 +43,8 @@ namespace YGEPhysics {
 
 		void addAbsoluteTorque(double x, double y, double z);
 
+		YGEMath::Vector3 getRelativeVelocity();
+
 		dBodyID getBodyId();
 
 		virtual void setParent(YGETimeSpace::YGEEntity* entity);

@@ -5,14 +5,14 @@
 
 1. Requirements
 	a) Brief overview of features wanted
-		EF01: Entity-Based Scenegraph 80%
+		EF01: Entity-Based Scenegraph 85%
 		EF02: static models: OBJ loading and display 70%
 		EF03: animated models: md2 loading and display 0%
 		EF04: heightmap loading and display 70%
 		EF05: texture loading (bmp, png) 50%
 		EF06: Particle System (not affected by physics) 40%
 		EF07: loading and use of soundfiles (wav, ogg) via OPENAL 0%
-		EF08: Collision detection and physics with ODE 70%
+		EF08: Collision detection and physics with ODE 80%
 		EF09: Console for interaction with the engine 80%
 		EF10: Input Management 70%
 		EF11: Skybox rendering 80%
@@ -39,16 +39,13 @@
 		(e) ressource management for textures: completed
 		
 	EMS03: due to
-		(a) skybox rendering
+		(a) skybox rendering 90%
 		(c) collsion detection and physics (via ODE/EntityAssets)
-			- BoxHullAsset
-			- MeshHullAsset
 			- Heightmap as Physics Asset completed
-			- MotorAsset
 			- MassAsset completed
 		(d) interpolation
 		(e) light asset
-		(f) sunlight asset
+		(f) sunlight asset 80%
 		(g) readding of a scene/space object completed
 		
 	

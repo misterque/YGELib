@@ -6,12 +6,13 @@
 
 namespace YGEPhysics {
 
+
 	void YGEBodyAsset::createBody(){
 		YGETimeSpace::YGESpace* parentSpace = parent->getSpace();
 		if(parentSpace != NULL){
 			bodyId = dBodyCreate(parentSpace->getWorldId());
 
-			
+
 			mass = new dMass();
 			dMassSetBox(mass,1,1,1,1);
 
@@ -39,33 +40,64 @@ namespace YGEPhysics {
 			dGeomSetCategoryBits(geom, YGEPhysics::ENTITIES );
 			dGeomSetCollideBits(geom, YGEPhysics::ENTITIES | YGEPhysics::STATIC_OBJECTS );
 			dGeomSetBody(geom, bodyId);
-//			dBodySetAuto
+			//			dBodySetAuto
 			hasBody = true;
 		}
 	}
 
 	void YGEBodyAsset::addRelativeForce(double x, double y, double z){
 		if(hasBody){
-			dBodyAddRelForce(bodyId, x, y, z);
+			YGEMath::Quaternion q = parent->getOrientation();
+
+			YGEMath::Vector3 z(x,y,z);
+
+			YGEMath::Vector3 d = q.rotateVector(z);
+			
+			dBodyAddForce(bodyId, d.x, d.y, d.z);
 		}
 
 	}
 
-		void YGEBodyAsset::addRelativeTorque(double x, double y, double z){
+	void YGEBodyAsset::addAbsoluteForce(double x, double y, double z){
 		if(hasBody){
-			dBodyAddRelTorque(bodyId, x, y, z);
+
+			dBodyAddForce(bodyId, x, y, z);
+		}
+
+	}
+	void YGEBodyAsset::addRelativeTorque(double x, double y, double z){
+		if(hasBody){
+						YGEMath::Quaternion q = parent->getOrientation();
+
+			YGEMath::Vector3 z(x,y,z);
+
+			YGEMath::Vector3 d = q.rotateVector(z);
+			dBodyAddTorque(bodyId, d.x, d.y, d.z);
 		}
 
 	}
 
-		dBodyID YGEBodyAsset::getBodyId(){
-			if(hasBody) {
-				return bodyId;
-			} else {
-				// @todo add exception or similar
-				return 0;
-			}
+	YGEMath::Vector3 YGEBodyAsset::getRelativeVelocity(){
+
+			YGEMath::Quaternion q = parent->getOrientation();
+
+			const double* v = dBodyGetLinearVel(bodyId);
+
+			YGEMath::Vector3 z(v[0],v[1],v[2]);
+
+			return q.getConjugate().rotateVector(z);
+
+
+	}
+
+	dBodyID YGEBodyAsset::getBodyId(){
+		if(hasBody) {
+			return bodyId;
+		} else {
+			// @todo add exception or similar
+			return 0;
 		}
+	}
 
 	void YGEBodyAsset::setParent(YGETimeSpace::YGEEntity* entity){
 		parent = entity;
@@ -81,10 +113,11 @@ namespace YGEPhysics {
 			createBody();
 		}
 
+		
 		const dReal* pos = dBodyGetPosition (bodyId);
 		const dReal* rot = dBodyGetQuaternion(bodyId);
 		parent->setPosition(YGEMath::Vector3(pos[0], pos[1], pos[2]));
-		parent->setOrientation(YGEMath::Quaternion(rot[0], rot[1], rot[3], rot[2]));
+		parent->setOrientation(YGEMath::Quaternion(rot[0], rot[1], rot[2], rot[3]));
 	}
 
 

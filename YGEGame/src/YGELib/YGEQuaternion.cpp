@@ -52,6 +52,18 @@ namespace YGEMath{
 			return result;
 		}
 
+/*		Quaternion Quaternion::operator * (const Vector3 &q2) const {
+			Quaternion result;
+			result.w = this->w*q2.w - this->x*q2.x - this->y*q2.y - this->z*q2.z;
+
+			result.x = this->w*q2.x + q2.w*this->x + this->y*q2.z - this->z*q2.y;
+			result.y = this->w*q2.y + q2.w*this->y - this->x*q2.z + this->z*q2.x;
+			result.z = this->w*q2.z + q2.w*this->z + this->x*q2.y - this->y*q2.x;
+
+			return result;
+		}*/
+
+
 
 
 
@@ -60,13 +72,17 @@ namespace YGEMath{
 
 		Quaternion& Quaternion::operator *= (const Quaternion &q2) {
 			this->w = this->w*q2.w - this->x*q2.x - this->y*q2.y - this->z*q2.z;
-
-			this->x = this->w*q2.x + q2.w*this->x + this->y*q2.z - this->z*q2.y;
-			this->y = this->w*q2.y + q2.w*this->y - this->x*q2.z + this->z*q2.x;
-			this->z = this->w*q2.z + q2.w*this->z + this->x*q2.y - this->y*q2.x;
+			this->x = this->w*q2.x + q2.w*this->x - this->y*q2.z + this->z*q2.y;
+			this->y = this->w*q2.y + q2.w*this->y + this->x*q2.z - this->z*q2.x;
+			this->z = this->w*q2.z + q2.w*this->z - this->x*q2.y + this->y*q2.x;
 
 			return *this;
 		}
+    /*result.w = w*a.w - x*a.x - y*a.y - z*a.z;   
+    result.x = w*a.x + x*a.w + z*a.y - y*a.z;   
+    result.y = w*a.y + y*a.w + x*a.z - z*a.x;   
+    result.z = w*a.z + z*a.w + y*a.x - x*a.y;   
+    */
 
 		Quaternion Quaternion::operator * (double v) const {
 			Quaternion result;
@@ -218,6 +234,8 @@ namespace YGEMath{
 		Quaternion::Quaternion(const double* q) : w(q[0]), x(q[1]), y(q[2]), z(q[3]) {
 		}
 
+		
+
 		Quaternion Quaternion::getConjugate(){
 			Quaternion q;
 			q.w = w;
@@ -228,6 +246,11 @@ namespace YGEMath{
 			return q;
 		}
 
+		Vector3 Quaternion::rotateVector(const Vector3& v){
+			Quaternion q(0, v.x, v.y, v.z);
+			Quaternion r = ((*this)) * (q * ~(*this));
+			return Vector3(r.x, r.y, r.z);
+		}
 
 
 }

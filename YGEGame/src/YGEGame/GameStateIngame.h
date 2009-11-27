@@ -16,8 +16,10 @@
 
 #include "GameGyrocopter.h"
 #include "GameLevel.h"
+#include "GameHUD.h"
 
 #include "Camera.h"
+
 
 class GameStateIngame  : public YGEGame::YGEGameState, public YGEKeyDownListener, public YGEKeyUpListener{
 private:
@@ -35,7 +37,7 @@ private:
 
 	GameLevel* level;
 
-	//GameHUD* hud;
+	GameHUD* hud;
 
 	bool initialized;
 

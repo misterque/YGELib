@@ -20,6 +20,8 @@ namespace YGETimeSpace{
 
 		//dGeomID groundPlane = dCreatePlane(spaceId, 0, 1, 0, 0);
 		//dGeom
+
+		timeIsRunning = true;
 	}
 
 	dWorldID  YGESpace::getWorldId(){
@@ -32,6 +34,7 @@ namespace YGETimeSpace{
 	}
 
 	void YGESpace::timeStep(long long delta){
+		if(!timeIsRunning) return;
 		if(delta <= 0) return;
 
 		double seconds = delta / 1000000.0f;
@@ -51,9 +54,9 @@ namespace YGETimeSpace{
 		for (int i = 0; i < MAX_CONTACTS; i++)
 		{
 			contact[i].surface.mode = dContactBounce | dContactSoftCFM;
-			contact[i].surface.mu = dInfinity;
-			contact[i].surface.mu2 = 0;
-			contact[i].surface.bounce = 0.7;
+			contact[i].surface.mu = 0.5;
+			//contact[i].surface.mu2 = 0;
+			contact[i].surface.bounce = 0.3;
 			contact[i].surface.bounce_vel = 0.1;
 			contact[i].surface.soft_cfm = 0.01;
 		}

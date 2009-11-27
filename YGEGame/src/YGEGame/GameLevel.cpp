@@ -22,7 +22,7 @@ void GameLevel::loadFromFile(const char* filename){
 }
 
 YGEMath::Vector3 GameLevel::getPlayerStartPosition(){
-	return YGEMath::Vector3(172-128, 40, 154-128);
+	return YGEMath::Vector3(172-128, 25, 154-128);
 }
 
 void GameLevel::addEntity(YGETimeSpace::YGEEntity* entity){
