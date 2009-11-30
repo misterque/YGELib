@@ -18,6 +18,11 @@ namespace YGEGraphics {
 		virtual YGETimeSpace::AssetType getAssetType(){
 			return YGETimeSpace::Graphical;
 		}
+
+		virtual void enable(){};
+
+		virtual void disable(){};
+
 	};
 
 	class YGESimpleBox : public YGEGraphicsAsset {

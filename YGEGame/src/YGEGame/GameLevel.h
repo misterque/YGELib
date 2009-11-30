@@ -12,13 +12,15 @@
 #include "YGEWater.h"
 #include "YGESpace.h"
 
+#include "GameBall.h"
+
 
 class GameLevel {
 private:
 	YGETimeSpace::YGESpace *space;
 	YGEGraphics::YGEHeightmap *heightmap;
 	YGEGraphics::YGEWater *water;
-
+	YGEGraphics::YGESkybox *skybox;
 public:
 	void loadFromFile(const char* filename);
 

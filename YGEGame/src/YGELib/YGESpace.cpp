@@ -47,6 +47,8 @@ namespace YGETimeSpace{
 	/** stolen from xavier decoret who stole it as well **/
 	void YGESpace::handleCollisionBetween(dGeomID o0, dGeomID o1)
 	{
+
+
 		// Create an array of dContact objects to hold the contact joints
 		static const int MAX_CONTACTS = 10;
 		dContact contact[MAX_CONTACTS];
@@ -62,6 +64,18 @@ namespace YGETimeSpace{
 		}
 		if (int numc = dCollide(o0, o1, MAX_CONTACTS, &contact[0].geom, sizeof(dContact)))
 		{
+
+			YGEPhysics::YGEPhysicsAsset* a0 = (YGEPhysics::YGEPhysicsAsset*)dGeomGetData(o0);
+			YGEPhysics::YGEPhysicsAsset* a1 = (YGEPhysics::YGEPhysicsAsset*)dGeomGetData(o1);
+
+			if(a0 && a1) {
+				a0->getParent()->processCollision(a0, a1);
+				a1->getParent()->processCollision(a1, a0);
+			} else if( a0) {
+				a0->getParent()->processCollision(a0, NULL);
+			} else if( a1) {
+				a1->getParent()->processCollision(a1, NULL);
+			}
 			// Get the dynamics body for each geom
 			dBodyID b1 = dGeomGetBody(o0);
 			dBodyID b2 = dGeomGetBody(o1);
@@ -82,5 +96,23 @@ namespace YGETimeSpace{
 		sunlightPosition = pos;
 	}
 
+	bool  YGESpace::hasSkybox(){
+		if(skybox == NULL) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+	YGEGraphics::YGESkybox* YGESpace::getSkybox(){
+		return skybox;
+	}
+
+	void YGESpace::setSkybox(YGEGraphics::YGESkybox* sky){
+		skybox = sky;
+	}
+
+	YGEGraphics::YGESunlight* YGESpace::getSunlight(){
+		return sunlight;
+	}
 
 }

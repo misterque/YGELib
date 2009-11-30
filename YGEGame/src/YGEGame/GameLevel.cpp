@@ -1,6 +1,7 @@
 #include "GameLevel.h"
 
 
+
 void GameLevel::loadFromFile(const char* filename){
 //@todo parse from file
 
@@ -11,13 +12,21 @@ void GameLevel::loadFromFile(const char* filename){
 
 	// create the heightmap
 	heightmap = new YGEGraphics::YGEHeightmap();
-	heightmap->create("images/hmap.bmp");
+	heightmap->create("images/hmap.bmp"); 
 	space->getRootEntity()->addAsset(heightmap);
 
 	heightmap->makeSolid();
 
-	water = new YGEGraphics::YGEWater();
+	water = new YGEGraphics::YGEWater(heightmap, 10);
 	space->getRootEntity()->addAsset(water);
+
+	skybox = new YGEGraphics::YGESkybox();
+	skybox->loadTextures();
+	space->setSkybox(skybox);
+
+	GameBall* ball = new GameBall();
+	space->getRootEntity()->addChild(ball);
+	ball->setPosition(YGEMath::Vector3(172-128, 25, 154-128-60));
 
 }
 

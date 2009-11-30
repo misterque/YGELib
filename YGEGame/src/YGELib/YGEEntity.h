@@ -92,8 +92,8 @@ public:
 	/**
 	 * get all the entities attached to this children
 	 */
-	std::list<YGEEntity*> getChildren(){
-		return children;
+	std::list<YGEEntity*>* getChildren(){
+		return &children;
 	}
 
 	YGEEntity* getParent(){
@@ -112,8 +112,8 @@ public:
 	/**
 	 * returns all assets assigned to this entity
 	 */
-	std::list<YGEEntityAsset*> getAssets(){
-		return assets;
+	std::list<YGEEntityAsset*>* getAssets(){
+		return &assets;
 	}
 
 	/**
@@ -122,12 +122,12 @@ public:
 	 * will be called by the scene graphical renderer to
 	 * just get the assests which are renderable
 	 */
-	std::list<YGEGraphics::YGEGraphicsAsset*> getGraphicsAssets(){
-		return graphicAssets;
+	std::list<YGEGraphics::YGEGraphicsAsset*>* getGraphicsAssets(){
+		return &graphicAssets;
 	}
 
-	std::list<YGEPhysics::YGEPhysicsAsset*> getPhysicsAssets(){
-		return physicsAssets;
+	std::list<YGEPhysics::YGEPhysicsAsset*>* getPhysicsAssets(){
+		return &physicsAssets;
 	}
 
 	/**
@@ -191,6 +191,7 @@ public:
 	virtual void render();
 
 	void update(long delta);
+	void tickChildren(long delta);
 
 	virtual void tick(long delta) { };
 
@@ -208,6 +209,8 @@ public:
 	void rotateDGR(const YGEMath::Vector3 axis, double degree);
 
 	void rotateRAD(const YGEMath::Vector3 axis, double radiant);
+
+	virtual void processCollision(YGEPhysics::YGEPhysicsAsset* bodyPart, YGEPhysics::YGEPhysicsAsset* collider){};
 
 };
 

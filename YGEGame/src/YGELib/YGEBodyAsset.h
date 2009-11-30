@@ -20,6 +20,8 @@ namespace YGEPhysics {
 		*/
 		dBodyID bodyId;
 
+		dGeomID geomId;
+
 		dMass* mass;
 
 		//YGEPhysicsAsset bla;
@@ -50,6 +52,9 @@ namespace YGEPhysics {
 		virtual void setParent(YGETimeSpace::YGEEntity* entity);
 
 		virtual void update(long delta);
+
+				virtual void disable();
+		virtual void enable();
 
 	};
 

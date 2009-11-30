@@ -46,8 +46,9 @@ namespace YGETimeSpace {
 
 			sunlight = new YGEGraphics::YGESunlight();
 
-			skybox = new YGEGraphics::YGESkybox();
-			skybox->loadTextures();
+			skybox = NULL;
+
+
 			rootEntity.setSpace(this);
 
 			timeIsRunning = false;
@@ -91,13 +92,13 @@ namespace YGETimeSpace {
 
 		void handleCollisionBetween(dGeomID o0, dGeomID o1);
 
-		YGEGraphics::YGESkybox* getSkybox(){
-			return skybox;
-		}
+		bool hasSkybox();
 
-		YGEGraphics::YGESunlight* getSunlight(){
-			return sunlight;
-		}
+		YGEGraphics::YGESkybox* getSkybox();
+
+		void setSkybox(YGEGraphics::YGESkybox* sky);
+
+		YGEGraphics::YGESunlight* getSunlight();
 
 		void setSunLightPosition(YGEMath::Vector3 pos);
 

@@ -52,7 +52,7 @@ void GameManager::popGameState(){
 
 }
 
-void GameManager::update(){
+void GameManager::update(long delta){
 	// if this point is reached, the gamestatestack is empty
 	// and the game may exit
 	engineCore->shutdown();

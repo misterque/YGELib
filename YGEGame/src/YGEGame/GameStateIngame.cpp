@@ -1,14 +1,15 @@
 #include "GameStateIngame.h"
 
 #include "YGELogger.h"
+#include "GameManager.h"
 
-GameStateIngame::GameStateIngame(){
+GameStateIngame::GameStateIngame() : timeSinceLastTimeUpdate(0) , gameStartTime(-1){
 
 
 }
 
 
-void GameStateIngame::init(){
+void GameStateIngame::init()  {
 	// setting up the HUD
 	hud = new GameHUD();
 
@@ -44,7 +45,7 @@ void GameStateIngame::init(){
 	sceneList.push_back(s);
 	spaceList.push_back(hud->getSpace());
 
-
+	gameStartTime = GameManager::getInstance()->getCore()->getTimeSinceGameStarted();
 
 }
 
@@ -57,9 +58,14 @@ void GameStateIngame::deinit(){
 	delete level;
 }
 
-void GameStateIngame::update(){
+void GameStateIngame::update(long delta){
+	timeSinceLastTimeUpdate += delta;
+	if(timeSinceLastTimeUpdate > 1000000) {
+		timeSinceLastTimeUpdate = 0;
+		long long timePassed = GameManager::getInstance()->getCore()->getTimeSinceGameStarted() - gameStartTime;
 
-
+		hud->setTime(timePassed / 1000000);
+	}
 }
 
 

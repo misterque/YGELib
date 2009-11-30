@@ -24,9 +24,14 @@ void GameRocket::tick(long delta){
 
 		dBodySetLinearDamping(body.getBodyId(), 0.01);
 
-		if(lifetime > 2) {
-			this->getParent()->removeChild(this);
-			delete this;
+		if(lifetime > 20) {
+			body.disable();
+			//delete this;
 			return;
 		}
 }
+
+void GameRocket::processCollision(YGEPhysics::YGEPhysicsAsset* bodyPart, YGEPhysics::YGEPhysicsAsset* collider){
+	getParent()->removeChild(this);
+
+};

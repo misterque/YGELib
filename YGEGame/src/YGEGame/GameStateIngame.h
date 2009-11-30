@@ -15,6 +15,8 @@
 #include "GameManager.h"
 
 #include "GameGyrocopter.h"
+#include "GameBall.h"
+
 #include "GameLevel.h"
 #include "GameHUD.h"
 
@@ -41,6 +43,11 @@ private:
 
 	bool initialized;
 
+	long timeSinceLastTimeUpdate;
+
+	long long gameStartTime;
+
+	std::vector<GameBall> balls;
 public:
 
 	GameStateIngame();
@@ -57,7 +64,7 @@ public:
 
 	void deinit();
 
-	void update();
+	void update(long delta);
 
 
 	void keyDown(SDLKey key);

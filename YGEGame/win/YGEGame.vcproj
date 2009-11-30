@@ -192,6 +192,10 @@
 				Name="objects"
 				>
 				<File
+					RelativePath="..\src\YGEGame\GameBall.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\YGEGame\GameGyrocopter.cpp"
 					>
 				</File>
@@ -247,6 +251,10 @@
 				>
 				<File
 					RelativePath="..\src\YGEGame\Camera.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\YGEGame\GameBall.h"
 					>
 				</File>
 				<File

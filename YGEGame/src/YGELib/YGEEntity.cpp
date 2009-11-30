@@ -36,9 +36,9 @@ namespace YGETimeSpace{
 		//glScalef(scale.x, scale.y, scale.z);
 
 		// get every graphical asset and render it
-		std::list<YGEGraphics::YGEGraphicsAsset*> assets = this->getGraphicsAssets();
-		for(std::list<YGEGraphics::YGEGraphicsAsset*>::iterator iter = assets.begin();
-			iter != assets.end();
+		std::list<YGEGraphics::YGEGraphicsAsset*>* assets = this->getGraphicsAssets();
+		for(std::list<YGEGraphics::YGEGraphicsAsset*>::iterator iter = assets->begin();
+			iter != assets->end();
 			iter++){
 
 
@@ -48,9 +48,9 @@ namespace YGETimeSpace{
 		}
 
 		// recursive call on all children
-		std::list<YGEEntity*> children = this->getChildren();
-		for(std::list<YGEEntity*>::iterator iter = children.begin();
-			iter != children.end();
+		std::list<YGEEntity*>* children = this->getChildren();
+		for(std::list<YGEEntity*>::iterator iter = children->begin();
+			iter != children->end();
 			iter++){
 				(*iter)->render();
 
@@ -61,9 +61,9 @@ namespace YGETimeSpace{
 	void YGEEntity::update(long delta){
 
 		// get every physical asset and ...
-		std::list<YGEPhysics::YGEPhysicsAsset*> assets = this->getPhysicsAssets();
-		for(std::list<YGEPhysics::YGEPhysicsAsset*>::iterator iter = assets.begin();
-			iter != assets.end();
+		std::list<YGEPhysics::YGEPhysicsAsset*>* assets = this->getPhysicsAssets();
+		for(std::list<YGEPhysics::YGEPhysicsAsset*>::iterator iter = assets->begin();
+			iter != assets->end();
 			iter++){
 
 
@@ -73,9 +73,9 @@ namespace YGETimeSpace{
 		}
 
 		// recursive call on all children
-		std::list<YGEEntity*> children = this->getChildren();
-		for(std::list<YGEEntity*>::iterator iter = children.begin();
-			iter != children.end();
+		std::list<YGEEntity*>* children = this->getChildren();
+		for(std::list<YGEEntity*>::iterator iter = children->begin();
+			iter != children->end();
 			iter++){
 				(*iter)->update(delta);
 
@@ -83,6 +83,23 @@ namespace YGETimeSpace{
 
 		
 		tick(delta);
+
+
+	};
+	void YGEEntity::tickChildren(long delta){
+
+		// recursive call on all children
+		std::list<YGEEntity*>* children = this->getChildren();
+		for(std::list<YGEEntity*>::iterator iter = children->begin();
+			iter != children->end();
+			iter++){
+				(*iter)->tickChildren(delta);
+				(*iter)->tick(delta);
+
+		}
+
+		
+		
 
 
 	};
@@ -98,6 +115,15 @@ namespace YGETimeSpace{
 
 	void YGEEntity::removeChild(YGETimeSpace::YGEEntity *entity){
 		children.remove(entity);
+		//@todo check if children was removed so it really was a child...
+		for(std::list<YGEEntityAsset*>::iterator iter = entity->getAssets()->begin();
+			iter != entity->getAssets()->end();
+			iter++){
+
+				(*iter)->disable();
+		
+
+		}
 
 	}
 
@@ -116,6 +142,8 @@ namespace YGETimeSpace{
 		if(asset->getAssetType() == Physics) {
 			physicsAssets.push_back((YGEPhysics::YGEPhysicsAsset*)asset);
 		}
+
+		
 
 	}
 

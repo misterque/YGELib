@@ -28,7 +28,7 @@ namespace YGECore {
 
 
 			if(gamestate != NULL) {
-				gamestate->update();
+				gamestate->update(delta);
 
 				updateSpaceList(gamestate->getSpacesToUpdate());
 
@@ -91,12 +91,17 @@ namespace YGECore {
 	}
 
 	void YGEEngineCoreSingleThreaded::renderSceneList(YGETimeSpace::YGESceneList *list){
+		int t;
+		timerGraphics->startTimer();
+
 		for(YGETimeSpace::YGESceneList::iterator iter = list->begin(); iter != list->end(); iter++){
 
 
 
-			//(*iter).second->setCameraMatrixRotation((*iter).first->getRootEntity());
-			//(*iter).first->getSkybox()->draw();
+			if((*iter).first->hasSkybox()){
+				(*iter).second->setCameraMatrixRotation((*iter).first->getRootEntity());
+				(*iter).first->getSkybox()->draw();
+			}
 			(*iter).second->setCameraMatrix((*iter).first->getRootEntity());
 			(*iter).first->getSunlight()->draw();
 
@@ -106,13 +111,39 @@ namespace YGECore {
 			glDisable(GL_BLEND);
 			(*iter).first->getRootEntity()->render();
 		}
+		t = timerGraphics->stopTimer() / 1000;
+		debugout("time for rendering:");
+		debugout((long long) t);
 	}
 	void YGEEngineCoreSingleThreaded::updateSpaceList(YGETimeSpace::YGESpaceList *list){
+		int t;
+		timerPhysics->startTimer();
 		for(YGETimeSpace::YGESpaceList::iterator iter = list->begin(); iter != list->end(); iter++){
 
 			(*iter)->timeStep(delta);
+		}
+		t = timerPhysics->stopTimer() / 1000;
+		debugout("time for physics:");
+		debugout((long long) t);
+
+		timerUpdate->startTimer();
+		for(YGETimeSpace::YGESpaceList::iterator iter = list->begin(); iter != list->end(); iter++){
+
 			(*iter)->getRootEntity()->update(delta);
 		}
+		t = timerUpdate->stopTimer() / 1000;
+		debugout("time for updateing:");
+		debugout((long long) t);
+
+		timerTick->startTimer();
+		for(YGETimeSpace::YGESpaceList::iterator iter = list->begin(); iter != list->end(); iter++){
+
+			(*iter)->getRootEntity()->tickChildren(delta);
+		}
+		
+		t = timerTick->stopTimer() / 1000;
+		debugout("time for ticking:");
+		debugout((long long) t);
 	}
 
 
@@ -177,6 +208,10 @@ namespace YGECore {
 		timeSinceGameStarted = new YGETimer();
 		timeSinceGameStarted->startTimer();
 
+		timerGraphics = new YGETimer();
+		timerPhysics = new YGETimer();
+		timerUpdate = new YGETimer();
+		timerTick = new YGETimer();
 
 
 		logger = YGELogger::getInstance();

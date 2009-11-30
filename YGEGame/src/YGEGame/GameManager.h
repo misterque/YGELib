@@ -54,8 +54,11 @@ public:
 
 	void popGameState();
 
-	void update();
+	void update(long delta);
 
+	YGECore::YGEEngineCore* getCore(){
+		return engineCore;
+	}
 };
 
 #endif

@@ -35,11 +35,13 @@ namespace YGEPhysics {
 			//dBodyAddForce(bodyId, 0.5, 0, 0);
 
 			// a hull, remove this
-			dGeomID geom = dCreateBox(parentSpace->getDSpaceId(), 1, 1, 1);
+			geomId = dCreateBox(parentSpace->getDSpaceId(), 1, 1, 1);
+			dGeomSetData(geomId, this);
+			
+			dGeomSetCategoryBits(geomId, YGEPhysics::ENTITIES );
+			dGeomSetCollideBits(geomId, YGEPhysics::ENTITIES | YGEPhysics::STATIC_OBJECTS );
+			dGeomSetBody(geomId, bodyId);
 
-			dGeomSetCategoryBits(geom, YGEPhysics::ENTITIES );
-			dGeomSetCollideBits(geom, YGEPhysics::ENTITIES | YGEPhysics::STATIC_OBJECTS );
-			dGeomSetBody(geom, bodyId);
 			//			dBodySetAuto
 			hasBody = true;
 		}
@@ -120,5 +122,20 @@ namespace YGEPhysics {
 		parent->setOrientation(YGEMath::Quaternion(rot[0], rot[1], rot[2], rot[3]));
 	}
 
+
+	void YGEBodyAsset::disable(){
+		if(hasBody) {
+			dGeomDisable(geomId);
+			dBodyDisable(bodyId);
+		}
+
+	}
+	void YGEBodyAsset::enable(){
+		if(hasBody) {
+			dGeomEnable(geomId);
+			dBodyDisable(bodyId);
+		}
+
+	}
 
 }

@@ -113,7 +113,7 @@ namespace YGEGraphics {
 		setFont("VeraMono12");
 		setText(t);
 
-		
+
 		color.r=255;
 		color.g=255;
 		color.b=255;
@@ -124,7 +124,7 @@ namespace YGEGraphics {
 		setFont(f);
 		setText(t);
 
-				color.r=255;
+		color.r=255;
 		color.g=255;
 		color.b=255;
 	}
@@ -133,21 +133,24 @@ namespace YGEGraphics {
 		text = t;
 		//@todo free texture if hasTexture
 		if(hasTexture){
-		} else {
-			SDL_Surface* surface = CreateText(
-					text,
-					font,
-					color
-					);
-			textureId = surfaceToTexture(surface);
-
-			w = surface->w;
-			h = surface->h;
-
-			SDL_FreeSurface(surface);
-			hasTexture = true;
-
+			hasTexture = false;
+			glDeleteTextures(1, &textureId);
 		}
+
+		SDL_Surface* surface = CreateText(
+			text,
+			font,
+			color
+			);
+		textureId = surfaceToTexture(surface);
+
+		w = surface->w;
+		h = surface->h;
+
+		SDL_FreeSurface(surface);
+		hasTexture = true;
+
+
 	}
 	void YGEText::setFont(const char* f){
 		font = getFont(f);
@@ -185,11 +188,11 @@ namespace YGEGraphics {
 		glEnable(GL_TEXTURE_2D);
 		glDisable(GL_LIGHTING);
 
-		
+		glDisable(GL_DEPTH_TEST);
 		glEnable(GL_BLEND);
 
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		
+
 		glColor3f(1.0f, 1.0f, 1.0f);
 		glBindTexture(GL_TEXTURE_2D, textureId);
 		glBegin(GL_QUADS);

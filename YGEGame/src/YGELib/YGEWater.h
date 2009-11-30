@@ -9,16 +9,23 @@
 
 #include "YGEGraphicsAsset.h"
 #include "YGERessourceManager.h"
+#include "YGEHeightmap.h"
+
 namespace YGEGraphics {
 
 
 class YGEWater : public YGEGraphicsAsset {
 private:
+	YGEVbo* mesh;
+	Mesh* map;
 	YGECore::Texture *texture;
+
+	bool allLessThan(YGEHeightmap* hmap, int x, int y, int w, int h, double waterheight);
+	bool buildMeshRecursive(YGEHeightmap* hmap, int x, int y, int w, int h, double waterheight);
 
 public:
 
-	YGEWater();
+	YGEWater(YGEHeightmap* hmap, double h);
 
 	virtual void draw(YGEGraphicsContext* context);
 };

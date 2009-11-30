@@ -21,7 +21,7 @@ public:
 		started = false;
 	}
 
-	virtual void update(){
+	virtual void update(long delta){
 		if (started == false) {
 			started = true;
 			timer.startTimer();

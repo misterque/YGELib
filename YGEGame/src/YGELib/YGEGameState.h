@@ -18,7 +18,7 @@ protected:
 	YGETimeSpace::YGESpaceList spaceList;
 
 public:
-	virtual void update() = 0;
+	virtual void update(long delta) = 0;
 	//virtual void draw(YGECore::YGEEngineCore* core) = 0;
 
 	virtual YGETimeSpace::YGESceneList* getScenesToRender() {

@@ -157,4 +157,8 @@ namespace YGEGraphics {
 
 		}
 	}
+	double YGEHeightmap::getZ(int x, int y){
+		return pHeightData[(x) + ((y+1) * w)];
+	}
+
 }

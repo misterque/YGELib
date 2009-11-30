@@ -84,7 +84,7 @@ void GameGyrocopter::tick(long delta){
 	0, tailH / 100.0f * 3.0f, 0,
 	0, 0, 4);*/
 
-	mass.addRelativeForce( 0, 0, -throttle * 0.5f);
+	mass.addRelativeForce( 0, 0, -throttle * 0.2f);
 
 
 
@@ -127,7 +127,7 @@ void GameGyrocopter::fireRocket(){
 		this->getParent()->addChild(rocket);
 		rocket->setPosition(this->getPosition());
 		//getOrientation().rotateVector(YGEMath::Vector3(3* fireFromRight,3,0));
-		rocket->translate(getOrientation().rotateVector(YGEMath::Vector3(3 * fireFromRight,3,0)));
+		rocket->translate(getOrientation().rotateVector(YGEMath::Vector3(2 * fireFromRight,1,0)));
 
 		rocket->setOrientation(getOrientation());
 		reload = 1000000;

@@ -21,6 +21,7 @@ private:
 public:
 	GameRocket();
 	virtual void tick(long delta);
+	virtual void processCollision(YGEPhysics::YGEPhysicsAsset* bodyPart, YGEPhysics::YGEPhysicsAsset* collider);
 
 
 };

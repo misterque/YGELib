@@ -246,6 +246,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\YGELib\YGESimpleSphere.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\YGELib\YGESkybox.cpp"
 					>
 				</File>
@@ -283,6 +287,10 @@
 				>
 				<File
 					RelativePath="..\src\YGELib\YGEBodyAsset.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\src\YGELib\YGESimpleHullAsset.cpp"
 					>
 				</File>
 			</Filter>
@@ -420,6 +428,10 @@
 					>
 				</File>
 				<File
+					RelativePath="..\src\YGELib\YGESimpleSphere.h"
+					>
+				</File>
+				<File
 					RelativePath="..\src\YGELib\YGESkybox.h"
 					>
 				</File>
@@ -497,6 +509,10 @@
 				</File>
 				<File
 					RelativePath="..\src\YGELib\YGEPhysicsAsset.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\YGELib\YGESimpleHullAsset.h"
 					>
 				</File>
 			</Filter>

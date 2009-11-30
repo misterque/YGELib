@@ -52,6 +52,11 @@ protected:
 	 */
 	YGETimer* timer;
 
+	YGETimer* timerGraphics;
+	YGETimer* timerPhysics;
+	YGETimer* timerUpdate;
+	YGETimer* timerTick;
+
 	YGETimer* timeSinceGameStarted;
 
 	YGEGame::YGEGameState* gamestate;

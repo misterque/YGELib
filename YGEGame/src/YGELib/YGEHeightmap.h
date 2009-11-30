@@ -37,6 +37,16 @@ public:
 	void create(char *filename);
 
 	void makeSolid();
+
+	int getW() {
+		return w;
+	}
+	int getH() {
+		return h;
+	}
+
+	double getZ(int x, int y);
+
 };
 
 }
