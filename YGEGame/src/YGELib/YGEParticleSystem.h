@@ -95,7 +95,7 @@ public:
 
 	virtual void draw(YGEGraphicsContext* context);
 
-	void update(long delta);
+	virtual void tick(long delta);
 
 };
 

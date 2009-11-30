@@ -9,7 +9,7 @@ namespace YGETimeSpace {
 				glMatrixMode( GL_PROJECTION );
 				glLoadIdentity();
 
-				gluPerspective(45.0f,640.0f/480.0f,0.1f,10000.0f);
+				gluPerspective(45.0f,640.0f/480.0f,0.1f,1000.0f);
 
 
 				break;
@@ -44,11 +44,6 @@ namespace YGETimeSpace {
 
 			YGEMath::Mat3x3 mat = rot.getConjugate().getRotationMatrix();
 
-			/*			GLfloat m[16] = {	(GLfloat)mat[0][0], (GLfloat)mat[0][1], (GLfloat)mat[0][2], 0.0f,
-			(GLfloat)mat[1][0], (GLfloat)mat[1][1], (GLfloat)mat[1][2], 0.0f,
-			(GLfloat)mat[2][0], (GLfloat)mat[2][1], (GLfloat)mat[2][2], 0.0f,
-			0,				  0,				    0,				    1.0f };
-			*/
 			GLfloat m[16] = { (GLfloat)mat[0][0], (GLfloat)mat[1][0], (GLfloat)mat[2][0], 0.0f,
 				(GLfloat)mat[0][1], (GLfloat)mat[1][1], (GLfloat)mat[2][1], 0.0f,
 				(GLfloat)mat[0][2], (GLfloat)mat[1][2], (GLfloat)mat[2][2], 0.0f,
@@ -77,11 +72,6 @@ namespace YGETimeSpace {
 
 			YGEMath::Mat3x3 mat = rot.getConjugate().getRotationMatrix();
 
-			/*			GLfloat m[16] = {	(GLfloat)mat[0][0], (GLfloat)mat[0][1], (GLfloat)mat[0][2], 0.0f,
-			(GLfloat)mat[1][0], (GLfloat)mat[1][1], (GLfloat)mat[1][2], 0.0f,
-			(GLfloat)mat[2][0], (GLfloat)mat[2][1], (GLfloat)mat[2][2], 0.0f,
-			0,				  0,				    0,				    1.0f };
-			*/
 			GLfloat m[16] = { (GLfloat)mat[0][0], (GLfloat)mat[1][0], (GLfloat)mat[2][0], 0.0f,
 				(GLfloat)mat[0][1], (GLfloat)mat[1][1], (GLfloat)mat[2][1], 0.0f,
 				(GLfloat)mat[0][2], (GLfloat)mat[1][2], (GLfloat)mat[2][2], 0.0f,

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="9,00"
+	Version="9.00"
 	Name="YGEGame"
 	ProjectGUID="{C1EB6209-DDA8-404D-9983-1E1CF1C53703}"
 	RootNamespace="YGEGame"
@@ -185,6 +185,10 @@
 				>
 				<File
 					RelativePath="..\src\YGEGame\GameStateIngame.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\src\YGEGame\GameStateSplashscreen.cpp"
 					>
 				</File>
 			</Filter>

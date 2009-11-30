@@ -193,7 +193,8 @@ public:
 	void update(long delta);
 	void tickChildren(long delta);
 
-	virtual void tick(long delta) { };
+	virtual void tick(long delta) { 
+	};
 
 	void translate3d(double x, double y, double z){
 		position.x += x;

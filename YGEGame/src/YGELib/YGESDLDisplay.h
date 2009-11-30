@@ -112,6 +112,10 @@ namespace YGECore {
 
 		virtual void update(){
 		}
+
+		virtual void setTitle(const char* title){
+			SDL_WM_SetCaption(title,title);
+		}
 	};
 
 }

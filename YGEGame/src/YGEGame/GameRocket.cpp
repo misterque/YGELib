@@ -1,4 +1,5 @@
 #include "GameRocket.h"
+#include "YGEParticleSystem.h"
 
 GameRocket::GameRocket(){
 	// add the body
@@ -6,7 +7,7 @@ GameRocket::GameRocket(){
 	// add the mesh
 	addAsset(new YGEGraphics::YGESimpleBox());
 
-
+	addAsset(&explosion);
 
 	//@todo add the particle system
 
@@ -15,6 +16,9 @@ GameRocket::GameRocket(){
 }
 
 void GameRocket::tick(long delta){
+	// @todo UGLYUGLYUGLY
+
+	explosion.tick(delta);
 	lifetime += delta / 1000000.0f;
 	//unaffect the rocket by gravity
 	body.addAbsoluteForce(0, 9.81f, 0);
@@ -32,6 +36,9 @@ void GameRocket::tick(long delta){
 }
 
 void GameRocket::processCollision(YGEPhysics::YGEPhysicsAsset* bodyPart, YGEPhysics::YGEPhysicsAsset* collider){
-	getParent()->removeChild(this);
+	//getParent()->removeChild(this);
+	body.disable();
 
+	//explosion.
+	
 };

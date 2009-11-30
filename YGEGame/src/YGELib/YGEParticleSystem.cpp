@@ -98,7 +98,7 @@ namespace YGEGraphics {
 		texture = YGECore::YGERessourceManager::getInstance()->getTexture("textures/particle.tex");
 	}
 
-	void YGEParticleSystem::update(long delta){
+	void YGEParticleSystem::tick(long delta){
 
 		YGEParticle* p = particleList.getFirstAliveParticle();
 		YGEParticle* p2;
@@ -142,7 +142,7 @@ namespace YGEGraphics {
 
 		glEnable(GL_TEXTURE_2D);
 		glEnable(GL_BLEND);
-		glDisable(GL_DEPTH_TEST);
+		//glDisable(GL_DEPTH_TEST);
 		glBlendFunc(GL_SRC_COLOR, GL_ONE_MINUS_SRC_COLOR);
 
 		glBindTexture(GL_TEXTURE_2D, texture->textureID);

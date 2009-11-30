@@ -10,18 +10,6 @@ namespace YGEGraphics {
 
 		uptodate = false;
 
-		//if (GLEE_ARB_vertex_buffer_object)    //is multitexture support available?
-		{
-			YGECore::YGELogger::getInstance()->logToConsole("EXTENSION AVAIBLE");
-
-		}
-		//else
-		{
-			YGECore::YGELogger::getInstance()->logToConsole("EXTENSION NOT AVAIBLE");
-
-		}
-
-
 	}
 
 	void YGEVbo::draw(YGEGraphicsContext *context){

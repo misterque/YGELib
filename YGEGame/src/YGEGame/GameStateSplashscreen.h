@@ -17,10 +17,7 @@ private:
 	YGECore::YGETimer timer;
 	bool started;
 public:
-	GameStateSplashscreen(){
-		started = false;
-	}
-
+	GameStateSplashscreen();
 	virtual void update(long delta){
 		if (started == false) {
 			started = true;

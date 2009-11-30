@@ -23,6 +23,8 @@ namespace YGECore {
 		void bind(){
 			glBindTexture(GL_TEXTURE_2D, textureID);
 		}
+
+		void setRepeat(bool repeat);
 	};
 
 class YGERessourceManager {

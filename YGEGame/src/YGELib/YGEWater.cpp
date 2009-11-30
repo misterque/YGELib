@@ -23,7 +23,25 @@ namespace YGEGraphics {
 			
 			Vertex v1(x - hmap->getH() / 2 ,waterheight,y  - hmap->getW() / 2 );
 			Vertex v2(x+w  - hmap->getH() / 2 ,waterheight,y  - hmap->getW() / 2 );
-			Vertex v3(x+w  - hmap->getH() / 2 ,waterheight,y+h - hmap->getW() / 2 );
+			Vertex v3(x  - hmap->getH() / 2 ,waterheight,y+h - hmap->getW() / 2 );
+			
+			Vertex v4(x+w  - hmap->getH() / 2 ,waterheight,y - hmap->getW() / 2 );
+			Vertex v5(x+w  - hmap->getH() / 2 ,waterheight,y+h - hmap->getW() / 2 );
+			Vertex v6(x - hmap->getH() / 2 ,waterheight,y+h - hmap->getW() / 2 );
+
+			v1.u = x;
+			v1.v = y;
+			v2.u = x+w;
+			v2.v = y;
+			v3.u = x;
+			v3.v = y+h;
+			v4.u = x+w;
+			v4.v = y;
+			v5.u = x+w;
+			v5.v = y+h;
+			v6.u = x;
+			v6.v = y+h;
+			
 			
 			v1.nx = 0.0f;
 			v1.ny = 1.0f;
@@ -34,6 +52,16 @@ namespace YGEGraphics {
 			v3.nx = 0.0f;
 			v3.ny = 1.0f;
 			v3.nz = 0.0f;
+			v4.nx = 0.0f;
+			v4.ny = 1.0f;
+			v4.nz = 0.0f;
+			v5.nx = 0.0f;
+			v5.ny = 1.0f;
+			v5.nz = 0.0f;
+			v6.nx = 0.0f;
+			v6.ny = 1.0f;
+			v6.nz = 0.0f;
+
 			
 			map->addVertex(v1);
 			v1 = map->vertexList.back();
@@ -41,9 +69,18 @@ namespace YGEGraphics {
 			v2 = map->vertexList.back();
 			map->addVertex(v3);
 			v3 = map->vertexList.back();
+			map->addVertex(v4);
+			v4 = map->vertexList.back();
+			map->addVertex(v5);
+			v5 = map->vertexList.back();
+			map->addVertex(v6);
+			v6 = map->vertexList.back();
 
-			Triangle t(v1.index, v2.index, v3.index);
-			map->addTriangle(t);
+			Triangle t1(v1.index, v2.index, v3.index);
+			Triangle t2(v4.index, v5.index, v6.index);
+			map->addTriangle(t1);
+			map->addTriangle(t2);
+
 		} else {
 			buildMeshRecursive(hmap, x, y, w/2, h/2, waterheight);
 			buildMeshRecursive(hmap, x + w/2, y, w/2, h/2, waterheight);

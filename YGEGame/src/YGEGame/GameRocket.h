@@ -10,12 +10,14 @@
 #include "YGEStaticMesh.h"
 #include "YGEEntity.h"
 #include "YGEBodyAsset.h"
+#include "YGEParticleSystem.h"
 
 class GameRocket : public YGETimeSpace::YGEEntity {
 private:
 	YGEGraphics::YGEStaticMesh meshRocket;
 	YGEPhysics::YGEBodyAsset body;
 
+	YGEGraphics::YGEParticleSystem explosion;
 	double lifetime;
 
 public:

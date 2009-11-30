@@ -17,9 +17,7 @@ public:
 
 	virtual void update() = 0;
 
-	virtual void setTitle(char* title){
-
-	};
+	virtual void setTitle(const char* title) = 0;
 
 
 };

@@ -156,7 +156,13 @@ namespace YGECore {
 			debugout("FPS:");
 			debugout((long long)frames);
 			accumDelta = 0;
+			std::stringstream s;
+			s<<"FPS: "<<frames;
+
+			display->setTitle(s.str().c_str());
 			frames = 0;
+
+
 
 
 		}
@@ -168,7 +174,7 @@ namespace YGECore {
 
 	void YGEEngineCoreSingleThreaded::limitFPS(){
 		if(delta < 10000) {
-			//debugout("less then 10 ms, wait a little");
+			debugout("less then 10 ms, wait a little");
 
 			SDL_Delay(Uint32((10000-delta) / 1000));
 		}
