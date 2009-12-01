@@ -23,7 +23,7 @@ void GameManager::initAndStartGame(){
 		engineCore->init();
 
 	ingame = new GameStateIngame();
-	((GameStateIngame*)ingame)->init();
+	
 	splashscreen = new GameStateSplashscreen();
 	
 	this->pushGameState(ingame);

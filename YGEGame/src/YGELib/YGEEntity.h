@@ -22,10 +22,10 @@ class YGESpace;
 /**
  * Entity Class
  * represents an entity. Definiton from wikipedia:
- * "An entity is something that has a distinct, separate existence,
+ * 'An entity is something that has a distinct, separate existence,
  *  though it need not be a material existence. ... An entity could
  *  be viewed as a set containing subsets. In philosophy, such sets
- *  are said to be abstract objects".
+ *  are said to be abstract objects'.
  * 
  * YGEEntities are abstract objects composed of other YGEEntities,
  * augmented by YGEEntityAssets which represents a perceptible

@@ -214,7 +214,7 @@ namespace YGEGraphics {
 				ss <<"images/"<< textures[s];
 
 				model.textureID =
-					YGECore::YGERessourceManager::getInstance()->getTexture(ss.str())->textureID;
+					YGECore::YGERessourceManager::getInstance()->getTexture(ss.str().c_str())->textureID;
 
 			}
 

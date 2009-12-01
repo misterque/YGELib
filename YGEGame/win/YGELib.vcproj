@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="9.00"
+	Version="9,00"
 	Name="YGELib"
 	ProjectGUID="{B34C1000-21FF-4AF4-B36D-7C9E6175D53A}"
 	RootNamespace="YGELib"
@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(SolutionDir)/../lib/win32/SDL_ttf-2.0.9/include&quot;;&quot;$(SolutionDir)/../src/GLee&quot;;&quot;$(SolutionDir)/../lib/win32/SDL-1.2.13/include&quot;;&quot;$(SolutionDir)/../lib/ode-0.11.1/include&quot;"
+				AdditionalIncludeDirectories="&quot;$(SolutionDir)/../lib/win32/openal/include&quot;;&quot;$(SolutionDir)/../lib/win32/SDL_ttf-2.0.9/include&quot;;&quot;$(SolutionDir)/../src/GLee&quot;;&quot;$(SolutionDir)/../lib/win32/SDL-1.2.13/include&quot;;&quot;$(SolutionDir)/../lib/ode-0.11.1/include&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_YGE_DEBUG;dDOUBLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -107,7 +107,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="&quot;$(SolutionDir)/../lib/win32/SDL_ttf-2.0.9/include&quot;;&quot;$(SolutionDir)/../src/GLee&quot;;&quot;$(SolutionDir)/../lib/win32/SDL-1.2.13/include&quot;;&quot;$(SolutionDir)/../lib/ode-0.11.1/include&quot;"
+				AdditionalIncludeDirectories="&quot;$(SolutionDir)/../lib/win32/openal/include&quot;;&quot;$(SolutionDir)/../lib/win32/SDL_ttf-2.0.9/include&quot;;&quot;$(SolutionDir)/../src/GLee&quot;;&quot;$(SolutionDir)/../lib/win32/SDL-1.2.13/include&quot;;&quot;$(SolutionDir)/../lib/ode-0.11.1/include&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;dDOUBLE"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -263,6 +263,10 @@
 				</File>
 				<File
 					RelativePath="..\src\YGELib\YGEText.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\src\YGELib\YGETexture.cpp"
 					>
 				</File>
 				<File
@@ -448,7 +452,7 @@
 					>
 				</File>
 				<File
-					RelativePath="..\src\YGELib\YGETexture.cpp"
+					RelativePath="..\src\YGELib\YGETexture.h"
 					>
 				</File>
 				<File
@@ -525,6 +529,10 @@
 				>
 				<File
 					RelativePath="..\src\YGELib\YGEAudioCore.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\YGELib\YGESound.h"
 					>
 				</File>
 			</Filter>

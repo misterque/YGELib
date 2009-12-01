@@ -59,6 +59,8 @@ void GameStateIngame::deinit(){
 }
 
 void GameStateIngame::update(long delta){
+	if(gameStartTime == -1) init();
+
 	timeSinceLastTimeUpdate += delta;
 	if(timeSinceLastTimeUpdate > 1000000) {
 		timeSinceLastTimeUpdate = 0;
