@@ -3,6 +3,7 @@
 
 #include "GameStateIngame.h"
 #include "GameStateSplashscreen.h"
+#include "GameStateMainmenu.h"
 
 #include <tchar.h>
 
@@ -15,7 +16,19 @@ GameManager::GameManager(){
 void GameManager::startEngine(){
 
 
-	engineCore->run();
+		engineCore->run();
+}
+
+void GameManager::startGame(){
+	this->pushGameState(ingame);
+	((GameStateIngame*)ingame)->init();
+	engineCore->getInputManager()->addKeyDownListener((GameStateIngame*)ingame);
+	engineCore->getInputManager()->addKeyUpListener((GameStateIngame*)ingame);
+	engineCore->getInputManager()->removeKeyDownListener((GameStateMainmenu*)mainmenu);
+}
+
+void GameManager::stopGame(){
+	this->popGameState();
 }
 
 void GameManager::initAndStartGame(){
@@ -23,13 +36,17 @@ void GameManager::initAndStartGame(){
 		engineCore->init();
 
 	ingame = new GameStateIngame();
+
+	mainmenu = new GameStateMainmenu();
 	
 	splashscreen = new GameStateSplashscreen();
 	
-	this->pushGameState(ingame);
-	engineCore->getInputManager()->addKeyDownListener((GameStateIngame*)ingame);
-	engineCore->getInputManager()->addKeyUpListener((GameStateIngame*)ingame);
+	
+//	engineCore->getInputManager()->addKeyDownListener((GameStateIngame*)ingame);
+//	engineCore->getInputManager()->addKeyUpListener((GameStateIngame*)ingame);
 
+	this->pushGameState(mainmenu);
+	engineCore->getInputManager()->addKeyDownListener((GameStateMainmenu*)mainmenu);
 
 	this->pushGameState(splashscreen);
 	
@@ -58,6 +75,7 @@ void GameManager::update(long delta){
 	engineCore->shutdown();
 
 }
+
 
 
 

@@ -3,7 +3,8 @@
 #include "YGESpace.h"
 #include "YGEObserver.h"
 #include "YGEText.h"
-
+#include "YGESoundSource.h"
+#include "YGERessourceManager.h"
 GameStateSplashscreen::GameStateSplashscreen(){
 	started = false;
 
@@ -19,6 +20,8 @@ GameStateSplashscreen::GameStateSplashscreen(){
 
 	sceneList.push_back(s);
 
+	spaceList.push_back(space);
+
 	YGETimeSpace::YGEEntity* textPos = new YGETimeSpace::YGEEntity();
 	space->getRootEntity()->addChild(textPos);
 
@@ -27,4 +30,9 @@ GameStateSplashscreen::GameStateSplashscreen(){
 	textPos->addAsset(text);
 	textPos->setPosition(YGEMath::Vector3(200,75,0));
 
+	//YGEAudio::YGEAudioCore::getInstance()->
+	YGEAudio::YGESoundSource* sound = new YGEAudio::YGESoundSource();
+	sound->setSound("sounds/start.wav");
+	space->getRootEntity()->addAsset(sound);
+	sound->playOnce();
 }

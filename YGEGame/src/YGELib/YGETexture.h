@@ -19,7 +19,7 @@ namespace YGECore{
 }
 
 namespace YGECore {
-	class Texture {
+	class YGETexture {
 	private:
 		friend class YGECore::YGERessourceManager;
 

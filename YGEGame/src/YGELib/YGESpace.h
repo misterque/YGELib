@@ -40,6 +40,8 @@ namespace YGETimeSpace {
 
 		bool timeIsRunning;
 
+		bool soundEnabled;
+
 	public:
 
 		YGESpace() {
@@ -52,6 +54,8 @@ namespace YGETimeSpace {
 			rootEntity.setSpace(this);
 
 			timeIsRunning = false;
+
+			soundEnabled = false;
 		}
 		/**
 		 * Creates a physics environment for this YGESpace.
@@ -102,6 +106,8 @@ namespace YGETimeSpace {
 
 		void setSunLightPosition(YGEMath::Vector3 pos);
 
+		bool getSoundEnabled();
+		void setSoundEnabled(bool enable);
 	};
 
 	typedef std::list<YGESpace*> YGESpaceList;

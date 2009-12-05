@@ -24,7 +24,7 @@ namespace YGECore {
 
 	}
 
-	YGESDLInputManager* YGEEngineCore::getInputManager(){
+	YGEInputManager* YGEEngineCore::getInputManager(){
 		return input;
 	}
 
@@ -35,6 +35,24 @@ namespace YGECore {
 	void YGEEngineCore::toggleConsole(){
 		consoleEnabled = !consoleEnabled;
 		SDL_EnableUNICODE(consoleEnabled);
+	}
+
+	void YGEEngineCore::processCommand(const char* command){
+		if(std::string(command) == "quit") {
+			shutdown();
+		} else if (std::string(command) == "volumeUp") {
+			int volume = YGEAudio::YGEAudioCore::getInstance()->getSoundVolume();
+			volume += 10;
+			YGEAudio::YGEAudioCore::getInstance()->setSoundVolume(volume);
+		} else if (std::string(command) == "volumeDown") {
+			int volume = YGEAudio::YGEAudioCore::getInstance()->getSoundVolume();
+			volume -= 10;
+			YGEAudio::YGEAudioCore::getInstance()->setSoundVolume(volume);
+		} else {
+
+			gamestate->processCommand(command);
+		}
+
 	}
 
 }

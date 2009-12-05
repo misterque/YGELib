@@ -43,14 +43,14 @@ public:
 		console = c;
 	}
 
-	void log(char* message){
+	void log(const char* message){
 #ifdef _DEBUG
 		std::cout<<message<<std::endl;
 
 #endif
 	}
 
-	void logToConsole(char* message){
+	void logToConsole(const char* message){
 		console->println(message);
 	}
 

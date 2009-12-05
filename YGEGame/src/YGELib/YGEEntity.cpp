@@ -16,15 +16,11 @@ namespace YGETimeSpace{
 		YGEMath::Vector3 scale = this->getScale();
 
 		glPushMatrix();
-		glTranslatef((GLfloat)pos.x, (GLfloat)pos.y, (GLfloat)pos.z);
+		
+		glTranslatef(absPosition.x, absPosition.y, absPosition.z);
 
-		YGEMath::Mat3x3 mat = orientation.getRotationMatrix();
+		YGEMath::Mat3x3 mat = absOrientation.getRotationMatrix();
 
-/*		GLfloat m[16] = { (GLfloat)mat[0][0], (GLfloat)mat[0][1], (GLfloat)mat[0][2], 0.0f,
-			(GLfloat)mat[1][0], (GLfloat)mat[1][1], (GLfloat)mat[1][2], 0.0f,
-			(GLfloat)mat[2][0], (GLfloat)mat[2][1], (GLfloat)mat[2][2], 0.0f,
-			0,         0,         0,         1.0f };
-*/
 		GLfloat m[16] = { (GLfloat)mat[0][0], (GLfloat)mat[1][0], (GLfloat)mat[2][0], 0.0f,
 			(GLfloat)mat[0][1], (GLfloat)mat[1][1], (GLfloat)mat[2][1], 0.0f,
 			(GLfloat)mat[0][2], (GLfloat)mat[1][2], (GLfloat)mat[2][2], 0.0f,
@@ -46,7 +42,7 @@ namespace YGETimeSpace{
 				(*iter)->draw(NULL);
 
 		}
-
+		glPopMatrix();
 		// recursive call on all children
 		std::list<YGEEntity*>* children = this->getChildren();
 		for(std::list<YGEEntity*>::iterator iter = children->begin();
@@ -55,10 +51,12 @@ namespace YGETimeSpace{
 				(*iter)->render();
 
 		}
-		glPopMatrix();
+
 	};
 	
 	void YGEEntity::update(long delta){
+
+		protectChildren = true;
 
 		// get every physical asset and ...
 		std::list<YGEPhysics::YGEPhysicsAsset*>* assets = this->getPhysicsAssets();
@@ -72,6 +70,17 @@ namespace YGETimeSpace{
 
 		}
 
+	// get every sound asset and ...
+		std::list<YGEAudio::YGESoundSource*>* assets2 = this->getSoundAssets();
+		for(std::list<YGEAudio::YGESoundSource*>::iterator iter = assets2->begin();
+			iter != assets2->end();
+			iter++){
+
+
+				(*iter)->update(delta);
+
+		}
+
 		// recursive call on all children
 		std::list<YGEEntity*>* children = this->getChildren();
 		for(std::list<YGEEntity*>::iterator iter = children->begin();
@@ -81,12 +90,74 @@ namespace YGETimeSpace{
 
 		}
 
-		
-		tick(delta);
+		protectChildren = false;
+
+		// remove all children which have been proteced	
+		for(std::list<YGEEntity*>::iterator iter = childrenToRemove.begin();
+			iter != childrenToRemove.end();
+			iter++){
+				this->children.remove((*iter));
+
+		}
 
 
 	};
+
+	void YGEEntity::updateAbsolutePosition(YGEMath::Vector3 posStack, YGEMath::Quaternion rotStack){
+		
+		oldPosition = newPosition;
+		oldOrientation = newOrientation;
+
+		newPosition = rotStack.rotateVector(position) + posStack;
+		newOrientation = rotStack * orientation;
+
+		std::list<YGEEntity*>* children = this->getChildren();
+		for(std::list<YGEEntity*>::iterator iter = children->begin();
+			iter != children->end();
+			iter++){
+				(*iter)->updateAbsolutePosition(newPosition, newOrientation);
+
+		}
+
+	}
+
+	void YGEEntity::interpolate(long long timeX){
+		
+		double delta = 0.0001;
+		
+		if(timeOfNewPosition - timeOfOldPosition > 0)  {
+			delta = ((timeX - timeOfOldPosition) / (timeOfNewPosition - timeOfOldPosition));
+		}
+
+		absPosition = oldPosition + (newPosition - oldPosition) * delta;
+		absOrientation = oldOrientation + (newOrientation - oldOrientation) * delta;
+		//absPosition = newPosition;
+		//absOrientation = newOrientation;
+		std::list<YGEEntity*>* children = this->getChildren();
+		for(std::list<YGEEntity*>::iterator iter = children->begin();
+			iter != children->end();
+			iter++){
+				(*iter)->interpolate(timeX);
+
+		}
+	}
+
+	void YGEEntity::setTimeOfNewPosition(long long time) {
+		timeOfOldPosition = timeOfNewPosition;
+		timeOfNewPosition = time;
+
+		std::list<YGEEntity*>* children = this->getChildren();
+		for(std::list<YGEEntity*>::iterator iter = children->begin();
+			iter != children->end();
+			iter++){
+				(*iter)->setTimeOfNewPosition(time);
+
+		}
+	}
+
 	void YGEEntity::tickChildren(long delta){
+
+		protectChildren = true;
 
 		// recursive call on all children
 		std::list<YGEEntity*>* children = this->getChildren();
@@ -98,9 +169,15 @@ namespace YGETimeSpace{
 
 		}
 
-		
-		
+		protectChildren = false;
 
+				// remove all children which have been proteced	
+		for(std::list<YGEEntity*>::iterator iter = childrenToRemove.begin();
+			iter != childrenToRemove.end();
+			iter++){
+				this->children.remove((*iter));
+
+		}
 
 	};
 
@@ -114,7 +191,13 @@ namespace YGETimeSpace{
 	}
 
 	void YGEEntity::removeChild(YGETimeSpace::YGEEntity *entity){
-		children.remove(entity);
+		if(protectChildren) {
+			childrenToRemove.push_back(entity);
+		} else {
+			children.remove(entity);
+		}
+
+
 		//@todo check if children was removed so it really was a child...
 		for(std::list<YGEEntityAsset*>::iterator iter = entity->getAssets()->begin();
 			iter != entity->getAssets()->end();
@@ -142,7 +225,9 @@ namespace YGETimeSpace{
 		if(asset->getAssetType() == Physics) {
 			physicsAssets.push_back((YGEPhysics::YGEPhysicsAsset*)asset);
 		}
-
+		if(asset->getAssetType() == Sound) {
+			soundAssets.push_back((YGEAudio::YGESoundSource*)asset);
+		}
 		
 
 	}
@@ -158,6 +243,8 @@ namespace YGETimeSpace{
 		parent = NULL;
 
 		space = NULL;
+
+		protectChildren = false;
 	}
 
 	void YGEEntity::rotateDGR(const YGEMath::Vector3 axis, double degree){

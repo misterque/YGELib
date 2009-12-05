@@ -74,7 +74,7 @@ GLuint surfaceToTexture2(SDL_Surface *surface, bool mipmap){
 
 namespace YGECore{
 
-	void Texture::setRepeat(bool repeat){
+	void YGETexture ::setRepeat(bool repeat){
 
 		glBindTexture(GL_TEXTURE_2D, textureID);
 		if(repeat) {
@@ -89,7 +89,7 @@ namespace YGECore{
 	}
 
 
-	void Texture::load(const char* filename){
+	void YGETexture ::load(const char* filename){
 
 		hasMipMaps = false;
 
@@ -117,7 +117,7 @@ namespace YGECore{
 
 	}
 
-	void Texture::parseTexFile(const char* filename){
+	void YGETexture ::parseTexFile(const char* filename){
 
 		std::ifstream is;
 		is.open(filename);
@@ -143,7 +143,7 @@ namespace YGECore{
 	}
 
 
-	SDL_Surface* Texture::getSurface(const char *filename){
+	SDL_Surface* YGETexture ::getSurface(const char *filename){
 
 		SDL_Surface* surface;
 		surface = SDL_LoadBMP(filename);

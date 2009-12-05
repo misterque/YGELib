@@ -18,7 +18,7 @@ class YGEWater : public YGEGraphicsAsset {
 private:
 	YGEVbo* mesh;
 	Mesh* map;
-	YGECore::Texture *texture;
+	YGECore::YGETexture *texture;
 
 	bool allLessThan(YGEHeightmap* hmap, int x, int y, int w, int h, double waterheight);
 	bool buildMeshRecursive(YGEHeightmap* hmap, int x, int y, int w, int h, double waterheight);

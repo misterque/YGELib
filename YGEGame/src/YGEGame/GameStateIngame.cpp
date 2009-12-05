@@ -66,7 +66,7 @@ void GameStateIngame::update(long delta){
 		timeSinceLastTimeUpdate = 0;
 		long long timePassed = GameManager::getInstance()->getCore()->getTimeSinceGameStarted() - gameStartTime;
 
-		hud->setTime(timePassed / 1000000);
+		hud->setTime((int)(timePassed / 1000000));
 	}
 }
 
@@ -138,4 +138,11 @@ void GameStateIngame::keyUp(SDLKey key){
 
 	}
 
+}
+
+
+void  GameStateIngame::processCommand(const char* command) {
+	if(command == "stopgame") {
+		GameManager::getInstance()->stopGame();
+	}
 }

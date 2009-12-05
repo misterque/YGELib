@@ -8,6 +8,16 @@
 #ifndef _YGE_AUDIO_CORE_H_
 #define _YGE_AUDIO_CORE_H_
 
+#include <al.h>
+#include <alc.h>
+#include <AL/alut.h>
+
+
+
+#include "YGEVector.h"
+#include "YGESpace.h"
+
+#include <map>
 
 namespace YGEAudio {
 
@@ -19,6 +29,12 @@ namespace YGEAudio {
 		 */
 		static YGEAudioCore* singleton;
 
+		ALCdevice* device;
+
+		std::map<YGETimeSpace::YGESpace*, ALCcontext*> contexts;
+
+		
+		int volume;
 	public:
 		/**
 		 * @return returns a pointer to the singleton
@@ -29,6 +45,12 @@ namespace YGEAudio {
 			}
 			return singleton;
 		}
+
+
+		/**
+		 * initialise the sound subsystem
+		 */
+		void init();
 
 		/**
 		 * play a song from a file
@@ -54,6 +76,11 @@ namespace YGEAudio {
 		 * gets the music volume in percent
 		 */
 		int getMusicVolume();
+
+
+		void setListenerPosition(const YGEMath::Vector3 &v, YGETimeSpace::YGESpace* space);
+		
+		void enableListenerForSpace(YGETimeSpace::YGESpace* space);
 	};
 
 }

@@ -30,6 +30,7 @@ private:
 	YGECore::YGEEngineCore* engineCore;
 
 	YGEGameState* ingame;
+	YGEGameState* mainmenu;
 	YGEGameState* splashscreen;
 	
 
@@ -56,9 +57,15 @@ public:
 
 	void update(long delta);
 
+	void startGame();
+	void stopGame();
+
 	YGECore::YGEEngineCore* getCore(){
 		return engineCore;
 	}
+
+	virtual void processCommand(const char* command) {
+	};
 };
 
 #endif

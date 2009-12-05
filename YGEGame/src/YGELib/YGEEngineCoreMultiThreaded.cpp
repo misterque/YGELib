@@ -137,7 +137,7 @@ namespace YGECore {
 		console = new YGEConsole();
 		YGELogger::getInstance()->setConsole(console);
 		display = new YGESDLDisplay();
-		input = new YGESDLInputManager();
+		input = new YGEInputManager();
 
 		timer = new YGETimer();
 		timeSinceGameStarted = new YGETimer();
@@ -166,7 +166,7 @@ namespace YGECore {
 
 
 
-		input = new YGESDLInputManager();
+		input = new YGEInputManager();
 
 		timer = new YGETimer();
 		timeSinceGameStarted = new YGETimer();

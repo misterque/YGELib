@@ -5,9 +5,15 @@ GameRocket::GameRocket(){
 	// add the body
 	addAsset(&body);
 	// add the mesh
-	addAsset(new YGEGraphics::YGESimpleBox());
+	meshRocket = new YGEGraphics::YGESimpleBox()
+	addAsset();
 
 	addAsset(&explosion);
+
+	engineSound = new YGEAudio::YGESoundSource();
+	engineSound->setSound("sounds/rocket.wav");
+	addAsset(engineSound);
+	engineSound->playOnce();
 
 	//@todo add the particle system
 
@@ -28,17 +34,30 @@ void GameRocket::tick(long delta){
 
 		dBodySetLinearDamping(body.getBodyId(), 0.01);
 
-		if(lifetime > 20) {
+		if(lifetime > 6) {
 			body.disable();
+			getParent()->removeChild(this);
 			//delete this;
 			return;
 		}
 }
 
 void GameRocket::processCollision(YGEPhysics::YGEPhysicsAsset* bodyPart, YGEPhysics::YGEPhysicsAsset* collider){
-	//getParent()->removeChild(this);
-	body.disable();
-
-	//explosion.
+	
+	explode();
 	
 };
+
+void GameRocket::explode(){
+	body.disable();
+
+	engineSound->stop();
+	YGEAudio::YGESoundSource* sound = new YGEAudio::YGESoundSource();
+	sound->setSound("sounds/explosion.wav");
+	addAsset(sound);
+	sound->playOnce();
+
+
+	//explosion.
+
+}

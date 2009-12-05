@@ -70,6 +70,7 @@ public:
 	void keyDown(SDLKey key);
 	void keyUp(SDLKey key);
 
+	virtual void processCommand(const char* command);
 
 };
 

@@ -5,31 +5,38 @@
 #include "YGEKeyUpListener.h"
 #include "YGEMouseMoveListener.h"
 
-#include <vector>
+#include <list>
 
 class YGEInputManager {
 protected:
-	std::vector<YGEKeyDownListener*> keydownlisteners;
-	std::vector<YGEKeyUpListener*> keyuplisteners;
-	std::vector<YGEMouseMoveListener*> mousemovelisteners;
+	std::list<YGEKeyDownListener*> keydownlisteners;
+	std::list<YGEKeyUpListener*> keyuplisteners;
+	std::list<YGEMouseMoveListener*> mousemovelisteners;
+
+	std::list<YGEKeyDownListener*> copyKeydownlisteners;
+	std::list<YGEKeyUpListener*> copyKeyuplisteners;
+	std::list<YGEMouseMoveListener*> copyMousemovelisteners;
 
 public:
 	/*+ virtual void update() = 0; +*/
 
 	/** @todo remove SDLInputManager **/
-	virtual void init() = 0;
+	virtual void init();
 
-	void addKeyDownListener(YGEKeyDownListener* listener){
-		keydownlisteners.push_back(listener);
-	}
+	void notifyEvent(SDL_Event *event);
 
-	void addKeyUpListener(YGEKeyUpListener* listener){
-		keyuplisteners.push_back(listener);
-	}
+	void addKeyDownListener(YGEKeyDownListener* listener);
 
-	void addMouseMoveListener(YGEMouseMoveListener* listener){
-		mousemovelisteners.push_back(listener);
-	}
+	void addKeyUpListener(YGEKeyUpListener* listener);
+
+	void addMouseMoveListener(YGEMouseMoveListener* listener);
+
+	void removeKeyDownListener(YGEKeyDownListener* listener);
+
+	void removeKeyUpListener(YGEKeyUpListener* listener);
+
+	void removeMouseMoveListener(YGEMouseMoveListener* listener);
+
 };
 
 

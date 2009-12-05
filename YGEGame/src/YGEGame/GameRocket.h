@@ -20,11 +20,14 @@ private:
 	YGEGraphics::YGEParticleSystem explosion;
 	double lifetime;
 
+	YGEAudio::YGESoundSource* engineSound;
+
 public:
 	GameRocket();
 	virtual void tick(long delta);
 	virtual void processCollision(YGEPhysics::YGEPhysicsAsset* bodyPart, YGEPhysics::YGEPhysicsAsset* collider);
 
+	void explode();
 
 };
 

@@ -37,6 +37,10 @@ namespace YGEGraphics {
 		bool hasTexture;
 		SDL_Color color;
 
+		float red;
+		float green;
+		float blue;
+
 		int w;
 		int h;
 
@@ -50,6 +54,7 @@ namespace YGEGraphics {
 		void setText(std::string t);
 		void setFont(const char* f);
 
+		void setColor(float r, float g, float b);
 
 		static void registerFont(const char* fontname, const char* filename, int s);
 		static void init();

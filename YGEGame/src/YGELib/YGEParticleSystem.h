@@ -88,7 +88,7 @@ public:
 class YGEParticleSystem : public YGEGraphicsAsset {
 private:
 	YGEParticleList particleList;
-	YGECore::Texture* texture;
+	YGECore::YGETexture* texture;
 public:
 
 	YGEParticleSystem();

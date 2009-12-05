@@ -41,7 +41,7 @@ private:
 		/**
 		 * map containing textures associated with their filenames
 		 */
-		std::map<std::string, Texture*> textures;
+		std::map<std::string, YGETexture*> textures;
 
 		/**
 		 * map containing sounds associated with their filenames
@@ -77,7 +77,7 @@ public:
 	 *
 	 * @throws YGEExceptionMethodNotImplementedYet
 	 * @throws YGEExceptionFileNotFound
-	 * @deprecated use the method provided by Texture
+	 * @deprecated use the method provided by YGETexture 
 	 */
 	SDL_Surface* getSurface(const char *filename);
 
@@ -107,10 +107,10 @@ public:
 	 *
 	 * @throws YGEExceptionMethodNotImplementedYet
 	 * @throws YGEExceptionFileNotFound
-	 * @return pointer to Texture
+	 * @return pointer to YGETexture 
 	 *	
 	 */
-	Texture* getTexture(const char* filename);
+	YGETexture* getTexture(const char* filename);
 
 
 	

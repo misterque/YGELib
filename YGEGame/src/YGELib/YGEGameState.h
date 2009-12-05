@@ -30,6 +30,9 @@ public:
 	};
 
 
+	virtual void processCommand(const char* command) {
+	};
+
 };
 }
 

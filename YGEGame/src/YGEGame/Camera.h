@@ -24,7 +24,7 @@ public:
 		pitcher->addChild(distancer);
 		distancer->addChild(cam);
 		
-		pitch = -0.1f;
+		pitch = -0.0f;
 		yaw = 0;
 		distance = 20;
 		distancer->translate3d(0,0, distance);

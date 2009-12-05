@@ -10,10 +10,47 @@
 #include "YGEGameState.h"
 #include "GameManager.h"
 
-class GameStateMainmenu  : public YGEGamestate{
+#include "YGESpace.h"
+#include "YGEKeyDownListener.h"
+#include "YGEKeyUpListener.h"
+#include "YGEText.h"
+
+#include "GameManager.h"
+
+#include "GameGyrocopter.h"
+
+#include "Camera.h"
+
+#include "Menu.h"
+
+class GameStateMainmenu  : public YGEGame::YGEGameState, public YGEKeyDownListener{
 private:
+	GameGyrocopter* gyro;
+	YGETimeSpace::YGEObserver* observer;
+	YGETimeSpace::YGEObserver* observerText;
+
+	YGETimeSpace::YGESpace* backgroundspace;
+	YGETimeSpace::YGESpace* textspace;
+
+	Menu* mainMenu;
+	Menu* optionsMenu;
+	Menu* activeMenu;
+
+	YGETimeSpace::YGEEntity* optionsmenuEntity;
+
+
+
+
 
 public:
+	GameStateMainmenu();
+	
+	void update(long delta);
+
+
+	void keyDown(SDLKey key);
+
+	virtual void processCommand(const char* command) ;
 
 };
 

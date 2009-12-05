@@ -38,6 +38,10 @@ namespace YGETimeSpace{
 		if(delta <= 0) return;
 
 		double seconds = delta / 1000000.0f;
+		if(seconds > 0.3) {
+			seconds = 0.3;
+		}
+
 		dSpaceCollide(spaceId, this, &nearCallback);
 		dWorldStep(worldId, seconds );
 		dJointGroupEmpty(contactGroup);
@@ -113,6 +117,15 @@ namespace YGETimeSpace{
 
 	YGEGraphics::YGESunlight* YGESpace::getSunlight(){
 		return sunlight;
+	}
+
+
+	bool YGESpace::getSoundEnabled() {
+		return soundEnabled;
+	}
+	
+	void YGESpace::setSoundEnabled(bool enable){
+		soundEnabled = enable;
 	}
 
 }

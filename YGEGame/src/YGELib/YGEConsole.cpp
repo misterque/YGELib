@@ -212,9 +212,7 @@ namespace YGECore {
 	}
 
 	void YGEConsole::evaluateCommand(const char* command){
-		if(std::string(command) == "quit") {
-			core->shutdown();
-		}
+			core->processCommand(command);
 
 	}
 }

@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(SolutionDir)/../lib/win32/openal/include&quot;;&quot;$(SolutionDir)/../lib/win32/SDL_ttf-2.0.9/include&quot;;&quot;$(SolutionDir)/../src/GLee&quot;;&quot;$(SolutionDir)/../lib/win32/SDL-1.2.13/include&quot;;&quot;$(SolutionDir)/../lib/ode-0.11.1/include&quot;"
+				AdditionalIncludeDirectories="&quot;$(SolutionDir)/../lib/win32/freealut-1.1.0/include&quot;;&quot;$(SolutionDir)/../lib/win32/openal/include&quot;;&quot;$(SolutionDir)/../lib/win32/SDL_ttf-2.0.9/include&quot;;&quot;$(SolutionDir)/../src/GLee&quot;;&quot;$(SolutionDir)/../lib/win32/SDL-1.2.13/include&quot;;&quot;$(SolutionDir)/../lib/ode-0.11.1/include&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;_YGE_DEBUG;dDOUBLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -61,8 +61,8 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				AdditionalDependencies="SDL.lib opengl32.lib glu32.lib SDL_ttf.lib ode_doubled.lib"
-				AdditionalLibraryDirectories="&quot;$(SolutionDir)/../lib/win32/SDL-1.2.13/lib&quot;;&quot;$(SolutionDir)/../lib/win32/SDL_ttf-2.0.9/lib&quot;;&quot;$(SolutionDir)/../lib/win32/GLee&quot;;&quot;$(SolutionDir)/../lib/ode-0.11.1/lib/DebugDoubleDLL/&quot;"
+				AdditionalDependencies="SDL.lib opengl32.lib glu32.lib SDL_ttf.lib ode_doubled.lib alut.lib OpenAL32.lib"
+				AdditionalLibraryDirectories="&quot;$(SolutionDir)/../lib/win32/openal/libs/Win32&quot;;&quot;$(SolutionDir)/../lib/win32/freealut-1.1.0/lib&quot;;&quot;$(SolutionDir)/../lib/win32/SDL-1.2.13/lib&quot;;&quot;$(SolutionDir)/../lib/win32/SDL_ttf-2.0.9/lib&quot;;&quot;$(SolutionDir)/../lib/win32/GLee&quot;;&quot;$(SolutionDir)/../lib/ode-0.11.1/lib/DebugDoubleDLL/&quot;"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -107,7 +107,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="&quot;$(SolutionDir)/../lib/win32/openal/include&quot;;&quot;$(SolutionDir)/../lib/win32/SDL_ttf-2.0.9/include&quot;;&quot;$(SolutionDir)/../src/GLee&quot;;&quot;$(SolutionDir)/../lib/win32/SDL-1.2.13/include&quot;;&quot;$(SolutionDir)/../lib/ode-0.11.1/include&quot;"
+				AdditionalIncludeDirectories="&quot;$(SolutionDir)/../lib/win32/freealut-1.1.0/include&quot;;&quot;$(SolutionDir)/../lib/win32/openal/include&quot;;&quot;$(SolutionDir)/../lib/win32/SDL_ttf-2.0.9/include&quot;;&quot;$(SolutionDir)/../src/GLee&quot;;&quot;$(SolutionDir)/../lib/win32/SDL-1.2.13/include&quot;;&quot;$(SolutionDir)/../lib/ode-0.11.1/include&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;dDOUBLE"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -154,6 +154,10 @@
 			Filter="cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx"
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
+			<File
+				RelativePath="..\src\YGELib\YGEInputManager.cpp"
+				>
+			</File>
 			<Filter
 				Name="math"
 				>
@@ -305,6 +309,14 @@
 					RelativePath="..\src\YGELib\YGEAudioCore.cpp"
 					>
 				</File>
+				<File
+					RelativePath="..\src\YGELib\YGESound.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\src\YGELib\YGESoundSource.cpp"
+					>
+				</File>
 			</Filter>
 		</Filter>
 		<Filter
@@ -395,10 +407,6 @@
 					RelativePath="..\src\YGELib\YGEMouseMoveListener.h"
 					>
 				</File>
-				<File
-					RelativePath="..\src\YGELib\YGESDLInputManager.h"
-					>
-				</File>
 			</Filter>
 			<Filter
 				Name="game"
@@ -453,10 +461,6 @@
 				</File>
 				<File
 					RelativePath="..\src\YGELib\YGETexture.h"
-					>
-				</File>
-				<File
-					RelativePath="..\src\YGELib\YGETextureFunctions.h"
 					>
 				</File>
 				<File
@@ -533,6 +537,10 @@
 				</File>
 				<File
 					RelativePath="..\src\YGELib\YGESound.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\YGELib\YGESoundSource.h"
 					>
 				</File>
 			</Filter>

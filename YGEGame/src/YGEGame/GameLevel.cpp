@@ -8,7 +8,7 @@ void GameLevel::loadFromFile(const char* filename){
 	// create a space
 	space = new YGETimeSpace::YGESpace();
 	space->initTime();
-	
+	space->setSoundEnabled(true);
 
 	// create the heightmap
 	heightmap = new YGEGraphics::YGEHeightmap();
@@ -17,8 +17,8 @@ void GameLevel::loadFromFile(const char* filename){
 
 	heightmap->makeSolid();
 
-	water = new YGEGraphics::YGEWater(heightmap, 10);
-	space->getRootEntity()->addAsset(water);
+	//water = new YGEGraphics::YGEWater(heightmap, 10);
+	//space->getRootEntity()->addAsset(water);
 
 	skybox = new YGEGraphics::YGESkybox();
 	skybox->loadTextures();
@@ -26,7 +26,7 @@ void GameLevel::loadFromFile(const char* filename){
 
 	GameBall* ball = new GameBall();
 	space->getRootEntity()->addChild(ball);
-	ball->setPosition(YGEMath::Vector3(172-128, 25, 154-128-60));
+	ball->setPosition(YGEMath::Vector3(172-128, 27, 154-128-60));
 
 }
 

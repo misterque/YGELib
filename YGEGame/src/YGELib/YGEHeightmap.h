@@ -16,7 +16,7 @@ class YGEHeightmap : public YGEGraphicsAsset { // , YGEPhysicsAsset
 private:
 	YGEVbo* mesh;
 
-	YGECore::Texture* texture;
+	YGECore::YGETexture* texture;
 
 	int w;
 	int h;

@@ -5,6 +5,7 @@
 #ifndef _YGE_ENTITY_H_
 #define _YGE_ENTITY_H_
 
+#include "YGESoundSource.h"
 #include "YGEEntityAsset.h"
 #include "YGEGraphicsAsset.h"
 #include "YGEPhysicsAsset.h"
@@ -44,6 +45,14 @@ private:
 	 */
 	std::list<YGEEntity*> children;
 
+
+	/**
+	 * the children of the entity
+	 */
+	std::list<YGEEntity*> childrenToRemove;
+
+	bool protectChildren;
+
 	/**
 	 * the assets of this entity
 	 */
@@ -60,6 +69,11 @@ private:
 	 */
 	std::list<YGEPhysics::YGEPhysicsAsset*> physicsAssets;
 
+	/**
+	 * sound assets of this entity
+	 */
+	std::list<YGEAudio::YGESoundSource*> soundAssets;
+
 
 	/**
 	 * parent of this entity. every entity can have just one
@@ -71,8 +85,21 @@ private:
 	YGESpace* space;
 
 	YGEMath::Vector3 position;
+	YGEMath::Vector3 absPosition;
+	YGEMath::Vector3 oldPosition;
+	YGEMath::Vector3 newPosition;
+
+	long long timeOfOldPosition;
+	long long timeOfNewPosition;
+
+
 	YGEMath::Vector3 scale;
 	YGEMath::Quaternion orientation;
+	YGEMath::Quaternion absOrientation;
+	YGEMath::Quaternion oldOrientation;
+	YGEMath::Quaternion newOrientation;
+
+
 
 public:
 
@@ -130,6 +157,10 @@ public:
 		return &physicsAssets;
 	}
 
+	std::list<YGEAudio::YGESoundSource*>* getSoundAssets(){
+		return &soundAssets;
+	}
+
 	/**
 	 * @return the YGESpace the entity lies in, NULL if the entity is not
 	 * associated to a YGESpace
@@ -149,6 +180,10 @@ public:
 	 */
 	YGEMath::Vector3 getPosition(){
 		return position;
+	}
+
+	YGEMath::Vector3 getAbsPosition(){
+		return absPosition;
 	}
 
 	/**
@@ -191,10 +226,17 @@ public:
 	virtual void render();
 
 	void update(long delta);
+
+	void updateAbsolutePosition(YGEMath::Vector3 posStack, YGEMath::Quaternion rotStack);
+
+	void interpolate(long long timeX);
+
 	void tickChildren(long delta);
 
 	virtual void tick(long delta) { 
 	};
+
+	void setTimeOfNewPosition(long long time);
 
 	void translate3d(double x, double y, double z){
 		position.x += x;

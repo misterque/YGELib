@@ -2,7 +2,7 @@
 #include "YGESDLDisplay.h"
 #include <SDL_thread.h> 
 #include <SDL_ttf.h>
-
+#include "YGEAudioCore.h"
 #include "YGEText.h"
 
 
@@ -96,16 +96,24 @@ namespace YGECore {
 
 		for(YGETimeSpace::YGESceneList::iterator iter = list->begin(); iter != list->end(); iter++){
 
+			(*iter).first->getRootEntity()->updateAbsolutePosition(YGEMath::Vector3(), YGEMath::Quaternion());
 
+			// before drawing a new scene, interpolate the positions
+			(*iter).first->getRootEntity()->interpolate(getTimeSinceGameStarted());
 
+			// draw a skybox
 			if((*iter).first->hasSkybox()){
 				(*iter).second->setCameraMatrixRotation((*iter).first->getRootEntity());
 				(*iter).first->getSkybox()->draw();
 			}
+
+			//draw the scene
 			(*iter).second->setCameraMatrix((*iter).first->getRootEntity());
 			(*iter).first->getSunlight()->draw();
 
-			
+			if((*iter).first->getSoundEnabled()) {
+				YGEAudio::YGEAudioCore::getInstance()->setListenerPosition((*iter).second->getAbsPosition(), (*iter).first);
+			}
 			// @todo this doesnt belong here
 			glDisable(GL_TEXTURE_2D);
 			glDisable(GL_BLEND);
@@ -126,7 +134,11 @@ namespace YGECore {
 		debugout("time for physics:");
 		debugout((long long) t);
 
+		for(YGETimeSpace::YGESpaceList::iterator iter = list->begin(); iter != list->end(); iter++){
+			(*iter)->getRootEntity()->setTimeOfNewPosition(getTimeSinceGameStarted());
+		}
 		timerUpdate->startTimer();
+
 		for(YGETimeSpace::YGESpaceList::iterator iter = list->begin(); iter != list->end(); iter++){
 
 			(*iter)->getRootEntity()->update(delta);
@@ -208,7 +220,9 @@ namespace YGECore {
 		console = new YGEConsole();
 		YGELogger::getInstance()->setConsole(console);
 		display = new YGESDLDisplay();
-		input = new YGESDLInputManager();
+		input = new YGEInputManager();
+
+		audio = YGEAudio::YGEAudioCore::getInstance();
 
 		timer = new YGETimer();
 		timeSinceGameStarted = new YGETimer();
@@ -223,6 +237,7 @@ namespace YGECore {
 		logger = YGELogger::getInstance();
 		display->init();
 		console->init(this);
+		audio->init();
 
 	}
 

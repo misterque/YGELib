@@ -2,7 +2,10 @@
 #define _YGE_ENGINE_CORE_H_
 
 #include "YGESDLDisplay.h"
-#include "YGESDLInputManager.h"
+#include "YGEInputManager.h"
+
+#include "YGEAudioCore.h"
+
 #include "YGETimer.h"
 
 #include "YGEConsole.h"
@@ -32,10 +35,16 @@ protected:
 	YGESDLDisplay* display;
 
 	/**
+	 *
+	 *
+	 */
+
+	YGEAudio::YGEAudioCore* audio;
+	/**
 	 * pointer to a YGEInputManager. Responsible for input
 	 * as from keyboard, joystick, gamepad or mouse.
 	 */
-	YGESDLInputManager* input;
+	YGEInputManager* input;
 
 	/**
 	 * pointer to a YGELogger
@@ -97,11 +106,13 @@ public:
 
 	void setGameState(YGEGame::YGEGameState* state);
 
-	YGESDLInputManager* getInputManager();
+	YGEInputManager* getInputManager();
 
 	long long getTimeSinceGameStarted();
 
 	void toggleConsole();
+
+	void processCommand(const char* command);
 };
 
 }

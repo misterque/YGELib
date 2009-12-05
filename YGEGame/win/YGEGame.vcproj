@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(SolutionDir)/../lib/win32/openal/include&quot;;&quot;$(SolutionDir)/../lib/win32/SDL_ttf-2.0.9/include&quot;;&quot;$(SolutionDir)/../lib/win32/SDL-1.2.13/include&quot;;&quot;$(SolutionDir)/../src/YGELib&quot;;&quot;$(SolutionDir)/../lib/win32/GLee&quot;;&quot;$(SolutionDir)/../lib/ode-0.11.1/include&quot;"
+				AdditionalIncludeDirectories="&quot;$(SolutionDir)/../lib/win32/freealut-1.1.0/include&quot;;&quot;$(SolutionDir)/../lib/win32/openal/include&quot;;&quot;$(SolutionDir)/../lib/win32/SDL_ttf-2.0.9/include&quot;;&quot;$(SolutionDir)/../lib/win32/SDL-1.2.13/include&quot;;&quot;$(SolutionDir)/../src/YGELib&quot;;&quot;$(SolutionDir)/../lib/win32/GLee&quot;;&quot;$(SolutionDir)/../lib/ode-0.11.1/include&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;_YGE_DEBUG;dDOUBLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -115,7 +115,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="&quot;$(SolutionDir)/../lib/win32/openal/include&quot;;&quot;$(SolutionDir)/../lib/win32/SDL_ttf-2.0.9/include&quot;;&quot;$(SolutionDir)/../lib/win32/SDL-1.2.13/include&quot;;&quot;$(SolutionDir)/../src/YGELib&quot;;&quot;$(SolutionDir)/../lib/win32/GLee&quot;;&quot;$(SolutionDir)/../lib/ode-0.11.1/include&quot;"
+				AdditionalIncludeDirectories="&quot;$(SolutionDir)/../lib/win32/freealut-1.1.0/include&quot;;&quot;$(SolutionDir)/../lib/win32/openal/include&quot;;&quot;$(SolutionDir)/../lib/win32/SDL_ttf-2.0.9/include&quot;;&quot;$(SolutionDir)/../lib/win32/SDL-1.2.13/include&quot;;&quot;$(SolutionDir)/../src/YGELib&quot;;&quot;$(SolutionDir)/../lib/win32/GLee&quot;;&quot;$(SolutionDir)/../lib/ode-0.11.1/include&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;dDOUBLE"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -180,11 +180,19 @@
 				RelativePath="..\src\YGEGame\GameManager.cpp"
 				>
 			</File>
+			<File
+				RelativePath="..\src\YGEGame\Menu.cpp"
+				>
+			</File>
 			<Filter
 				Name="gamestates"
 				>
 				<File
 					RelativePath="..\src\YGEGame\GameStateIngame.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\src\YGEGame\GameStateMainmenu.cpp"
 					>
 				</File>
 				<File
@@ -224,6 +232,10 @@
 			>
 			<File
 				RelativePath="..\src\YGEGame\GameManager.h"
+				>
+			</File>
+			<File
+				RelativePath="..\src\YGEGame\Menu.h"
 				>
 			</File>
 			<Filter

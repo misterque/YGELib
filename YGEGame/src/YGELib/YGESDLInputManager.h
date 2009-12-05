@@ -5,7 +5,7 @@
 #include "YGEInputManager.h"
 #include "YGELogger.h"
 
-class YGESDLInputManager : public YGEInputManager {
+class YGEInputManager : public YGEInputManager {
 public: 
 	virtual void init(){
 

@@ -13,12 +13,12 @@ namespace YGEGraphics {
 
 class YGESkybox {
 private:
-	YGECore::Texture* up;
-	YGECore::Texture* down;
-	YGECore::Texture* front;
-	YGECore::Texture* back;
-	YGECore::Texture* left;
-	YGECore::Texture* right;
+	YGECore::YGETexture* up;
+	YGECore::YGETexture* down;
+	YGECore::YGETexture* front;
+	YGECore::YGETexture* back;
+	YGECore::YGETexture* left;
+	YGECore::YGETexture* right;
 public:
 
 	void loadTextures();

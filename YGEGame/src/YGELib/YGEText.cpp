@@ -118,6 +118,10 @@ namespace YGEGraphics {
 		color.g=255;
 		color.b=255;
 
+		red = 1.0f;
+		green = 1.0f;
+		blue = 1.0f;
+
 	}
 
 	YGEText::YGEText(std::string t, const char* f):hasTexture(false){
@@ -127,6 +131,10 @@ namespace YGEGraphics {
 		color.r=255;
 		color.g=255;
 		color.b=255;
+
+		red = 1.0f;
+		green = 1.0f;
+		blue = 1.0f;
 	}
 
 	void YGEText::setText(std::string t){
@@ -154,6 +162,12 @@ namespace YGEGraphics {
 	}
 	void YGEText::setFont(const char* f){
 		font = getFont(f);
+	}
+
+	void YGEText::setColor(float r, float g, float b){
+		red = r;
+		green = g;
+		blue = b;
 	}
 
 	void YGEText::registerFont(const char* fontname, const char* filename, int s){
@@ -193,7 +207,7 @@ namespace YGEGraphics {
 
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-		glColor3f(1.0f, 1.0f, 1.0f);
+		glColor3f(red, green, blue);
 		glBindTexture(GL_TEXTURE_2D, textureId);
 		glBegin(GL_QUADS);
 		glTexCoord2f(0.0f, 0.0f);

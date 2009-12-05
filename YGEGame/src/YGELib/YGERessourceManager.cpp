@@ -38,10 +38,10 @@ namespace YGECore {
 	}
 	//void unloadTexture(std::string name);
 
-	Texture* YGERessourceManager::getTexture(const char* filename){
+	YGETexture* YGERessourceManager::getTexture(const char* filename){
 
 		if(textures.find(filename) == textures.end()) {
-			Texture* texture = new Texture();
+			YGETexture* texture = new YGETexture ();
 			texture->load(absoluteFilename(filename).c_str());
 			textures[filename] = texture;
 		}
@@ -49,6 +49,19 @@ namespace YGECore {
 		return (textures.find(filename)->second);
 		
 	}
+
+	YGEAudio::YGESound* YGERessourceManager::getSound(const char* filename){
+
+		if(sounds.find(filename) == sounds.end()) {
+			YGEAudio::YGESound* sound = new YGEAudio::YGESound ();
+			sound->load(absoluteFilename(filename).c_str());
+			sounds[filename] = sound;
+		}
+
+		return (sounds.find(filename)->second);
+		
+	}
+
 
 	YGERessourceManager* YGERessourceManager::singleton = NULL;
 
