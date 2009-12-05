@@ -101,23 +101,10 @@ namespace YGECore {
 			// before drawing a new scene, interpolate the positions
 			(*iter).first->getRootEntity()->interpolate(getTimeSinceGameStarted());
 
-			// draw a skybox
-			if((*iter).first->hasSkybox()){
-				(*iter).second->setCameraMatrixRotation((*iter).first->getRootEntity());
-				(*iter).first->getSkybox()->draw();
-			}
 
-			//draw the scene
-			(*iter).second->setCameraMatrix((*iter).first->getRootEntity());
-			(*iter).first->getSunlight()->draw();
+			YGEAudio::YGEAudioCore::getInstance()->renderSpace( (*iter).first, (*iter).second );
+			display->renderSpace( (*iter).first, (*iter).second  );
 
-			if((*iter).first->getSoundEnabled()) {
-				YGEAudio::YGEAudioCore::getInstance()->setListenerPosition((*iter).second->getAbsPosition(), (*iter).first);
-			}
-			// @todo this doesnt belong here
-			glDisable(GL_TEXTURE_2D);
-			glDisable(GL_BLEND);
-			(*iter).first->getRootEntity()->render();
 		}
 		t = timerGraphics->stopTimer() / 1000;
 		debugout("time for rendering:");

@@ -1,9 +1,20 @@
 #ifndef _YGE_DISPLAY_H_
 #define _YGE_DISPLAY_H_
 
+
+
+namespace YGETimeSpace {
+	class YGESpace;
+	class YGEEntity;
+	class YGEObserver;
+}
+
 namespace YGECore {
 
-class YGEDisplay {
+class YGEGraphicsCore {
+private:
+	void renderEntity(YGETimeSpace::YGEEntity* entity);
+
 public:
 	int windowClosed;
 
@@ -18,6 +29,9 @@ public:
 	virtual void update() = 0;
 
 	virtual void setTitle(const char* title) = 0;
+
+
+	void renderSpace(YGETimeSpace::YGESpace* space, YGETimeSpace::YGEObserver* observer);
 
 
 };

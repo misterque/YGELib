@@ -22,6 +22,7 @@
 namespace YGEAudio {
 
 	class YGEAudioCore {
+		void renderEntity(YGETimeSpace::YGEEntity* entity);
 
 	private:
 		/**
@@ -81,6 +82,10 @@ namespace YGEAudio {
 		void setListenerPosition(const YGEMath::Vector3 &v, YGETimeSpace::YGESpace* space);
 		
 		void enableListenerForSpace(YGETimeSpace::YGESpace* space);
+
+
+	void renderSpace(YGETimeSpace::YGESpace* space, YGETimeSpace::YGEObserver* observer);
+
 	};
 
 }

@@ -5,13 +5,15 @@
 #ifndef _YGE_ENTITY_H_
 #define _YGE_ENTITY_H_
 
-#include "YGESoundSource.h"
+#include "YGESoundAsset.h"
 #include "YGEEntityAsset.h"
 #include "YGEGraphicsAsset.h"
 #include "YGEPhysicsAsset.h"
 #include "YGEVector.h"
 #include "YGEMatrix.h"
 #include "YGEQuaternion.h"
+
+#include "YGEGraphicsCore.h"
 
 #include <list>
 
@@ -39,7 +41,9 @@ class YGESpace;
 
 
 class YGEEntity {
-private:
+private:	
+	friend class YGEGraphicsCore;
+
 	/**
 	 * the children of the entity
 	 */
@@ -72,7 +76,7 @@ private:
 	/**
 	 * sound assets of this entity
 	 */
-	std::list<YGEAudio::YGESoundSource*> soundAssets;
+	std::list<YGEAudio::YGESoundAsset*> soundAssets;
 
 
 	/**
@@ -85,9 +89,14 @@ private:
 	YGESpace* space;
 
 	YGEMath::Vector3 position;
+
 	YGEMath::Vector3 absPosition;
 	YGEMath::Vector3 oldPosition;
 	YGEMath::Vector3 newPosition;
+
+	friend class YGECore::YGEGraphicsCore;
+	friend class YGEAudio::YGEAudioCore;
+	YGEMath::Vector3 interpolatedPosition;
 
 	long long timeOfOldPosition;
 	long long timeOfNewPosition;
@@ -98,6 +107,9 @@ private:
 	YGEMath::Quaternion absOrientation;
 	YGEMath::Quaternion oldOrientation;
 	YGEMath::Quaternion newOrientation;
+
+		friend class YGEGraphicsCore;
+	YGEMath::Quaternion interpolatedOrientation;
 
 
 
@@ -157,7 +169,7 @@ public:
 		return &physicsAssets;
 	}
 
-	std::list<YGEAudio::YGESoundSource*>* getSoundAssets(){
+	std::list<YGEAudio::YGESoundAsset*>* getSoundAssets(){
 		return &soundAssets;
 	}
 
@@ -222,8 +234,6 @@ public:
 	void setOrientation(const YGEMath::Quaternion &q){
 		orientation = q;
 	}
-
-	virtual void render();
 
 	void update(long delta);
 

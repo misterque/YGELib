@@ -20,9 +20,22 @@ GameGyrocopter::GameGyrocopter(){
 	// add the back rotor
 	addChild(&posRotorBack);
 	posRotorBack.addAsset(&meshRotorBack);
-	//posRotorBack.translate3d(0,1,-1);
-	//posRotorBack.rotateDGR(YGEMath::Vector3(1,0,0), 90);
+	posRotorBack.translate3d(0,3,1.5);
 	meshRotorBack.loadFromOBJ("models/gyro_rotor_back.obj");
+
+	// add the h tail
+	addChild(&posTailH);
+	posTailH.addAsset(&meshTailH);
+	posTailH.translate3d(0,1,2);
+	meshTailH.loadFromOBJ("models/gyro_tail_H.obj");
+
+	// add the v tail
+	addChild(&posTailV);
+	posTailV.addAsset(&meshTailV);
+	posTailV.translate3d(0,3,2);
+	meshTailV.loadFromOBJ("models/gyro_tail_V.obj");
+
+	backRotorAngularVelocity = 0.0f;
 
 
 
@@ -35,17 +48,81 @@ GameGyrocopter::GameGyrocopter(){
 	tailV = 0;
 	tailX = 0;
 
+	tailHRot = 0;
+	tailVRot = 0;
+
 	up = 0.0f;
 
 	reload = -1;
 	fireFromRight = 1;
+
+	idleSound.setSound("sounds/prop_idle.wav");
+	lowSound.setSound("sounds/prop_low.wav");
+	midSound.setSound("sounds/prop_mid.wav");
+	highSound.setSound("sounds/prop_high.wav");
+
+	addAsset(&idleSound);
+	addAsset(&lowSound);
+	addAsset(&midSound);
+	addAsset(&highSound);
+
+	soundstate = -1;
 
 
 }
 
 void GameGyrocopter::tick(long delta){
 
+	switch(soundstate){
+		case -1:
+			soundstate = 0;
+			idleSound.playLooped();
+		break;
+		// idle
+		case 0:
+			if(backRotorAngularVelocity > 5.0f) {
+				soundstate = 1;
+				idleSound.stop();
+				lowSound.playLooped();
+			}
+			break;
+		// low
+		case 1:
+			if(backRotorAngularVelocity > 50.0f) {
+				soundstate = 2;
+				lowSound.stop();
+				midSound.playLooped();
+			} else if(backRotorAngularVelocity < 5.0f) {
+				soundstate = 0;
+				lowSound.stop();
+				idleSound.playLooped();
+			}
 
+			break;
+		// mid
+		case 2:
+			if(backRotorAngularVelocity > 80.0f) {
+				soundstate = 3;
+				midSound.stop();
+				highSound.playLooped();
+			} else if(backRotorAngularVelocity <= 50.0f) {
+				soundstate = 1;
+				midSound.stop();
+				lowSound.playLooped();
+			}
+
+			break;
+		// high
+		case 3:
+			if(backRotorAngularVelocity < 80.0f) {
+				soundstate = 2;
+				highSound.stop();
+				midSound.playLooped();
+			}
+
+			break;
+
+	}
 
 	double seconds = delta / 1000000.0f;
 
@@ -61,59 +138,40 @@ void GameGyrocopter::tick(long delta){
 
 	up += abs(mass.getRelativeVelocity().z / 3.0f * seconds);
 	up -= 2.0f * seconds;
-	debugout(mass.getRelativeVelocity().z);
-	//debugout(mass.getRelativeVelocity().z);
 
 	if(up < 0.0f) {
 		up = 0.0f;
 	};
+
 	if(up > 10.0f) {
 		up = 10.0f;
 	}
 
+	double damp = 20.0f;
+	backRotorAngularVelocity += (throttle - backRotorAngularVelocity) * seconds;
+	tailHRot += (tailH - tailHRot) * seconds * 3.0f;
+	tailVRot += (tailV - tailVRot) * seconds * 3.0f;
+
+
 	mass.addAbsoluteForce(0, up, 0);
-	//	dBodyAddRelForceAtRelPos(bodyId,
-	//		0, up, 0,
-	//		0, 4, 0);
-	/*
-	dBodyAddRelForceAtRelPos(bodyId,
-	tailV / 100.0f * 3.0f, 0, 0,
-	0, 0, 4);
 
-	dBodyAddForceAtRelPos(bodyId,
-	0, tailH / 100.0f * 3.0f, 0,
-	0, 0, 4);*/
+	mass.addRelativeForce( 0, 0, -backRotorAngularVelocity * 0.2f);
 
-	mass.addRelativeForce( 0, 0, -throttle * 0.2f);
-
-
-
-	//z.rotateBy(q);
-
-
-
-	//const double* pos = dBodyGetPosition(bodyId);
-
-	//	d[0] -= pos[0];
-	//	d[1] -= pos[1];
-	//	d[2] -= pos[2];
-
-	//dBodyAddForce(bodyId, d[0] * throttle, d[1] * throttle, d[2] * throttle);
-
-	//mass.addRelativeForce(0,0,-throttle * 1.0f);
-	//	mass.addRelativeForce(0,tailH / 200.0f, 0);
-	/*debugout(d[0]);
-	debugout(d[1]);
-	debugout(d[2]);
-	debugout(d[3]);
-	debugout("---");
-	*/
 	mass.addRelativeTorque(0, 0, -tailV / 400.0f);
 	mass.addRelativeTorque(-tailH / 400.0f, 0, 0);
 	mass.addRelativeTorque(0, -tailX / 400.0f, 0);
-	//dBod
 
 	posRotorTop.rotateDGR(YGEMath::Vector3(0,1,0), up * seconds * 50.0f);
+	posRotorBack.rotateDGR(YGEMath::Vector3(0,0,1), seconds * backRotorAngularVelocity * 5.0f);
+
+	posTailH.setOrientation(YGEMath::Quaternion());
+
+	posTailH.rotateDGR(YGEMath::Vector3(1,0,0), tailHRot / 100.0f * 30.0f);
+
+	posTailV.setOrientation(YGEMath::Quaternion());
+
+	posTailV.rotateDGR(YGEMath::Vector3(0,1,0), tailVRot / 100.0f * 30.0f);
+
 
 	if(reload > 0) {
 		reload -= delta;

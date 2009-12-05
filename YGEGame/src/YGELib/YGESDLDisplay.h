@@ -4,7 +4,7 @@
 #include <SDL.h> // main SDL header
 #include <SDL_opengl.h> 
 #include "YGELogger.h"
-#include "YGEDisplay.h"
+#include "YGEGraphicsCore.h"
 
 
 #define SCREEN_WIDTH 640
@@ -20,7 +20,7 @@
 namespace YGECore {
 
 
-	class YGESDLDisplay : public YGEDisplay {
+	class YGESDLDisplay : public YGEGraphicsCore {
 
 		int screenw;
 		int screenh;

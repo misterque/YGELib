@@ -133,6 +133,14 @@ namespace YGEGraphics {
 	void YGEHeightmap::draw(YGEGraphicsContext *context){
 		mesh->draw(context);
 
+		glBegin(GL_QUADS);
+		glNormal3d(0.0f, 1.0f, 0.0f);
+		glTexCoord2f(0.0f, 0.0f); glVertex3f(-10000, 0, -10000);
+		glTexCoord2f(0.0f, 500.0f); glVertex3f(-10000, 0, 10000);
+		glTexCoord2f(500.0f, 500.0f); glVertex3f(10000, 0, 10000);
+		glTexCoord2f(500.0f, 0.0f); glVertex3f(10000, 0, -10000);
+		glEnd();
+
 	}
 
 	void YGEHeightmap::makeSolid(){
@@ -142,6 +150,10 @@ namespace YGEGraphics {
 
 
 			//@todo check if space has time not enabled
+
+
+
+
 			heightfieldId = dGeomHeightfieldDataCreate ();
 			dGeomHeightfieldDataBuildDouble (heightfieldId,
 				pHeightData,
@@ -151,6 +163,10 @@ namespace YGEGraphics {
 				1, 0, 5, 0);
 
 			dGeomID geom = dCreateHeightfield( parentSpace->getDSpaceId(), heightfieldId, false);
+			dGeomSetCategoryBits(geom,YGEPhysics::STATIC_OBJECTS );
+			dGeomSetCollideBits(geom, YGEPhysics::ENTITIES );
+
+			geom = dCreatePlane(parentSpace->getDSpaceId(),0,1,0,0);
 			dGeomSetCategoryBits(geom,YGEPhysics::STATIC_OBJECTS );
 			dGeomSetCollideBits(geom, YGEPhysics::ENTITIES );
 

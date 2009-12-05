@@ -1,15 +1,15 @@
 #include "YGEEntity.h"
-#include "YGESoundSource.h"
+#include "YGESoundAsset.h"
 #include "YGERessourceManager.h"
 #include "YGEVector.h"
 
 namespace YGEAudio {
 
-	YGESoundSource::YGESoundSource() : wantsToBePlayed(2) {
+	YGESoundAsset::YGESoundAsset() : wantsToBePlayed(2) {
 
 	}
 
-	void YGESoundSource::update(long delta){
+	void YGESoundAsset::render(){
 
 		
 		YGEMath::Vector3 v = this->getParent()->getAbsPosition();
@@ -23,7 +23,7 @@ namespace YGEAudio {
 		}
 	}
 
-	void YGESoundSource::setSound(const char *filename){
+	void YGESoundAsset::setSound(const char *filename){
 		sound = YGECore::YGERessourceManager::getInstance()->getSound(filename);
 		
 		alGenSources(1, &source);
@@ -33,7 +33,7 @@ namespace YGEAudio {
 
 
 	}
-	void YGESoundSource::playOnce(){
+	void YGESoundAsset::playOnce(){
 
 		alSourcei(source,AL_LOOPING,AL_FALSE);
 
@@ -41,14 +41,14 @@ namespace YGEAudio {
 
 	}
 
-	void YGESoundSource::playLooped(){
+	void YGESoundAsset::playLooped(){
 
 		alSourcei(source,AL_LOOPING,AL_TRUE);
 
 		wantsToBePlayed = -1;
 
 	}
-	void YGESoundSource::stop(){
+	void YGESoundAsset::stop(){
 
 		alSourceStop(source);
 	}

@@ -234,6 +234,10 @@
 				Name="graphics"
 				>
 				<File
+					RelativePath="..\src\YGELib\YGEGraphicsCore.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\YGELib\YGEHeightmap.cpp"
 					>
 				</File>
@@ -314,7 +318,7 @@
 					>
 				</File>
 				<File
-					RelativePath="..\src\YGELib\YGESoundSource.cpp"
+					RelativePath="..\src\YGELib\YGESoundAsset.cpp"
 					>
 				</File>
 			</Filter>
@@ -380,7 +384,7 @@
 				Name="display"
 				>
 				<File
-					RelativePath="..\src\YGELib\YGEDisplay.h"
+					RelativePath="..\src\YGELib\YGEGraphicsCore.h"
 					>
 				</File>
 				<File
@@ -540,7 +544,7 @@
 					>
 				</File>
 				<File
-					RelativePath="..\src\YGELib\YGESoundSource.h"
+					RelativePath="..\src\YGELib\YGESoundAsset.h"
 					>
 				</File>
 			</Filter>

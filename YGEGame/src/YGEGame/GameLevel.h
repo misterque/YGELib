@@ -22,7 +22,11 @@ private:
 	YGEGraphics::YGEWater *water;
 	YGEGraphics::YGESkybox *skybox;
 public:
-	void loadFromFile(const char* filename);
+	void createFromFile(const char* filename);
+
+	void createRandom();
+
+	void createSample();
 
 	YGEMath::Vector3 getPlayerStartPosition();
 

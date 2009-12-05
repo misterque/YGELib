@@ -14,13 +14,13 @@
 
 class GameRocket : public YGETimeSpace::YGEEntity {
 private:
-	YGEGraphics::YGEStaticMesh meshRocket;
+	YGEGraphics::YGEGraphicsAsset* meshRocket;
 	YGEPhysics::YGEBodyAsset body;
 
 	YGEGraphics::YGEParticleSystem explosion;
 	double lifetime;
 
-	YGEAudio::YGESoundSource* engineSound;
+	YGEAudio::YGESoundAsset* engineSound;
 
 public:
 	GameRocket();

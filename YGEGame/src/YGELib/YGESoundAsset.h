@@ -12,8 +12,9 @@
 
 
 namespace YGEAudio {
-	class YGESoundSource : public YGETimeSpace::YGEEntityAsset {
+	class YGESoundAsset : public YGETimeSpace::YGEEntityAsset {
 	private:
+		friend class YGEAudioCore;
 		YGESound* sound;
 
 		ALuint source;
@@ -22,9 +23,10 @@ namespace YGEAudio {
 
 	public:
 		//	virtual void draw(YGEGraphicsContext* context) = 0;
-		YGESoundSource();
+		YGESoundAsset();
 
-		virtual void update(long delta);
+		// @todo remove this
+		virtual void render();
 
 		virtual YGETimeSpace::AssetType getAssetType(){
 			return YGETimeSpace::Sound;

@@ -1,8 +1,17 @@
 #include "YGEAudioCore.h"
+#include "YGEObserver.h"
 
 #define NULL 0
 
 namespace YGEAudio {
+	void YGEAudioCore::renderSpace(YGETimeSpace::YGESpace* space, YGETimeSpace::YGEObserver* observer){
+		if(space->getSoundEnabled()) {
+			setListenerPosition(observer->getAbsPosition(), space);
+		}
+
+		renderEntity(space->getRootEntity());
+	}
+
 
 	void YGEAudioCore::init(){
 		alutInit(NULL, NULL);
@@ -13,6 +22,26 @@ namespace YGEAudio {
 		volume = 50;
 
 
+	}
+
+		
+	void YGEAudioCore::renderEntity(YGETimeSpace::YGEEntity* entity){
+		// get every graphical asset and render it
+		std::list<YGEAudio::YGESoundAsset*>* assets = entity->getSoundAssets();
+		for(std::list<YGEAudio::YGESoundAsset*>::iterator iter = assets->begin();
+			iter != assets->end();
+			iter++){
+				(*iter)->render();
+		}
+
+		// recursive call on all children
+		std::list<YGETimeSpace::YGEEntity*>* children = entity->getChildren();
+		for(std::list<YGETimeSpace::YGEEntity*>::iterator iter = children->begin();
+			iter != children->end();
+			iter++){
+				 renderEntity(*iter);
+
+		}
 	}
 
 	void YGEAudioCore::playMusic(const char* filename) {

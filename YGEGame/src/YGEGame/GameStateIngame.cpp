@@ -15,7 +15,9 @@ void GameStateIngame::init()  {
 
 	// setting up the level
 	level = new GameLevel();
-	level->loadFromFile("");
+
+	// @todo create level from file
+	level->createFromFile("");
 
 
 	// setting up the gyrocopter

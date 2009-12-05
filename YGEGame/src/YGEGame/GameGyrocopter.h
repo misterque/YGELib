@@ -4,6 +4,7 @@
 #include "YGEStaticMesh.h"
 #include "YGEEntity.h"
 #include "YGEBodyAsset.h"
+#include "YGESoundAsset.h"
 
 class GameGyrocopter : public YGETimeSpace::YGEEntity{
 private:
@@ -21,7 +22,12 @@ private:
 
 	YGEPhysics::YGEBodyAsset mass;
 
+	YGEAudio::YGESoundAsset idleSound;
+	YGEAudio::YGESoundAsset lowSound;
+	YGEAudio::YGESoundAsset midSound;
+	YGEAudio::YGESoundAsset highSound;
 
+	int soundstate;
 	float fuel;
 
 	double throttle;
@@ -31,8 +37,14 @@ private:
 
 	double up;
 
+	double backRotorAngularVelocity;
+
+	double tailHRot;
+	double tailVRot;
+
 	long long reload;
 	int fireFromRight;
+
 
 
 public:

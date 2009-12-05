@@ -7,52 +7,6 @@
 #define PI 3.1415926
 
 namespace YGETimeSpace{
-
-	void YGEEntity::render(){
-
-		glEnable(GL_LIGHTING);
-
-		YGEMath::Vector3 pos = this->getPosition();
-		YGEMath::Vector3 scale = this->getScale();
-
-		glPushMatrix();
-		
-		glTranslatef(absPosition.x, absPosition.y, absPosition.z);
-
-		YGEMath::Mat3x3 mat = absOrientation.getRotationMatrix();
-
-		GLfloat m[16] = { (GLfloat)mat[0][0], (GLfloat)mat[1][0], (GLfloat)mat[2][0], 0.0f,
-			(GLfloat)mat[0][1], (GLfloat)mat[1][1], (GLfloat)mat[2][1], 0.0f,
-			(GLfloat)mat[0][2], (GLfloat)mat[1][2], (GLfloat)mat[2][2], 0.0f,
-			0,         0,         0,         1.0f };
-
-
-		glMultMatrixf(m);
-
-		//glScalef(scale.x, scale.y, scale.z);
-
-		// get every graphical asset and render it
-		std::list<YGEGraphics::YGEGraphicsAsset*>* assets = this->getGraphicsAssets();
-		for(std::list<YGEGraphics::YGEGraphicsAsset*>::iterator iter = assets->begin();
-			iter != assets->end();
-			iter++){
-
-
-
-				(*iter)->draw(NULL);
-
-		}
-		glPopMatrix();
-		// recursive call on all children
-		std::list<YGEEntity*>* children = this->getChildren();
-		for(std::list<YGEEntity*>::iterator iter = children->begin();
-			iter != children->end();
-			iter++){
-				(*iter)->render();
-
-		}
-
-	};
 	
 	void YGEEntity::update(long delta){
 
@@ -69,18 +23,6 @@ namespace YGETimeSpace{
 				(*iter)->update(delta);
 
 		}
-
-	// get every sound asset and ...
-		std::list<YGEAudio::YGESoundSource*>* assets2 = this->getSoundAssets();
-		for(std::list<YGEAudio::YGESoundSource*>::iterator iter = assets2->begin();
-			iter != assets2->end();
-			iter++){
-
-
-				(*iter)->update(delta);
-
-		}
-
 		// recursive call on all children
 		std::list<YGEEntity*>* children = this->getChildren();
 		for(std::list<YGEEntity*>::iterator iter = children->begin();
@@ -131,8 +73,10 @@ namespace YGETimeSpace{
 
 		absPosition = oldPosition + (newPosition - oldPosition) * delta;
 		absOrientation = oldOrientation + (newOrientation - oldOrientation) * delta;
-		//absPosition = newPosition;
-		//absOrientation = newOrientation;
+
+		interpolatedPosition = absPosition;
+		interpolatedOrientation = absOrientation;
+
 		std::list<YGEEntity*>* children = this->getChildren();
 		for(std::list<YGEEntity*>::iterator iter = children->begin();
 			iter != children->end();
@@ -226,7 +170,7 @@ namespace YGETimeSpace{
 			physicsAssets.push_back((YGEPhysics::YGEPhysicsAsset*)asset);
 		}
 		if(asset->getAssetType() == Sound) {
-			soundAssets.push_back((YGEAudio::YGESoundSource*)asset);
+			soundAssets.push_back((YGEAudio::YGESoundAsset*)asset);
 		}
 		
 

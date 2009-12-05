@@ -2,7 +2,7 @@
 
 
 
-void GameLevel::loadFromFile(const char* filename){
+void GameLevel::createFromFile(const char* filename){
 //@todo parse from file
 
 	// create a space
@@ -24,9 +24,14 @@ void GameLevel::loadFromFile(const char* filename){
 	skybox->loadTextures();
 	space->setSkybox(skybox);
 
-	GameBall* ball = new GameBall();
-	space->getRootEntity()->addChild(ball);
-	ball->setPosition(YGEMath::Vector3(172-128, 27, 154-128-60));
+	GameBall* ball1 = new GameBall();
+	space->getRootEntity()->addChild(ball1);
+	ball1->setPosition(YGEMath::Vector3(172-128, 27, 154-128-90));
+
+	GameBall* ball2 = new GameBall();
+	space->getRootEntity()->addChild(ball2);
+	ball2->setPosition(YGEMath::Vector3(0, 90, 0));
+
 
 }
 

@@ -5,12 +5,12 @@ GameRocket::GameRocket(){
 	// add the body
 	addAsset(&body);
 	// add the mesh
-	meshRocket = new YGEGraphics::YGESimpleBox()
-	addAsset();
+	meshRocket = new YGEGraphics::YGESimpleBox();
+	addAsset(meshRocket);
 
 	addAsset(&explosion);
 
-	engineSound = new YGEAudio::YGESoundSource();
+	engineSound = new YGEAudio::YGESoundAsset();
 	engineSound->setSound("sounds/rocket.wav");
 	addAsset(engineSound);
 	engineSound->playOnce();
@@ -22,9 +22,7 @@ GameRocket::GameRocket(){
 }
 
 void GameRocket::tick(long delta){
-	// @todo UGLYUGLYUGLY
 
-	explosion.tick(delta);
 	lifetime += delta / 1000000.0f;
 	//unaffect the rocket by gravity
 	body.addAbsoluteForce(0, 9.81f, 0);
@@ -51,8 +49,10 @@ void GameRocket::processCollision(YGEPhysics::YGEPhysicsAsset* bodyPart, YGEPhys
 void GameRocket::explode(){
 	body.disable();
 
+	meshRocket->disable();
+
 	engineSound->stop();
-	YGEAudio::YGESoundSource* sound = new YGEAudio::YGESoundSource();
+	YGEAudio::YGESoundAsset* sound = new YGEAudio::YGESoundAsset();
 	sound->setSound("sounds/explosion.wav");
 	addAsset(sound);
 	sound->playOnce();

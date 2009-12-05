@@ -7,7 +7,7 @@ namespace YGECore {
 
 	/**
 	* YGE main game engine class
-	* @todo just use YGEDisplay... make it nicer... more PFI
+	* @todo just use YGEGraphicsCore... make it nicer... more PFI
 	* true object orientation
 	*/
 	class YGEEngineCoreSingleThreaded : public YGEEngineCore {
