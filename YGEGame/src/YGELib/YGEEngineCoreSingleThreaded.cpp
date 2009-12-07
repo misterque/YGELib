@@ -8,23 +8,40 @@
 
 
 namespace YGECore {
+	void YGEEngineCoreSingleThreaded::printTimes(){
+		debugout("physics");
+		debugout(timerPhysics->getStoppedTime()/1000);
+		debugout("graphics rendering");
+		debugout(timerGraphics->getStoppedTime()/1000);
+		debugout("updating");
+		debugout(timerUpdate->getStoppedTime()/1000);
+		debugout("ticking");
+		debugout(timerTick->getStoppedTime()/1000);
+		debugout("altogether");
+		debugout(timer->getStoppedTime()/1000);
+		debugout("other");
+		debugout(timerOther->getStoppedTime()/1000);
+	}
 
 	void YGEEngineCoreSingleThreaded::run(){
 
 		debugout("starting the core");
 
-		while(display->windowClosed == false && shutdownNow == false){
+		while(graphics->windowClosed == false && shutdownNow == false){
 
 			//debugout("update the core");
 
 			timer->startTimer();
 
-			display->reset();
-			display->update();
+
+			graphics->reset();
+			graphics->update();
 
 
 
 			processEvents();
+
+
 
 
 			if(gamestate != NULL) {
@@ -40,10 +57,13 @@ namespace YGECore {
 				console->draw();
 			}
 
+			//timerOther->startTimer();
+
 			calculateFPSRate();
 
 			limitFPS();
-
+			//timerOther->stopTimer();
+			printTimes();
 
 		}
 
@@ -57,7 +77,7 @@ namespace YGECore {
 		while(SDL_PollEvent(&event)) {
 			switch(event.type){
 			case SDL_QUIT:
-				display->notifyEvent(&event);
+				graphics->notifyEvent(&event);
 				break;
 			case SDL_KEYDOWN:
 				switch(event.key.keysym.sym){
@@ -103,46 +123,43 @@ namespace YGECore {
 
 
 			YGEAudio::YGEAudioCore::getInstance()->renderSpace( (*iter).first, (*iter).second );
-			display->renderSpace( (*iter).first, (*iter).second  );
+			graphics->renderSpace( (*iter).first, (*iter).second  );
 
 		}
-		t = timerGraphics->stopTimer() / 1000;
-		debugout("time for rendering:");
-		debugout((long long) t);
+		timerGraphics->stopTimer();
 	}
 	void YGEEngineCoreSingleThreaded::updateSpaceList(YGETimeSpace::YGESpaceList *list){
-		int t;
+
 		timerPhysics->startTimer();
 		for(YGETimeSpace::YGESpaceList::iterator iter = list->begin(); iter != list->end(); iter++){
 
 			(*iter)->timeStep(delta);
 		}
-		t = timerPhysics->stopTimer() / 1000;
-		debugout("time for physics:");
-		debugout((long long) t);
+		timerPhysics->stopTimer();
+
+
+		timerUpdate->startTimer();
 
 		for(YGETimeSpace::YGESpaceList::iterator iter = list->begin(); iter != list->end(); iter++){
 			(*iter)->getRootEntity()->setTimeOfNewPosition(getTimeSinceGameStarted());
 		}
-		timerUpdate->startTimer();
+
 
 		for(YGETimeSpace::YGESpaceList::iterator iter = list->begin(); iter != list->end(); iter++){
 
 			(*iter)->getRootEntity()->update(delta);
 		}
-		t = timerUpdate->stopTimer() / 1000;
-		debugout("time for updateing:");
-		debugout((long long) t);
+		timerUpdate->stopTimer();
 
 		timerTick->startTimer();
 		for(YGETimeSpace::YGESpaceList::iterator iter = list->begin(); iter != list->end(); iter++){
 
-			(*iter)->getRootEntity()->tickChildren(delta);
+			if( (*iter)->getTimeIsRunning() ) {
+				(*iter)->getRootEntity()->tickChildren(delta);
+			}
 		}
 		
-		t = timerTick->stopTimer() / 1000;
-		debugout("time for ticking:");
-		debugout((long long) t);
+		timerTick->stopTimer();
 	}
 
 
@@ -158,17 +175,9 @@ namespace YGECore {
 			std::stringstream s;
 			s<<"FPS: "<<frames;
 
-			display->setTitle(s.str().c_str());
+			graphics->setTitle(s.str().c_str());
 			frames = 0;
-
-
-
-
 		}
-		//debugout("updating the core took ms");
-		//debugout(delta / 1000);
-
-
 	}
 
 	void YGEEngineCoreSingleThreaded::limitFPS(){
@@ -206,7 +215,7 @@ namespace YGECore {
 
 		console = new YGEConsole();
 		YGELogger::getInstance()->setConsole(console);
-		display = new YGESDLDisplay();
+		graphics = new YGESDLDisplay();
 		input = new YGEInputManager();
 
 		audio = YGEAudio::YGEAudioCore::getInstance();
@@ -219,11 +228,12 @@ namespace YGECore {
 		timerPhysics = new YGETimer();
 		timerUpdate = new YGETimer();
 		timerTick = new YGETimer();
-
+		timerOther = new YGETimer();
 
 		logger = YGELogger::getInstance();
-		display->init();
 		console->init(this);
+		graphics->init();
+
 		audio->init();
 
 	}

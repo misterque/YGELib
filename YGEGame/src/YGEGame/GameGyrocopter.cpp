@@ -1,11 +1,16 @@
 #include "GameGyrocopter.h"
 #include "YGEGraphicsAsset.h"
 #include "YGELogger.h"
-
+#include "YGEParticleSystem.h"
 #include "GameRocket.h"
 #include "YGEText.h"
 
 GameGyrocopter::GameGyrocopter(){
+
+	// add a particle system
+	//engineParticles = new YGEGraphics::YGEParticleSystem();
+	addAsset(&engineParticles);
+
 
 	// load and add the body model for the gyrocopter
 	meshBody.loadFromOBJ("models/gyro_body.obj");

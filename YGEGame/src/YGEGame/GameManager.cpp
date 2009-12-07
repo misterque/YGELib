@@ -21,7 +21,7 @@ void GameManager::startEngine(){
 
 void GameManager::startGame(){
 	this->pushGameState(ingame);
-	((GameStateIngame*)ingame)->init();
+	//((GameStateIngame*)ingame)->init();
 	engineCore->getInputManager()->addKeyDownListener((GameStateIngame*)ingame);
 	engineCore->getInputManager()->addKeyUpListener((GameStateIngame*)ingame);
 	engineCore->getInputManager()->removeKeyDownListener((GameStateMainmenu*)mainmenu);
@@ -40,10 +40,6 @@ void GameManager::initAndStartGame(){
 	mainmenu = new GameStateMainmenu();
 	
 	splashscreen = new GameStateSplashscreen();
-	
-	
-//	engineCore->getInputManager()->addKeyDownListener((GameStateIngame*)ingame);
-//	engineCore->getInputManager()->addKeyUpListener((GameStateIngame*)ingame);
 
 	this->pushGameState(mainmenu);
 	engineCore->getInputManager()->addKeyDownListener((GameStateMainmenu*)mainmenu);

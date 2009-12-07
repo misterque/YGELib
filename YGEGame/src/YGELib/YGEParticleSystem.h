@@ -30,6 +30,7 @@ public:
 	YGEParticle *nextParticle;
 	YGEParticle *previousParticle;
 	YGEMath::Vector3 position;
+	YGEMath::Vector3 velocity;
 
 };
 
@@ -89,6 +90,11 @@ class YGEParticleSystem : public YGEGraphicsAsset {
 private:
 	YGEParticleList particleList;
 	YGECore::YGETexture* texture;
+	YGEMath::Vector3 spawnVelocity;
+	YGEMath::Vector3 spawnRandomVelocity;
+	YGEMath::Vector3 addVelocity;
+	YGEMath::Vector3 addRandomVelocity;
+
 public:
 
 	YGEParticleSystem();

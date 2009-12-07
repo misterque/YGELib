@@ -5,5 +5,7 @@
 #include "YGEEntityAsset.h"
 namespace YGETimeSpace{
 
+	YGEEntityAsset::YGEEntityAsset() : enabled(true) {
 
+	}
 }

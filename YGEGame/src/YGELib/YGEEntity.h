@@ -117,6 +117,7 @@ public:
 
 
 	YGEEntity();
+	~YGEEntity();
 
 	/**
 	 * add a child to the entity

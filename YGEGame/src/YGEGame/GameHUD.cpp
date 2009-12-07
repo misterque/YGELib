@@ -16,6 +16,12 @@ GameHUD::GameHUD(){
 	text->addAsset(new YGEGraphics::YGEText("blaaa"));
 	text->setPosition(YGEMath::Vector3(50,50,0));
 
+	pauseTextPos = new YGETimeSpace::YGEEntity();
+	space.getRootEntity()->addChild(pauseTextPos);
+	pauseTextPos->translate(YGEMath::Vector3(200,300,0));
+	pauseText = new YGEGraphics::YGEText("press 'p' to continue", "VeraMono24");
+	pauseTextPos->addAsset(pauseText);
+
 	YGETimeSpace::YGEEntity* timePos = new YGETimeSpace::YGEEntity();
 	space.getRootEntity()->addChild(timePos);
 
@@ -57,4 +63,13 @@ void GameHUD::setVelocity(double v){
 
 	velocity = v;
 	//velocityText->
+}
+
+void GameHUD::setShowPauseText(bool show){
+	showPauseText = show;
+	if(show) {
+		pauseText->enable();
+	} else {
+		pauseText->disable();
+	}
 }

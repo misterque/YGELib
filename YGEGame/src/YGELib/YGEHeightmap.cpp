@@ -13,7 +13,7 @@
 Uint32 getpixel(SDL_Surface *surface, int x, int y) 
 { 
 	int bpp = surface->format->BytesPerPixel; 
-	/* Here p is the address to the pixel we want to retrieve */ 
+	
 	Uint8 *p = (Uint8 *)surface->pixels + y * surface->pitch + x * bpp; 
 
 	switch(bpp) { 
@@ -33,14 +33,15 @@ Uint32 getpixel(SDL_Surface *surface, int x, int y)
 		return *(Uint32 *)p; 
 
 	default: 
-		return 0;       /* shouldn't happen, but avoids warnings */ 
+		return 0; 
 	} 
 }
 
 
 namespace YGEGraphics {
 
-	void YGEHeightmap::create(char *filename){
+	void YGEHeightmap::create(char *filename, double width, double depth, double height){
+
 
 
 		// get texture
@@ -49,6 +50,10 @@ namespace YGEGraphics {
 
 		w = surface->w;
 		h = surface->h;
+
+		scalex = width / w;
+		scalez = depth / h;
+		scaley = height / 256.0f;
 
 		texture = YGECore::YGERessourceManager::getInstance()->getTexture("textures/mud.tex");
 
@@ -68,11 +73,11 @@ namespace YGEGraphics {
 
 				Uint8 height;
 				SDL_GetRGB(getpixel(surface, x, y), surface->format, &height, &height, &height);
-				pHeightData[x + (y * w)] = (float)height / 5.0f;
+				pHeightData[x + (y * w)] = (float)height * scaley;
 				Vertex v;
-				v.x = GLfloat(x - w/2);
-				v.z = GLfloat(y - h/2);
-				v.y = (float)height / 5.0f;
+				v.x = GLfloat(x - w/2) * scalex;
+				v.z = GLfloat(y - h/2) * scalez;
+				v.y = (float)height * scaley;
 				v.u = x  / 20.0f;
 				v.v = y  / 20.0f;
 				map->addVertex(v);
@@ -158,7 +163,7 @@ namespace YGEGraphics {
 			dGeomHeightfieldDataBuildDouble (heightfieldId,
 				pHeightData,
 				true,
-				w, h,
+				w * scalex, h * scalez,
 				w, h,
 				1, 0, 5, 0);
 

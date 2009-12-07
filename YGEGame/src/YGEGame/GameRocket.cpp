@@ -9,6 +9,8 @@ GameRocket::GameRocket(){
 	addAsset(meshRocket);
 
 	addAsset(&explosion);
+	addAsset(&trail);
+	explosion.disable();
 
 	engineSound = new YGEAudio::YGESoundAsset();
 	engineSound->setSound("sounds/rocket.wav");
@@ -25,12 +27,12 @@ void GameRocket::tick(long delta){
 
 	lifetime += delta / 1000000.0f;
 	//unaffect the rocket by gravity
-	body.addAbsoluteForce(0, 9.81f, 0);
+	body.addAbsoluteForce(0, 0.81f, 0);
 
 	//thrust the rocket!
 	body.addRelativeForce(0,0,-100.0f);
 
-		dBodySetLinearDamping(body.getBodyId(), 0.01);
+		//dBodySetLinearDamping(body.getBodyId(), 0.01);
 
 		if(lifetime > 6) {
 			body.disable();
@@ -48,6 +50,8 @@ void GameRocket::processCollision(YGEPhysics::YGEPhysicsAsset* bodyPart, YGEPhys
 
 void GameRocket::explode(){
 	body.disable();
+
+	trail.disable();
 
 	meshRocket->disable();
 

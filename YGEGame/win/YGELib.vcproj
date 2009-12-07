@@ -234,6 +234,10 @@
 				Name="graphics"
 				>
 				<File
+					RelativePath="..\src\YGELib\YGEGraphicsContext.cpp"
+					>
+				</File>
+				<File
 					RelativePath="..\src\YGELib\YGEGraphicsCore.cpp"
 					>
 				</File>

@@ -7,8 +7,6 @@ namespace YGECore {
 
 	/**
 	* YGE main game engine class
-	* @todo just use YGEGraphicsCore... make it nicer... more PFI
-	* true object orientation
 	*/
 	class YGEEngineCoreSingleThreaded : public YGEEngineCore {
 	private:
@@ -40,6 +38,8 @@ namespace YGECore {
 		void calculateFPSRate();
 
 		void limitFPS();
+
+		void printTimes();
 
 	public:
 

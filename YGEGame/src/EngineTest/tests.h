@@ -9,4 +9,6 @@ using namespace std;
 
 void testParticleSystem();
 
+void speedTests();
+
 #endif

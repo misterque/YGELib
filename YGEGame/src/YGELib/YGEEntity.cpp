@@ -18,8 +18,6 @@ namespace YGETimeSpace{
 			iter != assets->end();
 			iter++){
 
-
-
 				(*iter)->update(delta);
 
 		}
@@ -113,6 +111,16 @@ namespace YGETimeSpace{
 
 		}
 
+		// recursive call on all assets
+		std::list<YGETimeSpace::YGEEntityAsset*>* assets = this->getAssets();
+		for(std::list<YGETimeSpace::YGEEntityAsset*>::iterator iter = assets->begin();
+			iter != assets->end();
+			iter++){
+
+			(*iter)->tick(delta);
+
+		}
+
 		protectChildren = false;
 
 				// remove all children which have been proteced	
@@ -189,6 +197,27 @@ namespace YGETimeSpace{
 		space = NULL;
 
 		protectChildren = false;
+	}
+
+	YGEEntity::~YGEEntity(){
+
+		for(std::list<YGEEntityAsset*>::iterator iter = getAssets()->begin();
+			iter != getAssets()->end();
+			iter++){
+
+				delete (*iter);
+		
+
+		}
+
+		std::list<YGEEntity*>* children = this->getChildren();
+		for(std::list<YGEEntity*>::iterator iter = children->begin();
+			iter != children->end();
+			iter++){
+				delete (*iter);
+
+		}
+
 	}
 
 	void YGEEntity::rotateDGR(const YGEMath::Vector3 axis, double degree){

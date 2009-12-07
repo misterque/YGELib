@@ -7,7 +7,7 @@
 #include "time.h"
 #include "YGEVector.h"
 #include "YGEMatrix.h"
-#include "YGEEngineCore.h"
+#include "YGEEngineCoreSingleThreaded.h"
 #include <iostream>
 
 using namespace std;
@@ -64,7 +64,7 @@ void speedTestMath(){
 }
 
 void testCore(){
-	YGEEngineCore core;
+	YGEEngineCoreSingleThreaded core;
 
 	core.init();
 	core.run();
@@ -74,13 +74,18 @@ int _tmain(int argc, _TCHAR* argv[])
 {
 
 	cout<<"Testing Engine Features:"<<endl;
-	cout<<"1) Math Library"<<endl;
+	cout<<"01) Math Library"<<endl;
 	testMath();
-	cout<<"2) Core Functions"<<endl;
+	cout<<"02) Core Functions"<<endl;
 
-	cout<<"3) Particle System"<<endl;
+	cout<<"03) Particle System"<<endl;
 	testParticleSystem();
+	
+	cout<<"10) Speed Tests"<<endl;
+	speedTests();	
 	//testCore();
+	char a;
+	cin>>a;
 	return 0;
 }
 

@@ -7,14 +7,10 @@ namespace YGEGraphics {
 
 		GLfloat dir[] = {1,1,1,0};
 		glLightfv(GL_LIGHT0, GL_POSITION, dir);	
-			/*GLfloat ambient = {
-GLfloat diffuse = 
-GLfloat specular = 
-		GLFl
 
-		glLightfv(GL_LIGHT0, GL_AMBIENT, ambient);
-		glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuse);
-		glLightfv(GL_LIGHT0, GL_SPECULAR, specular);*/
+		GLfloat ambient[] = { 0.5f, 0.5f, 0.5f, 1.0f };
+		glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ambient);
+
 		glEnable(GL_LIGHT0);
 		glEnable(GL_LIGHTING);
 	}

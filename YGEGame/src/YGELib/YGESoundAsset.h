@@ -25,7 +25,6 @@ namespace YGEAudio {
 		//	virtual void draw(YGEGraphicsContext* context) = 0;
 		YGESoundAsset();
 
-		// @todo remove this
 		virtual void render();
 
 		virtual YGETimeSpace::AssetType getAssetType(){

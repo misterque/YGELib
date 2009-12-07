@@ -12,7 +12,7 @@ void GameLevel::createFromFile(const char* filename){
 
 	// create the heightmap
 	heightmap = new YGEGraphics::YGEHeightmap();
-	heightmap->create("images/hmap.bmp"); 
+	heightmap->create("images/hmap.bmp", 1000.0f, 1000.0f, 100.0f); 
 	space->getRootEntity()->addAsset(heightmap);
 
 	heightmap->makeSolid();

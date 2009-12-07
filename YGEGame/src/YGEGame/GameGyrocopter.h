@@ -5,6 +5,7 @@
 #include "YGEEntity.h"
 #include "YGEBodyAsset.h"
 #include "YGESoundAsset.h"
+#include "YGEParticleSystem.h"
 
 class GameGyrocopter : public YGETimeSpace::YGEEntity{
 private:
@@ -14,6 +15,8 @@ private:
 	YGEGraphics::YGEStaticMesh meshRotorBack;
 	YGEGraphics::YGEStaticMesh meshTailV;
 	YGEGraphics::YGEStaticMesh meshTailH;
+
+	YGEGraphics::YGEParticleSystem engineParticles;
 
 	YGETimeSpace::YGEEntity posRotorTop;
 	YGETimeSpace::YGEEntity posRotorBack;

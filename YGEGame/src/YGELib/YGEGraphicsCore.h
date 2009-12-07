@@ -1,7 +1,7 @@
 #ifndef _YGE_DISPLAY_H_
 #define _YGE_DISPLAY_H_
 
-
+#include "YGEGraphicsContext.h"
 
 namespace YGETimeSpace {
 	class YGESpace;
@@ -13,6 +13,7 @@ namespace YGECore {
 
 class YGEGraphicsCore {
 private:
+	YGEGraphicsContext context;
 	void renderEntity(YGETimeSpace::YGEEntity* entity);
 
 public:

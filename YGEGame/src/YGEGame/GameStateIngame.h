@@ -23,13 +23,18 @@
 #include "Camera.h"
 
 
+/**
+ *
+ */
 class GameStateIngame  : public YGEGame::YGEGameState, public YGEKeyDownListener, public YGEKeyUpListener{
 private:
-
+	/**
+	 * the Camera attact to the players gyrocopter
+	 */
 	Camera* cam;
 
 	/**
-	 * the player
+	 * the players gyrocopter
 	 */
 	GameGyrocopter* gyro;
 
@@ -39,17 +44,41 @@ private:
 
 	GameLevel* level;
 
+	/**
+	 * the hud
+	 */
 	GameHUD* hud;
 
+	/**
+	 * if true, the gamestate considers itself as initialized, meaning all resources
+	 * have been loaded
+	 */
 	bool initialized;
 
+	/**
+	 * time in microseconds since the last gamestate was updated the last time
+	 */
 	long timeSinceLastTimeUpdate;
 
+	/**
+	 * time at which the game was started in milliseconds since ?
+	 */
 	long long gameStartTime;
 
+	/**
+	 * time the game is running without beeing paused
+	 */
+	long long ingameTime;
+
+	/**
+	 * vector of balls which have to be destroyed to finish the level
+	 */
 	std::vector<GameBall> balls;
 public:
 
+	/**
+	 * sets primitive variables
+	 */
 	GameStateIngame();
 
 	/**
@@ -58,17 +87,22 @@ public:
 	 */
 	void init();
 
-	/** deinit this gamestate:
-	 ...
+	/**
+	 * deinit this gamestate:
+	 * unload unneeded resources
+	 * 
 	 */
-
 	void deinit();
 
-	void update(long delta);
+
+	/**
+	 * update the gamestate
+     */
+	virtual void update(long delta);
 
 
-	void keyDown(SDLKey key);
-	void keyUp(SDLKey key);
+	virtual void keyDown(SDLKey key);
+	virtual void keyUp(SDLKey key);
 
 	virtual void processCommand(const char* command);
 

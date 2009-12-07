@@ -13,11 +13,13 @@ namespace YGECore {
 			// draw a skybox
 			if(space->hasSkybox()){
 				observer->setCameraMatrixRotation(space->getRootEntity());
+
 				space->getSkybox()->draw();
 			}
 
 			//draw the scene
 			observer->setCameraMatrix(space->getRootEntity());
+			context.saveAsGlCameraRotation();
 			space->getSunlight()->draw();
 
 					glDisable(GL_TEXTURE_2D);
@@ -61,7 +63,7 @@ namespace YGECore {
 
 
 
-				(*iter)->draw(NULL);
+				(*iter)->draw(&context);
 
 		}
 		glPopMatrix();

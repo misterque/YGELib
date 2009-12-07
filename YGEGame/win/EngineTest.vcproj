@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(SolutionDir)/../lib/win32/SDL-1.2.13/include&quot;;&quot;$(SolutionDir)/../src/YGELib&quot;"
+				AdditionalIncludeDirectories="&quot;$(SolutionDir)/../lib/win32/freealut-1.1.0/include&quot;;&quot;$(SolutionDir)/../lib/win32/openal/include&quot;;&quot;$(SolutionDir)/../lib/win32/SDL_ttf-2.0.9/include&quot;;&quot;$(SolutionDir)/../lib/win32/SDL-1.2.13/include&quot;;&quot;$(SolutionDir)/../src/YGELib&quot;;&quot;$(SolutionDir)/../lib/win32/GLee&quot;;&quot;$(SolutionDir)/../lib/ode-0.11.1/include&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -181,6 +181,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\src\EngineTest\SpeedTests.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\src\EngineTest\stdafx.cpp"
 				>
 			</File>
@@ -194,6 +198,10 @@
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
+			<File
+				RelativePath="..\src\EngineTest\SpeedTests.h"
+				>
+			</File>
 			<File
 				RelativePath="..\src\EngineTest\stdafx.h"
 				>

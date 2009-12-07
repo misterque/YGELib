@@ -19,6 +19,8 @@ namespace YGEGraphics {
 		glEnable(GL_TEXTURE_2D);
 		glBindTexture(GL_TEXTURE_2D, mesh->textureID);
 
+		glDisable(GL_BLEND);
+
 		glColor3f(1,1,1);
 		// fallback
 		if(false){

@@ -19,9 +19,6 @@ namespace YGEGraphics {
 			return YGETimeSpace::Graphical;
 		}
 
-		virtual void enable(){};
-
-		virtual void disable(){};
 
 	};
 

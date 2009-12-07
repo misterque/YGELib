@@ -3,7 +3,7 @@
 #include "YGELogger.h"
 #include "GameManager.h"
 
-GameStateIngame::GameStateIngame() : timeSinceLastTimeUpdate(0) , gameStartTime(-1){
+GameStateIngame::GameStateIngame() : timeSinceLastTimeUpdate(0) , gameStartTime(-1), ingameTime(0){
 
 
 }
@@ -58,17 +58,27 @@ void GameStateIngame::deinit(){
 	delete cam;
 	delete gyro;
 	delete level;
+	delete hud;
+	sceneList.empty();
+	spaceList.empty();
 }
 
 void GameStateIngame::update(long delta){
-	if(gameStartTime == -1) init();
+	if(gameStartTime == -1) {
+		init();
+		return;
+	}
 
 	timeSinceLastTimeUpdate += delta;
+	
+	if( level->getSpace()->getTimeIsRunning() ) {
+		ingameTime += delta;
+	} 
 	if(timeSinceLastTimeUpdate > 1000000) {
 		timeSinceLastTimeUpdate = 0;
-		long long timePassed = GameManager::getInstance()->getCore()->getTimeSinceGameStarted() - gameStartTime;
+		//long long timePassed = GameManager::getInstance()->getCore()->getTimeSinceGameStarted() - gameStartTime;
 
-		hud->setTime((int)(timePassed / 1000000));
+		hud->setTime((int)(ingameTime / 1000000));
 	}
 }
 
@@ -103,6 +113,15 @@ void GameStateIngame::keyDown(SDLKey key){
 			case SDLK_SPACE:
 				gyro->fireRocket();
 				break;
+			case SDLK_p:
+				if(level->getSpace()->getTimeIsRunning()) {
+					level->getSpace()->stopTime();
+					hud->setShowPauseText(true);
+				} else {
+					level->getSpace()->startTime();
+					hud->setShowPauseText(false);
+				}
+				break;
 
 
 	}
@@ -136,6 +155,7 @@ void GameStateIngame::keyUp(SDLKey key){
 			case SDLK_DOWN:
 				gyro->setTailH(0.0f);
 				break;
+
 
 
 	}

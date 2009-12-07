@@ -43,6 +43,9 @@ namespace YGECore {
 		*/
 		virtual long long stopTimer();
 
+		long long getStoppedTime(){
+			return stoppedTime;
+		}
 
 
 	};

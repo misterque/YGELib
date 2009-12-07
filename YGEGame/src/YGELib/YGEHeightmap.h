@@ -21,6 +21,10 @@ private:
 	int w;
 	int h;
 
+	double scalex;
+	double scalez;
+	double scaley;
+
 	dHeightfieldDataID heightfieldId;
 	double* pHeightData;
 public:
@@ -34,7 +38,7 @@ public:
 	/** 
 	 * creates a heightmap using a monocromatic texture.
 	 */
-	void create(char *filename);
+	void create(char *filename, double width, double depth, double height);
 
 	void makeSolid();
 

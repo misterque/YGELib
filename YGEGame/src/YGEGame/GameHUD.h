@@ -15,10 +15,16 @@ class GameHUD {
 	YGETimeSpace::YGESpace space;
 	YGETimeSpace::YGEObserver observer;
 
+	YGETimeSpace::YGEEntity* pauseTextPos;
+
+	YGEGraphics::YGEText* pauseText;
 	YGEGraphics::YGEText* velocityText;
 	YGEGraphics::YGEText* timeText;
 	double velocity;
 	int time;
+
+	bool showPauseText;
+
 public:
 	GameHUD();
 	YGETimeSpace::YGESpace* getSpace();
@@ -27,6 +33,8 @@ public:
 
 	void setTime(int seconds);
 	void setVelocity(double v);
+
+	void setShowPauseText(bool show);
 };
 
 

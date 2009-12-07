@@ -80,6 +80,10 @@ namespace YGETimeSpace {
 
 		void timeStep(long long delta);
 
+		bool getTimeIsRunning(){
+			return timeIsRunning;
+		}
+
 		/**
 		 * */
 		YGEEntity* getRootEntity(){
@@ -104,7 +108,8 @@ namespace YGETimeSpace {
 
 		YGEGraphics::YGESunlight* getSunlight();
 
-		void setSunLightPosition(YGEMath::Vector3 pos);
+		void setSunLightPosition(const YGEMath::Vector3 &pos);
+		
 
 		bool getSoundEnabled();
 		void setSoundEnabled(bool enable);

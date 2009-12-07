@@ -4,7 +4,7 @@
 #include <SDL_opengl.h>
 #include "YGEParticleSystem.h"
 #include "YGELogger.h"
-
+#include "YGEEntity.h"
 #include <cassert>
 
 namespace YGEGraphics {
@@ -96,9 +96,18 @@ namespace YGEGraphics {
 
 	YGEParticleSystem::YGEParticleSystem(){
 		texture = YGECore::YGERessourceManager::getInstance()->getTexture("textures/particle.tex");
+	
+		spawnVelocity = YGEMath::Vector3(0,0,0);
+		spawnRandomVelocity = YGEMath::Vector3(0.3,0.3,0.3);
+		addVelocity = YGEMath::Vector3(0,0.5,0);
+		addRandomVelocity = YGEMath::Vector3(0.1,0.1,0.1);
+	
 	}
 
 	void YGEParticleSystem::tick(long delta){
+
+
+		double seconds = delta / 1000000.0f;
 
 		YGEParticle* p = particleList.getFirstAliveParticle();
 		YGEParticle* p2;
@@ -113,8 +122,10 @@ namespace YGEGraphics {
 			// if not, do other stuff
 			else {
 				// calc new position
-				// for now, just brownian motion
-				p->position += YGEMath::Vector3::random(0.1);
+				p->position += p->velocity * seconds;
+				p->velocity += YGEMath::Vector3::random( addRandomVelocity ) * seconds;
+				p->velocity +=  addVelocity * seconds;
+
 
 
 			}
@@ -124,12 +135,17 @@ namespace YGEGraphics {
 		// calc the amount of particles to spawn
 		// should be dependand on framerate and respawn rate
 		int spawnnew = 1;
+		if(enabled == false) {
+			spawnnew = 0;
+		}
 		for(int i = 0; i<spawnnew; i++){
 			YGEParticle* newParticle = particleList.getParticle();
 			newParticle->timeToLive = 5.0f;
-			newParticle->position.x = 0.0f;
-			newParticle->position.y = 0.0f;
-			newParticle->position.z = 0.0f;
+			
+			newParticle->position = this->getParent()->getAbsPosition();
+
+			newParticle->velocity = spawnVelocity;
+			newParticle->velocity += YGEMath::Vector3::random( spawnRandomVelocity );
 
 		}
 
@@ -138,20 +154,27 @@ namespace YGEGraphics {
 	}
 
 	void YGEParticleSystem::draw(YGEGraphicsContext *context){
+	
 		YGEParticle* p = particleList.getFirstAliveParticle();
 
-		glEnable(GL_TEXTURE_2D);
-		glEnable(GL_BLEND);
-		//glDisable(GL_DEPTH_TEST);
-		glBlendFunc(GL_SRC_COLOR, GL_ONE_MINUS_SRC_COLOR);
 
-		glBindTexture(GL_TEXTURE_2D, texture->textureID);
+		glPushMatrix();
+		context->glGetCameraMatrix();
+
+		glDisable(GL_TEXTURE_2D);
+
+		glDisable(GL_LIGHTING);
+		///glEnable(GL_BLEND);
+		//glDisable(GL_DEPTH_TEST);
+		///glBlendFunc(GL_SRC_COLOR, GL_ONE_MINUS_SRC_COLOR);
+
+		///glBindTexture(GL_TEXTURE_2D, texture->textureID);
 
 		glColor3f(1,1,1);
 
-		glEnable( GL_POINT_SPRITE );
+		///glEnable( GL_POINT_SPRITE );
 
-		glTexEnvi( GL_POINT_SPRITE, GL_COORD_REPLACE, GL_TRUE );
+		///glTexEnvi( GL_POINT_SPRITE, GL_COORD_REPLACE, GL_TRUE );
 
 
 		GLfloat fSizes[2];
@@ -163,11 +186,11 @@ namespace YGEGraphics {
 
 		glPointParameterf( GL_POINT_FADE_THRESHOLD_SIZE, 60.0f );
 
-		glPointParameterf( GL_POINT_SIZE_MIN, 50.0f );
+		glPointParameterf( GL_POINT_SIZE_MIN, 5.0f );
 
 		glPointParameterf( GL_POINT_SIZE_MAX, 60.0f );
 
-		glPointSize(32.0f);
+		glPointSize(64.0f);
 
 		glBegin(GL_POINTS);
 		while(p != NULL){
@@ -175,7 +198,8 @@ namespace YGEGraphics {
 			p = p->nextParticle;
 		}
 		glEnd();
-
+	
+		glPopMatrix();
 
 	}
 

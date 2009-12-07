@@ -69,6 +69,23 @@ struct Vector3 {
 
 	}
 
+	static Vector3 random(double vx, double vy, double vz){
+		Vector3 r;
+		r.x = randDouble() * vx;
+		r.y = randDouble() * vy;
+		r.z = randDouble() * vz;
+		return r;
+
+	}
+
+	static Vector3 random(const Vector3 &v){
+		Vector3 r;
+		r.x = randDouble() * v.x;
+		r.y = randDouble() * v.y;
+		r.z = randDouble() * v.z;
+		return r;
+
+	}
 
 	double& operator [] (const int index){
 		switch(index){

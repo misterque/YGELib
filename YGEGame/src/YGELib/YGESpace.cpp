@@ -18,10 +18,15 @@ namespace YGETimeSpace{
 
 		dWorldSetGravity(worldId, 0, -9.81, 0);
 
-		//dGeomID groundPlane = dCreatePlane(spaceId, 0, 1, 0, 0);
-		//dGeom
-
 		timeIsRunning = true;
+	}
+
+	void YGESpace::startTime(){
+		timeIsRunning = true;
+	}
+
+	void YGESpace::stopTime(){
+		timeIsRunning = false;
 	}
 
 	dWorldID  YGESpace::getWorldId(){
@@ -96,7 +101,7 @@ namespace YGETimeSpace{
 		}	
 	}
 
-	void YGESpace::setSunLightPosition(YGEMath::Vector3 pos){
+	void YGESpace::setSunLightPosition(const YGEMath::Vector3 &pos){
 		sunlightPosition = pos;
 	}
 

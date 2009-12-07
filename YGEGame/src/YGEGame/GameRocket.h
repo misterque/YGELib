@@ -18,6 +18,7 @@ private:
 	YGEPhysics::YGEBodyAsset body;
 
 	YGEGraphics::YGEParticleSystem explosion;
+	YGEGraphics::YGEParticleSystem trail;
 	double lifetime;
 
 	YGEAudio::YGESoundAsset* engineSound;

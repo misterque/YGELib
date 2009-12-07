@@ -32,7 +32,7 @@ protected:
 	/**
 	 * pointer to a YGEGraphicsCore. Responsible for graphics rendering stuff.
 	 */
-	YGESDLDisplay* display;
+	YGESDLDisplay* graphics;
 
 	/**
 	 *
@@ -65,7 +65,7 @@ protected:
 	YGETimer* timerPhysics;
 	YGETimer* timerUpdate;
 	YGETimer* timerTick;
-
+	YGETimer* timerOther;
 	YGETimer* timeSinceGameStarted;
 
 	YGEGame::YGEGameState* gamestate;

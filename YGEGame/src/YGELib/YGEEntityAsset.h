@@ -23,6 +23,8 @@ class YGEEntityAsset {
 protected:
 	YGEEntity *parent;
 
+	bool enabled;
+
 public:
 	virtual AssetType getAssetType(){
 		return Standard;
@@ -33,14 +35,20 @@ public:
 	}
 
 	
+	YGEEntityAsset();
 
 	YGEEntity* getParent(){
 		return parent;
 	}
 
-	virtual void enable() = 0;
+	virtual void enable(){
+		enabled = true;
+	}
 
-	virtual void disable() = 0;
+	virtual void disable(){
+		enabled = false;
+	}
+	virtual void tick(long delta) {};
 
 };
 
