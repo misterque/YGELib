@@ -1,6 +1,6 @@
 #include "GameManager.h"
 #include "YGEEngineCoreSingleThreaded.h"
-
+#include "YGEEngineCoreMultiThreaded.h"
 #include "GameStateIngame.h"
 #include "GameStateSplashscreen.h"
 #include "GameStateMainmenu.h"
@@ -21,7 +21,6 @@ void GameManager::startEngine(){
 
 void GameManager::startGame(){
 	this->pushGameState(ingame);
-	//((GameStateIngame*)ingame)->init();
 	engineCore->getInputManager()->addKeyDownListener((GameStateIngame*)ingame);
 	engineCore->getInputManager()->addKeyUpListener((GameStateIngame*)ingame);
 	engineCore->getInputManager()->removeKeyDownListener((GameStateMainmenu*)mainmenu);
@@ -32,7 +31,7 @@ void GameManager::stopGame(){
 }
 
 void GameManager::initAndStartGame(){
-	engineCore = new YGECore::YGEEngineCoreSingleThreaded();
+	engineCore = new YGECore::YGEEngineCoreMultiThreaded();
 		engineCore->init();
 
 	ingame = new GameStateIngame();

@@ -30,7 +30,20 @@ protected:
 	 */
 	YGETimeSpace::YGESpaceList spaceList;
 
+	bool hasBeenInitialised;
+
 public:
+
+	YGEGameState(){
+		hasBeenInitialised = false;
+	}
+
+	bool getHasBeenInitialised(){
+		return hasBeenInitialised;
+	}
+	virtual void init(){
+		hasBeenInitialised = true;
+	};
 	/**
 	 * update the gamestate. overload this method to implement
 	 * game logic.

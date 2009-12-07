@@ -38,7 +38,7 @@ public:
 	/** 
 	 * creates a heightmap using a monocromatic texture.
 	 */
-	void create(char *filename, double width, double depth, double height);
+	void create(const char *filename, const char* texturefilename, double width, double depth, double height);
 
 	void makeSolid();
 

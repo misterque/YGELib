@@ -21,7 +21,7 @@ private:
 	YGECore::YGETexture* right;
 public:
 
-	void loadTextures();
+	void loadTextures(const char* name);
 	void draw();
 
 

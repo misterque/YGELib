@@ -17,7 +17,7 @@ void GameStateIngame::init()  {
 	level = new GameLevel();
 
 	// @todo create level from file
-	level->createFromFile("");
+	level->createFromFile("level/level01.lev");
 
 
 	// setting up the gyrocopter
@@ -49,6 +49,7 @@ void GameStateIngame::init()  {
 
 	gameStartTime = GameManager::getInstance()->getCore()->getTimeSinceGameStarted();
 
+	hasBeenInitialised = true;
 }
 
 
@@ -64,10 +65,10 @@ void GameStateIngame::deinit(){
 }
 
 void GameStateIngame::update(long delta){
-	if(gameStartTime == -1) {
+	/*if(gameStartTime == -1) {
 		init();
 		return;
-	}
+	}*/
 
 	timeSinceLastTimeUpdate += delta;
 	
@@ -166,5 +167,8 @@ void GameStateIngame::keyUp(SDLKey key){
 void  GameStateIngame::processCommand(const char* command) {
 	if(command == "stopgame") {
 		GameManager::getInstance()->stopGame();
+	}
+	if(command == "pop") {
+		GameManager::getInstance()->popGameState();
 	}
 }

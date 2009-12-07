@@ -80,7 +80,7 @@ namespace YGEPhysics {
 	}
 
 	YGEMath::Vector3 YGEBodyAsset::getRelativeVelocity(){
-
+if(hasBody) {
 			YGEMath::Quaternion q = parent->getOrientation();
 
 			const double* v = dBodyGetLinearVel(bodyId);
@@ -88,10 +88,26 @@ namespace YGEPhysics {
 			YGEMath::Vector3 z(v[0],v[1],v[2]);
 
 			return q.getConjugate().rotateVector(z);
-
+} else {
+	return YGEMath::Vector3();
+}
 
 	}
 
+	void YGEBodyAsset::setAngularDamping(double d){
+		if(hasBody) {
+			dBodySetAngularDamping(bodyId, d);
+		}
+	}
+
+	void YGEBodyAsset::setLinearDamping(double d){
+		if(hasBody) {
+			dBodySetLinearDamping(bodyId, d);
+		}
+	}
+
+
+/*
 	dBodyID YGEBodyAsset::getBodyId(){
 		if(hasBody) {
 			return bodyId;
@@ -100,6 +116,7 @@ namespace YGEPhysics {
 			return 0;
 		}
 	}
+	*/
 
 	void YGEBodyAsset::setParent(YGETimeSpace::YGEEntity* entity){
 		parent = entity;

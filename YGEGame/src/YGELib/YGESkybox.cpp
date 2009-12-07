@@ -1,14 +1,24 @@
 #include "YGESkybox.h"
+#include <sstream>
 
 namespace YGEGraphics {
 
-	void YGESkybox::loadTextures(){
-		up   = YGECore::YGERessourceManager::getInstance()->getTexture("skymaps/waterscape_positive_y.bmp");
-		down = YGECore::YGERessourceManager::getInstance()->getTexture("skymaps/waterscape_negative_y.bmp");
-		right  = YGECore::YGERessourceManager::getInstance()->getTexture("skymaps/waterscape_positive_x.bmp");
-		left = YGECore::YGERessourceManager::getInstance()->getTexture("skymaps/waterscape_negative_x.bmp");
-		front   = YGECore::YGERessourceManager::getInstance()->getTexture("skymaps/waterscape_positive_z.bmp");
-		back = YGECore::YGERessourceManager::getInstance()->getTexture("skymaps/waterscape_negative_z.bmp");
+	void YGESkybox::loadTextures(const char* name){
+
+		std::stringstream upfile, downfile, rightfile, leftfile, frontfile, backfile;
+		upfile<<"skymaps/"<<name<<"_positive_y.bmp";
+		downfile<<"skymaps/"<<name<<"_negative_y.bmp";
+		rightfile<<"skymaps/"<<name<<"_positive_x.bmp";
+		leftfile<<"skymaps/"<<name<<"_negative_x.bmp";
+		frontfile<<"skymaps/"<<name<<"_positive_z.bmp";
+		backfile<<"skymaps/"<<name<<"_negative_z.bmp";
+
+		up   = YGECore::YGERessourceManager::getInstance()->getTexture(upfile.str().c_str());
+		down = YGECore::YGERessourceManager::getInstance()->getTexture(downfile.str().c_str());
+		right  = YGECore::YGERessourceManager::getInstance()->getTexture(rightfile.str().c_str());
+		left = YGECore::YGERessourceManager::getInstance()->getTexture(leftfile.str().c_str());
+		front   = YGECore::YGERessourceManager::getInstance()->getTexture(frontfile.str().c_str());
+		back = YGECore::YGERessourceManager::getInstance()->getTexture(backfile.str().c_str());
 
 		up->setRepeat(false);
 		down->setRepeat(false);

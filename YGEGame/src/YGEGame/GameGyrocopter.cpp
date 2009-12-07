@@ -131,12 +131,12 @@ void GameGyrocopter::tick(long delta){
 
 	double seconds = delta / 1000000.0f;
 
-	dBodyID bodyId = mass.getBodyId();
+	//dBodyID bodyId = mass.getBodyId();
 
 	mass.getRelativeVelocity().z;
 
-	dBodySetLinearDamping(bodyId, 0.03);
-	dBodySetAngularDamping(bodyId, 0.1);
+	mass.setLinearDamping(0.03);
+	mass.setAngularDamping(0.1);
 
 
 	//double up = v[2] / 10.0f;

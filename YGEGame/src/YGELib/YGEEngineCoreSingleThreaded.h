@@ -9,7 +9,7 @@ namespace YGECore {
 	* YGE main game engine class
 	*/
 	class YGEEngineCoreSingleThreaded : public YGEEngineCore {
-	private:
+	protected:
 
 		/**
 		 * time elapsed between two frames
@@ -29,12 +29,20 @@ namespace YGECore {
 
 		void update();
 
+		void updateAbsolutePositions();
+
+		void interpolate();
+
 		void processEvents();
 
-		void renderSceneList(YGETimeSpace::YGESceneList *list);
+		void processSingleEvent(SDL_Event *event);
 
-		void updateSpaceList(YGETimeSpace::YGESpaceList *list);
+		void render();
 
+		void calcPhysics(long long delta);
+
+		void tick()	;
+		
 		void calculateFPSRate();
 
 		void limitFPS();

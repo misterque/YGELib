@@ -40,7 +40,7 @@ Uint32 getpixel(SDL_Surface *surface, int x, int y)
 
 namespace YGEGraphics {
 
-	void YGEHeightmap::create(char *filename, double width, double depth, double height){
+	void YGEHeightmap::create(const char *filename, const char* texturefilename, double width, double depth, double height){
 
 
 
@@ -55,7 +55,7 @@ namespace YGEGraphics {
 		scalez = depth / h;
 		scaley = height / 256.0f;
 
-		texture = YGECore::YGERessourceManager::getInstance()->getTexture("textures/mud.tex");
+		texture = YGECore::YGERessourceManager::getInstance()->getTexture( texturefilename);
 
 		mesh = new YGEVbo();
 

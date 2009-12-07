@@ -1,9 +1,77 @@
 #include "GameLevel.h"
 
+#include <istream>
+#include <sstream>
 
+void GameLevel::parseFile(const char *filename){
+		std::ifstream is;
+		is.open(filename);
+		if(!is.is_open()) {
+			throw YGEExceptionFileNotFound(filename);
+		}
+
+		while(!is.eof()){
+			std::string line, type;
+			getline(is, line);
+			std::istringstream istr(line);
+
+			istr >> type;
+
+			if(type == "sky:") {
+				istr >> skymapName;
+			} 
+			if(type == "sunposition:") {
+				istr >> sunposition.x;
+				istr >> sunposition.y;
+				istr >> sunposition.z;
+			}
+			if(type == "suncolor:") {
+				istr >> suncolor.x;
+				istr >> suncolor.y;
+				istr >> suncolor.z;
+			}
+			if(type == "timeToComplete:") {
+				istr >> timeToComplete;
+
+			}
+			if(type == "mapFileName:") {
+				istr >> mapFileName;
+
+			}
+			if(type == "textureFileName:") {
+				istr >> textureFileName;
+
+			}
+			if(type == "mapScale:") {
+				istr >> mapScale.x;
+				istr >> mapScale.y;	
+				istr >> mapScale.z;
+			}
+
+			if(type == "startPos:") {
+				istr >> startPos.x;
+				istr >> startPos.y;	
+				istr >> startPos.z;
+			}
+
+
+
+
+
+
+
+		}
+
+
+}
 
 void GameLevel::createFromFile(const char* filename){
-//@todo parse from file
+
+	mapScale.x = 100;
+	mapScale.y = 100;
+	mapScale.z = 100;
+
+	parseFile(YGECore::YGERessourceManager::getInstance()->absoluteFilename( filename ).c_str() );
 
 	// create a space
 	space = new YGETimeSpace::YGESpace();
@@ -12,7 +80,7 @@ void GameLevel::createFromFile(const char* filename){
 
 	// create the heightmap
 	heightmap = new YGEGraphics::YGEHeightmap();
-	heightmap->create("images/hmap.bmp", 1000.0f, 1000.0f, 100.0f); 
+	heightmap->create(mapFileName.c_str(), textureFileName.c_str(), mapScale.x, mapScale.z, mapScale.y); 
 	space->getRootEntity()->addAsset(heightmap);
 
 	heightmap->makeSolid();
@@ -21,12 +89,13 @@ void GameLevel::createFromFile(const char* filename){
 	//space->getRootEntity()->addAsset(water);
 
 	skybox = new YGEGraphics::YGESkybox();
-	skybox->loadTextures();
+	skybox->loadTextures(skymapName.c_str());
 	space->setSkybox(skybox);
-
+	space->getSunlight()->setColor(suncolor.x, suncolor.y, suncolor.z);
+	space->getSunlight()->setDirection(sunposition);
 	GameBall* ball1 = new GameBall();
 	space->getRootEntity()->addChild(ball1);
-	ball1->setPosition(YGEMath::Vector3(172-128, 27, 154-128-90));
+	ball1->setPosition(startPos);
 
 	GameBall* ball2 = new GameBall();
 	space->getRootEntity()->addChild(ball2);
@@ -36,7 +105,7 @@ void GameLevel::createFromFile(const char* filename){
 }
 
 YGEMath::Vector3 GameLevel::getPlayerStartPosition(){
-	return YGEMath::Vector3(172-128, 25, 154-128);
+	return startPos;
 }
 
 void GameLevel::addEntity(YGETimeSpace::YGEEntity* entity){

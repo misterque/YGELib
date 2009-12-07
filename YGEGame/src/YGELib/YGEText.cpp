@@ -109,7 +109,7 @@ GLuint surfaceToTexture(SDL_Surface *surface){
 
 namespace YGEGraphics {
 
-	YGEText::YGEText(std::string t) : hasTexture(false){
+	YGEText::YGEText(std::string t) : hasTexture(false), hasToBeCreated(true){
 		setFont("VeraMono12");
 		setText(t);
 
@@ -124,7 +124,7 @@ namespace YGEGraphics {
 
 	}
 
-	YGEText::YGEText(std::string t, const char* f):hasTexture(false){
+	YGEText::YGEText(std::string t, const char* f):hasTexture(false), hasToBeCreated(true){
 		setFont(f);
 		setText(t);
 
@@ -137,9 +137,7 @@ namespace YGEGraphics {
 		blue = 1.0f;
 	}
 
-	void YGEText::setText(std::string t){
-		text = t;
-		//@todo free texture if hasTexture
+	void YGEText::createText(){
 		if(hasTexture){
 			hasTexture = false;
 			glDeleteTextures(1, &textureId);
@@ -157,7 +155,13 @@ namespace YGEGraphics {
 
 		SDL_FreeSurface(surface);
 		hasTexture = true;
+		hasToBeCreated = false;
 
+	}
+	void YGEText::setText(std::string t){
+		text = t;
+		//@todo free texture if hasTexture
+		hasToBeCreated = true;
 
 	}
 	void YGEText::setFont(const char* f){
@@ -199,6 +203,10 @@ namespace YGEGraphics {
 
 
 	void YGEText::draw(YGEGraphicsContext* context){
+		if(hasToBeCreated){
+			createText();
+		}
+			
 		glEnable(GL_TEXTURE_2D);
 		glDisable(GL_LIGHTING);
 

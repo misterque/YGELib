@@ -104,7 +104,7 @@ public:
 
 
 
-	void setGameState(YGEGame::YGEGameState* state);
+	virtual void setGameState(YGEGame::YGEGameState* state);
 
 	YGEInputManager* getInputManager();
 

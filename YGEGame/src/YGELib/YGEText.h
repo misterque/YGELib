@@ -35,6 +35,7 @@ namespace YGEGraphics {
 		static FontList fonts;
 		int size;
 		bool hasTexture;
+		bool hasToBeCreated;
 		SDL_Color color;
 
 		float red;
@@ -47,6 +48,10 @@ namespace YGEGraphics {
 		TTF_Font* font;
 
 		GLuint textureId;
+
+		void createText();
+
+
 	public:
 		YGEText(std::string t);
 		YGEText(std::string t, const char* f);

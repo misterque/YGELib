@@ -1,7 +1,12 @@
 #ifndef _YGE_ENGINE_CORE_MULTI_THREADED_H_
 #define _YGE_ENGINE_CORE_MULTI_THREADED_H_
 
-#include "YGEEngineCore.h"
+#include "YGEEngineCoreSingleThreaded.h"
+
+#include "SDL.h"
+#include "SDL_thread.h"
+
+#include <list>
 
 namespace YGECore {
 
@@ -10,31 +15,68 @@ namespace YGECore {
 	* @todo just use YGEGraphicsCore... make it nicer... more PFI
 	* true object orientation
 	*/
-	class YGEEngineCoreMultiThreaded : public YGEEngineCore {
+	class YGEEngineCoreMultiThreaded : public YGEEngineCoreSingleThreaded {
 	protected:
+		SDL_mutex* simulateMutex;
 
+
+		SDL_mutex* updateMutex;
+		SDL_mutex* prerenderMutex;
+		SDL_cond* updateCondition;
+		SDL_cond* renderCondition;
+
+		bool statusIsRender;
+	
+		SDL_mutex* eventMutex;
+
+		std::list<SDL_Event> events;
+
+		SDL_Thread* updateThread;
+		SDL_Thread* simulateThread;
+		YGEGame::YGEGameState* newGameState;
+
+		bool gamestatechanged;
 	public:
 
-		YGEEngineCoreMultiThreaded();
+		YGEEngineCoreMultiThreaded(){
+			statusIsRender = true;
 
-		~YGEEngineCoreMultiThreaded();
-		/**
-		* initialises the core
-		* components are allocated and ressources are loaded
-		*/
-		virtual void init();
+			simulateMutex = SDL_CreateMutex();
+			eventMutex = SDL_CreateMutex();
+
+			updateMutex = SDL_CreateMutex();			
+			prerenderMutex = SDL_CreateMutex();
+
+			updateCondition = SDL_CreateCond();
+			renderCondition = SDL_CreateCond();
+
+			updateThread = NULL;
+			simulateThread = NULL;
+
+			gamestatechanged = true;
+
+			newGameState = NULL;
+		}
+
+		//@todo destroy the mutexes and conditions
+//		~YGEEngineCoreMultiThreaded();
 
 		/**
-		* starts a permanent engine loop, returns if core
-		* decides to shut down (window closed etc...);
-		* init() should be called before starting the render loop
+		* starts a permanent engine loop with a seperate thread for physics
+		* init() should be called before 
 		*/
 		virtual void run();
 
-		/**
-		* free resources etc.
-		*/
-		virtual void shutdown();
+		void threadUpdate();
+
+		void threadSimulate();
+
+		void processEvents();
+
+		virtual void setGameState(YGEGame::YGEGameState* state);
+
+
+
 
 	};
 

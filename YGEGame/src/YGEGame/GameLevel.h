@@ -21,6 +21,19 @@ private:
 	YGEGraphics::YGEHeightmap *heightmap;
 	YGEGraphics::YGEWater *water;
 	YGEGraphics::YGESkybox *skybox;
+
+
+	std::string skymapName;
+	YGEMath::Vector3 sunposition;
+	YGEMath::Vector3 suncolor;
+	int timeToComplete;
+
+	std::string mapFileName;
+	std::string textureFileName;
+
+	YGEMath::Vector3 mapScale;
+	YGEMath::Vector3 startPos;
+	void parseFile(const char* filename);
 public:
 	void createFromFile(const char* filename);
 

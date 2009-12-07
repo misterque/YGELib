@@ -47,7 +47,11 @@ namespace YGEPhysics {
 
 		YGEMath::Vector3 getRelativeVelocity();
 
-		dBodyID getBodyId();
+		void setLinearDamping(double d);
+
+		void setAngularDamping(double d);
+
+		//dBodyID getBodyId();
 
 		virtual void setParent(YGETimeSpace::YGEEntity* entity);
 
