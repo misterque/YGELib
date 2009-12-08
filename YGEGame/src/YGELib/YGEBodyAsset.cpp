@@ -10,13 +10,18 @@ namespace YGEPhysics {
 	void YGEBodyAsset::createBody(){
 		YGETimeSpace::YGESpace* parentSpace = parent->getSpace();
 		if(parentSpace != NULL){
+
+			if(hasBody) {
+				dBodyDestroy(bodyId);
+				dGeomDestroy(geomId);
+			}
 			bodyId = dBodyCreate(parentSpace->getWorldId());
 
 
 			mass = new dMass();
 			dMassSetBox(mass,1,1,1,1);
 
-			dMassAdjust(mass,1.0f);
+			dMassAdjust(mass,bodyMass);
 
 			dBodySetMass(bodyId, mass);
 
@@ -35,7 +40,7 @@ namespace YGEPhysics {
 			//dBodyAddForce(bodyId, 0.5, 0, 0);
 
 			// a hull, remove this
-			geomId = dCreateBox(parentSpace->getDSpaceId(), 1, 1, 1);
+			geomId = dCreateBox(parentSpace->getDSpaceId(), bodySize.x, bodySize.y, bodySize.z);
 			dGeomSetData(geomId, this);
 			
 			dGeomSetCategoryBits(geomId, YGEPhysics::ENTITIES );
@@ -107,16 +112,6 @@ if(hasBody) {
 	}
 
 
-/*
-	dBodyID YGEBodyAsset::getBodyId(){
-		if(hasBody) {
-			return bodyId;
-		} else {
-			// @todo add exception or similar
-			return 0;
-		}
-	}
-	*/
 
 	void YGEBodyAsset::setParent(YGETimeSpace::YGEEntity* entity){
 		parent = entity;
@@ -155,4 +150,18 @@ if(hasBody) {
 
 	}
 
+	void YGEBodyAsset::setSize(const YGEMath::Vector3 &size){
+		bodySize = size;
+		if(hasBody) {
+			createBody();
+		}
+	}
+	
+	void YGEBodyAsset::setMass(double mass){
+		bodyMass = mass;
+		if(hasBody) {
+			createBody();
+		}
+
+	}
 }

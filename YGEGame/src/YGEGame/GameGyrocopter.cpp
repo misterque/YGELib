@@ -45,8 +45,10 @@ GameGyrocopter::GameGyrocopter(){
 
 
 	//addAsset(new YGEGraphics::YGESimpleBox());
+	
 	addAsset(&mass);
-
+	mass.setSize(YGEMath::Vector3(3, 2, 6));
+	mass.setMass(1);
 	
 	throttle = 0;
 	tailH = 0;

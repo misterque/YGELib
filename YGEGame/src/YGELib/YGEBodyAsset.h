@@ -28,10 +28,12 @@ namespace YGEPhysics {
 
 		bool hasBody;
 
+		YGEMath::Vector3 bodySize;
+		double bodyMass;
 
 	public:
 
-		YGEBodyAsset() : hasBody(false){
+		YGEBodyAsset() : hasBody(false), bodySize(YGEMath::Vector3(1,1,1)), bodyMass(1){
 			
 		}
 
@@ -60,6 +62,8 @@ namespace YGEPhysics {
 				virtual void disable();
 		virtual void enable();
 
+		void setSize(const YGEMath::Vector3 &size);
+		void setMass(double mass);
 	};
 
 }

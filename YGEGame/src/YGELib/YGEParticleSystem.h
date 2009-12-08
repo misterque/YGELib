@@ -32,6 +32,8 @@ public:
 	YGEMath::Vector3 position;
 	YGEMath::Vector3 velocity;
 
+
+
 };
 
 class YGEParticleList {
@@ -94,6 +96,9 @@ private:
 	YGEMath::Vector3 spawnRandomVelocity;
 	YGEMath::Vector3 addVelocity;
 	YGEMath::Vector3 addRandomVelocity;
+
+	double spawnPerSecond;
+	double spawnAccum;
 
 public:
 

@@ -4,37 +4,46 @@
 #include <sstream>
 
 GameHUD::GameHUD(){
-
+	// register a font
 	YGEGraphics::YGEText::registerFont("VeraMono24", "../media/fonts/VeraMono.ttf", 24);
 
+	// add the camera to the space of the hud and change the way of projection
 	space.getRootEntity()->addChild(&observer);
 	observer.setCameraMode(CAMERA_ORTHOGONAL);
 
+	/*
 	YGETimeSpace::YGEEntity* text = new YGETimeSpace::YGEEntity();
 	space.getRootEntity()->addChild(text);
 
 	text->addAsset(new YGEGraphics::YGEText("blaaa"));
 	text->setPosition(YGEMath::Vector3(50,50,0));
+*/
 
+	// add pause text and hide it
 	pauseTextPos = new YGETimeSpace::YGEEntity();
 	space.getRootEntity()->addChild(pauseTextPos);
 	pauseTextPos->translate(YGEMath::Vector3(200,300,0));
 	pauseText = new YGEGraphics::YGEText("press 'p' to continue", "VeraMono24");
 	pauseTextPos->addAsset(pauseText);
 
+	pauseText->disable();
+
+
+	// add entity and text for displaying the time
 	YGETimeSpace::YGEEntity* timePos = new YGETimeSpace::YGEEntity();
 	space.getRootEntity()->addChild(timePos);
 
 	timeText = new YGEGraphics::YGEText("bla", "VeraMono24");
 	timePos->addAsset(timeText);
 	timePos->setPosition(YGEMath::Vector3(500,75,0));
-
+	/*
 	YGETimeSpace::YGEEntity* velocityPos = new YGETimeSpace::YGEEntity();
 	space.getRootEntity()->addChild(velocityPos);
 
 	velocityText = new YGEGraphics::YGEText("bla", "VeraMono24");
 	velocityPos->addAsset(velocityText);
 	velocityPos->setPosition(YGEMath::Vector3(500,100,0));
+	*/
 
 
 }

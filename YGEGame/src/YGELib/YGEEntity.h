@@ -226,6 +226,10 @@ public:
 	 */
 	void setPosition(const YGEMath::Vector3 &pos){
 		position = pos;
+
+		// do this as well, so the physics engine does not get confused
+		// and for rendering it makes no difference
+		absPosition = pos;
 	}
 
 	void setScale(const YGEMath::Vector3 &sca){

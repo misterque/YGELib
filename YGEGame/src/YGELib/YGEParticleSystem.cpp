@@ -101,6 +101,8 @@ namespace YGEGraphics {
 		spawnRandomVelocity = YGEMath::Vector3(0.3,0.3,0.3);
 		addVelocity = YGEMath::Vector3(0,0.5,0);
 		addRandomVelocity = YGEMath::Vector3(0.1,0.1,0.1);
+		spawnPerSecond = 10.0f;
+		spawnAccum = 0;
 	
 	}
 
@@ -134,11 +136,18 @@ namespace YGEGraphics {
 
 		// calc the amount of particles to spawn
 		// should be dependand on framerate and respawn rate
-		int spawnnew = 1;
-		if(enabled == false) {
-			spawnnew = 0;
+		int numberOfParticlesToSpawn = spawnPerSecond * seconds + spawnAccum;
+		if(numberOfParticlesToSpawn == 0) {
+			spawnAccum += seconds;
+		} else {
+			spawnAccum = 0;
 		}
-		for(int i = 0; i<spawnnew; i++){
+
+		if(enabled == false) {
+			numberOfParticlesToSpawn = 0;
+		}
+		for(int i = 0; i<numberOfParticlesToSpawn; i++){
+			
 			YGEParticle* newParticle = particleList.getParticle();
 			newParticle->timeToLive = 5.0f;
 			

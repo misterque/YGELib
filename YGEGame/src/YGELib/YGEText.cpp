@@ -206,7 +206,7 @@ namespace YGEGraphics {
 		if(hasToBeCreated){
 			createText();
 		}
-			
+		if(!this->enabled) return;
 		glEnable(GL_TEXTURE_2D);
 		glDisable(GL_LIGHTING);
 

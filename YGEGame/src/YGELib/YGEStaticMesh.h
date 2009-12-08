@@ -32,6 +32,10 @@ private:
 	Mesh model;
 
 public:
+
+	Mesh* getModel(){
+		return &model;
+	}
 		virtual void draw(YGEGraphicsContext* context);
 
 		/**

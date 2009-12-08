@@ -9,4 +9,9 @@ textureFileName: textures/mud.tex
 
 mapScale: 1000 100 1000
 
-startPos: 0 110 0
+startPos: 0 400 -1000
+
+whiteBall: 0 300 0
+//whiteBall: 0 400 0
+
+solidObject: models/airport.obj 0 50 0

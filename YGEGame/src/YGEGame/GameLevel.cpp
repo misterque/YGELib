@@ -4,63 +4,74 @@
 #include <sstream>
 
 void GameLevel::parseFile(const char *filename){
-		std::ifstream is;
-		is.open(filename);
-		if(!is.is_open()) {
-			throw YGEExceptionFileNotFound(filename);
+	std::ifstream is;
+	is.open(filename);
+	if(!is.is_open()) {
+		throw YGEExceptionFileNotFound(filename);
+	}
+
+	while(!is.eof()){
+		std::string line, type;
+		getline(is, line);
+		std::istringstream istr(line);
+
+		istr >> type;
+
+		if(type == "sky:") {
+			istr >> skymapName;
+		} 
+		if(type == "sunposition:") {
+			istr >> sunposition.x;
+			istr >> sunposition.y;
+			istr >> sunposition.z;
 		}
-
-		while(!is.eof()){
-			std::string line, type;
-			getline(is, line);
-			std::istringstream istr(line);
-
-			istr >> type;
-
-			if(type == "sky:") {
-				istr >> skymapName;
-			} 
-			if(type == "sunposition:") {
-				istr >> sunposition.x;
-				istr >> sunposition.y;
-				istr >> sunposition.z;
-			}
-			if(type == "suncolor:") {
-				istr >> suncolor.x;
-				istr >> suncolor.y;
-				istr >> suncolor.z;
-			}
-			if(type == "timeToComplete:") {
-				istr >> timeToComplete;
-
-			}
-			if(type == "mapFileName:") {
-				istr >> mapFileName;
-
-			}
-			if(type == "textureFileName:") {
-				istr >> textureFileName;
-
-			}
-			if(type == "mapScale:") {
-				istr >> mapScale.x;
-				istr >> mapScale.y;	
-				istr >> mapScale.z;
-			}
-
-			if(type == "startPos:") {
-				istr >> startPos.x;
-				istr >> startPos.y;	
-				istr >> startPos.z;
-			}
-
-
-
-
-
-
+		if(type == "suncolor:") {
+			istr >> suncolor.x;
+			istr >> suncolor.y;
+			istr >> suncolor.z;
+		}
+		if(type == "timeToComplete:") {
+			istr >> timeToComplete;
 
 		}
+		if(type == "mapFileName:") {
+			istr >> mapFileName;
+
+		}
+		if(type == "textureFileName:") {
+			istr >> textureFileName;
+
+		}
+		if(type == "mapScale:") {
+			istr >> mapScale.x;
+			istr >> mapScale.y;	
+			istr >> mapScale.z;
+		}
+
+		if(type == "startPos:") {
+			istr >> startPos.x;
+			istr >> startPos.y;	
+			istr >> startPos.z;
+		}
+
+		if(type == "whiteBall:") {
+			YGEMath::Vector3 position;
+			istr >> position.x;
+			istr >> position.y;	
+			istr >> position.z;
+			ballPositions.push_back(position);
+		}
+
+
+
+
+
+
+
+
+
+
+	}
 
 
 }
@@ -93,13 +104,15 @@ void GameLevel::createFromFile(const char* filename){
 	space->setSkybox(skybox);
 	space->getSunlight()->setColor(suncolor.x, suncolor.y, suncolor.z);
 	space->getSunlight()->setDirection(sunposition);
-	GameBall* ball1 = new GameBall();
-	space->getRootEntity()->addChild(ball1);
-	ball1->setPosition(startPos);
 
-	GameBall* ball2 = new GameBall();
-	space->getRootEntity()->addChild(ball2);
-	ball2->setPosition(YGEMath::Vector3(0, 90, 0));
+	for(std::list<YGEMath::Vector3>::iterator iter = ballPositions.begin(); iter != ballPositions.end(); iter++){
+
+		GameBall* ball = new GameBall();
+		space->getRootEntity()->addChild(ball);
+		ball->setPosition(*iter);
+
+
+	}
 
 
 }

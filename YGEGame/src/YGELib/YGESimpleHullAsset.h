@@ -7,6 +7,7 @@
 #ifndef _YGE_SIMPLE_HULL_
 #define _YGE_SIMPLE_HULL_
 
+#include "YGEPrimitives.h"
 #include "YGEPhysicsAsset.h"
 #include "YGEVector.h"
 #include "ode/ode.h"
@@ -23,6 +24,9 @@ class YGESimpleHullAsset : public YGEPhysicsAsset {
 		YGESimpleHullAsset() : hasGeom(false){
 			
 		}
+
+
+		void fromTriangleMesh(YGEGraphics::Mesh* mesh);
 
 		void createGeom();
 
