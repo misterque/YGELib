@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="9,00"
+	Version="9.00"
 	Name="YGELib"
 	ProjectGUID="{B34C1000-21FF-4AF4-B36D-7C9E6175D53A}"
 	RootNamespace="YGELib"
@@ -385,18 +385,6 @@
 				</File>
 			</Filter>
 			<Filter
-				Name="display"
-				>
-				<File
-					RelativePath="..\src\YGELib\YGEGraphicsCore.h"
-					>
-				</File>
-				<File
-					RelativePath="..\src\YGELib\YGESDLDisplay.h"
-					>
-				</File>
-			</Filter>
-			<Filter
 				Name="input"
 				>
 				<File
@@ -433,6 +421,10 @@
 				</File>
 				<File
 					RelativePath="..\src\YGELib\YGEGraphicsContext.h"
+					>
+				</File>
+				<File
+					RelativePath="..\src\YGELib\YGEGraphicsCore.h"
 					>
 				</File>
 				<File

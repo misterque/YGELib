@@ -10,63 +10,61 @@
 namespace YGEGraphics {
 	void YGEParticleList::setAlive(YGEGraphics::YGEParticle *p){
 
-		if(!p->alive){
+		assert(!p->alive);
 
-			// remove from dead list
-			if(p->previousParticle != NULL) {
-				p->previousParticle->nextParticle = p->nextParticle;
-			} else {
-				firstDead = p->nextParticle;
-			}
-
-			if(p->nextParticle != NULL) {
-				p->nextParticle->previousParticle = p->previousParticle;
-			} 
-
-			// add to head of alive list
-			p->nextParticle = this->firstAlive;
-			p->nextParticle->previousParticle = p;
-			p->previousParticle = NULL;
-			this->firstAlive = p;
-
-			p->alive = true;
-
-			//increase alive counter
-			numberOfAliveParticles++;
-			numberOfDeadParticles--;
+		// remove from dead list
+		if(p->previousParticle != NULL) {
+			p->previousParticle->nextParticle = p->nextParticle;
 		} else {
-			assert(false);
+			firstDead = p->nextParticle;
 		}
+
+		if(p->nextParticle != NULL) {
+			p->nextParticle->previousParticle = p->previousParticle;
+		} 
+
+		// add to head of alive list
+		p->nextParticle = this->firstAlive;
+		if(p->nextParticle != NULL) {
+			p->nextParticle->previousParticle = p;
+		}
+		p->previousParticle = NULL;
+		this->firstAlive = p;
+
+		p->alive = true;
+
+		//increase alive counter
+		numberOfAliveParticles++;
+		numberOfDeadParticles--;
 
 	}
 
 	void YGEParticleList::setDead(YGEGraphics::YGEParticle *p){
 
-		if(p->alive){
-			// remove from alive list
-			if(p->previousParticle != NULL) {
-				p->previousParticle->nextParticle = p->nextParticle;
-			} else {
-				firstAlive = p->nextParticle;
-			}
-			if(p->nextParticle != NULL) {
-				p->nextParticle->previousParticle = p->previousParticle;
-			} 
+		assert(p->alive);
 
-			// add to head of dead list
-			p->nextParticle = firstDead;
-			p->previousParticle = NULL;
-			firstDead = p;
-
-			p->alive = false;
-
-			// increase dead counter
-			numberOfDeadParticles++;
-			numberOfAliveParticles--;
+		// remove from alive list
+		if(p->previousParticle != NULL) {
+			p->previousParticle->nextParticle = p->nextParticle;
 		} else {
-			assert(false);
+			firstAlive = p->nextParticle;
 		}
+		if(p->nextParticle != NULL) {
+			p->nextParticle->previousParticle = p->previousParticle;
+		} 
+
+		// add to head of dead list
+		p->nextParticle = firstDead;
+		p->previousParticle = NULL;
+		firstDead = p;
+
+		p->alive = false;
+
+		// increase dead counter
+		numberOfDeadParticles++;
+		numberOfAliveParticles--;
 	}
+
 
 	YGEParticle* YGEParticleList::getParticle(){
 		YGEParticle* p;
@@ -88,22 +86,25 @@ namespace YGEGraphics {
 				this->firstAlive->previousParticle = p;
 			}
 			this->firstAlive = p;
+			assert(firstAlive);
 			numberOfAliveParticles++;
 
 		}
+
+
 		return p;
 	}
 
 	YGEParticleSystem::YGEParticleSystem(){
 		texture = YGECore::YGERessourceManager::getInstance()->getTexture("textures/particle.tex");
-	
+
 		spawnVelocity = YGEMath::Vector3(0,0,0);
 		spawnRandomVelocity = YGEMath::Vector3(0.3,0.3,0.3);
 		addVelocity = YGEMath::Vector3(0,0.5,0);
 		addRandomVelocity = YGEMath::Vector3(0.1,0.1,0.1);
 		spawnPerSecond = 10.0f;
 		spawnAccum = 0;
-	
+
 	}
 
 	void YGEParticleSystem::tick(long delta){
@@ -136,7 +137,7 @@ namespace YGEGraphics {
 
 		// calc the amount of particles to spawn
 		// should be dependand on framerate and respawn rate
-		int numberOfParticlesToSpawn = spawnPerSecond * seconds + spawnAccum;
+		int numberOfParticlesToSpawn = spawnPerSecond * (seconds + spawnAccum);
 		if(numberOfParticlesToSpawn == 0) {
 			spawnAccum += seconds;
 		} else {
@@ -147,10 +148,10 @@ namespace YGEGraphics {
 			numberOfParticlesToSpawn = 0;
 		}
 		for(int i = 0; i<numberOfParticlesToSpawn; i++){
-			
+
 			YGEParticle* newParticle = particleList.getParticle();
 			newParticle->timeToLive = 5.0f;
-			
+
 			newParticle->position = this->getParent()->getAbsPosition();
 
 			newParticle->velocity = spawnVelocity;
@@ -163,27 +164,27 @@ namespace YGEGraphics {
 	}
 
 	void YGEParticleSystem::draw(YGEGraphicsContext *context){
-	
+
 		YGEParticle* p = particleList.getFirstAliveParticle();
 
 
 		glPushMatrix();
 		context->glGetCameraMatrix();
 
-		glDisable(GL_TEXTURE_2D);
+		glEnable(GL_TEXTURE_2D);
 
 		glDisable(GL_LIGHTING);
-		///glEnable(GL_BLEND);
-		//glDisable(GL_DEPTH_TEST);
-		///glBlendFunc(GL_SRC_COLOR, GL_ONE_MINUS_SRC_COLOR);
+		glEnable(GL_BLEND);
+		glDisable(GL_DEPTH_TEST);
+		glBlendFunc(GL_SRC_COLOR, GL_ONE_MINUS_SRC_COLOR);
 
-		///glBindTexture(GL_TEXTURE_2D, texture->textureID);
+		glBindTexture(GL_TEXTURE_2D, texture->textureID);
 
 		glColor3f(1,1,1);
 
-		///glEnable( GL_POINT_SPRITE );
+		glEnable( GL_POINT_SPRITE );
 
-		///glTexEnvi( GL_POINT_SPRITE, GL_COORD_REPLACE, GL_TRUE );
+		glTexEnvi( GL_POINT_SPRITE, GL_COORD_REPLACE, GL_TRUE );
 
 
 		GLfloat fSizes[2];
@@ -197,9 +198,9 @@ namespace YGEGraphics {
 
 		glPointParameterf( GL_POINT_SIZE_MIN, 5.0f );
 
-		glPointParameterf( GL_POINT_SIZE_MAX, 60.0f );
+		glPointParameterf( GL_POINT_SIZE_MAX, 260.0f );
 
-		glPointSize(64.0f);
+		glPointSize(150.0f);
 
 		glBegin(GL_POINTS);
 		while(p != NULL){
@@ -207,7 +208,7 @@ namespace YGEGraphics {
 			p = p->nextParticle;
 		}
 		glEnd();
-	
+
 		glPopMatrix();
 
 	}

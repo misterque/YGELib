@@ -1,5 +1,5 @@
 #include "GameBall.h"
-
+#include "GameManager.h"
 
 GameBall::GameBall() {
 
@@ -17,5 +17,7 @@ void GameBall::processCollision(YGEPhysics::YGEPhysicsAsset* bodyPart, YGEPhysic
 	if(collider != NULL){
 		getParent()->removeChild(this);
 	}
+
+	GameManager::getInstance()->getCore()->processCommand("balldestroyed");
 
 };

@@ -33,9 +33,7 @@ namespace YGECore {
 
 		SDL_Thread* updateThread;
 		SDL_Thread* simulateThread;
-		YGEGame::YGEGameState* newGameState;
 
-		bool gamestatechanged;
 	public:
 
 		YGEEngineCoreMultiThreaded(){
@@ -73,7 +71,7 @@ namespace YGECore {
 
 		void processEvents();
 
-		virtual void setGameState(YGEGame::YGEGameState* state);
+
 
 
 

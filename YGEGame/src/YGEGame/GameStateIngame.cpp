@@ -19,6 +19,8 @@ void GameStateIngame::init()  {
 	// @todo create level from file
 	level->createFromFile("level/level01.lev");
 
+	ballsToDestroy = level->getNumberOfBalls();
+
 
 	// setting up the gyrocopter
 	gyro = new GameGyrocopter();
@@ -50,6 +52,10 @@ void GameStateIngame::init()  {
 	gameStartTime = GameManager::getInstance()->getCore()->getTimeSinceGameStarted();
 
 	hasBeenInitialised = true;
+
+	timeToQuit=999999999;
+
+
 }
 
 
@@ -70,6 +76,7 @@ void GameStateIngame::update(long delta){
 		return;
 	}*/
 
+	int timeLeft = level->getTimeToComplete() - (ingameTime / 1000000);
 	timeSinceLastTimeUpdate += delta;
 	
 	if( level->getSpace()->getTimeIsRunning() ) {
@@ -79,7 +86,34 @@ void GameStateIngame::update(long delta){
 		timeSinceLastTimeUpdate = 0;
 		//long long timePassed = GameManager::getInstance()->getCore()->getTimeSinceGameStarted() - gameStartTime;
 
-		hud->setTime((int)(ingameTime / 1000000));
+		hud->setTime(timeLeft);
+		
+	}
+
+	
+
+	if(ballsToDestroy > 0 && timeLeft < 0) {
+		hud->setInfoText("timeout!!!");
+		timeToQuit = 3.0f;
+		ballsToDestroy = -1;
+	}
+	if(ballsToDestroy == 0) {
+		hud->setInfoText("all balls destroyed!!!");
+		timeToQuit = 3.0f;
+		ballsToDestroy--;
+		
+	}
+	if(ballsToDestroy == -1) {
+		timeToQuit -= delta / 1000000.0f;
+	}
+	if(ballsToDestroy == -2) {
+		hud->setInfoText("collision!!!");
+		timeToQuit = 3.0f;
+		ballsToDestroy = -1;
+	}
+
+	if(timeToQuit < 0) {
+		GameManager::getInstance()->popGameState();
 	}
 }
 
@@ -117,10 +151,10 @@ void GameStateIngame::keyDown(SDLKey key){
 			case SDLK_p:
 				if(level->getSpace()->getTimeIsRunning()) {
 					level->getSpace()->stopTime();
-					hud->setShowPauseText(true);
+					hud->setInfoText("PAUSE - press 'p' to continue");
 				} else {
 					level->getSpace()->startTime();
-					hud->setShowPauseText(false);
+					hud->setInfoText("");
 				}
 				break;
 
@@ -171,4 +205,16 @@ void  GameStateIngame::processCommand(const char* command) {
 	if(command == "pop") {
 		GameManager::getInstance()->popGameState();
 	}
+	if(command == "balldestroyed") {
+		ballsToDestroy--;
+	}
+	
+	if(command == "collision") {
+		ballsToDestroy = -2;
+	}
+
+}
+
+void GameStateIngame::setLevel(int level){
+
 }

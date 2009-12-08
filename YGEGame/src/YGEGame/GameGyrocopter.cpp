@@ -1,4 +1,5 @@
 #include "GameGyrocopter.h"
+#include "GameManager.h"
 #include "YGEGraphicsAsset.h"
 #include "YGELogger.h"
 #include "YGEParticleSystem.h"
@@ -50,7 +51,7 @@ GameGyrocopter::GameGyrocopter(){
 	mass.setSize(YGEMath::Vector3(3, 2, 6));
 	mass.setMass(1);
 	
-	throttle = 0;
+	throttle = 100;
 	tailH = 0;
 	tailV = 0;
 	tailX = 0;
@@ -72,6 +73,9 @@ GameGyrocopter::GameGyrocopter(){
 	addAsset(&lowSound);
 	addAsset(&midSound);
 	addAsset(&highSound);
+
+	posRotorTop.addAsset(&collider);
+	collider.setRadius(2);
 
 	soundstate = -1;
 
@@ -192,10 +196,20 @@ void GameGyrocopter::fireRocket(){
 		this->getParent()->addChild(rocket);
 		rocket->setPosition(this->getPosition());
 		//getOrientation().rotateVector(YGEMath::Vector3(3* fireFromRight,3,0));
-		rocket->translate(getOrientation().rotateVector(YGEMath::Vector3(2 * fireFromRight,1,0)));
+		rocket->translate(getOrientation().rotateVector(YGEMath::Vector3(1.5f * fireFromRight,2,-5)));
 
 		rocket->setOrientation(getOrientation());
 		reload = 1000000;
 		fireFromRight = fireFromRight * -1;
 	} 
 }
+
+
+void GameGyrocopter::processCollision(YGEPhysics::YGEPhysicsAsset* bodyPart, YGEPhysics::YGEPhysicsAsset* collider){
+	//if(collider != NULL){
+		GameManager::getInstance()->getCore()->processCommand("collision");
+		
+	//}
+
+
+};

@@ -1,5 +1,5 @@
 #include "YGEEngineCoreSingleThreaded.h"
-#include "YGESDLDisplay.h"
+#include "YGEGraphicsCore.h"
 #include <SDL_thread.h> 
 #include <SDL_ttf.h>
 #include "YGEAudioCore.h"
@@ -28,8 +28,18 @@ namespace YGECore {
 		debugout("starting the core");
 
 		while(graphics->windowClosed == false && shutdownNow == false){
+			if(gamestatechanged) {
+				gamestatechanged = false;
+				gamestate = newGameState;
+				newGameState = NULL;
+			}
+
+			if(gamestate->getHasBeenInitialised() == false) {
+				gamestate->init();
+			}
 
 			//debugout("update the core");
+
 
 			timer->startTimer();
 
@@ -40,6 +50,7 @@ namespace YGECore {
 
 
 			processEvents();
+
 
 
 
@@ -237,7 +248,7 @@ namespace YGECore {
 
 		console = new YGEConsole();
 		YGELogger::getInstance()->setConsole(console);
-		graphics = new YGESDLDisplay();
+		graphics = new YGEGraphicsCore();
 		input = new YGEInputManager();
 
 		audio = YGEAudio::YGEAudioCore::getInstance();
@@ -269,6 +280,11 @@ namespace YGECore {
 	void YGEEngineCoreSingleThreaded::shutdown(){
 		debugout("prepare to shut down!");
 		shutdownNow = true;
+	}
+
+	void YGEEngineCoreSingleThreaded::setGameState(YGEGame::YGEGameState* state){
+		newGameState = state;
+		gamestatechanged = true;
 	}
 
 }

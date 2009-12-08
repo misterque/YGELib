@@ -20,6 +20,7 @@ namespace YGEGraphics {
 		glBindTexture(GL_TEXTURE_2D, mesh->textureID);
 
 		glDisable(GL_BLEND);
+	glEnable(GL_DEPTH_TEST);
 
 		glColor3f(1,1,1);
 		// fallback

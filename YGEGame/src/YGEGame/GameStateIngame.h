@@ -74,6 +74,8 @@ private:
 	 * vector of balls which have to be destroyed to finish the level
 	 */
 	std::vector<GameBall> balls;
+
+	int ballsToDestroy;
 public:
 
 	/**
@@ -105,6 +107,10 @@ public:
 	virtual void keyUp(SDLKey key);
 
 	virtual void processCommand(const char* command);
+
+	void setLevel(int level);
+
+	double timeToQuit;
 
 };
 

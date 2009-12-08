@@ -19,13 +19,25 @@ GameStateMainmenu::GameStateMainmenu(){
 
 	optionsMenu = new Menu();
 	optionsMenu->addItem("< Change Sound Volume >", "changevolume");
+	optionsMenu->addItem("Toggle Fullscreen", "togglefullscreen");
 	optionsMenu->addItem("Back", "back");
+
+	levelMenu = new Menu();
+
+	std::vector<std::string>* levels = GameManager::getInstance()->getLevelList();
+	int i = 0;
+	for(std::vector<std::string>::iterator iter = levels->begin(); iter != levels->end(); iter++){
+		if(i < GameManager::getInstance()->getReachedLevel()) {
+			levelMenu->addItem((*iter), "start");
+		}
+
+	}
 
 	mainMenu = new Menu();
 
 	activeMenu = mainMenu;
 	mainMenu->pos->translate3d(300, 200, 0);
-	mainMenu->addItem("Start Game" , "start");
+	mainMenu->addSubmenu("Start Game" , levelMenu);
 	mainMenu->addSubmenu("Options", optionsMenu);
 	mainMenu->addItem("Exit", "quit");
 

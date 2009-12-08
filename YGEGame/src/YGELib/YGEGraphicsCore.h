@@ -1,6 +1,9 @@
 #ifndef _YGE_DISPLAY_H_
 #define _YGE_DISPLAY_H_
 
+#include <SDL.h> 
+#include <SDL_opengl.h> 
+
 #include "YGEGraphicsContext.h"
 
 namespace YGETimeSpace {
@@ -9,33 +12,63 @@ namespace YGETimeSpace {
 	class YGEObserver;
 }
 
+#define SCREEN_WIDTH 640
+#define SCREEN_HEIGHT 480
+
+
+#ifdef _DEBUG
+#define FULLSCREEN false
+#else
+#define FULLSCREEN true
+#endif
+
 namespace YGECore {
 
-class YGEGraphicsCore {
-private:
-	YGEGraphicsContext context;
-	void renderEntity(YGETimeSpace::YGEEntity* entity);
+	class YGEGraphicsCore {
+	private:
+		YGEGraphicsContext context;
+		void renderEntity(YGETimeSpace::YGEEntity* entity);
 
-public:
-	int windowClosed;
+		void createScreen();
 
-	virtual void setFullscreen(bool fullscreen) = 0;
-	virtual void setResolution(int w, int h) = 0;
-	virtual void setDepth(int depth) = 0;
-
-	virtual void init() = 0;
-
-	virtual void reset() = 0;
-
-	virtual void update() = 0;
-
-	virtual void setTitle(const char* title) = 0;
+		int screenw;
+		int screenh;
+		int isFullscreen;
+		int depth;
 
 
-	void renderSpace(YGETimeSpace::YGESpace* space, YGETimeSpace::YGEObserver* observer);
 
 
-};
+		SDL_Surface *screen;
+
+	public:
+		int windowClosed;
+
+		void renderSpace(YGETimeSpace::YGESpace* space, YGETimeSpace::YGEObserver* observer);
+
+
+		YGEGraphicsCore();
+
+		void setFullscreen(bool fullscreen);
+
+		bool getFullscreen();
+
+		void setResolution(int w, int h) ;
+
+		void setDepth(int depth);
+
+		void init();
+
+		void reset();
+
+		void notifyEvent(SDL_Event *event);
+
+		void update();
+
+		void setTitle(const char* title);
+	};
+
+
 
 }
 

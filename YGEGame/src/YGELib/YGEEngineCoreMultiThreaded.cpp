@@ -1,5 +1,4 @@
 #include "YGEEngineCoreMultiThreaded.h"
-#include "YGESDLDisplay.h"
 #include <SDL_thread.h> 
 #include <SDL_mutex.h> 
 #include <SDL_ttf.h>
@@ -56,7 +55,7 @@ namespace YGECore {
 		for(;;){
 			SDL_mutexP(simulateMutex);
 
-						gamestate->update(delta);
+			gamestate->update(delta);
 
 
 			processEvents();
@@ -174,10 +173,7 @@ namespace YGECore {
 	}
 
 
-	void YGEEngineCoreMultiThreaded::setGameState(YGEGame::YGEGameState* state){
-		newGameState = state;
-		gamestatechanged = true;
-	}
+
 
 
 		/*

@@ -6,6 +6,8 @@ void YGESimpleBox::draw(YGEGraphicsContext* context){
 
 	glDisable(GL_LIGHTING);
 	glDisable(GL_TEXTURE_2D);
+	glDisable(GL_BLEND);
+	glEnable(GL_DEPTH_TEST);
 			// NEHEs code?
 	glBegin(GL_QUADS);									// Draw A Quad
 		glColor3f(0.0f,1.0f,0.0f);						// Set The Color To Blue

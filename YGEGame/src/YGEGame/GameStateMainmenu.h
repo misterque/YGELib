@@ -34,6 +34,8 @@ private:
 
 	Menu* mainMenu;
 	Menu* optionsMenu;
+	Menu* levelMenu;
+
 	Menu* activeMenu;
 
 	YGETimeSpace::YGEEntity* optionsmenuEntity;

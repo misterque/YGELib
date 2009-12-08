@@ -20,13 +20,13 @@ GameHUD::GameHUD(){
 */
 
 	// add pause text and hide it
-	pauseTextPos = new YGETimeSpace::YGEEntity();
-	space.getRootEntity()->addChild(pauseTextPos);
-	pauseTextPos->translate(YGEMath::Vector3(200,300,0));
-	pauseText = new YGEGraphics::YGEText("press 'p' to continue", "VeraMono24");
-	pauseTextPos->addAsset(pauseText);
+	infoTextPos = new YGETimeSpace::YGEEntity();
+	space.getRootEntity()->addChild(infoTextPos);
+	infoTextPos->translate(YGEMath::Vector3(200,300,0));
+	infoText = new YGEGraphics::YGEText("press 'p' to continue", "VeraMono24");
+	infoTextPos->addAsset(infoText);
 
-	pauseText->disable();
+	infoText->disable();
 
 
 	// add entity and text for displaying the time
@@ -74,11 +74,14 @@ void GameHUD::setVelocity(double v){
 	//velocityText->
 }
 
-void GameHUD::setShowPauseText(bool show){
-	showPauseText = show;
-	if(show) {
-		pauseText->enable();
+
+void GameHUD::setInfoText(std::string text){
+	if(text == "") {
+		infoText->disable();
 	} else {
-		pauseText->disable();
+		infoText->enable();
+		infoText->setText(text);
 	}
+
+
 }

@@ -102,7 +102,7 @@ void GameLevel::createFromFile(const char* filename){
 	skybox = new YGEGraphics::YGESkybox();
 	skybox->loadTextures(skymapName.c_str());
 	space->setSkybox(skybox);
-	space->getSunlight()->setColor(suncolor.x, suncolor.y, suncolor.z);
+	space->getSunlight()->setColor((float)suncolor.x, (float)suncolor.y, (float)suncolor.z);
 	space->getSunlight()->setDirection(sunposition);
 
 	for(std::list<YGEMath::Vector3>::iterator iter = ballPositions.begin(); iter != ballPositions.end(); iter++){
@@ -124,4 +124,13 @@ YGEMath::Vector3 GameLevel::getPlayerStartPosition(){
 void GameLevel::addEntity(YGETimeSpace::YGEEntity* entity){
 	space->getRootEntity()->addChild(entity);
 
+}
+
+int GameLevel::getNumberOfBalls(){
+	return ballPositions.size();
+}
+
+int GameLevel::getTimeToComplete(){
+
+	return timeToComplete;
 }

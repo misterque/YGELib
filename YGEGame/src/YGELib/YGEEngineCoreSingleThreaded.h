@@ -49,6 +49,10 @@ namespace YGECore {
 
 		void printTimes();
 
+		YGEGame::YGEGameState* newGameState;
+
+		bool gamestatechanged;
+
 	public:
 
 		//YGEEngineCoreSingleThreaded();
@@ -72,6 +76,8 @@ namespace YGECore {
 		* free resources etc.
 		*/
 		virtual void shutdown();
+
+				virtual void setGameState(YGEGame::YGEGameState* state);
 
 	};
 

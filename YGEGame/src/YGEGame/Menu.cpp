@@ -64,6 +64,7 @@ Menu* Menu::select(){
 		return items[selectedItem]->submenu;
 
 	}
+	return NULL;
 
 
 }

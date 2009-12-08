@@ -1,5 +1,5 @@
 #include "YGEEngineCore.h"
-#include "YGESDLDisplay.h"
+#include "YGEGraphicsCore.h"
 
 #include <ode/ode.h>
 
@@ -48,6 +48,8 @@ namespace YGECore {
 			int volume = YGEAudio::YGEAudioCore::getInstance()->getSoundVolume();
 			volume -= 10;
 			YGEAudio::YGEAudioCore::getInstance()->setSoundVolume(volume);
+		} else if (std::string(command) == "togglefullscreen") {
+			graphics->setFullscreen(!graphics->getFullscreen());
 		} else {
 
 			gamestate->processCommand(command);

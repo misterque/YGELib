@@ -4,6 +4,7 @@
 #include "YGEStaticMesh.h"
 #include "YGEEntity.h"
 #include "YGEBodyAsset.h"
+#include "YGESimpleHullAsset.h"
 #include "YGESoundAsset.h"
 #include "YGEParticleSystem.h"
 
@@ -29,6 +30,8 @@ private:
 	YGEAudio::YGESoundAsset lowSound;
 	YGEAudio::YGESoundAsset midSound;
 	YGEAudio::YGESoundAsset highSound;
+
+	YGEPhysics::YGESimpleHullAsset collider;
 
 	int soundstate;
 	float fuel;
@@ -78,6 +81,7 @@ public:
 
 	virtual void tick(long delta);
 
+	virtual void processCollision(YGEPhysics::YGEPhysicsAsset* bodyPart, YGEPhysics::YGEPhysicsAsset* collider);
 
 
 };

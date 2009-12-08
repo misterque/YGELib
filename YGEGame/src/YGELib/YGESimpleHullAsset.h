@@ -18,10 +18,10 @@ class YGESimpleHullAsset : public YGEPhysicsAsset {
 
 		bool hasGeom;
 
-
+		double radius;
 	public:
 
-		YGESimpleHullAsset() : hasGeom(false){
+		YGESimpleHullAsset() : hasGeom(false), radius(10){
 			
 		}
 
@@ -29,6 +29,8 @@ class YGESimpleHullAsset : public YGEPhysicsAsset {
 		void fromTriangleMesh(YGEGraphics::Mesh* mesh);
 
 		void createGeom();
+
+		void setRadius(double r);
 
 		virtual void setParent(YGETimeSpace::YGEEntity* entity);
 

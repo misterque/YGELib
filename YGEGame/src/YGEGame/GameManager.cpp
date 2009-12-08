@@ -7,10 +7,59 @@
 
 #include <tchar.h>
 
+#include <istream>
+#include <sstream>
+
+
 GameManager* GameManager::instance = NULL;
 
 GameManager::GameManager(){
 
+}
+
+void GameManager::loadSaveGame(){
+	std::ifstream is;
+	is.open("highscore");
+	if(!is.()) {
+		
+		std::ofstream os;
+		os.open("highscore");
+		os<<1<<std::endl;
+		os.close();
+		reachedLevel = 1;
+		return;
+	}
+
+	while(!is.eof()){
+		std::string line;
+		getline(is, line);
+		std::istringstream istr(line);
+
+		istr >> reachedLevel;
+	}
+
+
+}
+
+void GameManager::loadLevelList(){
+
+	std::ifstream is;
+	is.open(YGECore::YGERessourceManager::getInstance()->absoluteFilename("level/levels.txt").c_str());
+	if(!is.is_open()) {
+		throw YGEExceptionFileNotFound("level/levels.txt");
+	}
+
+	while(!is.eof()){
+		std::string line, type;
+		getline(is, line);
+		std::istringstream istr(line);
+
+		std::string file;
+
+		istr >> file;
+
+		levelFiles.push_back(file);
+	}
 }
 
 void GameManager::startEngine(){
@@ -21,9 +70,7 @@ void GameManager::startEngine(){
 
 void GameManager::startGame(){
 	this->pushGameState(ingame);
-	engineCore->getInputManager()->addKeyDownListener((GameStateIngame*)ingame);
-	engineCore->getInputManager()->addKeyUpListener((GameStateIngame*)ingame);
-	engineCore->getInputManager()->removeKeyDownListener((GameStateMainmenu*)mainmenu);
+
 }
 
 void GameManager::stopGame(){
@@ -31,7 +78,7 @@ void GameManager::stopGame(){
 }
 
 void GameManager::initAndStartGame(){
-	engineCore = new YGECore::YGEEngineCoreMultiThreaded();
+	engineCore = new YGECore::YGEEngineCoreSingleThreaded();
 		engineCore->init();
 
 	ingame = new GameStateIngame();
@@ -41,9 +88,14 @@ void GameManager::initAndStartGame(){
 	splashscreen = new GameStateSplashscreen();
 
 	this->pushGameState(mainmenu);
-	engineCore->getInputManager()->addKeyDownListener((GameStateMainmenu*)mainmenu);
 
 	this->pushGameState(splashscreen);
+
+	engineCore->getInputManager()->addKeyDownListener(this);
+	engineCore->getInputManager()->addKeyUpListener(this);
+
+	loadSaveGame();
+	loadLevelList();
 	
 	startEngine();
 }
@@ -73,6 +125,29 @@ void GameManager::update(long delta){
 
 
 
+
+void GameManager::keyUp(SDLKey key){
+	// pass pressed key to the gamestate if is a keylistener
+
+	if(dynamic_cast<YGEKeyUpListener*>( gameStateStack.top()) != NULL ) {
+		(dynamic_cast<YGEKeyUpListener*>(gameStateStack.top()))->keyUp(key);
+	}
+}
+
+void GameManager::keyDown(SDLKey key){
+	switch(key){
+		case SDLK_F2:
+			getCore()->processCommand("togglefullscreen");
+			break;
+	}
+
+	// pass pressed key to the gamestate if is a keylistener
+
+	if(dynamic_cast<YGEKeyDownListener*>( gameStateStack.top()) != NULL ) {
+		dynamic_cast<YGEKeyDownListener*>(gameStateStack.top())->keyDown(key);
+	}
+
+}
 
 
 int _tmain(int argc, _TCHAR* argv[])

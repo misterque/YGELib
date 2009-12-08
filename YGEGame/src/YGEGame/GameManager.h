@@ -14,12 +14,14 @@
 #include "YGEEngineCore.h"
 
 #include <stack>
+#include <vector>
+
 /**
  * holds all GameState independant information
  * and all the GameStates as well. 
  * @todo make singleton
  */
-class GameManager : public YGEGame::YGEGameState{
+class GameManager : public YGEGame::YGEGameState, public YGEKeyDownListener, public YGEKeyUpListener{
 private:
 
 	GameManager();
@@ -35,10 +37,18 @@ private:
 	
 
 	std::stack<YGEGameState*> gameStateStack;
+
+	std::vector<std::string> levelFiles;
 	/**
 	 * init the game engine
 	 */
 	void startEngine();
+
+	void loadSaveGame();
+
+	void loadLevelList();
+
+	int reachedLevel;
 
 
 public:
@@ -66,6 +76,20 @@ public:
 
 	virtual void processCommand(const char* command) {
 	};
+
+	std::vector<std::string>* getLevelList(){
+		return &levelFiles;
+	}
+
+	int getReachedLevel(){
+		return reachedLevel;
+	}
+
+	
+	virtual void keyDown(SDLKey key);
+	
+	virtual void keyUp(SDLKey key);
+
 };
 
 #endif

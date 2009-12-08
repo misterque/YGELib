@@ -1,7 +1,7 @@
 #ifndef _YGE_ENGINE_CORE_H_
 #define _YGE_ENGINE_CORE_H_
 
-#include "YGESDLDisplay.h"
+#include "YGEGraphicsCore.h"
 #include "YGEInputManager.h"
 
 #include "YGEAudioCore.h"
@@ -32,7 +32,7 @@ protected:
 	/**
 	 * pointer to a YGEGraphicsCore. Responsible for graphics rendering stuff.
 	 */
-	YGESDLDisplay* graphics;
+	YGEGraphicsCore* graphics;
 
 	/**
 	 *

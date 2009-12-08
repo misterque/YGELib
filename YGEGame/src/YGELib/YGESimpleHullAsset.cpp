@@ -9,10 +9,20 @@ namespace YGEPhysics {
 		YGETimeSpace::YGESpace* parentSpace = parent->getSpace();
 
 		if(parentSpace != NULL){
-			geomId = dCreateSphere(parentSpace->getDSpaceId(), 10);
+			geomId = dCreateSphere(parentSpace->getDSpaceId(), radius);
 			dGeomSetData(geomId, this);
 			hasGeom = true;
 		}
+	}
+
+	void YGESimpleHullAsset::setRadius(double r){
+		if(hasGeom) {
+			dGeomDestroy(geomId);
+			hasGeom = false;
+
+		}
+		radius = r;
+		
 	}
 
 
@@ -30,10 +40,11 @@ namespace YGEPhysics {
 
 			createGeom();
 
-		} else {
-			YGEMath::Vector3 pos = parent->getPosition();
+		} 
+
+			YGEMath::Vector3 pos = parent->getAbsPosition();
 			dGeomSetPosition(geomId, pos.x, pos.y, pos.z);
-		}
+		
 	}
 	void YGESimpleHullAsset::disable(){
 		if(hasGeom) {

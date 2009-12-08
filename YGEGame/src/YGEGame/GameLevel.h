@@ -119,6 +119,10 @@ public:
 		return space;
 	}
 
+	int getNumberOfBalls();
+
+	int getTimeToComplete();
+
 };
 
 

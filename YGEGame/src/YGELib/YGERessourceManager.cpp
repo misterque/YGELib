@@ -63,6 +63,7 @@ namespace YGECore {
 	}
 
 
+
 	YGERessourceManager* YGERessourceManager::singleton = NULL;
 
 
