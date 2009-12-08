@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ode", "ode.vcproj", "{4B99E867-8913-C146-99EB-EF6D7D93A012}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		DebugSingleDLL|Win32 = DebugSingleDLL|Win32
+		ReleaseSingleDLL|Win32 = ReleaseSingleDLL|Win32
+		DebugSingleLib|Win32 = DebugSingleLib|Win32
+		ReleaseSingleLib|Win32 = ReleaseSingleLib|Win32
+		DebugDoubleDLL|Win32 = DebugDoubleDLL|Win32
+		ReleaseDoubleDLL|Win32 = ReleaseDoubleDLL|Win32
+		DebugDoubleLib|Win32 = DebugDoubleLib|Win32
+		ReleaseDoubleLib|Win32 = ReleaseDoubleLib|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4B99E867-8913-C146-99EB-EF6D7D93A012}.DebugSingleDLL|Win32.ActiveCfg = DebugSingleDLL|Win32
+		{4B99E867-8913-C146-99EB-EF6D7D93A012}.DebugSingleDLL|Win32.Build.0 = DebugSingleDLL|Win32
+		{4B99E867-8913-C146-99EB-EF6D7D93A012}.ReleaseSingleDLL|Win32.ActiveCfg = ReleaseSingleDLL|Win32
+		{4B99E867-8913-C146-99EB-EF6D7D93A012}.ReleaseSingleDLL|Win32.Build.0 = ReleaseSingleDLL|Win32
+		{4B99E867-8913-C146-99EB-EF6D7D93A012}.DebugSingleLib|Win32.ActiveCfg = DebugSingleLib|Win32
+		{4B99E867-8913-C146-99EB-EF6D7D93A012}.DebugSingleLib|Win32.Build.0 = DebugSingleLib|Win32
+		{4B99E867-8913-C146-99EB-EF6D7D93A012}.ReleaseSingleLib|Win32.ActiveCfg = ReleaseSingleLib|Win32
+		{4B99E867-8913-C146-99EB-EF6D7D93A012}.ReleaseSingleLib|Win32.Build.0 = ReleaseSingleLib|Win32
+		{4B99E867-8913-C146-99EB-EF6D7D93A012}.DebugDoubleDLL|Win32.ActiveCfg = DebugDoubleDLL|Win32
+		{4B99E867-8913-C146-99EB-EF6D7D93A012}.DebugDoubleDLL|Win32.Build.0 = DebugDoubleDLL|Win32
+		{4B99E867-8913-C146-99EB-EF6D7D93A012}.ReleaseDoubleDLL|Win32.ActiveCfg = ReleaseDoubleDLL|Win32
+		{4B99E867-8913-C146-99EB-EF6D7D93A012}.ReleaseDoubleDLL|Win32.Build.0 = ReleaseDoubleDLL|Win32
+		{4B99E867-8913-C146-99EB-EF6D7D93A012}.DebugDoubleLib|Win32.ActiveCfg = DebugDoubleLib|Win32
+		{4B99E867-8913-C146-99EB-EF6D7D93A012}.DebugDoubleLib|Win32.Build.0 = DebugDoubleLib|Win32
+		{4B99E867-8913-C146-99EB-EF6D7D93A012}.ReleaseDoubleLib|Win32.ActiveCfg = ReleaseDoubleLib|Win32
+		{4B99E867-8913-C146-99EB-EF6D7D93A012}.ReleaseDoubleLib|Win32.Build.0 = ReleaseDoubleLib|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
