@@ -90,9 +90,10 @@ private:
 	void parseFile(const char* filename);
 
 	/**
-	 * positions of the balls
+	 * positions of the balls and type
 	 */
-	std::list<YGEMath::Vector3> ballPositions;
+	std::list<std::pair<YGEMath::Vector3, std::string>> ballPositions;
+
 public:
 
 	~GameLevel();

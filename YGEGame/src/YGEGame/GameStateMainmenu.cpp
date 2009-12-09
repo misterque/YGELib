@@ -28,10 +28,12 @@ GameStateMainmenu::GameStateMainmenu(){
 	std::vector<std::string>* levels = GameManager::getInstance()->getLevelList();
 	int i = 0;
 	for(std::vector<std::string>::iterator iter = levels->begin(); iter != levels->end(); iter++){
+		std::stringstream s;
+		s<<"start "<<(*iter);
+		levelMenu->addItem((*iter), s.str());
+
 		if(i < GameManager::getInstance()->getReachedLevel()) {
-			std::stringstream s;
-			s<<"start "<<(*iter);
-			levelMenu->addItem((*iter), s.str());
+
 		}
 		i++;
 
@@ -109,7 +111,7 @@ void  GameStateMainmenu::processCommand(const char* command) {
 
 			break;
 		}
-	i++;
+		i++;
 
 	}
 

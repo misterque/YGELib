@@ -47,9 +47,11 @@ namespace YGETimeSpace{
 			seconds = 0.3;
 		}
 
+
 		dSpaceCollide(spaceId, this, &nearCallback);
-		dWorldStep(worldId, seconds );
+		dWorldStepFast1(worldId, seconds, 5 );
 		dJointGroupEmpty(contactGroup);
+
 
 	}
 
@@ -78,12 +80,28 @@ namespace YGETimeSpace{
 			YGEPhysics::YGEPhysicsAsset* a1 = (YGEPhysics::YGEPhysicsAsset*)dGeomGetData(o1);
 
 			if(a0 && a1) {
+
 				a0->getParent()->processCollision(a0, a1);
+				if(a0->getCollisionListener() != NULL) {
+					a0->getCollisionListener()->processCollision(a0, a1);
+				}
 				a1->getParent()->processCollision(a1, a0);
+				if(a1->getCollisionListener() != NULL) {
+					a1->getCollisionListener()->processCollision(a1, a0);
+				}
+
 			} else if( a0) {
 				a0->getParent()->processCollision(a0, NULL);
+				if(a0->getCollisionListener() != NULL) {
+				a0->getCollisionListener()->processCollision(a0, NULL);
+				}
+
 			} else if( a1) {
 				a1->getParent()->processCollision(a1, NULL);
+				if(a1->getCollisionListener() != NULL) {
+					a1->getCollisionListener()->processCollision(a1, a0);
+				}
+
 			}
 			// Get the dynamics body for each geom
 			dBodyID b1 = dGeomGetBody(o0);

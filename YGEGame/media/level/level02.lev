@@ -7,15 +7,13 @@ timeToComplete: 90
 mapFileName: images/mapcanyon.bmp
 textureFileName: textures/mud.tex
 
-mapScale: 1000 150 1000
+mapScale: 1000 150 2000
 
-startPos: 0 100 500
+startPos: 0 100 1200
 
-whiteBall: 0 40 400
-whiteBall: -140 40 300
-whiteBall: -80 40 230
-whiteBall: -100 40 130
-whiteBall: -150 40 00
-whiteBall: -80 40 -310
-
-solidObject: models/airport.obj 0 50 0
+ball: white 0 40 800
+ball: white -140 40 600
+ball: white -80 40 460
+ball: white -100 40 260
+ball: white -150 40 00
+ball: white -80 40 -620

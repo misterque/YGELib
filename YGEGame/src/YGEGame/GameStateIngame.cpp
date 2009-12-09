@@ -102,11 +102,15 @@ void GameStateIngame::update(long delta){
 		ballsToDestroy = -1;
 	}
 	if(ballsToDestroy == 0) {
+		
+		
 		hud->setInfoText("all balls destroyed!!!");
 		timeToQuit = 3.0f;
 		ballsToDestroy--;
 
 		levelCompleted = true;
+
+
 		
 	}
 	if(ballsToDestroy == -1) {
@@ -116,6 +120,9 @@ void GameStateIngame::update(long delta){
 		hud->setInfoText("collision!!!");
 		timeToQuit = 3.0f;
 		ballsToDestroy = -1;
+		level->addEntity(cam);
+		cam->setPosition(cam->getAbsPosition());
+		cam->setOrientation(cam->getAbsOrientation());
 	}
 
 	if(timeToQuit < 0) {
@@ -212,8 +219,9 @@ void  GameStateIngame::processCommand(const char* command) {
 		ballsToDestroy--;
 	}
 	
-	if(command == "collision") {
+	if(command == "collision" && ballsToDestroy >= 0) {
 		ballsToDestroy = -2;
+		
 	}
 
 }

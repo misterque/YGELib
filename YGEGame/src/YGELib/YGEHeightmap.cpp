@@ -75,11 +75,32 @@ namespace YGEGraphics {
 				SDL_GetRGB(getpixel(surface, x, y), surface->format, &height, &height, &height);
 				pHeightData[x + (y * w)] = (float)height * scaley;
 				Vertex v;
-				v.x = GLfloat(x - w/2) * scalex;
-				v.z = GLfloat(y - h/2) * scalez;
+				
+				v.x = GLfloat(x - w/2) * (float)scalex;
+				v.z = GLfloat(y - h/2) * (float)scalez;
 				v.y = (float)height * scaley;
 				v.u = x  / 20.0f;
 				v.v = y  / 20.0f;
+
+				/// create a border
+				if(x == 0) {
+					v.y = 0;
+				}
+				if(x == w-1) {
+					v.y = 0;
+
+				}
+				if(y == 0) {
+					v.y = 0;
+
+				}
+				if(y == h-1) {
+					v.y = 0;
+
+				}
+
+
+
 				map->addVertex(v);
 			}
 		}
@@ -139,6 +160,8 @@ namespace YGEGraphics {
 
 		glCullFace(GL_BACK);
 		glEnable(GL_CULL_FACE);
+		glEnable(GL_COLOR_MATERIAL);
+		glColor3f(1.0f, 1.0f, 1.0f);
 		mesh->draw(context);
 
 		glBegin(GL_QUADS);
@@ -148,7 +171,7 @@ namespace YGEGraphics {
 		glTexCoord2f(500.0f, 500.0f); glVertex3f(10000, 0, 10000);
 		glTexCoord2f(500.0f, 0.0f); glVertex3f(10000, 0, -10000);
 		glEnd();
-
+	
 	}
 
 	void YGEHeightmap::makeSolid(){

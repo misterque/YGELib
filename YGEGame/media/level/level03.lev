@@ -1,17 +1,18 @@
-sky: sunset
-sunposition: 1.0 1.0 1.0
-suncolor: 0.8 0.6 0.3
+sky: waterscape
+sunposition: 0.5 1.0 0.5
+suncolor: 0.8 0.8 1.0
 
-timeToComplete: 10
+timeToComplete: 60
 
-mapFileName: images/hmap2.bmp
-textureFileName: textures/mud.tex
+mapFileName: images/hmap.bmp
+textureFileName: textures/snow.tex
 
-mapScale: 1000 100 1000
+mapScale: 300 800 300
 
-startPos: 0 400 100
+startPos: 0 2 600
 
-whiteBall: 0 300 0
-whiteBall: 0 400 0
+ball: pink 0 800 0
+ball: red -200 600 0
+ball: blue 0 400 -200
+ball: white 200 200 0
 
-solidObject: models/airport.obj 0 50 0

@@ -51,13 +51,17 @@ namespace YGETimeSpace{
 		newPosition = rotStack.rotateVector(position) + posStack;
 		newOrientation = rotStack * orientation;
 
+		hasAbsPosition = true;
+
 		std::list<YGEEntity*>* children = this->getChildren();
 		for(std::list<YGEEntity*>::iterator iter = children->begin();
 			iter != children->end();
 			iter++){
 				(*iter)->updateAbsolutePosition(newPosition, newOrientation);
 
+
 		}
+
 
 	}
 
@@ -137,6 +141,10 @@ namespace YGETimeSpace{
 
 		//@todo check for double insertion
 
+		if(entity->parent != NULL) {
+			entity->parent->removeChild(entity);
+		}
+
 		entity->parent = this;
 		children.push_back(entity);
 
@@ -197,6 +205,8 @@ namespace YGETimeSpace{
 		space = NULL;
 
 		protectChildren = false;
+
+		hasAbsPosition = false;
 	}
 
 	YGEEntity::~YGEEntity(){

@@ -10,7 +10,12 @@
 
 namespace YGEPhysics {
 class YGEPhysicsAsset : public YGETimeSpace::YGEEntityAsset {
+private:
+	YGETimeSpace::YGEEntity* collisionListener;
 public:
+
+	YGEPhysicsAsset() : collisionListener (NULL) {
+	}
 	/**
 	 * gets the position from the physics engine, interpolates
 	 * and updates the parent entity
@@ -19,6 +24,14 @@ public:
 	
 	virtual YGETimeSpace::AssetType getAssetType(){
 		return YGETimeSpace::Physics;
+	}
+
+	void setCollisionListener(YGETimeSpace::YGEEntity *listener){
+		collisionListener = listener;
+	}
+
+	YGETimeSpace::YGEEntity* getCollisionListener(){
+		return collisionListener;
 	}
 };
 

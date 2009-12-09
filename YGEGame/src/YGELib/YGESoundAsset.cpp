@@ -13,7 +13,7 @@ namespace YGEAudio {
 
 		
 		YGEMath::Vector3 v = this->getParent()->getAbsPosition();
-		alSource3f(source, AL_POSITION, v.x, v.y, v.z);
+		alSource3f(source, AL_POSITION, (float)v.x, (float)v.y, (float)v.z);
 
 		if(wantsToBePlayed > 0 && wantsToBePlayed < 2) {
 			alSourcePlay(source);

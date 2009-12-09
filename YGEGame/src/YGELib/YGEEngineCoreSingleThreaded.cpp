@@ -36,6 +36,7 @@ namespace YGECore {
 
 			if(gamestate->getHasBeenInitialised() == false) {
 				gamestate->init();
+
 			}
 
 			//debugout("update the core");
@@ -73,9 +74,12 @@ namespace YGECore {
 
 			//timerOther->startTimer();
 
-			calculateFPSRate();
+			delta = timer->stopTimer();
 
-			limitFPS();
+
+
+			//limitFPS();
+			calculateFPSRate();
 			//timerOther->stopTimer();
 			printTimes();
 
@@ -133,7 +137,7 @@ namespace YGECore {
 
 	void YGEEngineCoreSingleThreaded::calculateFPSRate(){
 
-		delta = timer->stopTimer();
+		
 		accumDelta += delta;
 		frames++;
 		if(accumDelta > 1000000){
@@ -153,6 +157,7 @@ namespace YGECore {
 			debugout("less then 10 ms, wait a little");
 
 			SDL_Delay(Uint32((10000-delta) / 1000));
+			delta = 10000;
 		}
 	}
 

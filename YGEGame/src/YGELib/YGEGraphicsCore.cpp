@@ -42,7 +42,7 @@ namespace YGECore {
 
 		glPushMatrix();
 
-		glTranslatef(entity->interpolatedPosition.x, entity->interpolatedPosition.y, entity->interpolatedPosition.z);
+		glTranslated(entity->interpolatedPosition.x, entity->interpolatedPosition.y, entity->interpolatedPosition.z);
 
 		YGEMath::Mat3x3 mat = entity->interpolatedOrientation.getRotationMatrix();
 

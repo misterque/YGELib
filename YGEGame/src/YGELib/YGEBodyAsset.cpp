@@ -9,7 +9,7 @@ namespace YGEPhysics {
 
 	void YGEBodyAsset::createBody(){
 		YGETimeSpace::YGESpace* parentSpace = parent->getSpace();
-		if(parentSpace != NULL){
+		if(parentSpace != NULL && parent->getHasAbsPosition()){
 
 			if(hasBody) {
 				dBodyDestroy(bodyId);
@@ -27,8 +27,8 @@ namespace YGEPhysics {
 
 			dBodySetAutoDisableFlag(bodyId, 0);
 
-			YGEMath::Vector3 pos = parent->getPosition();
-			YGEMath::Quaternion rot = parent->getOrientation();
+			YGEMath::Vector3 pos = parent->getAbsPosition();
+			YGEMath::Quaternion rot = parent->getAbsOrientation();
 
 			dBodySetPosition(bodyId,pos.x,pos.y,pos.z);
 			dQuaternion q;
@@ -53,34 +53,32 @@ namespace YGEPhysics {
 	}
 
 	void YGEBodyAsset::addRelativeForce(double x, double y, double z){
-		if(hasBody){
 			YGEMath::Quaternion q = parent->getOrientation();
 
-			YGEMath::Vector3 z(x,y,z);
+			YGEMath::Vector3 t(x,y,z);
 
-			YGEMath::Vector3 d = q.rotateVector(z);
+			YGEMath::Vector3 d = q.rotateVector(t);
 			
-			dBodyAddForce(bodyId, d.x, d.y, d.z);
-		}
+			forceAccum += d;
 
 	}
 
 	void YGEBodyAsset::addAbsoluteForce(double x, double y, double z){
-		if(hasBody){
 
-			dBodyAddForce(bodyId, x, y, z);
-		}
+			forceAccum.x += x;
+			forceAccum.y += y;
+			forceAccum.z += z;
 
 	}
 	void YGEBodyAsset::addRelativeTorque(double x, double y, double z){
-		if(hasBody){
-						YGEMath::Quaternion q = parent->getOrientation();
+								YGEMath::Quaternion q = parent->getOrientation();
 
-			YGEMath::Vector3 z(x,y,z);
+			YGEMath::Vector3 t(x,y,z);
 
-			YGEMath::Vector3 d = q.rotateVector(z);
-			dBodyAddTorque(bodyId, d.x, d.y, d.z);
-		}
+			YGEMath::Vector3 d = q.rotateVector(t);
+
+			torqueAccum += d;
+
 
 	}
 
@@ -99,16 +97,29 @@ if(hasBody) {
 
 	}
 
+	void YGEBodyAsset::setForce(double x, double y, double z){
+		forceAccum.x = x;
+		forceAccum.y = y;
+		forceAccum.z = z;
+
+	}
+
+	void YGEBodyAsset::setTorque(double x, double y, double z){
+		torqueAccum.x = x;
+		torqueAccum.y = y;
+		torqueAccum.z = z;
+	}
+
 	void YGEBodyAsset::setAngularDamping(double d){
-		if(hasBody) {
-			dBodySetAngularDamping(bodyId, d);
-		}
+
+			angularDamping = d;
+
 	}
 
 	void YGEBodyAsset::setLinearDamping(double d){
-		if(hasBody) {
-			dBodySetLinearDamping(bodyId, d);
-		}
+
+			linearDamping = d;
+
 	}
 
 
@@ -125,13 +136,23 @@ if(hasBody) {
 		if(!hasBody){
 
 			createBody();
-		}
+		} else {
+
+		double second = delta / 1000000.0f;
+		double m = 1; //second * 1000; 
+
+		dBodySetAngularDamping(bodyId, angularDamping * second);
+		dBodySetLinearDamping(bodyId, linearDamping * second);
+
+		dBodyAddTorque(bodyId, torqueAccum.x * m, torqueAccum.y * m, torqueAccum.z * m);
+		dBodyAddForce(bodyId, forceAccum.x * m, forceAccum.y * m, forceAccum.z * m);
 
 		
 		const dReal* pos = dBodyGetPosition (bodyId);
 		const dReal* rot = dBodyGetQuaternion(bodyId);
 		parent->setPosition(YGEMath::Vector3(pos[0], pos[1], pos[2]));
 		parent->setOrientation(YGEMath::Quaternion(rot[0], rot[1], rot[2], rot[3]));
+		}
 	}
 
 

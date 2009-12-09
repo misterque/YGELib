@@ -11,6 +11,8 @@
 class GameGyrocopter : public YGETimeSpace::YGEEntity{
 private:
 
+	YGETimeSpace::YGEEntity posBody;
+
 	YGEGraphics::YGEStaticMesh meshBody;
 	YGEGraphics::YGEStaticMesh meshRotorTop;
 	YGEGraphics::YGEStaticMesh meshRotorBack;
@@ -26,12 +28,20 @@ private:
 
 	YGEPhysics::YGEBodyAsset mass;
 
+
+
 	YGEAudio::YGESoundAsset idleSound;
 	YGEAudio::YGESoundAsset lowSound;
 	YGEAudio::YGESoundAsset midSound;
 	YGEAudio::YGESoundAsset highSound;
 
 	YGEPhysics::YGESimpleHullAsset collider;
+	YGEPhysics::YGESimpleHullAsset colliderLeft;
+	YGEPhysics::YGESimpleHullAsset colliderRight;
+
+	YGETimeSpace::YGEEntity posColliderLeft;
+	YGETimeSpace::YGEEntity posColliderRight;
+
 
 	int soundstate;
 	float fuel;
@@ -50,6 +60,8 @@ private:
 
 	long long reload;
 	int fireFromRight;
+
+	bool destroyed;
 
 
 

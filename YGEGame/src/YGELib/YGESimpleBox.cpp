@@ -3,7 +3,7 @@
 
 namespace YGEGraphics {
 void YGESimpleBox::draw(YGEGraphicsContext* context){
-
+	if(!enabled) return;
 	glDisable(GL_LIGHTING);
 	glDisable(GL_TEXTURE_2D);
 	glDisable(GL_BLEND);
