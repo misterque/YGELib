@@ -126,8 +126,8 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				AdditionalDependencies="SDL.lib opengl32.lib glu32.lib SDL_ttf.lib ode_doubled.lib"
-				AdditionalLibraryDirectories="&quot;$(SolutionDir)/../lib/win32/SDL-1.2.13/lib&quot;;&quot;$(SolutionDir)/../lib/win32/SDL_ttf-2.0.9/lib&quot;;&quot;$(SolutionDir)/../lib/win32/GLee&quot;;&quot;$(SolutionDir)/../lib/ode-0.11.1/lib/DebugDoubleDLL/&quot;"
+				AdditionalDependencies="SDL.lib opengl32.lib glu32.lib SDL_ttf.lib ode_doubled.lib alut.lib OpenAL32.lib"
+				AdditionalLibraryDirectories="&quot;$(SolutionDir)/../lib/win32/openal/libs/Win32&quot;;&quot;$(SolutionDir)/../lib/win32/freealut-1.1.0/lib&quot;;&quot;$(SolutionDir)/../lib/win32/SDL-1.2.13/lib&quot;;&quot;$(SolutionDir)/../lib/win32/SDL_ttf-2.0.9/lib&quot;;&quot;$(SolutionDir)/../lib/win32/GLee&quot;;&quot;$(SolutionDir)/../lib/ode-0.11.1/lib/DebugDoubleDLL/&quot;"
 			/>
 			<Tool
 				Name="VCALinkTool"

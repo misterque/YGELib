@@ -14,6 +14,9 @@ GameStateMainmenu::GameStateMainmenu(){
 	backgroundspace->getRootEntity()->addChild(observer);
 	backgroundspace->getRootEntity()->addChild(gyro);
 
+		backgroundspace->getSunlight()->setColor(1.0f, 1.0f, 1.0f);
+		backgroundspace->getSunlight()->setDirection(YGEMath::Vector3(1,1,1));
+
 	observer->translate3d(0, 6, 20);
 	observer->rotateDGR(YGEMath::Vector3(1,0,0), -5);
 
@@ -38,6 +41,7 @@ GameStateMainmenu::GameStateMainmenu(){
 		i++;
 
 	}
+	levelMenu->addItem("Back", "back");
 
 	mainMenu = new Menu();
 
