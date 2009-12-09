@@ -250,5 +250,26 @@ namespace YGETimeSpace{
 		space = s;
 	}
 
+	void YGEEntity::disable(){
+	
+		// get every physical asset and ...
+		std::list<YGETimeSpace::YGEEntityAsset*>* assets = this->getAssets();
+		for(std::list<YGETimeSpace::YGEEntityAsset*>::iterator iter = assets->begin();
+			iter != assets->end();
+			iter++){
+
+				(*iter)->disable();
+
+		}
+		// recursive call on all children
+		std::list<YGEEntity*>* children = this->getChildren();
+		for(std::list<YGEEntity*>::iterator iter = children->begin();
+			iter != children->end();
+			iter++){
+				(*iter)->disable();
+
+		}
+	
+	}
 
 }

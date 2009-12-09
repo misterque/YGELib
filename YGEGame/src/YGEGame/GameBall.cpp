@@ -16,8 +16,9 @@ GameBall::GameBall() {
 void GameBall::processCollision(YGEPhysics::YGEPhysicsAsset* bodyPart, YGEPhysics::YGEPhysicsAsset* collider){
 	if(collider != NULL){
 		getParent()->removeChild(this);
+
+		GameManager::getInstance()->getCore()->processCommand("balldestroyed");
 	}
 
-	GameManager::getInstance()->getCore()->processCommand("balldestroyed");
 
 };

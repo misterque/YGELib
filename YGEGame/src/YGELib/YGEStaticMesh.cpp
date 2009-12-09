@@ -229,6 +229,7 @@ namespace YGEGraphics {
 	}
 
 	void YGEStaticMesh::draw(YGEGraphicsContext *context){
+				glEnable(GL_CULL_FACE);
 		meshes->draw(context);
 	}
 

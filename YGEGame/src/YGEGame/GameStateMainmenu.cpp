@@ -1,4 +1,5 @@
 #include "GameStateMainmenu.h"
+#include <string>
 
 GameStateMainmenu::GameStateMainmenu(){
 	gyro = new GameGyrocopter();
@@ -28,8 +29,11 @@ GameStateMainmenu::GameStateMainmenu(){
 	int i = 0;
 	for(std::vector<std::string>::iterator iter = levels->begin(); iter != levels->end(); iter++){
 		if(i < GameManager::getInstance()->getReachedLevel()) {
-			levelMenu->addItem((*iter), "start");
+			std::stringstream s;
+			s<<"start "<<(*iter);
+			levelMenu->addItem((*iter), s.str());
 		}
+		i++;
 
 	}
 
@@ -91,7 +95,23 @@ void GameStateMainmenu::keyDown(SDLKey key){
 }
 
 void  GameStateMainmenu::processCommand(const char* command) {
-	if(std::string(command) == "start") {
-		GameManager::getInstance()->startGame();
+	int i = 0;
+	std::vector<std::string>* levels = GameManager::getInstance()->getLevelList();
+
+	for(std::vector<std::string>::iterator iter = levels->begin(); iter != levels->end(); iter++){
+		std::stringstream s;
+		s<<"start "<<(*iter);
+
+		if(std::string(command) == s.str()) {
+			std::stringstream ss;
+			ss<<"level/"<<levels->at(i);
+			GameManager::getInstance()->startGame(ss.str());
+
+			break;
+		}
+	i++;
+
 	}
+
+
 };

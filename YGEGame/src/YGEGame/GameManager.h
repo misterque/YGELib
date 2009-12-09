@@ -50,6 +50,8 @@ private:
 
 	int reachedLevel;
 
+	bool latest;
+
 
 public:
 	static GameManager* getInstance(){
@@ -67,7 +69,7 @@ public:
 
 	void update(long delta);
 
-	void startGame();
+	void startGame(std::string filename);
 	void stopGame();
 
 	YGECore::YGEEngineCore* getCore(){

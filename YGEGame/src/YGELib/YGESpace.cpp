@@ -117,6 +117,7 @@ namespace YGETimeSpace{
 	}
 
 	void YGESpace::setSkybox(YGEGraphics::YGESkybox* sky){
+		delete skybox;
 		skybox = sky;
 	}
 

@@ -1,5 +1,6 @@
 #include "YGESimpleHullAsset.h"
 #include "YGESpace.h"
+#include "YGEPhysics.h"
 
 
 namespace YGEPhysics {
@@ -11,6 +12,10 @@ namespace YGEPhysics {
 		if(parentSpace != NULL){
 			geomId = dCreateSphere(parentSpace->getDSpaceId(), radius);
 			dGeomSetData(geomId, this);
+
+			dGeomSetCategoryBits(geomId, YGEPhysics::ENTITIES );
+			dGeomSetCollideBits(geomId, YGEPhysics::ENTITIES | YGEPhysics::STATIC_OBJECTS );
+
 			hasGeom = true;
 		}
 	}

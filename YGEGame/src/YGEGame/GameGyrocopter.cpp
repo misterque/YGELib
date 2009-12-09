@@ -168,9 +168,9 @@ void GameGyrocopter::tick(long delta){
 
 	mass.addRelativeForce( 0, 0, -backRotorAngularVelocity * 0.2f);
 
-	mass.addRelativeTorque(0, 0, -tailV / 400.0f);
-	mass.addRelativeTorque(-tailH / 400.0f, 0, 0);
-	mass.addRelativeTorque(0, -tailX / 400.0f, 0);
+	mass.addRelativeTorque(0, 0, -tailV / 300.0f);
+	mass.addRelativeTorque(-tailH / 300.0f, 0, 0);
+	mass.addRelativeTorque(0, -tailX / 300.0f, 0);
 
 	posRotorTop.rotateDGR(YGEMath::Vector3(0,1,0), up * seconds * 50.0f);
 	posRotorBack.rotateDGR(YGEMath::Vector3(0,0,1), seconds * backRotorAngularVelocity * 5.0f);
@@ -206,10 +206,11 @@ void GameGyrocopter::fireRocket(){
 
 
 void GameGyrocopter::processCollision(YGEPhysics::YGEPhysicsAsset* bodyPart, YGEPhysics::YGEPhysicsAsset* collider){
-	//if(collider != NULL){
+	if((YGEPhysics::YGEPhysicsAsset*)(&(this->collider)) == bodyPart){
 		GameManager::getInstance()->getCore()->processCommand("collision");
+		//posRotorBack.addAsset(new YGEPhysics::YGEBodyAsset());
 		
-	//}
+	}
 
 
 };

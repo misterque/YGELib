@@ -110,3 +110,7 @@ a) Brief overview of features wanted
 		(c) creation of 3 levels 0%
 		(d) testing 0%
 	
+	
+	
+BUGS:
+	openal orientation of listner not set

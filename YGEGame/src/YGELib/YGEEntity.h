@@ -270,6 +270,8 @@ public:
 
 	virtual void processCollision(YGEPhysics::YGEPhysicsAsset* bodyPart, YGEPhysics::YGEPhysicsAsset* collider){};
 
+
+	void disable();
 };
 
 }

@@ -57,6 +57,11 @@ namespace YGETimeSpace {
 
 			soundEnabled = false;
 		}
+
+		~YGESpace(){
+			delete sunlight;
+			delete skybox;
+		}
 		/**
 		 * Creates a physics environment for this YGESpace.
 		 * Time only affects physical assets as YGEMass.

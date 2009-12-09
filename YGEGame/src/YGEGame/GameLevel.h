@@ -94,6 +94,8 @@ private:
 	 */
 	std::list<YGEMath::Vector3> ballPositions;
 public:
+
+	~GameLevel();
 	/**
 	 * create his level from a file
 	 * @param filename relative to mediadirectory

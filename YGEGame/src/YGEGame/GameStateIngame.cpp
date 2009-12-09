@@ -10,6 +10,10 @@ GameStateIngame::GameStateIngame() : timeSinceLastTimeUpdate(0) , gameStartTime(
 
 
 void GameStateIngame::init()  {
+	timeSinceLastTimeUpdate= 0;
+	gameStartTime = -1;
+	ingameTime = 0;
+
 	// setting up the HUD
 	hud = new GameHUD();
 
@@ -17,7 +21,7 @@ void GameStateIngame::init()  {
 	level = new GameLevel();
 
 	// @todo create level from file
-	level->createFromFile("level/level01.lev");
+	level->createFromFile(levelFileName.c_str());
 
 	ballsToDestroy = level->getNumberOfBalls();
 
@@ -55,6 +59,8 @@ void GameStateIngame::init()  {
 
 	timeToQuit=999999999;
 
+	levelCompleted = false;
+
 
 }
 
@@ -62,12 +68,10 @@ void GameStateIngame::init()  {
 
 
 void GameStateIngame::deinit(){
-	delete cam;
-	delete gyro;
-	delete level;
-	delete hud;
-	sceneList.empty();
-	spaceList.empty();
+	hasBeenInitialised = false;
+	level->getSpace()->getRootEntity()->disable();
+	sceneList.clear();
+	spaceList.clear();
 }
 
 void GameStateIngame::update(long delta){
@@ -101,6 +105,8 @@ void GameStateIngame::update(long delta){
 		hud->setInfoText("all balls destroyed!!!");
 		timeToQuit = 3.0f;
 		ballsToDestroy--;
+
+		levelCompleted = true;
 		
 	}
 	if(ballsToDestroy == -1) {
@@ -113,7 +119,7 @@ void GameStateIngame::update(long delta){
 	}
 
 	if(timeToQuit < 0) {
-		GameManager::getInstance()->popGameState();
+		GameManager::getInstance()->getCore()->processCommand("stopgame");
 	}
 }
 
@@ -202,9 +208,6 @@ void  GameStateIngame::processCommand(const char* command) {
 	if(command == "stopgame") {
 		GameManager::getInstance()->stopGame();
 	}
-	if(command == "pop") {
-		GameManager::getInstance()->popGameState();
-	}
 	if(command == "balldestroyed") {
 		ballsToDestroy--;
 	}
@@ -218,3 +221,7 @@ void  GameStateIngame::processCommand(const char* command) {
 void GameStateIngame::setLevel(int level){
 
 }
+
+bool GameStateIngame::getLevelCompleted(){
+ return levelCompleted;
+ }

@@ -136,6 +136,9 @@ namespace YGEGraphics {
 	}
 
 	void YGEHeightmap::draw(YGEGraphicsContext *context){
+
+		glCullFace(GL_BACK);
+		glEnable(GL_CULL_FACE);
 		mesh->draw(context);
 
 		glBegin(GL_QUADS);

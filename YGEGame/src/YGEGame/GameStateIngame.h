@@ -1,8 +1,8 @@
 /**
- * @file
- * @author Dirk Fortmeier
- * @date 16.11.2009
- */
+* @file
+* @author Dirk Fortmeier
+* @date 16.11.2009
+*/
 
 #ifndef _GAME_STATE_INGAME_H_
 #define _GAME_STATE_INGAME_H_
@@ -24,82 +24,87 @@
 
 
 /**
- *
- */
+*
+*/
 class GameStateIngame  : public YGEGame::YGEGameState, public YGEKeyDownListener, public YGEKeyUpListener{
 private:
 	/**
-	 * the Camera attact to the players gyrocopter
-	 */
+	* the Camera attact to the players gyrocopter
+	*/
 	Camera* cam;
 
 	/**
-	 * the players gyrocopter
-	 */
+	* the players gyrocopter
+	*/
 	GameGyrocopter* gyro;
 
 	/**
-	 * the level
-	 */
+	* the level
+	*/
 
 	GameLevel* level;
 
 	/**
-	 * the hud
-	 */
+	* the hud
+	*/
 	GameHUD* hud;
 
 	/**
-	 * if true, the gamestate considers itself as initialized, meaning all resources
-	 * have been loaded
-	 */
+	* if true, the gamestate considers itself as initialized, meaning all resources
+	* have been loaded
+	*/
 	bool initialized;
 
 	/**
-	 * time in microseconds since the last gamestate was updated the last time
-	 */
+	* time in microseconds since the last gamestate was updated the last time
+	*/
 	long timeSinceLastTimeUpdate;
 
 	/**
-	 * time at which the game was started in milliseconds since ?
-	 */
+	* time at which the game was started in milliseconds since ?
+	*/
 	long long gameStartTime;
 
 	/**
-	 * time the game is running without beeing paused
-	 */
+	* time the game is running without beeing paused
+	*/
 	long long ingameTime;
 
 	/**
-	 * vector of balls which have to be destroyed to finish the level
-	 */
+	* vector of balls which have to be destroyed to finish the level
+	*/
 	std::vector<GameBall> balls;
 
 	int ballsToDestroy;
+
+	std::string levelFileName;
+
+	bool levelCompleted;
+
 public:
 
 	/**
-	 * sets primitive variables
-	 */
+	* sets primitive variables
+	*/
 	GameStateIngame();
 
 	/**
-	 * init this gamestate:
-	 * load all the needed objects: gyro, level, hud etc.
-	 */
+	* init this gamestate:
+	* load all the needed objects: gyro, level, hud etc.
+	*/
 	void init();
 
 	/**
-	 * deinit this gamestate:
-	 * unload unneeded resources
-	 * 
-	 */
+	* deinit this gamestate:
+	* unload unneeded resources
+	* 
+	*/
 	void deinit();
 
 
 	/**
-	 * update the gamestate
-     */
+	* update the gamestate
+	*/
 	virtual void update(long delta);
 
 
@@ -111,6 +116,12 @@ public:
 	void setLevel(int level);
 
 	double timeToQuit;
+
+	void setLevelFileName(std::string filename){
+		levelFileName = filename;
+	}
+
+	bool getLevelCompleted();
 
 };
 

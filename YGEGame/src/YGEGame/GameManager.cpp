@@ -20,7 +20,7 @@ GameManager::GameManager(){
 void GameManager::loadSaveGame(){
 	std::ifstream is;
 	is.open("highscore");
-	if(!is.()) {
+	if(!is.is_open()) {
 		
 		std::ofstream os;
 		os.open("highscore");
@@ -28,8 +28,8 @@ void GameManager::loadSaveGame(){
 		os.close();
 		reachedLevel = 1;
 		return;
-	}
-
+	} else {
+ 
 	while(!is.eof()){
 		std::string line;
 		getline(is, line);
@@ -38,7 +38,7 @@ void GameManager::loadSaveGame(){
 		istr >> reachedLevel;
 	}
 
-
+	}
 }
 
 void GameManager::loadLevelList(){
@@ -57,8 +57,9 @@ void GameManager::loadLevelList(){
 		std::string file;
 
 		istr >> file;
-
-		levelFiles.push_back(file);
+		if(file != "") {
+			levelFiles.push_back(file);
+		}
 	}
 }
 
@@ -68,18 +69,36 @@ void GameManager::startEngine(){
 		engineCore->run();
 }
 
-void GameManager::startGame(){
+void GameManager::startGame(std::string filename){
+	((GameStateIngame*)ingame)->setLevelFileName(filename);
 	this->pushGameState(ingame);
+
+	if(filename == this->getLevelList()->at(reachedLevel-1) &&
+		reachedLevel != this->getLevelList()->size()){
+		latest = true;
+	} else {
+		latest = false;
+	}
 
 }
 
 void GameManager::stopGame(){
 	this->popGameState();
+	
+	if( ((GameStateIngame*)ingame)->getLevelCompleted() &&
+		latest) {
+			reachedLevel++;
+	}
+	((GameStateIngame*)ingame)->deinit();
 }
 
 void GameManager::initAndStartGame(){
 	engineCore = new YGECore::YGEEngineCoreSingleThreaded();
 		engineCore->init();
+
+	loadSaveGame();
+	loadLevelList();
+	
 
 	ingame = new GameStateIngame();
 
@@ -94,9 +113,7 @@ void GameManager::initAndStartGame(){
 	engineCore->getInputManager()->addKeyDownListener(this);
 	engineCore->getInputManager()->addKeyUpListener(this);
 
-	loadSaveGame();
-	loadLevelList();
-	
+
 	startEngine();
 }
 	

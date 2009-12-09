@@ -34,6 +34,8 @@ namespace YGEGraphics {
 
 		glDisable(GL_LIGHTING);
 
+		glDisable(GL_CULL_FACE);
+
 
 		//@todo make texture clamp not repeat..
 		// draw the skymap

@@ -3,6 +3,12 @@
 #include <istream>
 #include <sstream>
 
+GameLevel::~GameLevel(){
+	delete space;
+	delete heightmap;
+	delete water;
+	delete skybox;
+}
 void GameLevel::parseFile(const char *filename){
 	std::ifstream is;
 	is.open(filename);
