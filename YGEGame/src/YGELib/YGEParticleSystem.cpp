@@ -138,7 +138,7 @@ namespace YGEGraphics {
 		// calc the amount of particles to spawn
 		// should be dependand on framerate and respawn rate
 		spawnAccum += seconds;
-		int numberOfParticlesToSpawn = spawnPerSecond * (spawnAccum);
+		int numberOfParticlesToSpawn = (int)(spawnPerSecond * (spawnAccum));
 
 		spawnAccum -= numberOfParticlesToSpawn / spawnPerSecond ;
 

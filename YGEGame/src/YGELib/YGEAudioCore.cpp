@@ -6,7 +6,8 @@
 namespace YGEAudio {
 	void YGEAudioCore::renderSpace(YGETimeSpace::YGESpace* space, YGETimeSpace::YGEObserver* observer){
 		if(space->getSoundEnabled()) {
-			setListenerPosition(observer->getAbsPosition(), space);
+			setListenerPosition(observer->getAbsPosition(), observer->getAbsOrientation(), space);
+
 		}
 
 		renderEntity(space->getRootEntity());
@@ -49,7 +50,7 @@ namespace YGEAudio {
 
 	}
 
-	void YGEAudioCore::setListenerPosition(const YGEMath::Vector3 &v, YGETimeSpace::YGESpace* space){
+	void YGEAudioCore::setListenerPosition(const YGEMath::Vector3 &v, const YGEMath::Quaternion &q, YGETimeSpace::YGESpace* space){
 		/*if(contexts.find(space) == contexts.end()) {
 			if (device) {
 				ALCcontext* context = alcCreateContext(device,NULL);
@@ -58,7 +59,22 @@ namespace YGEAudio {
 			}
 		}*/
 
-		alListener3f(AL_POSITION, v.x, v.y, v.z);
+		YGEMath::Vector3 front = q.rotateVector(YGEMath::Vector3(0, 0, -1));
+		YGEMath::Vector3 up = q.rotateVector(YGEMath::Vector3(0, 1, 0));
+
+		ALfloat orientation[6];
+
+		orientation[0] = (ALfloat)front.x;
+		orientation[1] = (ALfloat)front.y;
+		orientation[2] = (ALfloat)front.z;
+		orientation[3] = (ALfloat)up.x;
+		orientation[4] = (ALfloat)up.y;
+		orientation[5] = (ALfloat)up.z;
+
+		alListener3f(AL_POSITION, (ALfloat)v.x, (ALfloat)v.y, (ALfloat)v.z);
+		alListenerfv(AL_ORIENTATION, orientation);
+
+		alListenerf(AL_GAIN, pow(2.0f, (volume - 50)/10.0f));
 	}
 
 	void YGEAudioCore::enableListenerForSpace(YGETimeSpace::YGESpace* space){

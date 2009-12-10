@@ -113,6 +113,8 @@ public:
 	void toggleConsole();
 
 	void processCommand(const char* command);
+
+	virtual int getFramesPerSecond(){return -1;};
 };
 
 }

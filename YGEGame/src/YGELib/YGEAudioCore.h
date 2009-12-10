@@ -97,7 +97,7 @@ namespace YGEAudio {
 		/**
 		 * sets the position of the openal listner
 		 */
-		void setListenerPosition(const YGEMath::Vector3 &v, YGETimeSpace::YGESpace* space);
+		void setListenerPosition(const YGEMath::Vector3 &v, const YGEMath::Quaternion &q, YGETimeSpace::YGESpace* space);
 
 		/**
 		 * enables sound for a space. in fact, this is a workaround

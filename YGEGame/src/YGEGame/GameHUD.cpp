@@ -11,14 +11,6 @@ GameHUD::GameHUD(){
 	space.getRootEntity()->addChild(&observer);
 	observer.setCameraMode(CAMERA_ORTHOGONAL);
 
-	/*
-	YGETimeSpace::YGEEntity* text = new YGETimeSpace::YGEEntity();
-	space.getRootEntity()->addChild(text);
-
-	text->addAsset(new YGEGraphics::YGEText("blaaa"));
-	text->setPosition(YGEMath::Vector3(50,50,0));
-*/
-
 	// add pause text and hide it
 	infoTextPos = new YGETimeSpace::YGEEntity();
 	space.getRootEntity()->addChild(infoTextPos);
@@ -28,6 +20,15 @@ GameHUD::GameHUD(){
 
 	infoText->disable();
 
+	fpsTextPos = new YGETimeSpace::YGEEntity();
+	space.getRootEntity()->addChild(fpsTextPos);
+	fpsTextPos->translate(YGEMath::Vector3(20,20,0));
+	fpsText = new YGEGraphics::YGEText("FPS:", "VeraMono24");
+	fpsTextPos->addAsset(fpsText);
+
+//#ifndef _DEBUG
+	//fpsText->disable();
+//#endif
 
 	// add entity and text for displaying the time
 	YGETimeSpace::YGEEntity* timePos = new YGETimeSpace::YGEEntity();
@@ -44,6 +45,16 @@ GameHUD::GameHUD(){
 	velocityPos->addAsset(velocityText);
 	velocityPos->setPosition(YGEMath::Vector3(500,100,0));
 	*/
+
+
+	quitMenuPos = new YGETimeSpace::YGEEntity();
+	quitMenu = new Menu();
+
+	quitMenuPos->addChild(quitMenu->pos);
+
+	quitMenu->addItem("Increase Sound Volume +", "volumeUp");
+	quitMenu->addItem("Decrease Sound Volume -", "volumeDown");
+	quitMenu->addItem("Exit", "stopgame");
 
 
 }
@@ -83,5 +94,44 @@ void GameHUD::setInfoText(std::string text){
 		infoText->setText(text);
 	}
 
+
+}
+
+void GameHUD::setFramesPerSecond(int frames){
+	std::stringstream s;
+	s<<"FPS: "<<frames;
+	fpsText->setText(s.str());
+}
+
+
+void GameHUD::keyDown(SDLKey key){
+
+	switch(key){
+			case SDLK_DOWN:
+				quitMenu->down();
+				break;
+			case SDLK_UP:
+				quitMenu->up();
+				break;
+			case SDLK_LEFT:
+				quitMenu->left();
+				break;
+			case SDLK_RIGHT:
+				quitMenu->right();
+				break;
+
+			case SDLK_SPACE:
+			case SDLK_RETURN:
+				quitMenu->select();
+				break;
+	}
+}
+
+void GameHUD::showQuitMenu(bool show){
+	if(show) {
+		space.getRootEntity()->addChild(quitMenuPos);
+	} else {
+		space.getRootEntity()->removeChild(quitMenuPos);
+	}
 
 }

@@ -79,11 +79,11 @@ GameGyrocopter::GameGyrocopter(){
 
 	posRotorTop.addChild(&posColliderLeft);
 	posColliderLeft.addAsset(&colliderLeft);
-	posColliderLeft.translate3d(-5, 0, 0);
+	posColliderLeft.translate3d(-8, 0, 0);
 
 	posRotorTop.addChild(&posColliderRight);
 	posColliderRight.addAsset(&colliderRight);
-	posColliderRight.translate3d(5, 0, 0);
+	posColliderRight.translate3d(8, 0, 0);
 
 	collider.setRadius(1);
 	collider.setCollisionListener(this);
@@ -206,7 +206,7 @@ void GameGyrocopter::tick(long delta){
 	}
 
 	posRotorTop.rotateDGR(YGEMath::Vector3(0,1,0), up * seconds * 50.0f);
-	posRotorBack.rotateDGR(YGEMath::Vector3(0,0,1), seconds * backRotorAngularVelocity * 5.0f);
+	posRotorBack.rotateDGR(YGEMath::Vector3(0,0,1), seconds * backRotorAngularVelocity * 20.0f);
 
 	posTailH.setOrientation(YGEMath::Quaternion());
 

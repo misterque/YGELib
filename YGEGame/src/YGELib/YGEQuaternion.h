@@ -45,12 +45,12 @@ namespace YGEMath{
 		YGEMath::Vector3 operator * (const YGEMath::Vector3 &v);
 
 
-		Quaternion operator ~();
+		Quaternion operator ~() const;
 
 
 		YGEMath::Mat3x3 getRotationMatrix() const;
 
-		void Echo();
+		void Echo() const;
 
 		void normalize();
 
@@ -62,9 +62,9 @@ namespace YGEMath{
 
 		Quaternion(const double* q);
 
-		Quaternion getConjugate();
+		Quaternion getConjugate() const;
 
-		Vector3 rotateVector(const Vector3& v);
+		Vector3 rotateVector(const Vector3& v) const;
 
 
 

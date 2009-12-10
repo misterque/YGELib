@@ -12,14 +12,18 @@ GameBall::GameBall(double radius, double r, double g, double b) {
 	mesh->setColor(r, g, b);
 
 	this->addAsset(mesh);
+
+	destroyed = false;
 }
 
 
 void GameBall::processCollision(YGEPhysics::YGEPhysicsAsset* bodyPart, YGEPhysics::YGEPhysicsAsset* collider){
-	if(collider != NULL){
+	if(collider != NULL && destroyed == false){
 		getParent()->removeChild(this);
 
 		GameManager::getInstance()->getCore()->processCommand("balldestroyed");
+
+		destroyed = true;
 	}
 
 

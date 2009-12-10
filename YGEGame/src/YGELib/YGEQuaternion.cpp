@@ -129,7 +129,7 @@ namespace YGEMath{
 		}
 
 
-		Quaternion Quaternion::operator ~(){
+		Quaternion Quaternion::operator ~() const{
 			Quaternion result;
 			result.w = this->w;
 			result.x = - this->x;
@@ -170,7 +170,7 @@ namespace YGEMath{
 
 		}
 
-		void Quaternion::Echo(){
+		void Quaternion::Echo() const{
 			std::cout<<"w: "<<w<<" x: "<<x<<" y: "<<y<<" z: "<<z<<std::endl;
 		}
 
@@ -236,7 +236,7 @@ namespace YGEMath{
 
 		
 
-		Quaternion Quaternion::getConjugate(){
+		Quaternion Quaternion::getConjugate() const{
 			Quaternion q;
 			q.w = w;
 			q.x = -x;
@@ -246,7 +246,7 @@ namespace YGEMath{
 			return q;
 		}
 
-		Vector3 Quaternion::rotateVector(const Vector3& v){
+		Vector3 Quaternion::rotateVector(const Vector3& v) const{
 			Quaternion q(0, v.x, v.y, v.z);
 			Quaternion r = ((*this)) * (q * ~(*this));
 			return Vector3(r.x, r.y, r.z);

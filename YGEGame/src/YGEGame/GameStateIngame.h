@@ -22,6 +22,8 @@
 
 #include "Camera.h"
 
+#include "Menu.h"
+
 
 /**
 *
@@ -81,6 +83,7 @@ private:
 
 	bool levelCompleted;
 
+	bool quitMenuIsShow;
 public:
 
 	/**

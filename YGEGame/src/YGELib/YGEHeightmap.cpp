@@ -78,7 +78,7 @@ namespace YGEGraphics {
 				
 				v.x = GLfloat(x - w/2) * (float)scalex;
 				v.z = GLfloat(y - h/2) * (float)scalez;
-				v.y = (float)height * scaley;
+				v.y = (float)height * (float)scaley;
 				v.u = x  / 20.0f;
 				v.v = y  / 20.0f;
 
@@ -107,16 +107,16 @@ namespace YGEGraphics {
 		for(int x = 0; x < w; x++){
 			for(int y = 0; y < h; y++){
 				if(x>0 && y>0 && x<w-1 && y<h-1){
-					GLfloat b1 = pHeightData[(x-1) + (y * w)] - map->vertexList[(x * h) + (y)].y;
+					double b1 = pHeightData[(x-1) + (y * w)] - map->vertexList[(x * h) + (y)].y;
 					b1 /= sqrt(b1*b1 + 1);
 
-					GLfloat b2 = pHeightData[(x+1) + (y * w)] - map->vertexList[(x * h) + (y)].y;
+					double b2 = pHeightData[(x+1) + (y * w)] - map->vertexList[(x * h) + (y)].y;
 					b2 /= sqrt(b2*b2 + 1);
 
-					GLfloat a1 = pHeightData[(x) + ((y-1) * w)] - map->vertexList[(x * h) + (y)].y;
+					double a1 = pHeightData[(x) + ((y-1) * w)] - map->vertexList[(x * h) + (y)].y;
 					a1 /= sqrt(a1*a1 + 1);
 					
-					GLfloat a2 = pHeightData[(x) + ((y+1) * w)] - map->vertexList[(x * h) + (y)].y;
+					double a2 = pHeightData[(x) + ((y+1) * w)] - map->vertexList[(x * h) + (y)].y;
 					a2 /= sqrt(a2*a2 + 1);
 
 					GLfloat nx = b1 - b2;

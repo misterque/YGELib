@@ -147,6 +147,8 @@ namespace YGECore {
 			std::stringstream s;
 			s<<"FPS: "<<frames;
 
+			framesPerSecond = frames;
+
 			graphics->setTitle(s.str().c_str());
 			frames = 0;
 		}

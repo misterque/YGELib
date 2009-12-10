@@ -22,8 +22,8 @@ GameStateMainmenu::GameStateMainmenu(){
 
 
 	optionsMenu = new Menu();
-	optionsMenu->addItem("< Change Sound Volume >", "changevolume");
-	optionsMenu->addItem("Toggle Fullscreen", "togglefullscreen");
+	optionsMenu->addItem("Increase Sound Volume +", "volumeUp");
+	optionsMenu->addItem("Decrease Sound Volume -", "volumeDown");
 	optionsMenu->addItem("Back", "back");
 
 	levelMenu = new Menu();
@@ -66,6 +66,12 @@ GameStateMainmenu::GameStateMainmenu(){
 
 	sceneList.push_back(s);
 
+	menuSound = new YGEAudio::YGESoundAsset();
+	menuSound->setSound("sounds/start.wav");
+	textspace->getRootEntity()->addAsset(menuSound);
+	
+	textspace->setSoundEnabled(true);
+
 }
 
 void GameStateMainmenu::update(long delta){
@@ -92,6 +98,7 @@ void GameStateMainmenu::keyDown(SDLKey key){
 
 			case SDLK_SPACE:
 			case SDLK_RETURN:
+				menuSound->playOnce();
 				Menu* m = activeMenu->select();
 				if(m != NULL) {
 					activeMenu = m;
