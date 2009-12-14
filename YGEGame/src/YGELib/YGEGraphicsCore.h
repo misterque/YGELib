@@ -12,8 +12,8 @@ namespace YGETimeSpace {
 	class YGEObserver;
 }
 
-#define SCREEN_WIDTH 640
-#define SCREEN_HEIGHT 480
+#define SCREEN_WIDTH 1024
+#define SCREEN_HEIGHT 768
 
 
 #ifdef _DEBUG

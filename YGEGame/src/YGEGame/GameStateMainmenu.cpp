@@ -14,13 +14,16 @@ GameStateMainmenu::GameStateMainmenu(){
 	backgroundspace->getRootEntity()->addChild(observer);
 	backgroundspace->getRootEntity()->addChild(gyro);
 
+		backgroundspace->getSunlight()->setColor(1.0f, 1.0f, 1.0f);
+		backgroundspace->getSunlight()->setDirection(YGEMath::Vector3(1,1,1));
+
 	observer->translate3d(0, 6, 20);
 	observer->rotateDGR(YGEMath::Vector3(1,0,0), -5);
 
 
 	optionsMenu = new Menu();
-	optionsMenu->addItem("< Change Sound Volume >", "changevolume");
-	optionsMenu->addItem("Toggle Fullscreen", "togglefullscreen");
+	optionsMenu->addItem("Increase Sound Volume +", "volumeUp");
+	optionsMenu->addItem("Decrease Sound Volume -", "volumeDown");
 	optionsMenu->addItem("Back", "back");
 
 	levelMenu = new Menu();
@@ -28,14 +31,17 @@ GameStateMainmenu::GameStateMainmenu(){
 	std::vector<std::string>* levels = GameManager::getInstance()->getLevelList();
 	int i = 0;
 	for(std::vector<std::string>::iterator iter = levels->begin(); iter != levels->end(); iter++){
+		std::stringstream s;
+		s<<"start "<<(*iter);
+		levelMenu->addItem((*iter), s.str());
+
 		if(i < GameManager::getInstance()->getReachedLevel()) {
-			std::stringstream s;
-			s<<"start "<<(*iter);
-			levelMenu->addItem((*iter), s.str());
+
 		}
 		i++;
 
 	}
+	levelMenu->addItem("Back", "back");
 
 	mainMenu = new Menu();
 
@@ -59,6 +65,12 @@ GameStateMainmenu::GameStateMainmenu(){
 	s.second = observerText;
 
 	sceneList.push_back(s);
+
+	menuSound = new YGEAudio::YGESoundAsset();
+	menuSound->setSound("sounds/start.wav");
+	textspace->getRootEntity()->addAsset(menuSound);
+	
+	textspace->setSoundEnabled(true);
 
 }
 
@@ -86,6 +98,7 @@ void GameStateMainmenu::keyDown(SDLKey key){
 
 			case SDLK_SPACE:
 			case SDLK_RETURN:
+				menuSound->playOnce();
 				Menu* m = activeMenu->select();
 				if(m != NULL) {
 					activeMenu = m;
@@ -109,7 +122,7 @@ void  GameStateMainmenu::processCommand(const char* command) {
 
 			break;
 		}
-	i++;
+		i++;
 
 	}
 

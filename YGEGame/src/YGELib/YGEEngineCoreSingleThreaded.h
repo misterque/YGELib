@@ -27,6 +27,8 @@ namespace YGECore {
 		 */
 		int frames;
 
+		int framesPerSecond;
+
 		void update();
 
 		void updateAbsolutePositions();
@@ -78,6 +80,10 @@ namespace YGECore {
 		virtual void shutdown();
 
 				virtual void setGameState(YGEGame::YGEGameState* state);
+
+				virtual int getFramesPerSecond(){
+					return framesPerSecond;
+				}
 
 	};
 

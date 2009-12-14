@@ -15,9 +15,10 @@ class GameBall : public YGETimeSpace::YGEEntity {
 
 	YGEGraphics::YGESimpleSphere* mesh;
 
+	bool destroyed;
 	YGEPhysics::YGESimpleHullAsset* hull;
 public:
-	GameBall();
+	GameBall(double radius, double r, double g, double b);
 	virtual void processCollision(YGEPhysics::YGEPhysicsAsset* bodyPart, YGEPhysics::YGEPhysicsAsset* collider);
 
 

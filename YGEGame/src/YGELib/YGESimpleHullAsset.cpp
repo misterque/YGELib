@@ -27,7 +27,7 @@ namespace YGEPhysics {
 
 		}
 		radius = r;
-		
+
 	}
 
 
@@ -41,15 +41,16 @@ namespace YGEPhysics {
 	}
 
 	void YGESimpleHullAsset::update(long delta){
-		if(!hasGeom){
+		if(parent->getHasAbsPosition()) {
+			if(!hasGeom ){
 
-			createGeom();
+				createGeom();
 
-		} 
+			} 
 
 			YGEMath::Vector3 pos = parent->getAbsPosition();
 			dGeomSetPosition(geomId, pos.x, pos.y, pos.z);
-		
+		}
 	}
 	void YGESimpleHullAsset::disable(){
 		if(hasGeom) {

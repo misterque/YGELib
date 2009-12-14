@@ -101,6 +101,10 @@ private:
 	long long timeOfOldPosition;
 	long long timeOfNewPosition;
 
+	bool hasAbsPosition;
+
+
+
 
 	YGEMath::Vector3 scale;
 	YGEMath::Quaternion orientation;
@@ -115,6 +119,9 @@ private:
 
 public:
 
+	bool getHasAbsPosition(){
+		return hasAbsPosition;
+	}
 
 	YGEEntity();
 	~YGEEntity();
@@ -197,6 +204,11 @@ public:
 
 	YGEMath::Vector3 getAbsPosition(){
 		return absPosition;
+	}
+
+	YGEMath::Quaternion getAbsOrientation(){
+
+		return absOrientation;
 	}
 
 	/**

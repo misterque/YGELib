@@ -27,7 +27,7 @@ public:
 		pitch = -0.0f;
 		yaw = 0;
 		distance = 20;
-		distancer->translate3d(0,0, distance);
+		distancer->translate3d(0,-2, distance);
 
 		 rotate(0,0);
 	}

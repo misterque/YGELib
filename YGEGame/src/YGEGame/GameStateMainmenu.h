@@ -40,6 +40,8 @@ private:
 
 	YGETimeSpace::YGEEntity* optionsmenuEntity;
 
+	YGEAudio::YGESoundAsset* menuSound;
+
 
 
 

@@ -31,9 +31,15 @@ namespace YGEPhysics {
 		YGEMath::Vector3 bodySize;
 		double bodyMass;
 
+		YGEMath::Vector3 forceAccum;
+		YGEMath::Vector3 torqueAccum;
+
+		double linearDamping;
+		double angularDamping;
+
 	public:
 
-		YGEBodyAsset() : hasBody(false), bodySize(YGEMath::Vector3(1,1,1)), bodyMass(1){
+		YGEBodyAsset() : hasBody(false), bodySize(YGEMath::Vector3(1,1,1)), bodyMass(1), linearDamping(0), angularDamping(0){
 			
 		}
 
@@ -46,6 +52,10 @@ namespace YGEPhysics {
 		void addAbsoluteForce(double x, double y, double z);
 
 		void addAbsoluteTorque(double x, double y, double z);
+
+		void setForce(double x, double y, double z);
+
+		void setTorque(double x, double y, double z);
 
 		YGEMath::Vector3 getRelativeVelocity();
 

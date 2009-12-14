@@ -34,7 +34,7 @@ void GameStateIngame::init()  {
 	// setting up the camera
 	cam = new Camera();
 
-	
+
 	gyro->addChild(cam);
 	cam->translate3d(0, 6, 0);
 
@@ -62,6 +62,8 @@ void GameStateIngame::init()  {
 	levelCompleted = false;
 
 
+
+	quitMenuIsShow = false;
 }
 
 
@@ -76,13 +78,13 @@ void GameStateIngame::deinit(){
 
 void GameStateIngame::update(long delta){
 	/*if(gameStartTime == -1) {
-		init();
-		return;
+	init();
+	return;
 	}*/
 
 	int timeLeft = level->getTimeToComplete() - (ingameTime / 1000000);
 	timeSinceLastTimeUpdate += delta;
-	
+
 	if( level->getSpace()->getTimeIsRunning() ) {
 		ingameTime += delta;
 	} 
@@ -91,10 +93,11 @@ void GameStateIngame::update(long delta){
 		//long long timePassed = GameManager::getInstance()->getCore()->getTimeSinceGameStarted() - gameStartTime;
 
 		hud->setTime(timeLeft);
-		
+		hud->setFramesPerSecond(GameManager::getInstance()->getCore()->getFramesPerSecond());
+
 	}
 
-	
+
 
 	if(ballsToDestroy > 0 && timeLeft < 0) {
 		hud->setInfoText("timeout!!!");
@@ -102,12 +105,16 @@ void GameStateIngame::update(long delta){
 		ballsToDestroy = -1;
 	}
 	if(ballsToDestroy == 0) {
+
+
 		hud->setInfoText("all balls destroyed!!!");
 		timeToQuit = 3.0f;
 		ballsToDestroy--;
 
 		levelCompleted = true;
-		
+
+
+
 	}
 	if(ballsToDestroy == -1) {
 		timeToQuit -= delta / 1000000.0f;
@@ -116,6 +123,9 @@ void GameStateIngame::update(long delta){
 		hud->setInfoText("collision!!!");
 		timeToQuit = 3.0f;
 		ballsToDestroy = -1;
+		level->addEntity(cam);
+		cam->setPosition(cam->getAbsPosition());
+		cam->setOrientation(cam->getAbsOrientation());
 	}
 
 	if(timeToQuit < 0) {
@@ -126,7 +136,23 @@ void GameStateIngame::update(long delta){
 
 void GameStateIngame::keyDown(SDLKey key){
 
-	switch(key){
+	if(	key == SDLK_ESCAPE) {
+		if(!quitMenuIsShow) {
+			level->getSpace()->stopTime();
+			hud->showQuitMenu(true);
+			quitMenuIsShow = true;
+		} else {
+			level->getSpace()->startTime();
+			hud->showQuitMenu(false);
+			quitMenuIsShow = false;
+		}
+	}
+
+	if(quitMenuIsShow) {
+		hud->keyDown(key);
+	} else {
+
+		switch(key){
 			case SDLK_s:
 				gyro->setThrottle(0.0f);
 				break;
@@ -154,6 +180,14 @@ void GameStateIngame::keyDown(SDLKey key){
 			case SDLK_SPACE:
 				gyro->fireRocket();
 				break;
+			case SDLK_EQUALS:
+			case SDLK_PLUS:
+				GameManager::getInstance()->getCore()->processCommand("volumeUp");
+				break;
+			case SDLK_MINUS:
+				GameManager::getInstance()->getCore()->processCommand("volumeDown");
+				break;
+
 			case SDLK_p:
 				if(level->getSpace()->getTimeIsRunning()) {
 					level->getSpace()->stopTime();
@@ -165,23 +199,26 @@ void GameStateIngame::keyDown(SDLKey key){
 				break;
 
 
+
+
+		}
 	}
 }
 
 
 void GameStateIngame::keyUp(SDLKey key){
 
-		switch(key){
+	switch(key){
 			case SDLK_w:
 				gyro->setThrottle(50.0f);
 				break;
 			case SDLK_s:
 				gyro->setThrottle(50.0f);
 				break;
-				case SDLK_a:
+			case SDLK_a:
 				gyro->setTailX(0.0f);
 				break;
-							case SDLK_d:
+			case SDLK_d:
 				gyro->setTailX(0.0f);
 				break;			case SDLK_LEFT:
 				gyro->setTailV(0.0f);
@@ -199,6 +236,8 @@ void GameStateIngame::keyUp(SDLKey key){
 
 
 
+
+
 	}
 
 }
@@ -211,9 +250,10 @@ void  GameStateIngame::processCommand(const char* command) {
 	if(command == "balldestroyed") {
 		ballsToDestroy--;
 	}
-	
-	if(command == "collision") {
+
+	if(command == "collision" && ballsToDestroy >= 0) {
 		ballsToDestroy = -2;
+
 	}
 
 }
@@ -223,5 +263,5 @@ void GameStateIngame::setLevel(int level){
 }
 
 bool GameStateIngame::getLevelCompleted(){
- return levelCompleted;
- }
+	return levelCompleted;
+}

@@ -8,7 +8,7 @@ namespace YGEGraphics {
 		gluQuadricNormals(quadric, GLU_OUTSIDE);
 	}
 
-	void YGESimpleSphere::setColor(double r, double b, double g){
+	void YGESimpleSphere::setColor(double r, double g, double b){
 		red = r;
 		blue = b;
 		green = g;
@@ -21,6 +21,7 @@ namespace YGEGraphics {
 	void YGESimpleSphere::draw(YGEGraphicsContext* context){
 		glDisable(GL_TEXTURE_2D);
 
+		glEnable(GL_COLOR_MATERIAL);
 		glColor3d(red, green, blue);
 
 		gluSphere(quadric, radius, 16, 8);
