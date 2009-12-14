@@ -8,9 +8,7 @@ namespace YGECore {
 
 
 	YGEEngineCore::YGEEngineCore(){
-		gamestate = 0;
-		shutdownNow = false;
-		consoleEnabled = false;
+
 
 		dInitODE();
 	}

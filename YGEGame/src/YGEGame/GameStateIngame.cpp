@@ -82,7 +82,7 @@ void GameStateIngame::update(long delta){
 	return;
 	}*/
 
-	int timeLeft = level->getTimeToComplete() - (ingameTime / 1000000);
+	int timeLeft = level->getTimeToComplete() - int(ingameTime / 1000000);
 	timeSinceLastTimeUpdate += delta;
 
 	if( level->getSpace()->getTimeIsRunning() ) {

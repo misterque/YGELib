@@ -1,3 +1,9 @@
+/**
+ * @file
+ * @author Dirk Fortmeier
+ * @date ?
+ */
+
 #ifndef _YGE_ENGINE_CORE_MULTI_THREADED_H_
 #define _YGE_ENGINE_CORE_MULTI_THREADED_H_
 
@@ -51,7 +57,7 @@ namespace YGECore {
 			updateThread = NULL;
 			simulateThread = NULL;
 
-			gamestatechanged = true;
+			gameStateChanged = true;
 
 			newGameState = NULL;
 		}

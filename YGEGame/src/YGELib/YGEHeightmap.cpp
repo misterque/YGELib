@@ -119,8 +119,8 @@ namespace YGEGraphics {
 					double a2 = pHeightData[(x) + ((y+1) * w)] - map->vertexList[(x * h) + (y)].y;
 					a2 /= sqrt(a2*a2 + 1);
 
-					GLfloat nx = b1 - b2;
-					GLfloat nz = a1 - a2;
+					GLfloat nx = double(b1 - b2);
+					GLfloat nz = double(a1 - a2);
 
 					GLfloat length = sqrt(nx*nx + 1*1 + nz*nz);
 					map->vertexList[(x * h) + (y)].nx = nx / length;

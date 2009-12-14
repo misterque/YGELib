@@ -21,12 +21,12 @@ namespace YGEGame {
 class YGEGameState {
 protected:
 	/**
-	 * a list of scenes to be renderd
+	 * @brief a list of scenes to be renderd
 	 */
 	YGETimeSpace::YGESceneList sceneList;
 	
 	/** 
-	 * a list of spaces to be updated
+	 * @brief a list of spaces to be updated
 	 */
 	YGETimeSpace::YGESpaceList spaceList;
 

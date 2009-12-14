@@ -30,4 +30,17 @@ public:
 	}
 };
 
+class YGEExceptionSubsystemError : public std::exception {
+
+private:
+	std::string subsystem;
+public:
+	YGEExceptionSubsystemError(std::string s){
+		subsystem = s;
+	}
+	virtual const char* what() const throw(){
+		return subsystem.c_str();
+	}
+};
+
 #endif

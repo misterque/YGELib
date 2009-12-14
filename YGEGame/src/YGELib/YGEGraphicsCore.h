@@ -1,3 +1,9 @@
+/**
+ * @file
+ * @author Dirk Fortmeier
+ * @date ?
+ */
+
 #ifndef _YGE_DISPLAY_H_
 #define _YGE_DISPLAY_H_
 
@@ -33,7 +39,7 @@ namespace YGECore {
 
 		int screenw;
 		int screenh;
-		int isFullscreen;
+		bool isFullscreen;
 		int depth;
 
 

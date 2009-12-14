@@ -70,7 +70,7 @@ namespace YGETimeSpace{
 		double delta = 0.0001;
 		
 		if(timeOfNewPosition - timeOfOldPosition > 0)  {
-			delta = ((timeX - timeOfOldPosition) / (timeOfNewPosition - timeOfOldPosition));
+			delta = (double(timeX - timeOfOldPosition) / double(timeOfNewPosition - timeOfOldPosition));
 		}
 
 		absPosition = oldPosition + (newPosition - oldPosition) * delta;

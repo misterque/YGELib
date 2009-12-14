@@ -55,7 +55,7 @@ namespace YGECore {
 		for(;;){
 			SDL_mutexP(simulateMutex);
 
-			gamestate->update(delta);
+			gamestate->update((long)delta);
 
 
 			processEvents();
@@ -81,8 +81,8 @@ namespace YGECore {
 
 		while(graphics->windowClosed == false && shutdownNow == false){
 
-			if(gamestatechanged) {
-				gamestatechanged = false;
+			if(gameStateChanged) {
+				gameStateChanged = false;
 				gamestate = newGameState;
 				newGameState = NULL;
 
