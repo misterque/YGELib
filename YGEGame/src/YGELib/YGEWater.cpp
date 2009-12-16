@@ -96,7 +96,7 @@ namespace YGEGraphics {
 
 	YGEWater::YGEWater(YGEHeightmap* hmap, double h){
 
-		texture = YGECore::YGERessourceManager::getInstance()->getTexture("textures/water.tex");
+		texture = YGECore::YGEResourceManager::getInstance()->getTexture("textures/water.tex");
 
 		mesh = new YGEVbo();
 

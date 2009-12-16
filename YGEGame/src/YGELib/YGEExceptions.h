@@ -1,3 +1,11 @@
+/**
+ * @file
+ * @author Dirk Fortmeier
+ * @date ?
+ *
+ * contains differnt exceptions
+ */
+
 #ifndef _YGE_EXCEPTIONS_H_
 #define _YGE_EXCEPTIONS_H_
 

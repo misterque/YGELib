@@ -6,7 +6,7 @@
 GameLevel::~GameLevel(){
 	delete space;
 	delete heightmap;
-	delete water;
+//	delete water;
 	delete skybox;
 }
 void GameLevel::parseFile(const char *filename){
@@ -84,7 +84,7 @@ void GameLevel::createFromFile(const char* filename){
 	mapScale.y = 100;
 	mapScale.z = 100;
 
-	parseFile(YGECore::YGERessourceManager::getInstance()->absoluteFilename( filename ).c_str() );
+	parseFile(YGECore::YGEResourceManager::getInstance()->absoluteFilename( filename ).c_str() );
 
 	// create a space
 	space = new YGETimeSpace::YGESpace();

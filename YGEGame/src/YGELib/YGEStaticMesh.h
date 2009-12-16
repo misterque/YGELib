@@ -12,7 +12,8 @@
 namespace YGEGraphics {
 
 /** 
- * static and unanimated mesh object.
+ * @brief static and unanimated mesh object.
+ *
  * Mesh data can be loaded from an OBJ file
  * and will be stored in YGEVbo Vertex Buffer
  * Objects for fast drawing.
@@ -40,6 +41,7 @@ public:
 
 		/**
 		 * loads mesh data from an OBJ file.
+		 * @todo this should be managed by the YGECore::YGEResourceManager
 		 */
 		void loadFromOBJ(const char *filename);
 

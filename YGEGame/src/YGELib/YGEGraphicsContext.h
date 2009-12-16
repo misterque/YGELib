@@ -3,6 +3,10 @@
 
 #include <SDL_opengl.h>
 
+/**
+ * @brief graphics context which holds information about
+ * the render surface and the current camera transformations
+ */
 class YGEGraphicsContext {
 public:
 	int width, height;
@@ -10,6 +14,9 @@ public:
 
 	GLfloat cameraMatrix[16];
 
+	/**
+	 * @brief grabs the current open gl
+	 */
 	void glGetCameraMatrix();
 
 	void saveAsGlCameraRotation();

@@ -26,28 +26,28 @@
 
 
 /**
-*
+* @brief gamestate class modeling the behavior of the actual game
 */
-class GameStateIngame  : public YGEGame::YGEGameState, public YGEKeyDownListener, public YGEKeyUpListener{
+class GameStateIngame  : public YGEGame::YGEGameState, public  YGEInput::YGEKeyDownListener, public  YGEInput::YGEKeyUpListener{
 private:
 	/**
-	* the Camera attact to the players gyrocopter
+	* the Camera attached to the player's gyrocopter
 	*/
 	Camera* cam;
 
 	/**
-	* the players gyrocopter
+	* the player's gyrocopter
 	*/
 	GameGyrocopter* gyro;
 
 	/**
-	* the level
+	* the level consisting of objectives, heightmap
 	*/
 
 	GameLevel* level;
 
 	/**
-	* the hud
+	* the hud which displays information to the player
 	*/
 	GameHUD* hud;
 

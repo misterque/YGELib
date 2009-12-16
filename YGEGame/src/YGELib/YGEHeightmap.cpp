@@ -1,5 +1,5 @@
 #include "YGEHeightmap.h"
-#include "YGERessourceManager.h"
+#include "YGEResourceManager.h"
 #include "YGELogger.h"
 
 #include "YGESpace.h"
@@ -46,7 +46,7 @@ namespace YGEGraphics {
 
 		// get texture
 		SDL_Surface* surface = 
-			YGECore::YGERessourceManager::getInstance()->getSurface(filename);
+			YGECore::YGEResourceManager::getInstance()->getSurface(filename);
 
 		w = surface->w;
 		h = surface->h;
@@ -55,7 +55,7 @@ namespace YGEGraphics {
 		scalez = depth / h;
 		scaley = height / 256.0f;
 
-		texture = YGECore::YGERessourceManager::getInstance()->getTexture( texturefilename);
+		texture = YGECore::YGEResourceManager::getInstance()->getTexture( texturefilename);
 
 		mesh = new YGEVbo();
 
@@ -64,7 +64,7 @@ namespace YGEGraphics {
 		map->textureID = texture->textureID;
 
 
-		//		map->textureID = (YGECore::YGERessourceManager::getInstance()->getTexture("mud.bmp"))->textureID;
+		//		map->textureID = (YGECore::YGEResourceManager::getInstance()->getTexture("mud.bmp"))->textureID;
 		pHeightData = new double[w*h];
 
 		SDL_LockSurface(surface);
@@ -119,8 +119,8 @@ namespace YGEGraphics {
 					double a2 = pHeightData[(x) + ((y+1) * w)] - map->vertexList[(x * h) + (y)].y;
 					a2 /= sqrt(a2*a2 + 1);
 
-					GLfloat nx = double(b1 - b2);
-					GLfloat nz = double(a1 - a2);
+					GLfloat nx = GLfloat(b1 - b2);
+					GLfloat nz = GLfloat(a1 - a2);
 
 					GLfloat length = sqrt(nx*nx + 1*1 + nz*nz);
 					map->vertexList[(x * h) + (y)].nx = nx / length;

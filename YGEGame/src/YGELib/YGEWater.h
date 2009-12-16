@@ -8,7 +8,7 @@
 #define _YGE_WATER_H_
 
 #include "YGEGraphicsAsset.h"
-#include "YGERessourceManager.h"
+#include "YGEResourceManager.h"
 #include "YGEHeightmap.h"
 
 namespace YGEGraphics {

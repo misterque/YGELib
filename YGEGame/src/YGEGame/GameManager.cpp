@@ -19,6 +19,7 @@ GameManager::GameManager(){
 
 void GameManager::loadSaveGame(){
 	std::ifstream is;
+
 	is.open("highscore");
 	if(!is.is_open()) {
 		
@@ -44,7 +45,7 @@ void GameManager::loadSaveGame(){
 void GameManager::loadLevelList(){
 
 	std::ifstream is;
-	is.open(YGECore::YGERessourceManager::getInstance()->absoluteFilename("level/levels.txt").c_str());
+	is.open(YGECore::YGEResourceManager::getInstance()->absoluteFilename("level/levels.txt").c_str());
 	if(!is.is_open()) {
 		throw YGEExceptionFileNotFound("level/levels.txt");
 	}
@@ -73,22 +74,24 @@ void GameManager::startGame(std::string filename){
 	((GameStateIngame*)ingame)->setLevelFileName(filename);
 	this->pushGameState(ingame);
 
+	/* ignore this lately
 	if(filename == this->getLevelList()->at(reachedLevel-1) &&
 		reachedLevel != this->getLevelList()->size()){
 		latest = true;
 	} else {
 		latest = false;
 	}
-
+	*/
 }
 
 void GameManager::stopGame(){
 	this->popGameState();
-	
+
+	/*
 	if( ((GameStateIngame*)ingame)->getLevelCompleted() &&
 		latest) {
 			reachedLevel++;
-	}
+	}*/
 	((GameStateIngame*)ingame)->deinit();
 }
 
@@ -112,7 +115,6 @@ void GameManager::initAndStartGame(){
 
 	engineCore->getInputManager()->addKeyDownListener(this);
 	engineCore->getInputManager()->addKeyUpListener(this);
-
 
 	startEngine();
 }
@@ -146,8 +148,8 @@ void GameManager::update(long delta){
 void GameManager::keyUp(SDLKey key){
 	// pass pressed key to the gamestate if is a keylistener
 
-	if(dynamic_cast<YGEKeyUpListener*>( gameStateStack.top()) != NULL ) {
-		(dynamic_cast<YGEKeyUpListener*>(gameStateStack.top()))->keyUp(key);
+	if(dynamic_cast<YGEInput::YGEKeyUpListener*>( gameStateStack.top()) != NULL ) {
+		(dynamic_cast<YGEInput::YGEKeyUpListener*>(gameStateStack.top()))->keyUp(key);
 	}
 }
 
@@ -160,8 +162,8 @@ void GameManager::keyDown(SDLKey key){
 
 	// pass pressed key to the gamestate if is a keylistener
 
-	if(dynamic_cast<YGEKeyDownListener*>( gameStateStack.top()) != NULL ) {
-		dynamic_cast<YGEKeyDownListener*>(gameStateStack.top())->keyDown(key);
+	if(dynamic_cast<YGEInput::YGEKeyDownListener*>( gameStateStack.top()) != NULL ) {
+		dynamic_cast<YGEInput::YGEKeyDownListener*>(gameStateStack.top())->keyDown(key);
 	}
 
 }

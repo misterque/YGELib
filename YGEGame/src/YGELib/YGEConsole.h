@@ -13,13 +13,8 @@
 
 namespace YGECore {
 
-
+	// forward declaration
 	class YGEEngineCore;
-// needs current line
-// needs history
-// needs output
-// is a singleton?
-
 
 	struct consoleLine {
 		std::string text;
@@ -46,24 +41,37 @@ public:
 
 	YGEConsole();
 	/**
-	 * adds a character to the current input line
+	 * @adds a character to the current input line
 	 */
 	void insertKey(SDL_keysym key);
 
 	/**
-	 * draw the console on top of the rendering window
+	 * @draw the console on top of the rendering window
 	 */
 	void draw();
 
 	/**
-	 * evalute a string containing a command
+	 * @brief evalute a string containing a command
+	 *
+	 * basically sends this command to the engine core
 	 */
 	void evaluateCommand(const char* command);
 
+	/**
+	* @brief print something to the console
+	*/
 	void println(const char* line);
 
+	/**
+	 * @brief initialize this subsystem
+	 */
 	void init(YGEEngineCore *core);
 
+	/**
+	 * @brief update the console
+	 *
+	 * when this method is called, all lines of the console are rendered to textures
+	 */
 	void update();
 
 };

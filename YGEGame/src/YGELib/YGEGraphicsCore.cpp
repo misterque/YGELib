@@ -94,7 +94,7 @@ namespace YGECore {
 
 		screen = SDL_SetVideoMode(screenw, screenh, 16, flags);
 
-		//YGERessourceManager::getInstance()->reloadGraphics();
+		//YGEResourceManager::getInstance()->reloadGraphics();
 	}
 
 	YGEGraphicsCore::YGEGraphicsCore(){

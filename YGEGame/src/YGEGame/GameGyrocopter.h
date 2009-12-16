@@ -8,6 +8,9 @@
 #include "YGESoundAsset.h"
 #include "YGEParticleSystem.h"
 
+/**
+ * @brief the players gyrocopter
+ */
 class GameGyrocopter : public YGETimeSpace::YGEEntity{
 private:
 
@@ -89,10 +92,16 @@ public:
 
 
 
+	/**
+	 * tells the gyrocopter to fire a rocket
+	 */
 	void fireRocket();
 
 	virtual void tick(long delta);
 
+	/**
+	 * on a collsion with the rotor, the game will end
+	 */
 	virtual void processCollision(YGEPhysics::YGEPhysicsAsset* bodyPart, YGEPhysics::YGEPhysicsAsset* collider);
 
 

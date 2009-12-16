@@ -8,10 +8,13 @@
 
 #include "YGEGraphicsAsset.h"
 #include "YGEVector.h"
-#include "YGERessourceManager.h"
+#include "YGEResourceManager.h"
 
 namespace YGEGraphics {
 
+	/** 
+	 * @brief particle class representing single particle
+	 */
 class YGEParticle {
 
 private:
@@ -36,6 +39,14 @@ public:
 
 };
 
+/**
+ * @brief double list of particles
+ *
+ * this class is used for heavy reusing of memory allocated for
+ * particles. if a particle dies, it simply is just added to the list
+ * of dead particles from where it will be returned if a a new particle
+ * is created.
+ */
 class YGEParticleList {
 private:
 	YGEParticle* firstAlive;
@@ -88,6 +99,11 @@ public:
 
 };
 
+
+/**
+ * @brief particle system asset
+ * @note, to this time, all properties of the particle system are hardcoded
+ */
 class YGEParticleSystem : public YGEGraphicsAsset {
 private:
 	YGEParticleList particleList;
@@ -106,6 +122,9 @@ public:
 
 	virtual void draw(YGEGraphicsContext* context);
 
+	/**
+	 * @brief move, kill, spawn particles
+	 */
 	virtual void tick(long delta);
 
 };

@@ -4,7 +4,7 @@
 #include "YGEObserver.h"
 #include "YGEText.h"
 #include "YGESoundAsset.h"
-#include "YGERessourceManager.h"
+#include "YGEResourceManager.h"
 GameStateSplashscreen::GameStateSplashscreen(){
 	started = false;
 

@@ -31,7 +31,7 @@ PROJECT_NAME           = YGELib
 # This could be handy for archiving the generated documentation or 
 # if some version control system is used.
 
-PROJECT_NUMBER         = 0.01
+PROJECT_NUMBER         = 0.03
 
 # The OUTPUT_DIRECTORY tag is used to specify the (relative or absolute) 
 # base path where the generated documentation will be put. 
@@ -990,7 +990,7 @@ ENUM_VALUES_PER_LINE   = 4
 # JavaScript, DHTML, CSS and frames is required (i.e. any modern browser). 
 # Windows users are probably better off using the HTML help feature.
 
-GENERATE_TREEVIEW      = NO
+GENERATE_TREEVIEW      = YES
 
 # By enabling USE_INLINE_TREES, doxygen will generate the Groups, Directories, 
 # and Class Hierarchy pages using a tree view instead of an ordered list.
@@ -1018,7 +1018,7 @@ FORMULA_FONTSIZE       = 10
 # there is already a search function so this one should typically 
 # be disabled.
 
-SEARCHENGINE           = YES
+SEARCHENGINE           = NO
 
 #---------------------------------------------------------------------------
 # configuration options related to the LaTeX output

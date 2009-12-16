@@ -21,7 +21,7 @@
  * and all the GameStates as well. 
  * @todo make singleton
  */
-class GameManager : public YGEGame::YGEGameState, public YGEKeyDownListener, public YGEKeyUpListener{
+class GameManager : public YGEGame::YGEGameState, public YGEInput::YGEKeyDownListener, public YGEInput::YGEKeyUpListener{
 private:
 
 	GameManager();

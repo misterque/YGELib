@@ -22,7 +22,7 @@ namespace YGECore {
 
 	}
 
-	YGEInputManager* YGEEngineCore::getInputManager(){
+	YGEInput::YGEInputManager* YGEEngineCore::getInputManager(){
 		return input;
 	}
 

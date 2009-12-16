@@ -19,7 +19,7 @@
 /**
 * stolen from http://www.gamedev.net/community/forums/topic.asp?topic_id=422993
 */
-SDL_Surface *CreateText(std::string text, TTF_Font *font, SDL_Color textColor);
+SDL_Surface *renderText(std::string text, TTF_Font *font, SDL_Color textColor);
 
 /**
 * stolen from http://gpwiki.org/index.php/SDL_ttf:Tutorials:Basic_Font_Rendering or somewhere else?
@@ -28,6 +28,9 @@ GLuint surfaceToTexture(SDL_Surface *surface);
 
 
 namespace YGEGraphics {
+	/**
+	 * @brief text rendering class, mainly used for HUDs and menues
+	 */
 	class YGEText : public YGEGraphicsAsset {
 	private:
 		typedef std::map<std::string, TTF_Font*> FontList;
@@ -61,10 +64,25 @@ namespace YGEGraphics {
 
 		void setColor(float r, float g, float b);
 
+		/**
+		 * @brief a font first has to be registered/created to be usable
+		 *
+		 * for this, a name has to be chosen, a filename to a ttf must be given
+		 * and a font size as well.
+		 */
 		static void registerFont(const char* fontname, const char* filename, int s);
+
+		/**
+		 * initialize all font rendering
+		 */
 		static void init();
+
+
 		static TTF_Font* getFont(const char* fontname);
 
+		/**
+		 * draw the font
+		 */
 		virtual void draw(YGEGraphicsContext* context);
 
 	};

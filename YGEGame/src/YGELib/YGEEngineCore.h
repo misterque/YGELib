@@ -147,7 +147,7 @@ namespace YGECore {
 		* pointer to a YGEInputManager. Responsible for input
 		* as from keyboard, joystick, gamepad or mouse.
 		*/
-		YGEInputManager* input;
+		YGEInput::YGEInputManager* input;
 
 		/**
 		* pointer to a YGELogger
@@ -224,7 +224,7 @@ namespace YGECore {
 		/**
 		* @brief initialises the core
 		*
-		* components are created and ressources are loaded
+		* components are created and resources are loaded
 		*/
 		virtual void init() = 0;
 
@@ -251,7 +251,7 @@ namespace YGECore {
 		/**
 		* @brief returns a pointer to the input manager
 		*/
-		YGEInputManager* getInputManager();
+		YGEInput::YGEInputManager* getInputManager();
 
 		/**
 		* @brief returns the time the core is running in micro seconds

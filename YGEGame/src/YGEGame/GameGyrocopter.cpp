@@ -111,7 +111,7 @@ GameGyrocopter::GameGyrocopter(){
 }
 
 void GameGyrocopter::tick(long delta){
-
+	// play the right sound for the engine
 	switch(soundstate){
 		case -1:
 			soundstate = 0;
@@ -165,19 +165,14 @@ void GameGyrocopter::tick(long delta){
 
 	double seconds = delta / 1000000.0f;
 
-	//dBodyID bodyId = mass.getBodyId();
 
-	mass.getRelativeVelocity().z;
-
-
-
-	//// reset the force & torque accummulators
+	// reset the force & torque accummulators
 
 	mass.setForce(0, 0, 0);
 	mass.setTorque(0, 0, 0);
 
-	//double up = v[2] / 10.0f;
 
+	// change up vector in dependance of current speed
 	up += abs(mass.getRelativeVelocity().z / 3.0f * seconds);
 	up -= 2.0f * seconds;
 
@@ -191,8 +186,7 @@ void GameGyrocopter::tick(long delta){
 
 	double damp = 20.0f;
 	backRotorAngularVelocity += (throttle - backRotorAngularVelocity) * seconds;
-	tailHRot += (tailH - tailHRot) * seconds * 3.0f;
-	tailVRot += (tailV - tailVRot) * seconds * 3.0f;
+	
 
 
 	if(!destroyed) {
@@ -205,8 +199,14 @@ void GameGyrocopter::tick(long delta){
 	mass.addRelativeTorque(0, -tailX / 100.0f, 0);
 	}
 
+	// rotate the rotors
 	posRotorTop.rotateDGR(YGEMath::Vector3(0,1,0), up * seconds * 50.0f);
 	posRotorBack.rotateDGR(YGEMath::Vector3(0,0,1), seconds * backRotorAngularVelocity * 20.0f);
+
+	// set the rotation of the tails
+	
+	tailHRot += (tailH - tailHRot) * seconds * 3.0f;
+	tailVRot += (tailV - tailVRot) * seconds * 3.0f;
 
 	posTailH.setOrientation(YGEMath::Quaternion());
 
@@ -228,8 +228,8 @@ void GameGyrocopter::fireRocket(){
 		GameRocket* rocket = new GameRocket();
 		this->getParent()->addChild(rocket);
 		rocket->setPosition(this->getPosition());
-		//getOrientation().rotateVector(YGEMath::Vector3(3* fireFromRight,3,0));
-		rocket->translate(getOrientation().rotateVector(YGEMath::Vector3(1.5f * fireFromRight,2,-8)));
+
+		rocket->translate(getOrientation().rotateVector(YGEMath::Vector3(1.5f * fireFromRight,2,-12)));
 
 		rocket->setOrientation(getOrientation());
 		reload = 1000000;
@@ -239,6 +239,7 @@ void GameGyrocopter::fireRocket(){
 
 
 void GameGyrocopter::processCollision(YGEPhysics::YGEPhysicsAsset* bodyPart, YGEPhysics::YGEPhysicsAsset* collider){
+	// check if collision happend to the rotor
 	if( ( (YGEPhysics::YGEPhysicsAsset*)(&(this->collider)) == bodyPart  ||
 		(YGEPhysics::YGEPhysicsAsset*)(&(this->colliderLeft)) == bodyPart  ||
 		(YGEPhysics::YGEPhysicsAsset*)(&(this->colliderRight)) == bodyPart  )
@@ -246,6 +247,7 @@ void GameGyrocopter::processCollision(YGEPhysics::YGEPhysicsAsset* bodyPart, YGE
 			GameManager::getInstance()->getCore()->processCommand("collision");
 			//posRotorBack.addAsset(new YGEPhysics::YGEBodyAsset());
 
+			// add a mass to the rotor so it will move on its own
 			YGEPhysics::YGEBodyAsset* rotorMass = new YGEPhysics::YGEBodyAsset();
 			posRotorTop.addAsset(rotorMass);
 			this->getParent()->addChild(&posRotorTop);
@@ -253,7 +255,7 @@ void GameGyrocopter::processCollision(YGEPhysics::YGEPhysicsAsset* bodyPart, YGE
 			posRotorTop.setPosition(posRotorTop.getAbsPosition());
 			posRotorTop.setOrientation(posRotorTop.getAbsOrientation());
 
-			
+			// add random forces to the gyrocopter
 			YGEMath::Vector3 rand = YGEMath::Vector3::random(10);
 			mass.addAbsoluteForce(rand.x, rand.y, rand.z);
 

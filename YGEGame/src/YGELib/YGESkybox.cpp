@@ -13,12 +13,12 @@ namespace YGEGraphics {
 		frontfile<<"skymaps/"<<name<<"_positive_z.bmp";
 		backfile<<"skymaps/"<<name<<"_negative_z.bmp";
 
-		up   = YGECore::YGERessourceManager::getInstance()->getTexture(upfile.str().c_str());
-		down = YGECore::YGERessourceManager::getInstance()->getTexture(downfile.str().c_str());
-		right  = YGECore::YGERessourceManager::getInstance()->getTexture(rightfile.str().c_str());
-		left = YGECore::YGERessourceManager::getInstance()->getTexture(leftfile.str().c_str());
-		front   = YGECore::YGERessourceManager::getInstance()->getTexture(frontfile.str().c_str());
-		back = YGECore::YGERessourceManager::getInstance()->getTexture(backfile.str().c_str());
+		up   = YGECore::YGEResourceManager::getInstance()->getTexture(upfile.str().c_str());
+		down = YGECore::YGEResourceManager::getInstance()->getTexture(downfile.str().c_str());
+		right  = YGECore::YGEResourceManager::getInstance()->getTexture(rightfile.str().c_str());
+		left = YGECore::YGEResourceManager::getInstance()->getTexture(leftfile.str().c_str());
+		front   = YGECore::YGEResourceManager::getInstance()->getTexture(frontfile.str().c_str());
+		back = YGECore::YGEResourceManager::getInstance()->getTexture(backfile.str().c_str());
 
 		up->setRepeat(false);
 		down->setRepeat(false);

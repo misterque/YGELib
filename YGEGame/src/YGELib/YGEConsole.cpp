@@ -174,7 +174,7 @@ namespace YGECore {
 		c.r=255;
 		c.g=0;
 		c.b=255;
-		surface = CreateText(stream.str(), YGEGraphics::YGEText::getFont("VeraMono12"), c);
+		surface = renderText(stream.str(), YGEGraphics::YGEText::getFont("VeraMono12"), c);
 		/*	SDL_Surface* big = SDL_CreateRGBSurface(SDL_SWSURFACE | SDL_SRCALPHA, 1024, 64, surface->format->BitsPerPixel,surface->format->Rmask, surface->format->Gmask, surface->format->Bmask, surface->format->Amask);
 		SDL_Rect r;
 		r.h= surface->h;

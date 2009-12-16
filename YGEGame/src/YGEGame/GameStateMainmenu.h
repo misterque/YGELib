@@ -23,7 +23,7 @@
 
 #include "Menu.h"
 
-class GameStateMainmenu  : public YGEGame::YGEGameState, public YGEKeyDownListener{
+class GameStateMainmenu  : public YGEGame::YGEGameState, public  YGEInput::YGEKeyDownListener{
 private:
 	GameGyrocopter* gyro;
 	YGETimeSpace::YGEObserver* observer;

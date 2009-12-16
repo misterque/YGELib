@@ -2,19 +2,45 @@
 
 namespace YGETimeSpace{
 
-
+	/**
+	 * @brief callback function called by ODE in case of a collision
+	 */
 	void nearCallback(void *data, dGeomID o0, dGeomID o1)
 	{
 		reinterpret_cast<YGESpace*>(data)->handleCollisionBetween(o0,o1);
 	} 
 
+
+	YGESpace::YGESpace() {
+
+			sunlight = new YGEGraphics::YGESunlight();
+
+			skybox = NULL;
+
+
+			rootEntity.setSpace(this);
+
+			timeIsRunning = false;
+
+			soundEnabled = false;
+		}
+
+	
+	YGESpace::~YGESpace() {
+		delete sunlight;
+		delete skybox;
+	}
+
 	void YGESpace::initTime(){
 
 		worldId = dWorldCreate();
 		spaceId = dHashSpaceCreate(0);
+		
+		// maybe using this would be more suitable (because of the heightmap)
 		//spaceId = dQuadTreeSpaceCreate (NULL, bla, bla, 8);
-
 		contactGroup = dJointGroupCreate(0); 
+
+		// we need gravity
 
 		dWorldSetGravity(worldId, 0, -9.81, 0);
 
@@ -39,20 +65,34 @@ namespace YGETimeSpace{
 	}
 
 	void YGESpace::timeStep(long long delta){
+		// do not timestep if no time is running
 		if(!timeIsRunning) return;
+		
+		// and do not timestep on negative times
 		if(delta <= 0) return;
 
+
 		double seconds = delta / 1000000.0f;
+
+		// never do timesteps which are longer than a third of a second
 		if(seconds > 0.3) {
 			seconds = 0.3;
 		}
 
-
+		//test for collisions
 		dSpaceCollide(spaceId, this, &nearCallback);
+
+		//do a timestep
 		dWorldStepFast1(worldId, seconds, 5 );
+
+		// empty the group of collsion contacts
 		dJointGroupEmpty(contactGroup);
 
 
+	}
+
+	bool  YGESpace::getTimeIsRunning(){
+		return timeIsRunning;
 	}
 
 	/** stolen from xavier decoret who stole it as well **/
@@ -76,6 +116,7 @@ namespace YGETimeSpace{
 		if (int numc = dCollide(o0, o1, MAX_CONTACTS, &contact[0].geom, sizeof(dContact)))
 		{
 
+			// send a collison to the colliding physicsAssets
 			YGEPhysics::YGEPhysicsAsset* a0 = (YGEPhysics::YGEPhysicsAsset*)dGeomGetData(o0);
 			YGEPhysics::YGEPhysicsAsset* a1 = (YGEPhysics::YGEPhysicsAsset*)dGeomGetData(o1);
 

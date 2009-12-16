@@ -1,6 +1,6 @@
 #include "YGEEntity.h"
 #include "YGESoundAsset.h"
-#include "YGERessourceManager.h"
+#include "YGEResourceManager.h"
 #include "YGEVector.h"
 
 namespace YGEAudio {
@@ -24,7 +24,7 @@ namespace YGEAudio {
 	}
 
 	void YGESoundAsset::setSound(const char *filename){
-		sound = YGECore::YGERessourceManager::getInstance()->getSound(filename);
+		sound = YGECore::YGEResourceManager::getInstance()->getSound(filename);
 		
 		alGenSources(1, &source);
 

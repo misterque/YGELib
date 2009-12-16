@@ -36,7 +36,7 @@
 		(b) basic particle system with point sprites: completed
 		(c) improved heightmap loading with texture: completed
 		(d) OBJ loading with multiple meshes: 70 %
-		(e) ressource management for textures: completed
+		(e) resource management for textures: completed
 		
 	EMS03: due to
 		(a) skybox rendering 90%
@@ -52,7 +52,7 @@
 	EMS04:
 		(a) (animated md2 loading and rendering: postponed)
 		(b) particle system from file
-		(c) ressource management for models
+		(c) resource management for models
 		(d) basic shadows
 		(e) redoing the vertex buffer objects completed
 		

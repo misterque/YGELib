@@ -53,9 +53,7 @@ namespace YGECore {
 			timer->startTimer();
 
 
-			// do some prerendering
-			graphics->reset();
-			graphics->update();
+
 
 
 			// process all input events
@@ -69,6 +67,11 @@ namespace YGECore {
 				update();
 				updateAbsolutePositions();
 				interpolate();
+			
+				// do some prerendering
+				graphics->reset();
+				graphics->update();
+
 				render();
 				tick();
 
@@ -276,7 +279,7 @@ namespace YGECore {
 		console = new YGEConsole();
 		YGELogger::getInstance()->setConsole(console);
 		graphics = new YGEGraphicsCore();
-		input = new YGEInputManager();
+		input = new YGEInput::YGEInputManager();
 
 		audio = YGEAudio::YGEAudioCore::getInstance();
 

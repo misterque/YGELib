@@ -141,7 +141,7 @@ namespace YGECore {
 	public:
 		/**
 		* initialises the core
-		* components are allocated and ressources are loaded
+		* components are allocated and resources are loaded
 		*/
 		virtual void init();
 
