@@ -94,6 +94,14 @@ namespace YGEGraphics {
 
 	}
 
+	YGEStaticMesh::YGEStaticMesh(){
+		meshes = NULL;
+	}
+
+	YGEStaticMesh::~YGEStaticMesh(){
+		delete meshes;
+	}
+
 	void YGEStaticMesh::loadFromOBJ(const char *filename){
 
 
@@ -170,9 +178,9 @@ namespace YGEGraphics {
 					vv.y = vertexCoords.at(vindex).y;
 					vv.z = vertexCoords.at(vindex).z;
 					if(vnindex >= 0) {
-					vv.nx = vertexNormals.at(vnindex).nx;
-					vv.ny = vertexNormals.at(vnindex).ny;
-					vv.nz = vertexNormals.at(vnindex).nz;
+						vv.nx = vertexNormals.at(vnindex).nx;
+						vv.ny = vertexNormals.at(vnindex).ny;
+						vv.nz = vertexNormals.at(vnindex).nz;
 					} else {
 						vv.nx = 0;
 						vv.ny = 1;
@@ -229,7 +237,7 @@ namespace YGEGraphics {
 	}
 
 	void YGEStaticMesh::draw(YGEGraphicsContext *context){
-				glEnable(GL_CULL_FACE);
+		glEnable(GL_CULL_FACE);
 		meshes->draw(context);
 	}
 

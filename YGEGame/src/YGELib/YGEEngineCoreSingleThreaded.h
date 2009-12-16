@@ -165,10 +165,6 @@ namespace YGECore {
 			return framesPerSecond;
 		}
 
-				virtual int getFramesPerSecond(){
-					return framesPerSecond;
-				}
-
 	};
 
 }

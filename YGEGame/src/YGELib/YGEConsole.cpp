@@ -10,7 +10,32 @@ using namespace std;
 
 namespace YGECore {
 
+	/**
+	 * @brief helper function for creating a texture for a console line
+	 */
+	void textToConsoleLine(consoleLine* line){
 
+		std::ostringstream stream;
+
+		stream << "> " << line->text;
+		SDL_Surface* surface;
+
+		SDL_Color c;
+		c.r=255;
+		c.g=0;
+		c.b=255;
+		surface = renderText(stream.str(), YGEGraphics::YGEText::getFont("VeraMono12"), c);
+
+		if(line->texture > -1) {
+			glDeleteTextures( 1, &line->texture	);
+		}
+		line->width = surface->w;
+		line->height = surface->h;
+		line->texture = surfaceToTexture(surface);
+
+		SDL_FreeSurface( surface );
+
+	}
 
 	YGEConsole::YGEConsole(){
 		for(int i = 0; i<10; i++){
@@ -19,7 +44,7 @@ namespace YGECore {
 		output[9].text = "Engine up and running";
 
 		currentLine.text = "quit";
-		update();
+		inited = false;
 	}
 
 	void YGEConsole::insertKey(SDL_keysym key){
@@ -36,13 +61,13 @@ namespace YGECore {
 			case SDLK_BACKSPACE:
 				if(currentLine.text.length() > 0) {
 					currentLine.text.erase(currentLine.text.length()-1);
-					update();
+					textToConsoleLine(&currentLine);
 				}
 				break;
 
 			case SDLK_SPACE:
 				currentLine.text.append(" ");
-				update();
+				textToConsoleLine(&currentLine);
 				break;
 
 			case SDLK_RETURN:
@@ -61,6 +86,10 @@ namespace YGECore {
 
 
 	void YGEConsole::draw(){
+		if(!inited) {
+			inited = true;
+			update();
+		}
 
 		glDisable(GL_LIGHTING);
 		glMatrixMode( GL_PROJECTION );
@@ -136,7 +165,6 @@ namespace YGECore {
 	void YGEConsole::init(YGEEngineCore *core){
 
 		this->core = core;
-		update();
 
 	}
 
@@ -149,53 +177,8 @@ namespace YGECore {
 		update();
 	}
 
-	SDL_Surface* redImage(int w,int h,SDL_Surface* src) 
-	{ 
-		SDL_Surface* surface = SDL_CreateRGBSurface(SDL_SWSURFACE,w,h,32,0,0,0,0); 
-		SDL_SetColorKey(surface,SDL_SRCCOLORKEY,SDL_MapRGB(surface->format,0,0,0)); 
-		SDL_BlitSurface(src,NULL,surface,NULL); 
-		SDL_FreeSurface(src); 
-		return surface; 
-	} 
 
-	void textToConsoleLine(consoleLine* line){
 
-		std::ostringstream stream;
-
-		stream << "> " << line->text;
-		SDL_Surface* surface;
-		// 
-		//surface = SDL_LoadBMP("../media/images/testalpha256x256.bmp");
-		//surface = drawtext(VeraMono, 0, 255, 0, 255, 0, 0, 255, 255, stream.str().c_str(), blended);
-		// surface = drawtext(VeraMono, 0, 255, 0, 255, 0, 0, 255, 255, stream.str().c_str(), blended);
-
-		//surface = redImage(1024,32,surface);
-		SDL_Color c;
-		c.r=255;
-		c.g=0;
-		c.b=255;
-		surface = renderText(stream.str(), YGEGraphics::YGEText::getFont("VeraMono12"), c);
-		/*	SDL_Surface* big = SDL_CreateRGBSurface(SDL_SWSURFACE | SDL_SRCALPHA, 1024, 64, surface->format->BitsPerPixel,surface->format->Rmask, surface->format->Gmask, surface->format->Bmask, surface->format->Amask);
-		SDL_Rect r;
-		r.h= surface->h;
-		r.w= surface->w;
-		r.x= 0;
-		r.y= 0;
-		int blitresult = SDL_BlitSurface(surface, NULL, big, NULL);
-		printf("blit %i", blitresult);*/
-		printf("to delete Texute ID: %i \n", line->texture);
-
-		if(line->texture > -1) {
-			glDeleteTextures( 1, &line->texture	);
-		}
-		line->width = surface->w;
-		line->height = surface->h;
-		line->texture = surfaceToTexture(surface);
-
-		printf("Texute ID: %i \n", line->texture);
-		SDL_FreeSurface( surface );
-		//		SDL_FreeSurface( big );
-	}
 
 	void YGEConsole::update(){
 

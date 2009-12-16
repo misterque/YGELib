@@ -19,12 +19,12 @@ GLuint surfaceToTexture2(SDL_Surface *surface, bool mipmap){
 
 	// Check that the image's width is a power of 2
 	if ( (surface->w & (surface->w - 1)) != 0 ) {
-		printf("warning: image.bmp's width is not a power of 2\n");
+		//@todo error handling
 	}
 
 	// Also check if the height is a power of 2
 	if ( (surface->h & (surface->h - 1)) != 0 ) {
-		printf("warning: image.bmp's height is not a power of 2\n");
+		//@todo error handling
 	}
 
 	// get the number of channels in the SDL surface
@@ -42,14 +42,12 @@ GLuint surfaceToTexture2(SDL_Surface *surface, bool mipmap){
 		else
 			texture_format = GL_BGR;
 	} else {
-		printf("warning: the image is not truecolor..  this will probably break\n number of channels %i \n" , nOfColors);
-		// this error should not go unhandled
+		//@todo error handling
 	}
 
 	// Have OpenGL generate a texture object handle for us
 	glGenTextures( 1, &texture );
 
-	printf("init tex %u", texture);
 
 	// Bind the texture object
 	glBindTexture( GL_TEXTURE_2D, texture );
@@ -82,8 +80,8 @@ namespace YGECore{
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 		} else {
 
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
 		}
 	}

@@ -8,7 +8,7 @@
 
 
 
-namespace YGECore {
+namespace YGEGraphics {
 	void YGEGraphicsCore::renderSpace(YGETimeSpace::YGESpace* space, YGETimeSpace::YGEObserver* observer){
 
 		// draw a skybox
@@ -25,6 +25,7 @@ namespace YGECore {
 
 		glDisable(GL_TEXTURE_2D);
 		glDisable(GL_BLEND);
+
 
 
 		renderEntity(space->getRootEntity());
@@ -94,6 +95,8 @@ namespace YGECore {
 
 		screen = SDL_SetVideoMode(screenw, screenh, 16, flags);
 
+		context.width = screenw;
+			context.height = screenh;
 		//YGEResourceManager::getInstance()->reloadGraphics();
 	}
 
@@ -128,14 +131,14 @@ namespace YGECore {
 
 	void YGEGraphicsCore::init(){
 
-		YGELogger::getInstance()->log("Initializing Display");
+		YGECore::YGELogger::getInstance()->log("Initializing Display");
 
 
 
 		createScreen();
 
 		if (screen == NULL) {
-			YGELogger::getInstance()->log("Setting Video Mode Failed");
+			YGECore::YGELogger::getInstance()->log("Setting Video Mode Failed");
 			throw YGEExceptionSubsystemError(std::string(SDL_GetError()));
 			return;
 		}

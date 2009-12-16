@@ -30,6 +30,7 @@ namespace YGEGraphics {
 
 	public:
 		YGEVbo();
+		~YGEVbo();
 
 		virtual void draw(YGEGraphicsContext* context);
 

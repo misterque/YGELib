@@ -94,7 +94,7 @@ private:
 	YGEMath::Vector3 oldPosition;
 	YGEMath::Vector3 newPosition;
 
-	friend class YGECore::YGEGraphicsCore;
+	friend class YGEGraphics::YGEGraphicsCore;
 	friend class YGEAudio::YGEAudioCore;
 	YGEMath::Vector3 interpolatedPosition;
 

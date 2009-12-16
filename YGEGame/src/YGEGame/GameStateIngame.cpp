@@ -86,6 +86,7 @@ void GameStateIngame::update(long delta){
 	timeSinceLastTimeUpdate += delta;
 
 	if( level->getSpace()->getTimeIsRunning() ) {
+		// this is not THAT cool... could be based on difference of starttime and current time
 		ingameTime += delta;
 	} 
 	if(timeSinceLastTimeUpdate > 1000000) {
@@ -244,14 +245,14 @@ void GameStateIngame::keyUp(SDLKey key){
 
 
 void  GameStateIngame::processCommand(const char* command) {
-	if(command == "stopgame") {
+	if(strcmp(command, "stopgame") == 0) {
 		GameManager::getInstance()->stopGame();
 	}
-	if(command == "balldestroyed") {
+	if(strcmp(command, "balldestroyed") == 0) {
 		ballsToDestroy--;
 	}
 
-	if(command == "collision" && ballsToDestroy >= 0) {
+	if(strcmp(command, "collision") == 0 && ballsToDestroy >= 0) {
 		ballsToDestroy = -2;
 
 	}

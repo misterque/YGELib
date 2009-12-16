@@ -12,6 +12,12 @@ public:
 
 class Menu;
 
+
+/**
+ * @brief simple menu item
+ *
+ * has a text and a position, only needed by Menu
+ */
 class MenuItem {
 public:
 	MenuItem(std::string itemtext){
@@ -28,15 +34,16 @@ public:
 	std::string command;
 	Menu* submenu;
 };
-	
+
+/**
+ * @brief class for creating basic menus
+ */
 class Menu {
 private:
 	std::vector<MenuItem*> items;
 
 	int selectedItem;
 public:
-//	void addSubMenuItem(std::string text, Menu* submenu);
-//	void addMenuListenerItem(std::string text, MenuListener* listener);
 
 	Menu();
 
@@ -46,8 +53,18 @@ public:
 
 	YGETimeSpace::YGEEntity* children;
 
+	/**
+	 * @brief create a menuitem for this menu
+	 * @param text text of the item
+	 * @param command command of the menuitem that will be passed to the engine core on selection
+	 */
 	void addItem(std::string text, std::string command);
 
+	/**
+	 * @brief add another menu to this menu
+	 *
+	 * on selection, the other menu will be displayed and this will be hidden
+	 */
 	void addSubmenu(std::string text, Menu* sub);
 
 	void up();
@@ -57,6 +74,7 @@ public:
 	void left();
 
 	void right();
+
 
 	Menu* select();
 

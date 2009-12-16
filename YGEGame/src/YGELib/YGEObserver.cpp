@@ -9,7 +9,8 @@ namespace YGETimeSpace {
 				glMatrixMode( GL_PROJECTION );
 				glLoadIdentity();
 
-				gluPerspective(45.0f,640.0f/480.0f,0.1f,1000.0f);
+				gluPerspective(45.0f,640.0f/480.0f,0.1f,2000.0f);
+
 
 
 				break;

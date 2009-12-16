@@ -18,11 +18,9 @@
  * user head up display
  * used for displaying information like fps and time to complete the level
  */
-<<<<<<< HEAD
-class GameHUD : public YGEKeyDownListener{
-=======
+
 class GameHUD : public  YGEInput::YGEKeyDownListener{
->>>>>>> 26a8
+
 	// space where all the hud elements live in
 	YGETimeSpace::YGESpace space;
 

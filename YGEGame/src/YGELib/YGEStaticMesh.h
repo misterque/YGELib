@@ -34,13 +34,16 @@ private:
 
 public:
 
+	YGEStaticMesh();
+	~YGEStaticMesh();
+
 	Mesh* getModel(){
 		return &model;
 	}
 		virtual void draw(YGEGraphicsContext* context);
 
 		/**
-		 * loads mesh data from an OBJ file.
+		 * @brief loads mesh data from an OBJ file.
 		 * @todo this should be managed by the YGECore::YGEResourceManager
 		 */
 		void loadFromOBJ(const char *filename);

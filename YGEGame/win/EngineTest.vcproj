@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="9,00"
+	Version="9.00"
 	Name="EngineTest"
 	ProjectGUID="{E8E5D076-E7F7-4F38-80BA-2BCAB8F89CF3}"
 	RootNamespace="EngineTest"
@@ -178,6 +178,10 @@
 			>
 			<File
 				RelativePath="..\src\EngineTest\EngineTest.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\src\EngineTest\MemoryTests.cpp"
 				>
 			</File>
 			<File

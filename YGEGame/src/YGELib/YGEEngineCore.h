@@ -137,7 +137,7 @@ namespace YGECore {
 		/**
 		* pointer to a YGEGraphicsCore. Responsible for graphics rendering stuff.
 		*/
-		YGEGraphicsCore* graphics;
+		YGEGraphics::YGEGraphicsCore* graphics;
 
 		/**
 		* pointer to a YGEAudioCore. Responsigble for audio rendering stuff.

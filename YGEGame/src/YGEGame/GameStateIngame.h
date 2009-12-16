@@ -28,7 +28,7 @@
 /**
 *
 */
-class GameStateIngame  : public YGEGame::YGEGameState, public YGEKeyDownListener, public YGEKeyUpListener{
+class GameStateIngame  : public YGEGame::YGEGameState, public YGEInput::YGEKeyDownListener, public YGEInput::YGEKeyUpListener{
 private:
 	/**
 	* the Camera attact to the players gyrocopter

@@ -62,6 +62,7 @@ namespace YGECore {
 
 			// do all the engine stuff
 			if(gamestate != NULL) {
+				
 				gamestate->update((long)delta);
 
 				calcPhysics(delta);
@@ -70,9 +71,10 @@ namespace YGECore {
 				interpolate();
 			
 				// do some prerendering
+				timerOther->startTimer();
 				graphics->reset();
 				graphics->update();
-
+				timerOther->stopTimer();
 				render();
 				tick();
 
@@ -280,7 +282,7 @@ namespace YGECore {
 
 		console = new YGEConsole();
 		YGELogger::getInstance()->setConsole(console);
-		graphics = new YGEGraphicsCore();
+		graphics = new YGEGraphics::YGEGraphicsCore();
 		input = new YGEInput::YGEInputManager();
 
 		audio = YGEAudio::YGEAudioCore::getInstance();

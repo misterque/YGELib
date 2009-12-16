@@ -28,7 +28,7 @@ namespace YGETimeSpace {
 #define FULLSCREEN true
 #endif
 
-namespace YGECore {
+namespace YGEGraphics {
 
 	/**
 	* @brief core class for all rendering stuff
@@ -36,7 +36,7 @@ namespace YGECore {
 	class YGEGraphicsCore {
 	private:
 		YGEGraphicsContext context;
-		void renderEntity(YGETimeSpace::YGEEntity* entity);
+
 
 		/**
 		* @brief create a rendering surface
@@ -51,6 +51,11 @@ namespace YGECore {
 		SDL_Surface *screen;
 
 	public:
+
+		/**
+		 * @render an entity to the surface of a the screen associated to the YGEGraphicsCore
+		 */
+		void renderEntity(YGETimeSpace::YGEEntity* entity);
 		/**
 		* @brief will be true if the rendering window has been closed
 		*

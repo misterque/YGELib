@@ -63,7 +63,8 @@ namespace YGEGraphics {
 		int vertexCounter;
 	public:
 
-		Mesh(): vertexCounter(0) {};
+		Mesh();
+		~Mesh();
 
 		std::vector<Vertex> vertexList;
 		std::list<Triangle> triangleList;

@@ -173,12 +173,13 @@ namespace YGEGraphics {
 
 		glDisable(GL_LIGHTING);
 		glEnable(GL_BLEND);
-		glDisable(GL_DEPTH_TEST);
+		glEnable(GL_DEPTH_TEST);
+		//glDisable(GL_DEPTH);
 		glBlendFunc(GL_SRC_COLOR, GL_ONE_MINUS_SRC_COLOR);
 
 		glBindTexture(GL_TEXTURE_2D, texture->textureID);
 
-		glColor3f(1,1,1);
+		glColor3f(0.5,0.5,0.5);
 
 		glEnable( GL_POINT_SPRITE );
 
@@ -196,9 +197,11 @@ namespace YGEGraphics {
 
 		glPointParameterf( GL_POINT_SIZE_MIN, 5.0f );
 
-		glPointParameterf( GL_POINT_SIZE_MAX, 260.0f );
+		glPointParameterf( GL_POINT_SIZE_MAX, context->width/5.0f );
 
-		glPointSize(150.0f);
+		glPointSize(context->width/10.0f);
+
+		glDepthMask(GL_FALSE);
 
 		glBegin(GL_POINTS);
 		while(p != NULL){
@@ -206,6 +209,9 @@ namespace YGEGraphics {
 			p = p->nextParticle;
 		}
 		glEnd();
+
+		glDepthMask(GL_TRUE);
+
 
 		glPopMatrix();
 

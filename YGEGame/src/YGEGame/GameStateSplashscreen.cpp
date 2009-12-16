@@ -26,11 +26,11 @@ GameStateSplashscreen::GameStateSplashscreen(){
 	space->getRootEntity()->addChild(textPos);
 
 	YGEGraphics::YGEText::registerFont("VeraMono24", "../media/fonts/VeraMono.ttf", 24);
-	YGEGraphics::YGEText* text = new YGEGraphics::YGEText("YGE 2009", "VeraMono24");
+	YGEGraphics::YGEText* text = new YGEGraphics::YGEText("YGE 2009 - Dirk Fortmeier", "VeraMono24");
 	textPos->addAsset(text);
-	textPos->setPosition(YGEMath::Vector3(200,75,0));
+	textPos->setPosition(YGEMath::Vector3(150,205,0));
 
-	//YGEAudio::YGEAudioCore::getInstance()->
+	// play a sound on start of spl
 	YGEAudio::YGESoundAsset* sound = new YGEAudio::YGESoundAsset();
 	sound->setSound("sounds/start.wav");
 	space->getRootEntity()->addAsset(sound);

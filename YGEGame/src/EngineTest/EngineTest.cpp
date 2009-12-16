@@ -73,6 +73,7 @@ void testCore(){
 int _tmain(int argc, _TCHAR* argv[])
 {
 
+	memoryTests();
 	cout<<"Testing Engine Features:"<<endl;
 	cout<<"01) Math Library"<<endl;
 	testMath();

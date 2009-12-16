@@ -3,6 +3,21 @@
 namespace YGEGraphics {
 
 
+	Mesh::Mesh(){
+		vertexCounter = 0;
+		vertexBufferArray = NULL;
+		vertices = NULL;
+		uv = NULL;
+		indices = NULL;
+	}
+
+	Mesh::~Mesh(){
+		delete vertexBufferArray;
+		delete vertices;
+		delete uv;
+		delete indices;
+	}
+
 	void Mesh::addVertex(const Vertex &v){
 		vertexList.push_back(v);
 		vertexList.back().index = vertexCounter;

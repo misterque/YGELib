@@ -11,4 +11,6 @@ void testParticleSystem();
 
 void speedTests();
 
+void memoryTests();
+
 #endif

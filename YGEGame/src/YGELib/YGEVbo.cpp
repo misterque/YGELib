@@ -9,6 +9,10 @@ namespace YGEGraphics {
 	YGEVbo::YGEVbo(){
 
 		uptodate = false;
+		mesh = NULL;
+	}
+
+	YGEVbo::~YGEVbo(){
 
 	}
 
@@ -25,38 +29,38 @@ namespace YGEGraphics {
 		glColor3f(1,1,1);
 		// fallback
 		if(false){
-			for(int i = 0; i < mesh->numTriangles; i++){
-				glBegin(GL_TRIANGLES);
+			//for(int i = 0; i < mesh->numTriangles; i++){
+			//	glBegin(GL_TRIANGLES);
 
-				int iV1 = mesh->indices[i*3 + 0] * 3;
-				int iV2 = mesh->indices[i*3 + 1] * 3;
-				int iV3 = mesh->indices[i*3 + 2] * 3;
+			//	int iV1 = mesh->indices[i*3 + 0] * 3;
+			//	int iV2 = mesh->indices[i*3 + 1] * 3;
+			//	int iV3 = mesh->indices[i*3 + 2] * 3;
 
-				int iT1 = mesh->indices[i*3 + 0] * 2;
-				int iT2 = mesh->indices[i*3 + 1] * 2;
-				int iT3 = mesh->indices[i*3 + 2] * 2;
-
-
-				glTexCoord2d(mesh->uv[iT1 + 0], mesh->uv[iT1 + 1]); 
-				glVertex3f(	mesh->vertices[iV1 + 0],
-					mesh->vertices[iV1 + 1],
-					mesh->vertices[iV1 + 2] );
-
-				glTexCoord2d(mesh->uv[iT2 + 0], mesh->uv[iT2 + 1]); 
-				glVertex3f(	mesh->vertices[iV2 + 0],
-					mesh->vertices[iV2 + 1],
-					mesh->vertices[iV2 + 2] );
-
-				glTexCoord2d(mesh->uv[iT3 + 0], mesh->uv[iT3 + 1]); 
-				glVertex3f(	mesh->vertices[iV3 + 0],
-					mesh->vertices[iV3 + 1],
-					mesh->vertices[iV3 + 2] );
-
-				glEnd();
+			//	int iT1 = mesh->indices[i*3 + 0] * 2;
+			//	int iT2 = mesh->indices[i*3 + 1] * 2;
+			//	int iT3 = mesh->indices[i*3 + 2] * 2;
 
 
+			//	glTexCoord2d(mesh->uv[iT1 + 0], mesh->uv[iT1 + 1]); 
+			//	glVertex3f(	mesh->vertices[iV1 + 0],
+			//		mesh->vertices[iV1 + 1],
+			//		mesh->vertices[iV1 + 2] );
 
-			}
+			//	glTexCoord2d(mesh->uv[iT2 + 0], mesh->uv[iT2 + 1]); 
+			//	glVertex3f(	mesh->vertices[iV2 + 0],
+			//		mesh->vertices[iV2 + 1],
+			//		mesh->vertices[iV2 + 2] );
+
+			//	glTexCoord2d(mesh->uv[iT3 + 0], mesh->uv[iT3 + 1]); 
+			//	glVertex3f(	mesh->vertices[iV3 + 0],
+			//		mesh->vertices[iV3 + 1],
+			//		mesh->vertices[iV3 + 2] );
+
+			//	glEnd();
+
+
+
+			//}
 		} else {
 
 			if(!uptodate){

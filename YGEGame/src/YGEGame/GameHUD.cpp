@@ -14,7 +14,7 @@ GameHUD::GameHUD(){
 	// add pause text and hide it
 	infoTextPos = new YGETimeSpace::YGEEntity();
 	space.getRootEntity()->addChild(infoTextPos);
-	infoTextPos->translate(YGEMath::Vector3(200,300,0));
+	infoTextPos->translate(YGEMath::Vector3(100,300,0));
 	infoText = new YGEGraphics::YGEText("press 'p' to continue", "VeraMono24");
 	infoTextPos->addAsset(infoText);
 
@@ -51,6 +51,7 @@ GameHUD::GameHUD(){
 	quitMenu = new Menu();
 
 	quitMenuPos->addChild(quitMenu->pos);
+	quitMenuPos->translate3d(220, 50, 0);
 
 	quitMenu->addItem("Increase Sound Volume +", "volumeUp");
 	quitMenu->addItem("Decrease Sound Volume -", "volumeDown");
@@ -73,8 +74,12 @@ YGETimeSpace::YGEObserver* GameHUD::getObserver(){
 void GameHUD::setTime(int seconds){
 	time = seconds;
 	std::stringstream s;
-	s<<seconds/60<<":"<<seconds%60;
+	if(seconds < 0) {
+		s<<"-";
+	}
+	s<<seconds/60<<":"<<abs(seconds%60);
 	timeText->setText(s.str());
+	
 	
 
 }

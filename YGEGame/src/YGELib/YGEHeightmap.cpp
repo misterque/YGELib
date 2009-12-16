@@ -67,6 +67,23 @@ namespace YGEGraphics {
 		//		map->textureID = (YGECore::YGEResourceManager::getInstance()->getTexture("mud.bmp"))->textureID;
 		pHeightData = new double[w*h];
 
+		corners[0].x = (0 - w/2) * scalex;
+		corners[0].y = 0;
+		corners[0].z = (0 - h/2) * scalez;
+
+		corners[1].x = (w - w/2 -1) * scalex;
+		corners[1].y = 0;
+		corners[1].z = (0 - h/2) * scalez;
+
+		corners[2].x = (w - w/2 -1) * scalex;
+		corners[2].y = 0;
+		corners[2].z = (h - h/2 -1) * scalez;
+
+		corners[3].x = (0 - w/2) * scalex;
+		corners[3].y = 0;
+		corners[3].z = (h - h/2 -1) * scalez;
+
+
 		SDL_LockSurface(surface);
 		for(int x = 0; x < w; x++){
 			for(int y = 0; y < h; y++){
@@ -154,9 +171,24 @@ namespace YGEGraphics {
 		map->fillArrays();
 		mesh->setMesh(map);
 
+		SDL_FreeSurface(surface);
+
 	}
 
 	void YGEHeightmap::draw(YGEGraphicsContext *context){
+
+						glEnable(GL_FOG);
+				glHint(GL_FOG_HINT, GL_NICEST);
+				glFogf(GL_FOG_START, 1500.0f);
+				glFogf(GL_FOG_END, 2000.0f);
+glFogi(GL_FOG_MODE, GL_LINEAR);
+				GLfloat fogcolor[4]={1.0f, 1.0f, 1.0f, 0.0f};
+
+				glFogfv(GL_FOG_COLOR, fogcolor);
+
+				glEnable(GL_BLEND);
+
+				glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 		glCullFace(GL_BACK);
 		glEnable(GL_CULL_FACE);
@@ -166,11 +198,29 @@ namespace YGEGraphics {
 
 		glBegin(GL_QUADS);
 		glNormal3d(0.0f, 1.0f, 0.0f);
+
 		glTexCoord2f(0.0f, 0.0f); glVertex3f(-10000, 0, -10000);
 		glTexCoord2f(0.0f, 500.0f); glVertex3f(-10000, 0, 10000);
-		glTexCoord2f(500.0f, 500.0f); glVertex3f(10000, 0, 10000);
-		glTexCoord2f(500.0f, 0.0f); glVertex3f(10000, 0, -10000);
+		glTexCoord2f(500.0f, 0.0f); glVertex3f(corners[3].x, 0, corners[3].z);
+		glTexCoord2f(500.0f, 500.0f); glVertex3f(corners[0].x, 0, corners[0].z);
+
+		glTexCoord2f(0.0f, 0.0f); glVertex3f(10000, 0, -10000);
+		glTexCoord2f(0.0f, 500.0f); glVertex3f(-10000, 0, -10000);
+		glTexCoord2f(500.0f, 0.0f); glVertex3f(corners[0].x, 0, corners[0].z);
+		glTexCoord2f(500.0f, 500.0f); glVertex3f(corners[1].x, 0, corners[1].z);
+
+		glTexCoord2f(0.0f, 0.0f); glVertex3f(10000, 0, 10000);
+		glTexCoord2f(0.0f, 500.0f); glVertex3f(10000, 0, -10000);
+		glTexCoord2f(500.0f, 0.0f); glVertex3f(corners[1].x, 0, corners[1].z);
+		glTexCoord2f(500.0f, 5000.0f); glVertex3f(corners[2].x, 0, corners[2].z);
+
+		glTexCoord2f(0.0f, 0.0f); glVertex3f(-10000, 0, 10000);
+		glTexCoord2f(0.0f, 500.0f); glVertex3f(10000, 0, 10000);
+		glTexCoord2f(500.0f, 0.0f); glVertex3f(corners[2].x, 0, corners[2].z);
+		glTexCoord2f(500.0f, 500.0f); glVertex3f(corners[3].x, 0, corners[3].z);
 		glEnd();
+
+		glDisable(GL_FOG);
 	
 	}
 
@@ -208,4 +258,18 @@ namespace YGEGraphics {
 		return pHeightData[(x) + ((y+1) * w)];
 	}
 
+	YGEHeightmap::YGEHeightmap(){
+		mesh = NULL;
+
+
+		pHeightData = NULL;
+	}
+
+	YGEHeightmap::~YGEHeightmap(){
+		delete mesh;
+
+
+
+		delete pHeightData;
+	}
 }

@@ -21,6 +21,7 @@ void GameBall::processCollision(YGEPhysics::YGEPhysicsAsset* bodyPart, YGEPhysic
 	if(collider != NULL && destroyed == false){
 		getParent()->removeChild(this);
 
+		// send a command to the core to tell the gamestate that a ball has been destroyed
 		GameManager::getInstance()->getCore()->processCommand("balldestroyed");
 
 		destroyed = true;
