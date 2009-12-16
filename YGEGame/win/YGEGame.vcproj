@@ -252,14 +252,6 @@
 					>
 				</File>
 				<File
-					RelativePath="..\src\YGEGame\GameStateOptionsmenu.h"
-					>
-				</File>
-				<File
-					RelativePath="..\src\YGEGame\GameStatesCredits.h"
-					>
-				</File>
-				<File
 					RelativePath="..\src\YGEGame\GameStateSplashscreen.h"
 					>
 				</File>

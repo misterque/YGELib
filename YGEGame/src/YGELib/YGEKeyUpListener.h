@@ -3,10 +3,12 @@
 
 #include <SDL.h>
 
-class YGEKeyUpListener {
-public:
-	virtual void keyUp(SDLKey key) = 0;
-};
+namespace YGEInput {
 
+	class YGEKeyUpListener {
+	public:
+		virtual void keyUp(SDLKey key) = 0;
+	};
 
+}
 #endif

@@ -3,10 +3,14 @@
 
 #include <SDL.h>
 
-class YGEKeyDownListener {
-public:
-	virtual void keyDown(SDLKey key) = 0;
-};
+namespace YGEInput {
 
+
+	class YGEKeyDownListener {
+	public:
+		virtual void keyDown(SDLKey key) = 0;
+	};
+
+}
 
 #endif

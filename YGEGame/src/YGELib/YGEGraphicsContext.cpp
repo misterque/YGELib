@@ -7,5 +7,5 @@ void YGEGraphicsContext::glGetCameraMatrix(){
 
 void YGEGraphicsContext::saveAsGlCameraRotation(){
 	glGetFloatv(GL_MODELVIEW_MATRIX, cameraMatrix);
-	glLoadMatrixf(cameraMatrix);
+	//glLoadMatrixf(cameraMatrix);
 }

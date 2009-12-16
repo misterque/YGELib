@@ -28,60 +28,76 @@ namespace YGECore {
 		debugout("starting the core");
 
 		while(graphics->windowClosed == false && shutdownNow == false){
-			if(gamestatechanged) {
-				gamestatechanged = false;
+			debugout("starting core cycle");
+
+			// if needed, change the gamestate
+			if(gameStateChanged) {
+
+			debugout("changing gamestate");
+
+			gameStateChanged = false;
 				gamestate = newGameState;
 				newGameState = NULL;
 			}
 
+			// if needed, first initialize the gamesteate
 			if(gamestate->getHasBeenInitialised() == false) {
+			debugout("initializing gamestate");
+
 				gamestate->init();
+
 
 			}
 
-			//debugout("update the core");
 
-
+			// start timer for fps calculation
 			timer->startTimer();
 
 
-			graphics->reset();
-			graphics->update();
 
 
 
+			// process all input events
 			processEvents();
 
-
-
-
-
+			// do all the engine stuff
 			if(gamestate != NULL) {
-				gamestate->update(delta);
+				gamestate->update((long)delta);
 
 				calcPhysics(delta);
 				update();
 				updateAbsolutePositions();
 				interpolate();
+			
+				// do some prerendering
+				graphics->reset();
+				graphics->update();
+
 				render();
 				tick();
 
 			}
 
+			// draw the console
 			if(consoleEnabled) {
 				console->draw();
 			}
 
 			//timerOther->startTimer();
 
+
+			// stop the timer for fps calulation
 			delta = timer->stopTimer();
 
 
 
-			//limitFPS();
+			limitFPS();
 			calculateFPSRate();
-			//timerOther->stopTimer();
+
+			// give some debuggin and profiling information
+#ifdef _DEBUG
 			printTimes();
+#endif
 
 		}
 
@@ -102,14 +118,17 @@ namespace YGECore {
 				break;
 			default:
 				if(consoleEnabled){
+					// send input to the console
 					console->insertKey(event->key.keysym);
 				} else {
+					// send keyboard down input etc to the input manager
 					input->notifyEvent(event);
 				}
 				break;
 				}
 				break;
 			case SDL_KEYUP:
+				//send keyboard up to the input manager
 				input->notifyEvent(event);
 				break;
 			case SDL_MOUSEMOTION:
@@ -174,7 +193,7 @@ namespace YGECore {
 
 		for(YGETimeSpace::YGESpaceList::iterator iter = gamestate->getSpacesToUpdate()->begin(); iter != gamestate->getSpacesToUpdate()->end(); iter++){
 
-			(*iter)->getRootEntity()->update(delta);
+			(*iter)->getRootEntity()->update((long)delta);
 		}
 		timerUpdate->stopTimer();
 
@@ -203,7 +222,7 @@ namespace YGECore {
 		for(YGETimeSpace::YGESpaceList::iterator iter = gamestate->getSpacesToUpdate()->begin(); iter != gamestate->getSpacesToUpdate()->end(); iter++){
 
 			if( (*iter)->getTimeIsRunning() ) {
-				(*iter)->getRootEntity()->tickChildren(delta);
+				(*iter)->getRootEntity()->tickChildren((long)delta);
 			}
 		}
 
@@ -239,24 +258,30 @@ namespace YGECore {
 		delta = 1000;
 		accumDelta = 0;
 
+		gamestate = 0;
+		shutdownNow = false;
+		consoleEnabled = false;
 
 		debugout("initialize the core");
-		debugout("using SDL");
 
+		// init all subsystems
 
 		YGELogger::getInstance()->log("Initializing SDL Video");
 		if (SDL_Init(SDL_INIT_VIDEO) != 0) {
-			YGELogger::getInstance()->log("Unable to initialize SDL");
-			//fprintf(stderr, "Unable to initialize SDL: %s\n", SDL_GetError());
+			throw YGEExceptionSubsystemError("SDL Video init");
 			return;
 		}
 
-		TTF_Init();
+		if (TTF_Init() != 0) {
+			throw YGEExceptionSubsystemError("TTF init");
+			return;
+		}
+		
 
 		console = new YGEConsole();
 		YGELogger::getInstance()->setConsole(console);
 		graphics = new YGEGraphicsCore();
-		input = new YGEInputManager();
+		input = new YGEInput::YGEInputManager();
 
 		audio = YGEAudio::YGEAudioCore::getInstance();
 
@@ -291,7 +316,7 @@ namespace YGECore {
 
 	void YGEEngineCoreSingleThreaded::setGameState(YGEGame::YGEGameState* state){
 		newGameState = state;
-		gamestatechanged = true;
+		gameStateChanged = true;
 	}
 
 }

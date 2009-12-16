@@ -73,7 +73,7 @@ void speedTests(){
 	timer.startTimer();
 	for(int i=0; i<5; i++){
 		YGEGraphics::YGEHeightmap map;
-		map.create("images/hmap.bmp", 1000.0f, 1000.0f, 100.0f); 
+		map.create("images/hmap.bmp", "textures/mud.tex", 1000.0f, 1000.0f, 100.0f); 
 
 	}
 

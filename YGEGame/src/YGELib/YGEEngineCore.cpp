@@ -8,9 +8,7 @@ namespace YGECore {
 
 
 	YGEEngineCore::YGEEngineCore(){
-		gamestate = 0;
-		shutdownNow = false;
-		consoleEnabled = false;
+
 
 		dInitODE();
 	}
@@ -24,7 +22,7 @@ namespace YGECore {
 
 	}
 
-	YGEInputManager* YGEEngineCore::getInputManager(){
+	YGEInput::YGEInputManager* YGEEngineCore::getInputManager(){
 		return input;
 	}
 

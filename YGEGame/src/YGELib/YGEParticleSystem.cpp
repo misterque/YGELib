@@ -96,7 +96,7 @@ namespace YGEGraphics {
 	}
 
 	YGEParticleSystem::YGEParticleSystem(){
-		texture = YGECore::YGERessourceManager::getInstance()->getTexture("textures/particle.tex");
+		texture = YGECore::YGEResourceManager::getInstance()->getTexture("textures/particle.tex");
 
 		spawnVelocity = YGEMath::Vector3(0,-1,0);
 		spawnRandomVelocity = YGEMath::Vector3(0.3f,0.3f,0.3f);

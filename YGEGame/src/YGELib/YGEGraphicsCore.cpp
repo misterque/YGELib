@@ -94,7 +94,7 @@ namespace YGECore {
 
 		screen = SDL_SetVideoMode(screenw, screenh, 16, flags);
 
-		//YGERessourceManager::getInstance()->reloadGraphics();
+		//YGEResourceManager::getInstance()->reloadGraphics();
 	}
 
 	YGEGraphicsCore::YGEGraphicsCore(){
@@ -136,7 +136,7 @@ namespace YGECore {
 
 		if (screen == NULL) {
 			YGELogger::getInstance()->log("Setting Video Mode Failed");
-			fprintf(stderr, "Unable to set video mode: %s\n", SDL_GetError());
+			throw YGEExceptionSubsystemError(std::string(SDL_GetError()));
 			return;
 		}
 		windowClosed = 0;

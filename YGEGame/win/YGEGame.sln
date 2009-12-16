@@ -7,7 +7,18 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "YGEGame", "YGEGame.vcproj",
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "YGELib", "YGELib.vcproj", "{B34C1000-21FF-4AF4-B36D-7C9E6175D53A}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestProject1", "TestProject1\TestProject1.vcproj", "{488B9F63-C7AD-4FC6-B972-2D1A979918FD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3A2EC3B8-D2D9-4271-A073-5549150CD7AF}"
+	ProjectSection(SolutionItems) = preProject
+		LocalTestRun.testrunconfig = LocalTestRun.testrunconfig
+		YGEGame.vsmdi = YGEGame.vsmdi
+	EndProjectSection
+EndProject
 Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = YGEGame.vsmdi
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
 		DebugDoubleDLL|Win32 = DebugDoubleDLL|Win32
@@ -81,6 +92,26 @@ Global
 		{B34C1000-21FF-4AF4-B36D-7C9E6175D53A}.ReleaseSingleDLL|Win32.Build.0 = Release|Win32
 		{B34C1000-21FF-4AF4-B36D-7C9E6175D53A}.ReleaseSingleLib|Win32.ActiveCfg = Release|Win32
 		{B34C1000-21FF-4AF4-B36D-7C9E6175D53A}.ReleaseSingleLib|Win32.Build.0 = Release|Win32
+		{488B9F63-C7AD-4FC6-B972-2D1A979918FD}.Debug|Win32.ActiveCfg = Debug|Win32
+		{488B9F63-C7AD-4FC6-B972-2D1A979918FD}.Debug|Win32.Build.0 = Debug|Win32
+		{488B9F63-C7AD-4FC6-B972-2D1A979918FD}.DebugDoubleDLL|Win32.ActiveCfg = Debug|Win32
+		{488B9F63-C7AD-4FC6-B972-2D1A979918FD}.DebugDoubleDLL|Win32.Build.0 = Debug|Win32
+		{488B9F63-C7AD-4FC6-B972-2D1A979918FD}.DebugDoubleLib|Win32.ActiveCfg = Debug|Win32
+		{488B9F63-C7AD-4FC6-B972-2D1A979918FD}.DebugDoubleLib|Win32.Build.0 = Debug|Win32
+		{488B9F63-C7AD-4FC6-B972-2D1A979918FD}.DebugSingleDLL|Win32.ActiveCfg = Debug|Win32
+		{488B9F63-C7AD-4FC6-B972-2D1A979918FD}.DebugSingleDLL|Win32.Build.0 = Debug|Win32
+		{488B9F63-C7AD-4FC6-B972-2D1A979918FD}.DebugSingleLib|Win32.ActiveCfg = Debug|Win32
+		{488B9F63-C7AD-4FC6-B972-2D1A979918FD}.DebugSingleLib|Win32.Build.0 = Debug|Win32
+		{488B9F63-C7AD-4FC6-B972-2D1A979918FD}.Release|Win32.ActiveCfg = Release|Win32
+		{488B9F63-C7AD-4FC6-B972-2D1A979918FD}.Release|Win32.Build.0 = Release|Win32
+		{488B9F63-C7AD-4FC6-B972-2D1A979918FD}.ReleaseDoubleDLL|Win32.ActiveCfg = Release|Win32
+		{488B9F63-C7AD-4FC6-B972-2D1A979918FD}.ReleaseDoubleDLL|Win32.Build.0 = Release|Win32
+		{488B9F63-C7AD-4FC6-B972-2D1A979918FD}.ReleaseDoubleLib|Win32.ActiveCfg = Release|Win32
+		{488B9F63-C7AD-4FC6-B972-2D1A979918FD}.ReleaseDoubleLib|Win32.Build.0 = Release|Win32
+		{488B9F63-C7AD-4FC6-B972-2D1A979918FD}.ReleaseSingleDLL|Win32.ActiveCfg = Release|Win32
+		{488B9F63-C7AD-4FC6-B972-2D1A979918FD}.ReleaseSingleDLL|Win32.Build.0 = Release|Win32
+		{488B9F63-C7AD-4FC6-B972-2D1A979918FD}.ReleaseSingleLib|Win32.ActiveCfg = Release|Win32
+		{488B9F63-C7AD-4FC6-B972-2D1A979918FD}.ReleaseSingleLib|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

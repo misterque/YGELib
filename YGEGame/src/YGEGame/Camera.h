@@ -4,7 +4,13 @@
 #include "YGEEntity.h"
 #include "YGEObserver.h"
 
-
+/**
+ * @brief a simple camera object
+ *
+ * it is placed at the location of the player's gyrocopter
+ * if necessary, it could be rotated for example with the mouse
+ * but this is not used
+ */
 class Camera :	public YGETimeSpace::YGEEntity {
 private:
 	YGETimeSpace::YGEEntity* pitcher;

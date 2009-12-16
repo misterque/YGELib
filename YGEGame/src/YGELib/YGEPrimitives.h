@@ -14,7 +14,10 @@
 
 namespace YGEGraphics {
 
-
+	/** 
+	 * @brief simple vertex structure
+	 * for passing vertices to a vertex buffer object
+	 */
 	struct Vertex {
 		Vertex() : x(0.0f), y(0.0f), z(0.0f) { };
 
@@ -39,6 +42,9 @@ namespace YGEGraphics {
 
 	};
 
+	/**
+	 * @brief simple trianle structure
+	 */
 	struct Triangle {
 
 		Triangle(int A, int B, int C) : a(A), b(B), c(C) { };
@@ -50,7 +56,7 @@ namespace YGEGraphics {
 
 
 	/**
-	* holds mesh information
+	* @brief holds mesh information to create vertex buffer objects
 	*/
 	class Mesh {
 	private:
@@ -66,9 +72,13 @@ namespace YGEGraphics {
 
 		void addTriangle(const Triangle &t);
 
+
 		void fillArrays();
 
 
+		/**
+		 * create an ode mesh object for collision detection from a mesh
+		 */
 		dTriMeshDataID getODEMesh();
 
 

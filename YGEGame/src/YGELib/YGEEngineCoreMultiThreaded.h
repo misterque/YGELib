@@ -1,3 +1,9 @@
+/**
+ * @file
+ * @author Dirk Fortmeier
+ * @date ?
+ */
+
 #ifndef _YGE_ENGINE_CORE_MULTI_THREADED_H_
 #define _YGE_ENGINE_CORE_MULTI_THREADED_H_
 
@@ -11,9 +17,8 @@
 namespace YGECore {
 
 	/**
-	* YGE main game engine class
-	* @todo just use YGEGraphicsCore... make it nicer... more PFI
-	* true object orientation
+	* YGE main game engine class in multithreading mode
+	*
 	*/
 	class YGEEngineCoreMultiThreaded : public YGEEngineCoreSingleThreaded {
 	protected:
@@ -29,35 +34,19 @@ namespace YGECore {
 	
 		SDL_mutex* eventMutex;
 
-		std::list<SDL_Event> events;
+		/**
+		 * list of events for querying and processing events seperatly
+		 */
+		std::list<SDL_Event> eventList;
 
 		SDL_Thread* updateThread;
 		SDL_Thread* simulateThread;
 
 	public:
 
-		YGEEngineCoreMultiThreaded(){
-			statusIsRender = true;
+		YGEEngineCoreMultiThreaded();
 
-			simulateMutex = SDL_CreateMutex();
-			eventMutex = SDL_CreateMutex();
-
-			updateMutex = SDL_CreateMutex();			
-			prerenderMutex = SDL_CreateMutex();
-
-			updateCondition = SDL_CreateCond();
-			renderCondition = SDL_CreateCond();
-
-			updateThread = NULL;
-			simulateThread = NULL;
-
-			gamestatechanged = true;
-
-			newGameState = NULL;
-		}
-
-		//@todo destroy the mutexes and conditions
-//		~YGEEngineCoreMultiThreaded();
+		~YGEEngineCoreMultiThreaded();
 
 		/**
 		* starts a permanent engine loop with a seperate thread for physics
@@ -65,10 +54,20 @@ namespace YGECore {
 		*/
 		virtual void run();
 
+		/**
+		 * starting point for update thread
+		 */
 		void threadUpdate();
 
+		/**
+		 * starting point fot the simulation thread
+		 */
 		void threadSimulate();
 
+		/**
+		 * in multithreading mode, querying and processing of events is
+		 * decoupled, so this function processes all events from the events list
+		 */
 		void processEvents();
 
 

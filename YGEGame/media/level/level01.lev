@@ -1,0 +1,15 @@
+sky: sunset
+sunposition: 1.0 1.0 1.0
+suncolor: 0.8 0.6 0.3
+
+timeToComplete: 10
+
+mapFileName: images/hmap2.bmp
+textureFileName: textures/mud.tex
+
+mapScale: 1000 100 1000
+
+startPos: 0 400 400
+
+ball: blue 0 300 0
+ball: red 0 400 0

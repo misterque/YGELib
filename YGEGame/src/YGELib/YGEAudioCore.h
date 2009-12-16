@@ -22,7 +22,7 @@
 namespace YGEAudio {
 
 	/**
-	 * manages playback of audio files.
+	 * @brief manages playback of audio files.
 	 */
 	class YGEAudioCore {
 		/**

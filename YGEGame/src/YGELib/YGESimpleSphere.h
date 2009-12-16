@@ -13,6 +13,9 @@
 namespace YGEGraphics {
 
 
+	/**
+	 * @brief a simple sphere using GLU quadrics
+	 */
 	class YGESimpleSphere : public YGEGraphicsAsset {
 	private:
 		double red;

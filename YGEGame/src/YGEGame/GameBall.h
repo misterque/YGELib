@@ -11,9 +11,20 @@
 #include "YGESimpleHullAsset.h"
 #include "YGESimpleSphere.h"
 
+/**
+ * @brief simple mission objective
+ *
+ * on a collsion it is destroyed and sends a message to the core via YGECore::YGEEngineCore::processCommand()
+ *
+ */
 class GameBall : public YGETimeSpace::YGEEntity {
 
 	YGEGraphics::YGESimpleSphere* mesh;
+
+
+	/**
+	 * needed so a collision will only send a message once
+	 */
 
 	bool destroyed;
 	YGEPhysics::YGESimpleHullAsset* hull;

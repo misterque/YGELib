@@ -1,0 +1,18 @@
+sky: waterscape
+sunposition: 0.5 1.0 0.5
+suncolor: 0.8 0.8 1.0
+
+timeToComplete: 60
+
+mapFileName: images/hmap.bmp
+textureFileName: textures/snow.tex
+
+mapScale: 300 800 300
+
+startPos: 0 2 600
+
+ball: pink 0 800 0
+ball: red -200 600 0
+ball: blue 0 400 -200
+ball: white 200 200 0
+

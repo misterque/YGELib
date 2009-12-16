@@ -3,10 +3,12 @@
 
 #include <SDL.h>
 
-class YGEMouseMoveListener {
-public:
-	virtual void mouseMoved(int x, int y) = 0;
-};
+namespace YGEInput {
 
+	class YGEMouseMoveListener {
+	public:
+		virtual void mouseMoved(int x, int y) = 0;
+	};
+}
 
 #endif

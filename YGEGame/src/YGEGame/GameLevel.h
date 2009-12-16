@@ -31,7 +31,7 @@ private:
 	/**
 	 * some water, not used in every level
 	 */
-	YGEGraphics::YGEWater *water;
+	//YGEGraphics::YGEWater *water;
 	
 	
 	/**

@@ -1,4 +1,4 @@
-#include "YGERessourceManager.h"
+#include "YGEResourceManager.h"
 #include "YGEExceptions.h"
 
 #include <sstream>
@@ -7,12 +7,12 @@
 
 namespace YGECore {
 
-	YGERessourceManager::YGERessourceManager(){
-		ressourceLocation = "../media/";
+	YGEResourceManager::YGEResourceManager(){
+		resourceLocation = "../media/";
 
 	}
 
-	SDL_Surface* YGERessourceManager::getSurface(const char *filename){
+	SDL_Surface* YGEResourceManager::getSurface(const char *filename){
 
 		std::ostringstream s;
 		s << "../media/" << filename;
@@ -27,18 +27,18 @@ namespace YGECore {
 
 	}
 
-	void YGERessourceManager::crawlRessources(){
+	void YGEResourceManager::crawlResources(){
 
 	}
 
-	std::string YGERessourceManager::absoluteFilename(const char* filename) {
+	std::string YGEResourceManager::absoluteFilename(const char* filename) {
 		std::ostringstream s;
-		s<<ressourceLocation<<filename;
+		s<<resourceLocation<<filename;
 		return s.str();
 	}
 	//void unloadTexture(std::string name);
 
-	YGETexture* YGERessourceManager::getTexture(const char* filename){
+	YGETexture* YGEResourceManager::getTexture(const char* filename){
 
 		if(textures.find(filename) == textures.end()) {
 			YGETexture* texture = new YGETexture ();
@@ -47,10 +47,10 @@ namespace YGECore {
 		}
 
 		return (textures.find(filename)->second);
-		
+
 	}
 
-	YGEAudio::YGESound* YGERessourceManager::getSound(const char* filename){
+	YGEAudio::YGESound* YGEResourceManager::getSound(const char* filename){
 
 		if(sounds.find(filename) == sounds.end()) {
 			YGEAudio::YGESound* sound = new YGEAudio::YGESound ();
@@ -59,12 +59,12 @@ namespace YGECore {
 		}
 
 		return (sounds.find(filename)->second);
-		
+
 	}
 
 
 
-	YGERessourceManager* YGERessourceManager::singleton = NULL;
+	YGEResourceManager* YGEResourceManager::singleton = NULL;
 
 
 }

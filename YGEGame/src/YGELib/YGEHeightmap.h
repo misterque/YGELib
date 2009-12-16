@@ -8,11 +8,15 @@
 
 #include "YGEGraphicsAsset.h"
 #include "YGEVbo.h"
-#include "YGERessourceManager.h"
+#include "YGEResourceManager.h"
 
 namespace YGEGraphics {
 
-class YGEHeightmap : public YGEGraphicsAsset { // , YGEPhysicsAsset
+
+/**
+ * @brief heightmap class for terrain rendering and collsion
+ */
+class YGEHeightmap : public YGEGraphicsAsset { 
 private:
 	YGEVbo* mesh;
 
@@ -40,15 +44,33 @@ public:
 	 */
 	void create(const char *filename, const char* texturefilename, double width, double depth, double height);
 
+
+	/**
+	 * @brief make the heightmap solid
+	 *
+	 * i.e. create a static geom for the physics engine
+	 * @note heightmap must be child of a YGETimeSpace::YGESpace
+	 * and this space must have time enabled
+	 */
 	void makeSolid();
+
+	/**
+	 * @brief get the width of the heightmap
+	 */
 
 	int getW() {
 		return w;
 	}
+	/**
+	 * @brief get the height/depth of the heightmap
+	 */
 	int getH() {
 		return h;
 	}
 
+	/**
+	 * @brief get the height of the heightmap at position x, y
+	 */
 	double getZ(int x, int y);
 
 };

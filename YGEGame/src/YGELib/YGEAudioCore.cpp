@@ -16,10 +16,6 @@ namespace YGEAudio {
 
 	void YGEAudioCore::init(){
 		alutInit(NULL, NULL);
-//		alutInitWithoutContext (NULL, NULL);
-
-
-//device = alcOpenDevice(NULL);
 		volume = 50;
 
 

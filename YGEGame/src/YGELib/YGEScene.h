@@ -12,41 +12,14 @@
 namespace YGETimeSpace{
 
 
-/** this class seems to be dispensable.
- * considering a "root" entity to be a scene
- * is more logical.
- *
- * the root-entity
- * being a set of all sets,
- * mirroring the lord
- *
- * no, the root entity is just the set of all sets which are
- * part of a set.
- * 
- * i am getting stupid here...
- */
-
-/*
-class YGEScene {
-
-
-private:
-	YGEEntity rootNode;
-
-	void renderEntity(YGEEntity* entity);
-
-public:
-	void render();
-
-	YGEEntity* getRootNode(){
-		return &rootNode;
-	}
-
-	YGEScene();
-};
-
-*/
+	/**
+	 * @brief a scene consists of a space and an observer
+	 */
 	typedef std::pair<YGESpace*, YGEObserver*> YGEScene;
+
+	/**
+	 * @brief a list of scenes
+	 */
 	typedef std::list<YGEScene> YGESceneList;
 
 }

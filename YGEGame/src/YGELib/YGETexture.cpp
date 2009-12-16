@@ -1,4 +1,4 @@
-#include "YGERessourceManager.h"
+#include "YGEResourceManager.h"
 #include "YGELogger.h"
 #include "YGETextureFunctions.h"
 #include "YGEExceptions.h"
@@ -131,7 +131,7 @@ namespace YGECore{
 			is>>in;
 			if(in == "file:") {
 				is>>imagefilename;
-				imagefilename = YGECore::YGERessourceManager::getInstance()->absoluteFilename(imagefilename.c_str());
+				imagefilename = YGECore::YGEResourceManager::getInstance()->absoluteFilename(imagefilename.c_str());
 			}
 			if(in == "genmipmaps") {
 				hasMipMaps = true;

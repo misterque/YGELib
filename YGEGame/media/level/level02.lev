@@ -1,0 +1,19 @@
+sky: waterscape
+sunposition: 1.0 1.0 1.0
+suncolor: 1.0 1.0 1.0
+
+timeToComplete: 90
+
+mapFileName: images/mapcanyon.bmp
+textureFileName: textures/mud.tex
+
+mapScale: 1000 150 2000
+
+startPos: 0 100 1200
+
+ball: white 0 40 800
+ball: white -140 40 600
+ball: white -80 40 460
+ball: white -100 40 260
+ball: white -150 40 00
+ball: white -80 40 -620

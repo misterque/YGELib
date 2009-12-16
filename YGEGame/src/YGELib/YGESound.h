@@ -11,7 +11,7 @@
 #include <al.h>
 
 namespace YGECore{
-	class YGERessourceManager;
+	class YGEResourceManager;
 }
 
 namespace YGEAudio {
@@ -19,7 +19,7 @@ namespace YGEAudio {
 	class YGESound {
 
 	private:
-		friend class YGECore::YGERessourceManager;
+		friend class YGECore::YGEResourceManager;
 
 		/**
 		* load a sound from a file

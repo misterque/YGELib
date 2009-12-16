@@ -13,12 +13,20 @@ const int COLORKEY_BLUE = 0xFF;
 /**
 * stolen from http://www.gamedev.net/community/forums/topic.asp?topic_id=422993
 */
-SDL_Surface *CreateText(std::string text, TTF_Font *font, SDL_Color textColor)
+SDL_Surface *renderText(std::string text, TTF_Font *font, SDL_Color textColor)
 {
 	//Make text as normal...
 	SDL_Surface* TextSurface = TTF_RenderText_Solid(font, text.c_str(), textColor);
+	int w = 1;
+	int h = 1;
+	while( w < TextSurface->w) {
+		w *= 2;
+	}
+	while( h < TextSurface->h) {
+		h *= 2;
+	}
 
-	SDL_Surface *NewSurface = SDL_CreateRGBSurface(SDL_SWSURFACE, 1024, 32, 32, 
+	SDL_Surface *NewSurface = SDL_CreateRGBSurface(SDL_SWSURFACE, w, h, 32, 
 		0xFF000000, 0x00FF0000, 0x0000FF00, 0);
 
 	//Create a rectangle for coloring the empty image
@@ -59,12 +67,12 @@ GLuint surfaceToTexture(SDL_Surface *surface){
 
 	// Check that the image's width is a power of 2
 	if ( (surface->w & (surface->w - 1)) != 0 ) {
-		printf("warning: image.bmp's width is not a power of 2\n");
+		//printf("warning: image.bmp's width is not a power of 2\n");
 	}
 
 	// Also check if the height is a power of 2
 	if ( (surface->h & (surface->h - 1)) != 0 ) {
-		printf("warning: image.bmp's height is not a power of 2\n");
+		//printf("warning: image.bmp's height is not a power of 2\n");
 	}
 
 	// get the number of channels in the SDL surface
@@ -82,14 +90,13 @@ GLuint surfaceToTexture(SDL_Surface *surface){
 		else
 			texture_format = GL_BGR;
 	} else {
-		printf("warning: the image is not truecolor..  this will probably break\n number of channels %i \n" , nOfColors);
-		// this error should not go unhandled
+		//throwprintf("warning: the image is not truecolor..  this will probably break\n number of channels %i \n" , nOfColors);
+
 	}
 
 	// Have OpenGL generate a texture object handle for us
 	glGenTextures( 1, &texture );
 
-	printf("init tex %u", texture);
 
 	// Bind the texture object
 	glBindTexture( GL_TEXTURE_2D, texture );
@@ -143,7 +150,7 @@ namespace YGEGraphics {
 			glDeleteTextures(1, &textureId);
 		}
 
-		SDL_Surface* surface = CreateText(
+		SDL_Surface* surface = renderText(
 			text,
 			font,
 			color

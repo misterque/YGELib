@@ -19,24 +19,24 @@ namespace YGECore {
 
 
 /**
- *	singleton class for loading and unloading of ressources
+ *	singleton class for loading and unloading of resources
  */
-class YGERessourceManager {
+class YGEResourceManager {
 
 private:
 
-		YGERessourceManager();
+		YGEResourceManager();
 		/**
 		 * pointer to the singleton
 		 */
-		static YGERessourceManager* singleton;
+		static YGEResourceManager* singleton;
 
 		/**
-		 * path to the location of ressources
+		 * path to the location of resources
 		 * by default, this is set to '../media/'
-		 * @see setRessourceLocation
+		 * @see setResourceLocation
 		 */
-		std::string ressourceLocation;
+		std::string resourceLocation;
 
 		/**
 		 * map containing textures associated with their filenames
@@ -59,9 +59,9 @@ public:
 	/**
 	 * @return singlton instance
 	 */
-	static YGERessourceManager* getInstance(){
+	static YGEResourceManager* getInstance(){
 		if(singleton == 0){
-			singleton = new YGERessourceManager();
+			singleton = new YGEResourceManager();
 		}
 		return singleton;
 	}
@@ -82,19 +82,22 @@ public:
 	SDL_Surface* getSurface(const char *filename);
 
 	/**
-	 * crawls the ressource directory/directories
-	 * for ressources and stores the location of ressources
+	 * crawls the resource directory/directories
+	 * for resources and stores the location of resources
 	 * @note not working atm
 	 */
-	void crawlRessources();
-
-	std::string YGERessourceManager::absoluteFilename(const char* filename);
+	void crawlResources();
 
 	/**
-	 * set the ressource location
-	 * @see ressourceLocation
+	 * @return the path of a file with appended resource location
 	 */
-	void setRessourceLocation(const char* path);
+	std::string YGEResourceManager::absoluteFilename(const char* filename);
+
+	/**
+	 * set the resource location
+	 * @see resourceLocation
+	 */
+	void setResourceLocation(const char* path);
 
 
 	/**

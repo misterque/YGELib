@@ -1,6 +1,6 @@
 #include "YGEStaticMesh.h"
 #include "YGEExceptions.h"
-#include "YGERessourceManager.h"
+#include "YGEResourceManager.h"
 
 #include <sstream>
 #include <fstream>
@@ -214,7 +214,7 @@ namespace YGEGraphics {
 				ss <<"images/"<< textures[s];
 
 				model.textureID =
-					YGECore::YGERessourceManager::getInstance()->getTexture(ss.str().c_str())->textureID;
+					YGECore::YGEResourceManager::getInstance()->getTexture(ss.str().c_str())->textureID;
 
 			}
 

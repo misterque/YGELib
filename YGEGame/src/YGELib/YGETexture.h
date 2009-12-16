@@ -15,13 +15,18 @@
 #include <SDL_opengl.h>
 
 namespace YGECore{
-	class YGERessourceManager;
+	class YGEResourceManager;
 }
 
 namespace YGECore {
+	/**
+	 * @brief texture object
+	 *
+	 * use the YGECore::YGEResourceManager to load a texture
+	 */
 	class YGETexture {
 	private:
-		friend class YGECore::YGERessourceManager;
+		friend class YGECore::YGEResourceManager;
 
 		/**
 		* load a texture from a file
@@ -46,10 +51,16 @@ namespace YGECore {
 		int w, h;
 		GLuint textureID;
 
+		/**
+		 * @brief bind a texture to the opengl context
+		 */
 		void bind(){
 			glBindTexture(GL_TEXTURE_2D, textureID);
 		}
 
+		/**
+		 * sometimes a texture needs to be repeatable (terrain), sometimes not (skymap)
+		 */
 		void setRepeat(bool repeat);
 
 		/**

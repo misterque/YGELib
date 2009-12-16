@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="9.00"
+	Version="9,00"
 	Name="YGELib"
 	ProjectGUID="{B34C1000-21FF-4AF4-B36D-7C9E6175D53A}"
 	RootNamespace="YGELib"
@@ -154,10 +154,6 @@
 			Filter="cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx"
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
-			<File
-				RelativePath="..\src\YGELib\YGEInputManager.cpp"
-				>
-			</File>
 			<Filter
 				Name="math"
 				>
@@ -198,7 +194,7 @@
 					>
 				</File>
 				<File
-					RelativePath="..\src\YGELib\YGERessourceManager.cpp"
+					RelativePath="..\src\YGELib\YGEResourceManager.cpp"
 					>
 				</File>
 				<File
@@ -326,6 +322,14 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="input"
+				>
+				<File
+					RelativePath="..\src\YGELib\YGEInputManager.cpp"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -376,7 +380,7 @@
 					>
 				</File>
 				<File
-					RelativePath="..\src\YGELib\YGERessourceManager.h"
+					RelativePath="..\src\YGELib\YGEResourceManager.h"
 					>
 				</File>
 				<File

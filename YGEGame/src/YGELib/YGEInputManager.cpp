@@ -1,11 +1,14 @@
 #include "YGEInputManager.h"
 
-void YGEInputManager::init(){
+namespace YGEInput {
 
-}
 
-void YGEInputManager::notifyEvent(SDL_Event *event){
-	switch(event->type){
+	void YGEInputManager::init(){
+
+	}
+
+	void YGEInputManager::notifyEvent(SDL_Event *event){
+		switch(event->type){
 					case SDL_KEYDOWN:
 						copyKeydownlisteners = keydownlisteners;
 						for(std::list<YGEKeyDownListener*>::iterator iter = copyKeydownlisteners.begin();
@@ -33,32 +36,34 @@ void YGEInputManager::notifyEvent(SDL_Event *event){
 
 						}
 						break;
+		}
 	}
-}
 
 
-void YGEInputManager::addKeyDownListener(YGEKeyDownListener* listener){
-	keydownlisteners.push_back(listener);
-}
+	void YGEInputManager::addKeyDownListener(YGEKeyDownListener* listener){
+		keydownlisteners.push_back(listener);
+	}
 
-void YGEInputManager::addKeyUpListener(YGEKeyUpListener* listener){
-	keyuplisteners.push_back(listener);
-}
+	void YGEInputManager::addKeyUpListener(YGEKeyUpListener* listener){
+		keyuplisteners.push_back(listener);
+	}
 
-void YGEInputManager::addMouseMoveListener(YGEMouseMoveListener* listener){
-	mousemovelisteners.push_back(listener);
-}
+	void YGEInputManager::addMouseMoveListener(YGEMouseMoveListener* listener){
+		mousemovelisteners.push_back(listener);
+	}
 
-void YGEInputManager::removeKeyDownListener(YGEKeyDownListener* listener){
-	keydownlisteners.remove(listener);
-}
+	void YGEInputManager::removeKeyDownListener(YGEKeyDownListener* listener){
+		keydownlisteners.remove(listener);
+	}
 
-void YGEInputManager::removeKeyUpListener(YGEKeyUpListener* listener){
-	keyuplisteners.remove(listener);
+	void YGEInputManager::removeKeyUpListener(YGEKeyUpListener* listener){
+		keyuplisteners.remove(listener);
 
-}
+	}
 
-void YGEInputManager::removeMouseMoveListener(YGEMouseMoveListener* listener){
-	mousemovelisteners.remove(listener);
+	void YGEInputManager::removeMouseMoveListener(YGEMouseMoveListener* listener){
+		mousemovelisteners.remove(listener);
+
+	}
 
 }
