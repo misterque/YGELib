@@ -23,6 +23,9 @@
 
 #include "Menu.h"
 
+/**
+ * @brief class managing the main menu
+ */
 class GameStateMainmenu  : public YGEGame::YGEGameState, public  YGEInput::YGEKeyDownListener{
 private:
 	GameGyrocopter* gyro;

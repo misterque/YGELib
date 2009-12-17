@@ -24,7 +24,7 @@ namespace YGEGraphics {
 		glBindTexture(GL_TEXTURE_2D, mesh->textureID);
 
 		glDisable(GL_BLEND);
-	glEnable(GL_DEPTH_TEST);
+		glEnable(GL_DEPTH_TEST);
 
 		glColor3f(1,1,1);
 		// fallback
@@ -74,15 +74,15 @@ namespace YGEGraphics {
 			glEnableClientState(GL_VERTEX_ARRAY);
 			glVertexPointer(3, GL_FLOAT, sizeof(Vertex), 0);
 
-		glClientActiveTexture(GL_TEXTURE0);
-		glTexCoordPointer(2, GL_FLOAT, sizeof(Vertex), (void*) (sizeof(GLfloat) * 3));
-		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+			glClientActiveTexture(GL_TEXTURE0);
+			glTexCoordPointer(2, GL_FLOAT, sizeof(Vertex), (void*) (sizeof(GLfloat) * 3));
+			glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
-		glNormalPointer(GL_FLOAT, sizeof(Vertex), (void*) (sizeof(GLfloat) * 5 + sizeof(GLubyte) * 4));
-		glEnableClientState(GL_NORMAL_ARRAY);
+			glNormalPointer(GL_FLOAT, sizeof(Vertex), (void*) (sizeof(GLfloat) * 5 + sizeof(GLubyte) * 4));
+			glEnableClientState(GL_NORMAL_ARRAY);
 
 
-			//glDrawArrays( GL_TRIANGLES, 0, mesh->numVertices );
+
 			glDrawElements(GL_TRIANGLES, mesh->numTriangles*3, GL_UNSIGNED_INT, 0);
 
 			// reset
@@ -102,8 +102,8 @@ namespace YGEGraphics {
 
 		// fill the buffer with vertex data
 		glBindBufferARB(GL_ARRAY_BUFFER_ARB, vboId);
-		
-		
+
+
 		glBufferDataARB(GL_ARRAY_BUFFER_ARB, mesh->numVertices*sizeof(Vertex), mesh->vertexBufferArray, GL_STATIC_DRAW_ARB);
 
 		glGenBuffersARB(1, &iboId);

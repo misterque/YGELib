@@ -26,12 +26,12 @@
 
 
 /**
-*
+* @brief gamestate used for game logic
 */
 class GameStateIngame  : public YGEGame::YGEGameState, public YGEInput::YGEKeyDownListener, public YGEInput::YGEKeyUpListener{
 private:
 	/**
-	* the Camera attact to the players gyrocopter
+	* the Camera attached to the players gyrocopter
 	*/
 	Camera* cam;
 
@@ -111,19 +111,33 @@ public:
 	virtual void update(long delta);
 
 
+	
 	virtual void keyDown(SDLKey key);
 	virtual void keyUp(SDLKey key);
 
 	virtual void processCommand(const char* command);
 
+	/**
+	 * @deprecated
+	 */
 	void setLevel(int level);
-
+	
+	/**
+	 * after completing the level or crashing, the game should
+	 * not immediatly stop. this is a couter counting down for this.
+	 */
 	double timeToQuit;
 
+	/**
+	 * @brief set the level to load
+	 */ 
 	void setLevelFileName(std::string filename){
 		levelFileName = filename;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	bool getLevelCompleted();
 
 };
