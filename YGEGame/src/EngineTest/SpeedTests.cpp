@@ -41,6 +41,25 @@ void speedTests(){
 	core.reset();
 
 
+
+
+
+
+	//
+	// SPEEDTEST RESET GRAPICS CORE ************************************************
+	timer.startTimer();
+
+	for(int i=0; i<100; i++){
+		core.reset();
+
+
+	}
+
+	time = timer.stopTimer();
+	std::cout<<std::endl<<time / 1000.0f / 100.0f <<" ms for resetting graphics core"<<std::endl;
+
+
+
 	//
 	// SPEEDTEST QUATERNIONROTATIONS ************************************************
 
@@ -72,29 +91,29 @@ void speedTests(){
 	std::cout<<std::endl<<time / 1000.0f / 10000.0f <<" ms for creating a matrix from a quaternion"<<std::endl;
 
 
-	////
-	//// SPEEDTEST MESHLOADING ************************************************
-	//timer.startTimer();
-	//for(int i=0; i<10; i++){
-	//	YGEGraphics::YGEStaticMesh mesh;
-	//	mesh.loadFromOBJ("models/gyro_body.obj");
+	//
+	// SPEEDTEST MESHLOADING ************************************************
+	timer.startTimer();
+	for(int i=0; i<10; i++){
+		YGEGraphics::YGEStaticMesh mesh;
+		mesh.loadFromOBJ("models/gyro_body.obj");
 
-	//}
+	}
 
-	//time = timer.stopTimer();
-	//std::cout<<std::endl<<time / 1000 / 10 <<" ms for loading a mesh (10x the same)"<<std::endl;
+	time = timer.stopTimer();
+	std::cout<<std::endl<<time / 1000 / 10 <<" ms for loading a mesh (10x the same)"<<std::endl;
 
-	////
-	//// SPEEDTEST HEIGHTMAP LOADING ************************************************
-	//timer.startTimer();
-	//for(int i=0; i<5; i++){
-	//	YGEGraphics::YGEHeightmap map;
-	//	map.create("images/hmap.bmp", "textures/mud.tex", 1000.0f, 1000.0f, 100.0f); 
+	//
+	// SPEEDTEST HEIGHTMAP LOADING ************************************************
+	timer.startTimer();
+	for(int i=0; i<5; i++){
+		YGEGraphics::YGEHeightmap map;
+		map.create("images/hmap.bmp", "textures/mud.tex", 1000.0f, 1000.0f, 100.0f); 
 
-	//}
+	}
 
-	//time = timer.stopTimer();
-	//std::cout<<std::endl<<time / 1000 / 5<<" ms for loading heightmap (5x the same)"<<std::endl;
+	time = timer.stopTimer();
+	std::cout<<std::endl<<time / 1000.0f / 5.0f<<" ms for loading heightmap (5x the same)"<<std::endl;
 
 
 	//
@@ -152,7 +171,7 @@ void speedTests(){
 	}
 
 	time = timer.stopTimer();
-	std::cout<<std::endl<<time / 1000 / 10 <<" ms for creating and destroying an entity tree with 5^3=125 entities"<<std::endl;
+	std::cout<<std::endl<<time / 1000.0f / 10.0f <<" ms for creating and destroying an entity tree with 5^3=125 entities"<<std::endl;
 
 
 
