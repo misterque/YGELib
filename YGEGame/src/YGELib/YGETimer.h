@@ -28,6 +28,9 @@ namespace YGECore {
 		*/
 		virtual long long getTime();
 
+		/**
+		* @return time in milliseconds since timer has been started
+		*/
 		long getTimeMilliseconds();
 
 
@@ -43,6 +46,9 @@ namespace YGECore {
 		*/
 		virtual long long stopTimer();
 
+		/**
+		* @brief get the time that was stopped
+		*/
 		long long getStoppedTime(){
 			return stoppedTime;
 		}

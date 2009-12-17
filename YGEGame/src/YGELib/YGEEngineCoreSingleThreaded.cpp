@@ -6,21 +6,26 @@
 #include "YGEText.h"
 
 
+long long timerAccumTick;
+long long timerAccumPhysics;
+long long timerAccumGraphics;
+long long timerAccumUpdate;
+long long timerAccumOther;
+
+
 
 namespace YGECore {
 	void YGEEngineCoreSingleThreaded::printTimes(){
 		debugout("physics");
-		debugout(timerPhysics->getStoppedTime()/1000);
-		debugout("graphics rendering");
-		debugout(timerGraphics->getStoppedTime()/1000);
+		debugout(timerAccumPhysics/1000.0f/double(frames));
+		debugout("graphics");
+		debugout(timerAccumGraphics/1000.0f/double(frames));
 		debugout("updating");
-		debugout(timerUpdate->getStoppedTime()/1000);
+		debugout(timerAccumUpdate/1000.0f/double(frames));
 		debugout("ticking");
-		debugout(timerTick->getStoppedTime()/1000);
-		debugout("altogether");
-		debugout(timer->getStoppedTime()/1000);
+		debugout(timerAccumTick/1000.0f/double(frames));
 		debugout("other");
-		debugout(timerOther->getStoppedTime()/1000);
+		debugout(timerAccumOther/1000.0f/double(frames));
 	}
 
 	void YGEEngineCoreSingleThreaded::run(){
@@ -33,16 +38,16 @@ namespace YGECore {
 			// if needed, change the gamestate
 			if(gameStateChanged) {
 
-			debugout("changing gamestate");
+				debugout("changing gamestate");
 
-			gameStateChanged = false;
+				gameStateChanged = false;
 				gamestate = newGameState;
 				newGameState = NULL;
 			}
 
 			// if needed, first initialize the gamesteate
 			if(gamestate->getHasBeenInitialised() == false) {
-			debugout("initializing gamestate");
+				debugout("initializing gamestate");
 
 				gamestate->init();
 
@@ -62,14 +67,14 @@ namespace YGECore {
 
 			// do all the engine stuff
 			if(gamestate != NULL) {
-				
+
 				gamestate->update((long)delta);
 
 				calcPhysics(delta);
 				update();
 				updateAbsolutePositions();
 				interpolate();
-			
+
 				// do some prerendering
 				timerOther->startTimer();
 				graphics->reset();
@@ -91,15 +96,18 @@ namespace YGECore {
 			// stop the timer for fps calulation
 			delta = timer->stopTimer();
 
+			timerAccumTick += timerTick->getStoppedTime();
+			timerAccumPhysics += timerPhysics->getStoppedTime();
+			timerAccumGraphics += timerGraphics->getStoppedTime();
+			timerAccumUpdate += timerUpdate->getStoppedTime();
+			timerAccumOther += timerOther->getStoppedTime();
 
 
 			limitFPS();
 			calculateFPSRate();
 
 			// give some debuggin and profiling information
-#ifdef _DEBUG
-			printTimes();
-#endif
+
 
 		}
 
@@ -107,9 +115,9 @@ namespace YGECore {
 	}
 
 
-	
+
 	void YGEEngineCoreSingleThreaded::processSingleEvent(SDL_Event *event){
-			switch(event->type){
+		switch(event->type){
 			case SDL_QUIT:
 				graphics->notifyEvent(event);
 				break;
@@ -141,7 +149,7 @@ namespace YGECore {
 
 
 				break;
-			}
+		}
 
 
 	}
@@ -158,20 +166,37 @@ namespace YGECore {
 
 	void YGEEngineCoreSingleThreaded::calculateFPSRate(){
 
-		
+
 		accumDelta += delta;
+
+
+
+
 		frames++;
 		if(accumDelta > 1000000){
 			debugout("FPS:");
 			debugout((long long)frames);
 			accumDelta = 0;
+
+
 			std::stringstream s;
 			s<<"FPS: "<<frames;
 
 			framesPerSecond = frames;
 
 			graphics->setTitle(s.str().c_str());
+
+
+#ifdef _DEBUG
+			printTimes();
+
+			timerAccumTick = 0;
+			timerAccumPhysics = 0;
+			timerAccumGraphics = 0;
+			timerAccumUpdate = 0;
+			timerAccumOther = 0;
 			frames = 0;
+#endif
 		}
 	}
 
@@ -240,7 +265,7 @@ namespace YGECore {
 
 	}
 	void YGEEngineCoreSingleThreaded::render(){
-		
+
 		timerGraphics->startTimer();
 
 		for(YGETimeSpace::YGESceneList::iterator iter = gamestate->getScenesToRender()->begin(); iter != gamestate->getScenesToRender()->end(); iter++){
@@ -260,6 +285,12 @@ namespace YGECore {
 		delta = 1000;
 		accumDelta = 0;
 
+		timerAccumTick = 0;
+		timerAccumPhysics = 0;
+		timerAccumGraphics = 0;
+		timerAccumUpdate = 0;
+		timerAccumOther = 0;
+
 		gamestate = 0;
 		shutdownNow = false;
 		consoleEnabled = false;
@@ -278,7 +309,7 @@ namespace YGECore {
 			throw YGEExceptionSubsystemError("TTF init");
 			return;
 		}
-		
+
 
 		console = new YGEConsole();
 		YGELogger::getInstance()->setConsole(console);
